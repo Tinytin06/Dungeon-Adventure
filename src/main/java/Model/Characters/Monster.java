@@ -1,4 +1,4 @@
 package Model.Characters;
 
-public class Monster {
+public abstract class Monster {
 }
