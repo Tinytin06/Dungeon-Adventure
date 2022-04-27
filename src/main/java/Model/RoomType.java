@@ -8,7 +8,8 @@ public enum RoomType {
     EXIT('X'),
     ENTRANCE('E'),
     HEALING('H'),
-    VISION('V');
+    VISION('V'),
+    PLAYER('*');
 
     public final char type;
 

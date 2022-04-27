@@ -1,23 +1,26 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+
+import static Model.RoomType.*;
 
 public class Room {
-    private ArrayList<Character> myRoomInventory = new ArrayList<>();
-
+    private HashSet<Character> myRoomInventory = new HashSet<>();
+    private String myDisplayIcon = "";
     protected Room() {
         //is there a way to make this a switch statement?
         if (Math.random() < .1) {
-            setMyRoomInventory(RoomType.HEALING);
+            setMyRoomInventory(HEALING);
         }
         if (Math.random() < .05) {
-            setMyRoomInventory(RoomType.VISION);
+            setMyRoomInventory(VISION);
         }
         if (Math.random() < .1) {
-            setMyRoomInventory(RoomType.PIT);
+            setMyRoomInventory(PIT);
         }
         if (Math.random() < .1) {
-            setMyRoomInventory(RoomType.FIGHT);
+            setMyRoomInventory(FIGHT);
         }
 
     }
@@ -26,24 +29,37 @@ public class Room {
         myRoomInventory.add(theType.type);
     }
 
-    ArrayList<Character> getMyRoomInventory(){
+    HashSet<Character> getMyRoomInventory(){
         return myRoomInventory;
     }
     
     void removeMyTypes(RoomType theType){
-        myRoomInventory.remove((Character) theType.type);
+        myRoomInventory.remove(theType.type);
     }
+
+    public String toString() {
+        if (myRoomInventory.contains(PLAYER.type)){
+            return "* ";
+        }
+        return myDisplayIcon;
+    }
+
+    protected void setEmptyRoom() {
+        myRoomInventory.clear();
+    }
+
     public static void main(String[] args) {
     Room myRoom = new Room();
         System.out.println(myRoom.getMyRoomInventory());
-    myRoom.setMyRoomInventory(RoomType.NORMAL);
+        myRoom.setMyRoomInventory(NORMAL);
         System.out.println(myRoom.getMyRoomInventory());
-        myRoom.setMyRoomInventory(RoomType.FIGHT);
+        myRoom.setMyRoomInventory(FIGHT);
         System.out.println(myRoom.getMyRoomInventory());
-        myRoom.setMyRoomInventory(RoomType.PILLAR);
+        myRoom.setMyRoomInventory(PILLAR);
+        myRoom.setMyRoomInventory(PLAYER);
         System.out.println(myRoom.getMyRoomInventory());
-        myRoom.removeMyTypes(RoomType.NORMAL);
-        System.out.println(myRoom.getMyRoomInventory());
+        myRoom.removeMyTypes(NORMAL);
+        System.out.println(myRoom);
     }
 
 }
