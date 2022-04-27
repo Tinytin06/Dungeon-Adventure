@@ -6,7 +6,9 @@ public enum RoomType {
     NORMAL('N'),
     PILLAR('P'),
     EXIT('X'),
-    ENTRANCE('E');
+    ENTRANCE('E'),
+    HEALING('H'),
+    VISION('V');
 
     public final char type;
 
