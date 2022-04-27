@@ -6,6 +6,7 @@ public class Room {
     private ArrayList<Character> myRoomInventory = new ArrayList<>();
 
     protected Room() {
+        //is there a way to make this a switch statement?
         if (Math.random() < .1) {
             setMyRoomInventory(RoomType.HEALING);
         }
@@ -30,13 +31,17 @@ public class Room {
     }
     
     void removeMyTypes(RoomType theType){
-        
+        myRoomInventory.remove(theType.type);
     }
     public static void main(String[] args) {
     Room myRoom = new Room();
     myRoom.setMyRoomInventory(RoomType.NORMAL);
         System.out.println(myRoom.getMyRoomInventory());
         myRoom.setMyRoomInventory(RoomType.FIGHT);
+        System.out.println(myRoom.getMyRoomInventory());
+        myRoom.setMyRoomInventory(RoomType.PILLAR);
+        System.out.println(myRoom.getMyRoomInventory());
+        myRoom.removeMyTypes(RoomType.NORMAL);
         System.out.println(myRoom.getMyRoomInventory());
     }
 
