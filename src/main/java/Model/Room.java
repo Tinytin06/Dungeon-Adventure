@@ -31,10 +31,11 @@ public class Room {
     }
     
     void removeMyTypes(RoomType theType){
-        myRoomInventory.remove(theType.type);
+        myRoomInventory.remove((Character) theType.type);
     }
     public static void main(String[] args) {
     Room myRoom = new Room();
+        System.out.println(myRoom.getMyRoomInventory());
     myRoom.setMyRoomInventory(RoomType.NORMAL);
         System.out.println(myRoom.getMyRoomInventory());
         myRoom.setMyRoomInventory(RoomType.FIGHT);
