@@ -4,7 +4,7 @@ public enum RoomType {
     FIGHT('F'),
     PIT('P'),
     NORMAL('N'),
-    PILLAR('P'),
+    PILLAR('I'),
     EXIT('X'),
     ENTRANCE('E'),
     HEALING('H'),
