@@ -7,6 +7,7 @@ import static Model.RoomType.*;
 public class Room {
     private HashSet<Character> myRoomInventory = new HashSet<>();
     private String myDisplayIcon = "";
+    private final String TOOMUCH = "M ";
     Room() {
         //is there a way to make this a switch statement?
         if (Math.random() < .1) {
@@ -59,14 +60,25 @@ public class Room {
         myRoomInventory.clear();
     }
 
-    void exploreTheRoom(){
-        if (myRoomInventory.size() == 1) {
+    void exploreTheRoom() {
+        if (myRoomInventory.contains(ENTRANCE) || myRoomInventory.contains(EXIT)) {
+            if (myRoomInventory.contains(ENTRANCE)) {
+                setMyDisplayIcon(ENTRANCE.type + " ");
+                return;
+            }
+            if (myRoomInventory.contains(EXIT)) {
+                setMyDisplayIcon(EXIT.type + " ");
+                return;
+            }
+        } else if (myRoomInventory.size() == 1) {
             for (RoomType roomTypes : RoomType.values()) {
                 if (myRoomInventory.contains(roomTypes.type)) {
                     setMyDisplayIcon(roomTypes.type + " ");
                 }
             }
-        }
+        } else if (myRoomInventory.size() > 1){
+            setMyDisplayIcon(TOOMUCH);
+    }
     }
 
     void setEntrance(){
