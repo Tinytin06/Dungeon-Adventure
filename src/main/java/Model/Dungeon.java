@@ -24,9 +24,24 @@ public class Dungeon {
             myDungeon.add(row);
         }
     }
+    public String toString() {
 
-    public String toString(){
-    return "";
+        String dungeonPrint = "\n";
+        for (ArrayList row: myDungeon) {
+            for (Object myRoom : row) {
+                dungeonPrint += myRoom.toString();
+            }
+            dungeonPrint += "\n";
+        }
+        return dungeonPrint ;
+    }
+
+    Room getContent(final int theY, final int theX) {
+        return myDungeon.get(theY).get(theX);
+    }
+    public static void main(String[] args) {
+       Dungeon myDungeon= new Dungeon(5);
+        System.out.println(myDungeon);
     }
 
 }

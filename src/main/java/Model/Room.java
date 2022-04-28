@@ -6,7 +6,7 @@ import static Model.RoomType.*;
 
 public class Room {
     private HashSet<Character> myRoomInventory = new HashSet<>();
-    private String myDisplayIcon = "";
+    private String myDisplayIcon = "? ";
     private final String TOOMUCH = "M ";
     Room() {
         //is there a way to make this a switch statement?
@@ -50,6 +50,7 @@ public class Room {
     }
 
     public String toString() {
+        //exploreTheRoom();
         if (myRoomInventory.contains(PLAYER.type)){
             return "* ";
         }
