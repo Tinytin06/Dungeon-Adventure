@@ -79,10 +79,20 @@ public class Room {
         setMyRoomInventory(EXIT);
     }
 
+    void setPillar(){
+        setMyRoomInventory(FIGHT);
+        setMyRoomInventory(PILLAR);
+    }
+
     public static void main(String[] args) {
     Room myRoom = new Room();
         myRoom.exploreTheRoom();
         System.out.println(myRoom);
+        myRoom.setEntrance();
+        myRoom.exploreTheRoom();
+        System.out.println(myRoom);
+
+        System.out.println(myRoom.getMyRoomInventory());
     }
 
 }
