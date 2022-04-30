@@ -3,11 +3,20 @@ package Model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import static Model.RoomType.*;
-
+/**
+ * This is the Room class which populates the rooms and insures that each room is labeled correctly.
+ * @author Varun Parbhakar
+ * @editor Austin Luu
+ */
 public class Room {
     private HashSet<Character> myRoomInventory = new HashSet<>();
     private String myDisplayIcon = "? ";
     private final String TOOMUCH = "M ";
+
+    /**
+     * This is the room constructor which populates the room with healing and vision potions
+     * and other items.
+     */
     Room() {
         //is there a way to make this a switch statement?
         if (Math.random() < .1) {
@@ -28,27 +37,45 @@ public class Room {
 
     }
 
+    /**
+     * This method sets the icon of the room with the passed String
+     * @param theIcon (String text that represents the room)
+     */
     void setMyDisplayIcon(final String theIcon) {
         if (theIcon.length() > 2 || theIcon.length() <= 0) {
-
             throw new IllegalArgumentException("The Icon string "+theIcon.length()+ " cannot be greater than 1 or less than 0");//need to change this to not throw exception
         } else {
             myDisplayIcon = theIcon;
         }
     }
-
+    /**
+     * This method adds the passed item to the room inventory Set.
+     * @param theType
+     */
     void setMyRoomInventory(RoomType theType) {
         myRoomInventory.add(theType.type);
     }
 
+    /**
+     * This method return the room's inventory.
+     * @return
+     */
     HashSet<Character> getMyRoomInventory(){
         return myRoomInventory;
     }
-    
+
+    /**
+     * removes from myRoomInventory theType of room from set
+     * @param theType
+     */
     void removeMyTypes(RoomType theType){
         myRoomInventory.remove(theType.type);
     }
 
+    /**
+     * This toString method returns the room icon.
+     * @return
+     */
     public String toString() {
         //exploreTheRoom();
         if (myRoomInventory.contains(PLAYER.type)){
@@ -57,10 +84,16 @@ public class Room {
         return myDisplayIcon;
     }
 
+    /**
+     * clears room inventory so that the room has nothing in it not even normal room type
+     */
     void setEmptyRoom() {
         myRoomInventory.clear();
     }
 
+    /**
+     * This is the explore method which searches the room and sets the icon of that room accordingly.
+     */
     void exploreTheRoom() {
         if (myRoomInventory.contains(ENTRANCE) || myRoomInventory.contains(EXIT)) {
             if (myRoomInventory.contains(ENTRANCE)) {
@@ -82,17 +115,27 @@ public class Room {
     }
     }
 
+    /**
+     * This methods sets the room to be the entrance.
+     * @param
+     */
     void setEntrance(){
         setEmptyRoom();
         setMyRoomInventory(ENTRANCE);
     }
-
+    /**
+     * This methods sets the room to be the exit.
+     * @param
+     */
     void setExit(){
         setEmptyRoom();
         setMyRoomInventory(EXIT);
     }
 
-
+    /**
+     * This methods sets the room to be a pillar fight.
+     * @param
+     */
     void setPillar(){
         setMyRoomInventory(FIGHT);
         setMyRoomInventory(PILLAR);
