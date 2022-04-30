@@ -4,6 +4,7 @@ import Model.Characters.Monster;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public class Dungeon {
     private int myDungeonSize;
@@ -40,7 +41,10 @@ public class Dungeon {
 
     private void createExitEntrance(final ArrayList<ArrayList<Room>> theDungeon, final int theDungeonSize){
         Random rand = new Random();
-
+        Room thisRoom = new Room();
+        thisRoom.setEntrance();
+        theDungeon.get(0).add(thisRoom);
+        System.out.println(theDungeon.forEach(ArrayList::contains));
         boolean haveEntrance = false;//need to check preexisting dungeon to see if they have an entrance or exit this should not fly
         boolean haveExit = false;
         int roomNumber;

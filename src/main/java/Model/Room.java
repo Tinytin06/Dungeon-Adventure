@@ -92,6 +92,7 @@ public class Room {
         setMyRoomInventory(EXIT);
     }
 
+
     void setPillar(){
         setMyRoomInventory(FIGHT);
         setMyRoomInventory(PILLAR);
