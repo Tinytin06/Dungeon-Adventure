@@ -3,8 +3,13 @@ package Model;
 import Model.Characters.Hero;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * This class manages the dungeon, it is responsible for creating and populating the dungeon
@@ -17,6 +22,16 @@ public class Dungeon {
     private ArrayList<ArrayList<Room>> myDungeon;
     private boolean myCheatEnabled;
 
+
+    /**
+     * Reading from txt file.
+     * @param theFile
+     * @throws FileNotFoundException
+     */
+    Dungeon(final File theFile, final int theSize) throws FileNotFoundException {
+        myDungeonSize = theSize;
+        readFromFile(theFile);
+    }
     /**
      * This constructor creates the dungeon with the use of the specified dungeon size from
      * the user.
@@ -189,8 +204,40 @@ public class Dungeon {
     protected boolean getMyCheat(){
         return myCheatEnabled;
     }
-    public static void main(String[] args) {
-       Dungeon myDungeon= new Dungeon(5);
+
+    protected void readFromFile(final File theFile) throws FileNotFoundException {
+        Scanner s = new Scanner(theFile);
+        myDungeon = new ArrayList<>();
+
+
+
+        for (int i = 0; i < myDungeonSize; i++) {
+            ArrayList<Room> dungeonRow = new ArrayList<>();
+            String[] row = s.nextLine().split(" ");
+            System.out.println(Arrays.toString(row));
+            for (int j = 0; j < myDungeonSize; j++) {
+                Room myNewRoom = new Room();
+                switch (row[j]){
+                    case("P"):
+                        myNewRoom.setMyRoomInventory(RoomType.PIT);
+                        break;
+
+                }
+                dungeonRow.add(myNewRoom);
+                //myNewRoom.exploreTheRoom();           //
+            }
+            myDungeon.add(dungeonRow);
+
+            //Crashes on the third iteration.
+            row = s.nextLine().split(" ");
+        }
+
+
+
+    }
+    public static void main(String[] args) throws FileNotFoundException {
+       Dungeon myDungeon= new Dungeon(new File("inputTest.txt"), 5);
+
        System.out.println(myDungeon);
     }
 
