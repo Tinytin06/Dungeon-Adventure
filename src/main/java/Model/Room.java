@@ -122,6 +122,7 @@ public class Room {
     void setEntrance(){
         setEmptyRoom();
         setMyRoomInventory(ENTRANCE);
+        setMyDisplayIcon(ENTRANCE.type + " ");
     }
     /**
      * This methods sets the room to be the exit.
@@ -130,6 +131,9 @@ public class Room {
     void setExit(){
         setEmptyRoom();
         setMyRoomInventory(EXIT);
+
+        //If the exit needs to be shielded/hidden from the player the
+
     }
 
     /**
