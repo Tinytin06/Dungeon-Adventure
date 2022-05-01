@@ -159,11 +159,16 @@ public class Dungeon {
     protected void visionPotionUser(final Point theLocation) {
         Room dummyRoom = null;
         ArrayList<Point> currentLocation = new ArrayList<>();
-        Point dummyPoint = (Point)(theLocation.clone());;
-        boolean north = dummyPoint.y - 1 >= 0;
-        boolean south = dummyPoint.y + 1 <= myDungeonSize-1;
-        boolean west = dummyPoint.x - 1 >= 0;
-        boolean east = dummyPoint.x + 1 <= myDungeonSize-1;
+        Point dummyPoint = (Point)(theLocation.clone());
+
+        //dont know if this is needed but helps with magic numbers I guess
+        int indexOfLastSize = myDungeonSize-1;
+        int firstIndex = 0;
+
+        boolean north = (dummyPoint.y - 1 >= firstIndex);
+        boolean south = (dummyPoint.y + 1 <= indexOfLastSize);
+        boolean west = (dummyPoint.x - 1 >= firstIndex);
+        boolean east = (dummyPoint.x + 1 <= indexOfLastSize);
         if (north) {
             dummyPoint.translate(0,-1);
             currentLocation.add(dummyPoint);
