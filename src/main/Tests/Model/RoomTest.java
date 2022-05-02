@@ -13,6 +13,9 @@ class RoomTest {
 
     @Test
     //made public setMyDisplayIcon and constructor for this test
+    /**
+     * tests to see if too much of a string gets put in that the exception is triggered
+     */
     void setMyDisplayIconTooBig() {
         Room roomTest = new Room();
         Boolean caughtExcepton = false;
@@ -25,6 +28,9 @@ class RoomTest {
         assertTrue(caughtExcepton);
     }
     @Test
+    /**
+     * tests to see if too little of a string gets put in that the exception is triggered
+     */
     void setMyDisplayIconTooSmall() {
         Room roomTest = new Room();
         Boolean caughtExcepton = false;
@@ -39,6 +45,9 @@ class RoomTest {
     }
 
     @Test
+    /**
+     * tests to see if the Icon Properly gets set
+     */
     void setMyDisplayIconProper() {
         Room roomTest = new Room();
         roomTest.setMyDisplayIcon("N ");
@@ -46,6 +55,9 @@ class RoomTest {
     }
 
     @Test
+    /**
+     * tests to see if setting the inventory of MyRoomInventory actually gets added to the hashset
+     */
     void setMyRoomInventory() {
         Room roomTest = new Room();
         roomTest.setEmptyRoom();
@@ -54,7 +66,12 @@ class RoomTest {
     }
 
     @Test
-    void getMyRoomInventory() {
+    /**
+     * tests to see if the inventory inside the room is the same as what it should be
+     */
+    void getMyRoomInventoryInside() {
+        Room roomTest = new Room(RoomType.NORMAL);
+        assertEquals(new char[]{RoomType.NORMAL.type}.toString() ,roomTest.getMyRoomInventory().toArray().toString());
     }
 
     @Test
