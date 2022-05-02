@@ -1,11 +1,11 @@
 package Model;
 
-import Model.Characters.Hero;
+
 
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -216,25 +216,74 @@ public class Dungeon {
 
 
 
+
         for (int i = 0; i < myDungeonSize; i++) {
             ArrayList<Room> dungeonRow = new ArrayList<>();
             String[] row = s.nextLine().split(" ");
-            System.out.println(Arrays.toString(row));
+
             for (int j = 0; j < myDungeonSize; j++) {
-                Room myNewRoom = new Room();
+                Room myNewRoom;
                 switch (row[j]){
+                    case("F"):
+                        myNewRoom = new Room(RoomType.FIGHT);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
                     case("P"):
-                        myNewRoom.setMyRoomInventory(RoomType.PIT);
+                        myNewRoom = new Room(RoomType.PIT);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("N"):
+                        myNewRoom = new Room(RoomType.NORMAL);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("I"):
+                        myNewRoom = new Room(RoomType.PILLAR);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("X"):
+                        myNewRoom = new Room(RoomType.EXIT);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("E"):
+                        myNewRoom = new Room(RoomType.ENTRANCE);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("H"):
+                        myNewRoom = new Room(RoomType.HEALING);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("V"):
+                        myNewRoom = new Room(RoomType.VISION);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("*"):
+                        myNewRoom = new Room(RoomType.PLAYER);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
                         break;
 
                 }
-                dungeonRow.add(myNewRoom);
+
+
                 //myNewRoom.exploreTheRoom();           //
             }
             myDungeon.add(dungeonRow);
-
-            //Crashes on the third iteration.
-            row = s.nextLine().split(" ");
         }
 
 
@@ -242,8 +291,8 @@ public class Dungeon {
     }
     public static void main(String[] args) throws FileNotFoundException {
        Dungeon myDungeon= new Dungeon(new File("inputTest.txt"), 5);
-
        System.out.println(myDungeon);
+
     }
 
 }

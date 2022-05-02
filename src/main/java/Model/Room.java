@@ -13,6 +13,12 @@ public class Room {
     private String myDisplayIcon = "? ";
     private final String TOOMUCH = "M ";
 
+
+    Room(final RoomType theType) {
+        setMyRoomInventory(theType);
+    }
+
+
     /**
      * This is the room constructor which populates the room with healing and vision potions
      * and other items.
