@@ -24,6 +24,7 @@ class RoomTest {
 
         assertTrue(caughtExcepton);
     }
+    @Test
     void setMyDisplayIconTooSmall() {
         Room roomTest = new Room();
         Boolean caughtExcepton = false;
@@ -38,7 +39,18 @@ class RoomTest {
     }
 
     @Test
+    void setMyDisplayIconProper() {
+        Room roomTest = new Room();
+        roomTest.setMyDisplayIcon("N ");
+        assertEquals("N ", roomTest.toString());
+    }
+
+    @Test
     void setMyRoomInventory() {
+        Room roomTest = new Room();
+        roomTest.setEmptyRoom();
+        roomTest.setMyRoomInventory(RoomType.NORMAL);
+        assertEquals(true, roomTest.getMyRoomInventory().contains(RoomType.NORMAL.type));//test looks awful might change it so that there is less ellipses references
     }
 
     @Test
