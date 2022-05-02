@@ -17,7 +17,7 @@ public class Room {
      * This is the room constructor which populates the room with healing and vision potions
      * and other items.
      */
-    Room() {
+    public Room() {
         //is there a way to make this a switch statement?
         if (Math.random() < .1) {
             setMyRoomInventory(HEALING);
@@ -41,7 +41,7 @@ public class Room {
      * This method sets the icon of the room with the passed String
      * @param theIcon (String text that represents the room)
      */
-    void setMyDisplayIcon(final String theIcon) {
+    public void setMyDisplayIcon(final String theIcon) {
         if (theIcon.length() > 2 || theIcon.length() <= 0) {
             throw new IllegalArgumentException("The Icon string "+theIcon.length()+ " cannot be greater than 1 or less than 0");//need to change this to not throw exception
         } else {
