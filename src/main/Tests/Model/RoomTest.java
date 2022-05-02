@@ -1,4 +1,4 @@
-package Tests.Model;
+package Model;
 import Model.Room;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
