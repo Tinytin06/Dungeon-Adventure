@@ -79,17 +79,51 @@ class RoomTest {
     }
 
     @Test
-    void testToString() {
+    /**
+     * tests to see if Player gets priority when toString is called
+     */
+    void testToStringPlayer() {
+        Room roomTest = new Room(RoomType.PIT);
+        roomTest.setMyRoomInventory(RoomType.PLAYER);
+        assertEquals("* ",roomTest.toString());
     }
 
+    @Test
+    /**
+     * tests to see if toString is properly working without Player
+     */
+    void testToString() {
+        Room roomTest = new Room(RoomType.PIT);
+        assertEquals("? ",roomTest.toString());
+        roomTest.exploreTheRoom();
+        assertEquals("P ",roomTest.toString());
+    }
     @Test
     void setEmptyRoom() {
     }
 
     @Test
+    /**
+     * tests if exploring the room reveals the room
+     */
     void exploreTheRoom() {
+        Room roomTest = new Room(RoomType.PIT);
+        assertEquals("? ",roomTest.toString());
+        roomTest.exploreTheRoom();
+        assertEquals("P ",roomTest.toString());
     }
 
+    @Test
+    /**
+     * tests if exploring the room reveals the room
+     */
+    void exploreTheRoomTooMuch() {
+        Room roomTest = new Room(RoomType.PIT);
+        roomTest.setMyRoomInventory(RoomType.NORMAL);
+        assertEquals("? ",roomTest.toString());
+        roomTest.exploreTheRoom();
+        assertEquals("M ",roomTest.toString());
+    }
     @Test
     void setEntrance() {
     }
