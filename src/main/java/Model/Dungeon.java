@@ -24,12 +24,15 @@ public class Dungeon {
 
 
     /**
-     * Reading from txt file.
+     * Constructor is for reading from the text file.
      * @param theFile
      * @throws FileNotFoundException
      */
-    Dungeon(final File theFile, final int theSize) throws FileNotFoundException {
-        myDungeonSize = theSize;
+    Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
+        if(theDungeonLength < 2) {
+            throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");
+        }
+        myDungeonSize = theDungeonLength;
         readFromFile(theFile);
     }
     /**
@@ -39,6 +42,9 @@ public class Dungeon {
      *
      */
     Dungeon(final int theDungeonLength) {
+        if(theDungeonLength < 2) {
+            throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");
+        }
         myDungeonSize = theDungeonLength;
         myDungeon = new ArrayList<>();
         dungeonBuilder();
@@ -63,26 +69,34 @@ public class Dungeon {
     }
 
     /**
+     * This method is used to return the room of the passed parameters.
+     * @param row
+     * @param column
+     * @return
+     */
+    Room getRoom(final int row, final int column ) {
+        return myDungeon.get(row).get(column);
+    }
+
+    /**
      * To string method for the dungeon.
      * @return (String containing the layout of the dungeon)
      */
     public String toString() {
 
-        String dungeonPrint = "\n";
+        StringBuilder dungeonPrint = new StringBuilder();
         for (ArrayList row: myDungeon) {
             for (Object myRoom : row) {
-                dungeonPrint += myRoom.toString();
+                dungeonPrint.append(myRoom.toString());
             }
-            dungeonPrint += "\n";
+            dungeonPrint.append("\n");
         }
-        return dungeonPrint ;
+        return dungeonPrint.toString() ;
     }
 
     private void entranceCreator(final ArrayList<ArrayList<Room>> theDungeon) {
         Random rand = new Random();
         boolean haveEntrance = false;
-        boolean haveCrown = false;
-        boolean have2ndCrown = false;
 
         int roomNumber;
         Room roomSetter;
@@ -214,9 +228,6 @@ public class Dungeon {
         Scanner s = new Scanner(theFile);
         myDungeon = new ArrayList<>();
 
-
-
-
         for (int i = 0; i < myDungeonSize; i++) {
             ArrayList<Room> dungeonRow = new ArrayList<>();
             String[] row = s.nextLine().split(" ");
@@ -278,15 +289,14 @@ public class Dungeon {
                         myNewRoom.exploreTheRoom();
                         break;
 
+                    default:
+                        throw new IllegalArgumentException(row[j] + " is not a correct room.");
+
                 }
-
-
                 //myNewRoom.exploreTheRoom();           //
             }
             myDungeon.add(dungeonRow);
         }
-
-
 
     }
     public static void main(String[] args) throws FileNotFoundException {
