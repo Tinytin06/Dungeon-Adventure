@@ -19,7 +19,7 @@ public class Warrior extends Hero {
 
     //Ask him why does compile fail when this class is set to protected level
     //despite it being imported into the dungeon class.
-    protected Warrior(final String theC_Name) {
+    public Warrior(final String theC_Name) {
 
         super(  theC_Name,
                 125,
