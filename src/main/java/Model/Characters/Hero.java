@@ -6,6 +6,7 @@ package Model.Characters;/*
  */
 
 import Model.Characters.DungeonCharacter;
+import View.ConsoleOutput;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public abstract class Hero extends DungeonCharacter {
     private int myHealingPotions;
     private int myVisionPotions;
     private int myCrownPieces;
+
+    private static final int SPECIAL_ATTACK = 1;
+    private static final int NORMAL_ATTACK = 2;
 
     /**
      * This abstract method initializes the values for all for
@@ -140,9 +144,11 @@ public abstract class Hero extends DungeonCharacter {
      */
     protected void attacks(final DungeonCharacter theEnemy) {
         int attackChoice = 0;
+        int tooLowOfAttackSpeedRatio= 0;
+        int fixesLowRatio = 1;
         myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
-        if (myNumberOfAttacks == 0) {
-            myNumberOfAttacks = 1;
+        if (myNumberOfAttacks == tooLowOfAttackSpeedRatio) {
+            myNumberOfAttacks = fixesLowRatio;
 
         }
         while (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway) {
@@ -150,10 +156,10 @@ public abstract class Hero extends DungeonCharacter {
                 throw new IllegalArgumentException("The passed enemy is set to null");
             }
             attackChoice = getChoice();
-            if (attackChoice == 1) {
+            if (attackChoice == SPECIAL_ATTACK) {
                 specialAttack(theEnemy);
             }
-            else if (attackChoice == 2) {
+            else if (attackChoice == NORMAL_ATTACK) {
                 super.attacks(theEnemy);
             } else {
                 runAway();
@@ -173,14 +179,17 @@ public abstract class Hero extends DungeonCharacter {
      */
     protected final int getChoice() {
         int selection = 0;
+        //maybe pull out choices string and sout to the view and control parts of the method
         String choices = (getCharacter_Name() + " select your attack:" +
                 "\n1: Special Attack" +
                 "\n2: Normal Attack" +
                 "\n3: Run Away");
         boolean correctAnswer = false;
         while (!correctAnswer) {
+
             System.out.println(choices);
             if (userInput.hasNextInt()) {
+
                 selection = userInput.nextInt();
                 if (selection <= 0 || selection > 3) {
                     System.out.println("Invalid Choice");
