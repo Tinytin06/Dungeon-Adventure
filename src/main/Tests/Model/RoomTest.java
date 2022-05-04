@@ -4,12 +4,14 @@ import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RoomTest {
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
+
 
     @Test
     //made public setMyDisplayIcon and constructor for this test
@@ -18,14 +20,15 @@ class RoomTest {
      */
     void setMyDisplayIconTooBig() {
         Room roomTest = new Room();
-        Boolean caughtExcepton = false;
+        Boolean caughtExceptonTooBig = false;
+        String tooBig = "Too Big";
         try {
-            roomTest.setMyDisplayIcon("Too Big");
+            roomTest.setMyDisplayIcon(tooBig);
         } catch (IllegalArgumentException e) {
-            caughtExcepton = true;
+            caughtExceptonTooBig = true;
         }
 
-        assertTrue(caughtExcepton);
+        assertTrue(caughtExceptonTooBig);
     }
     @Test
     /**
@@ -33,15 +36,15 @@ class RoomTest {
      */
     void setMyDisplayIconTooSmall() {
         Room roomTest = new Room();
-        Boolean caughtExcepton = false;
+        Boolean caughtExceptonTooSmall = false;
         String tooSmall = "";
         try {
             roomTest.setMyDisplayIcon(tooSmall);
         } catch (IllegalArgumentException e) {
-            caughtExcepton = true;
+            caughtExceptonTooSmall = true;
         }
 
-        assertTrue(caughtExcepton);
+        assertTrue(caughtExceptonTooSmall);
     }
 
     @Test
@@ -50,8 +53,9 @@ class RoomTest {
      */
     void setMyDisplayIconProper() {
         Room roomTest = new Room();
-        roomTest.setMyDisplayIcon("N ");
-        assertEquals("N ", roomTest.toString());
+        roomTest.setMyDisplayIcon(RoomType.NORMAL.type +" ");
+        String normalRoomOutput = "N ";
+        assertEquals(normalRoomOutput, roomTest.toString());
     }
 
     @Test
@@ -62,7 +66,8 @@ class RoomTest {
         Room roomTest = new Room();
         roomTest.setEmptyRoom();
         roomTest.setMyRoomInventory(RoomType.NORMAL);
-        assertEquals(true, roomTest.getMyRoomInventory().contains(RoomType.NORMAL.type));//test looks awful might change it so that there is less ellipses references
+        HashSet roomInventory = roomTest.getMyRoomInventory();
+        assertEquals(true, roomInventory.contains(RoomType.NORMAL.type));//test looks awful might change it so that there is less ellipses references
     }
 
     @Test
@@ -71,11 +76,21 @@ class RoomTest {
      */
     void getMyRoomInventoryInside() {
         Room roomTest = new Room(RoomType.NORMAL);
-        assertEquals(new char[]{RoomType.NORMAL.type}.toString() ,roomTest.getMyRoomInventory().toArray().toString());
+        char[] normalRoomArray =new char[]{RoomType.NORMAL.type};
+        HashSet RoomInventory = roomTest.getMyRoomInventory();
+        assertEquals(Arrays.toString(normalRoomArray) , RoomInventory.toString());
     }
 
     @Test
     void removeMyTypes() {
+        Room roomTest = new Room(RoomType.PIT);
+        roomTest.setMyRoomInventory(RoomType.PLAYER);
+        String playerIcon = "* ";
+        assertEquals(playerIcon, roomTest.toString());
+        roomTest.removeMyTypes(RoomType.PLAYER);
+        roomTest.exploreTheRoom();
+        String pitIcon = "P ";
+        assertEquals(pitIcon, roomTest.toString());
     }
 
     @Test
@@ -85,7 +100,8 @@ class RoomTest {
     void testToStringPlayer() {
         Room roomTest = new Room(RoomType.PIT);
         roomTest.setMyRoomInventory(RoomType.PLAYER);
-        assertEquals("* ",roomTest.toString());
+        String playerIcon = "* ";
+        assertEquals(playerIcon, roomTest.toString());
     }
 
     @Test
@@ -94,12 +110,33 @@ class RoomTest {
      */
     void testToString() {
         Room roomTest = new Room(RoomType.PIT);
-        assertEquals("? ",roomTest.toString());
+        String hiddenRoomIcon = "? ";
+        String pitRoomIcon = "P ";
+        assertEquals(hiddenRoomIcon,roomTest.toString());
         roomTest.exploreTheRoom();
-        assertEquals("P ",roomTest.toString());
+        assertEquals(pitRoomIcon,roomTest.toString());
+    }
+    @Test
+    void setEmptyRoomOne() {
+        Room roomTest = new Room(RoomType.PIT);
+        String pitRoomIcon = "P ";
+        roomTest.exploreTheRoom();
+        assertEquals(pitRoomIcon,roomTest.toString());
+        roomTest.setEmptyRoom();
+        HashSet RoomInventory = roomTest.getMyRoomInventory();
+        assertTrue(RoomInventory.isEmpty());
     }
     @Test
     void setEmptyRoom() {
+        Room roomTest = new Room(RoomType.PIT);
+        roomTest.setMyRoomInventory(RoomType.PILLAR);
+        String tooManyRoomIcon = "I ";
+
+        roomTest.exploreTheRoom();
+        assertEquals(tooManyRoomIcon,roomTest.toString());
+        roomTest.setEmptyRoom();
+        HashSet RoomInventory = roomTest.getMyRoomInventory();
+        assertTrue(RoomInventory.isEmpty());
     }
 
     @Test
@@ -112,6 +149,17 @@ class RoomTest {
         roomTest.exploreTheRoom();
         assertEquals("P ",roomTest.toString());
     }
+    @Test
+    /**
+     * tests if exploring the room reveals the room
+     */
+    void exploreTheRoomPillar() {
+        Room roomTest = new Room(RoomType.PILLAR);
+        assertEquals("? ",roomTest.toString());
+        roomTest.exploreTheRoom();
+        assertEquals("I ",roomTest.toString());
+    }
+
 
     @Test
     /**
@@ -120,23 +168,38 @@ class RoomTest {
     void exploreTheRoomTooMuch() {
         Room roomTest = new Room(RoomType.PIT);
         roomTest.setMyRoomInventory(RoomType.NORMAL);
-        assertEquals("? ",roomTest.toString());
+        String tooMuchIcon = "M ";
+        String hiddenIcon = "? ";
+
+        assertEquals(hiddenIcon, roomTest.toString());
         roomTest.exploreTheRoom();
-        assertEquals("M ",roomTest.toString());
+        assertEquals(tooMuchIcon, roomTest.toString());
     }
     @Test
     void setEntrance() {
+        Room roomTest = new Room();
+        roomTest.setEntrance();
+        String entranceIcon = "E ";
+        assertEquals(entranceIcon, roomTest.toString());
     }
 
     @Test
     void setExit() {
+        Room roomTest = new Room();
+        roomTest.setExit();
+        String exitIcon = "X ";
+        roomTest.exploreTheRoom();
+        assertEquals(exitIcon, roomTest.toString());
     }
 
     @Test
     void setPillar() {
+        Room roomTest = new Room();
+        roomTest.setPillar();
+        String pillarIcon = "I ";
+        roomTest.exploreTheRoom();
+        assertEquals(pillarIcon, roomTest.toString());
     }
 
-    @Test
-    void main() {
-    }
+
 }
