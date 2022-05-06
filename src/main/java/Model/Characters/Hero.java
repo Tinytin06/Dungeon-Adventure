@@ -5,9 +5,6 @@ package Model.Characters;/*
  * Heroes VS Monster (Dungeon DLC)
  */
 
-import Model.Characters.DungeonCharacter;
-import View.ConsoleOutput;
-
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -155,7 +152,7 @@ public abstract class Hero extends DungeonCharacter {
             if (theEnemy == null) {
                 throw new IllegalArgumentException("The passed enemy is set to null");
             }
-            attackChoice = getChoice();
+            attackChoice = attackChoiceValidator();
             if (attackChoice == SPECIAL_ATTACK) {
                 specialAttack(theEnemy);
             }
@@ -177,7 +174,7 @@ public abstract class Hero extends DungeonCharacter {
      * and also performs input validation.
      * @return (Corresponding number related to the attack choice)
      */
-    protected final int getChoice() {
+    protected final int attackChoiceValidator() {
         int selection = 0;
         //maybe pull out choices string and sout to the view and control parts of the method
         String choices = (getCharacter_Name() + " select your attack:" +

@@ -7,6 +7,9 @@ import View.ConsoleOutput;
 import java.util.Scanner;
 
 public class Movement   {
+
+
+
     public static int GetChoiceCreator (Hero theHero){
     int selection = 0;
         boolean correctAnswer = false;
@@ -16,7 +19,7 @@ public class Movement   {
             if (input.hasNextInt()) {
                 selection = input.nextInt();
                 if (selection <= 0 || selection > 3) {
-                    ConsoleOutput.InvalidInput();
+                    ConsoleOutput.invalidInput();
                 } else {
 
                     correctAnswer = true;
@@ -24,7 +27,7 @@ public class Movement   {
 
 
             } else {
-                ConsoleOutput.InvalidInput();
+                ConsoleOutput.invalidInput();
                 input.next();
             }
 

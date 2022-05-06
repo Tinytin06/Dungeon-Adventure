@@ -9,7 +9,7 @@
 //import Model.Characters.Skeleton;
 //import Model.Characters.Warrior;
 //import Model.Dungeon;
-//
+//import View.ConsoleOutput;
 //
 //
 //import java.awt.*;
@@ -203,6 +203,7 @@
 //                                       final Hero theHero,
 //                                       final Scanner theUserInput) {
 //        if (theRoom.getHasExit()) {
+//            ConsoleOutput.printString("You are on the exit!\n");
 //            System.out.println("You are on the exit!");
 //            if (theHero.hasBothCrowns()) {
 //                System.out.println("Would you like to exit the dungeon?");
@@ -229,7 +230,8 @@
 //        boolean correctAnswer = false;
 //        String choice = null;
 //        while (!correctAnswer) {
-//            System.out.print("'y' for yes, 'n' for no: ");
+//            ConsoleOutput.printString("'y' for yes, 'n' for no: ");
+//            //System.out.print("'y' for yes, 'n' for no: ");
 //
 //            if (theUserInput.hasNext()) {
 //                choice = theUserInput.next();
@@ -244,7 +246,7 @@
 //                    System.out.println("Please select the correct response");
 //                }
 //            } else {
-//                System.out.println("Invalid Input\n");
+//                ConsoleOutput.invalidInput();
 //                theUserInput.next();
 //            }
 //        }
