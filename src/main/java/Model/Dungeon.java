@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -187,7 +186,7 @@ public class Dungeon {
 
 
 
-
+// The old create entrance and exit method
 
 //    /**
 //     * This method creates and exit, entrance and populates the dungeon with 2 crowns.
@@ -228,10 +227,11 @@ public class Dungeon {
     Room getContent(final int theY, final int theX) {
         return myDungeon.get(theY).get(theX);
     }
-    /**
-     * This is a cheat method which reveals all of the items in the dungeon.
-     */
 
+
+    /**
+     * This is a cheat method which reveals all the items in the dungeon.
+     */
     protected void revealAll() {
         Room dummyRoom;
         for(int i = 0; i < myDungeonSize; i++){
@@ -247,19 +247,17 @@ public class Dungeon {
      * This method searches for the possible directions and reveals the room accordingly.
      * @param theLocation (Location of the hero)
      */
-    protected void visionPotionUser(final Point theLocation) {
+    protected void deployVisionPotion(final Point theLocation) {
         Room dummyRoom = null;
         ArrayList<Point> currentLocation = new ArrayList<>();
         Point dummyPoint = (Point)(theLocation.clone());
 
-        //dont know if this is needed but helps with magic numbers I guess
-        int indexOfLastSize = myDungeonSize-1;
         int firstIndex = 0;
 
         boolean north = (dummyPoint.y - 1 >= firstIndex);
-        boolean south = (dummyPoint.y + 1 <= indexOfLastSize);
+        boolean south = (dummyPoint.y + 1 <= myDungeonSize-1);
         boolean west = (dummyPoint.x - 1 >= firstIndex);
-        boolean east = (dummyPoint.x + 1 <= indexOfLastSize);
+        boolean east = (dummyPoint.x + 1 <= myDungeonSize-1);
         if (north) {
             dummyPoint.translate(0,-1);
             currentLocation.add(dummyPoint);
@@ -277,7 +275,6 @@ public class Dungeon {
             currentLocation.add(dummyPoint);
             dummyPoint = (Point)(theLocation.clone());
         }
-
 
         for (Point local: currentLocation){
             dummyRoom = myDungeon.get(local.y).get(local.x);
