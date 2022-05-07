@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import static Model.RoomType.*;
 /**
@@ -40,9 +41,6 @@ public class Room {
             addTo_MyRoomInventory(NORMAL);
         }
 
-    }
-    public String getMyRoomDisplayIcon() {
-        return myDisplayIcon;
     }
 
     /**
