@@ -116,6 +116,56 @@ public class Dungeon {
 
     }
 
+    private void exitCreator(final ArrayList<ArrayList<Room>> theDungeon) {
+        Random rand = new Random();
+        boolean haveExit = false;
+
+        int roomNumber;
+        Room roomSetter;
+
+        while (!haveExit) {
+            if (Math.random() < .1 && !haveExit) {
+                roomNumber = rand.nextInt(myDungeonSize - 1);
+                roomSetter = theDungeon.get(myDungeonSize-1).get(roomNumber);
+                roomSetter.setEntrance();
+                haveExit = true;
+            }
+        }
+
+    }
+
+//    private void crownSetter (final ArrayList<ArrayList<Room>> theDungeon) {
+//        boolean haveEntrance = false;
+//        boolean haveExit = false;
+//        boolean haveCrown = false;
+//        boolean have2ndCrown = false;
+//
+//        while (!haveCrown || !have2ndCrown) {
+//            if (Math.random() < .1 && !haveCrown) {
+//                roomSetter = theDungeon.get(rand.nextInt(theDungeonSize - 1)).get(rand.nextInt(theDungeonSize - 1));
+//                if (!roomSetter.getHasASecondCrown() && !roomSetter.getHasEnterance() && !roomSetter.getHasExit()) {
+//                    roomSetter.setHasMy_Crown(true);
+//                    roomSetter.addRoomInventory("Coding Crown");
+//                    haveCrown = true;
+//                }
+//
+//            }
+//            if (Math.random() < .1 && !have2ndCrown) {
+//                roomSetter = theDungeon.get(rand.nextInt(theDungeonSize - 1)).get(rand.nextInt(theDungeonSize - 1));
+//                if (!roomSetter.getHasACrown() && !roomSetter.getHasEnterance() && !roomSetter.getHasExit()) {
+//                    roomSetter.setHasMy_SecondCrown(true);
+//                    roomSetter.addRoomInventory("Second Coding Crown");
+//                    have2ndCrown = true;
+//                }
+//            }
+//
+//        }
+//    }
+
+
+
+
+
     /**
      * This method creates and exit, entrance and populates the dungeon with 2 crowns.
      * @param theDungeon
@@ -301,11 +351,6 @@ public class Dungeon {
             }
             myDungeon.add(dungeonRow);
         }
-
-    }
-    public static void main(String[] args) throws FileNotFoundException {
-       Dungeon myDungeon= new Dungeon(new File("inputTest.txt"), 5);
-       System.out.println(myDungeon);
 
     }
 

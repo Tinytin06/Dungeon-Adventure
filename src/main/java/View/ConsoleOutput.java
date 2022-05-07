@@ -21,7 +21,7 @@ public class ConsoleOutput {
         System.out.print(theString);
     }
 
-    public static boolean introduction(final String theUserInput) {
+    public static void introduction(final String theUserInput) {
         System.out.println("------------------ Welcome!!! -------------------");
         System.out.println("---------------- Hear Ye Hear Ye ----------------");
         System.out.println("A long time ago, a warrior had challenged" +
@@ -29,6 +29,5 @@ public class ConsoleOutput {
                 "Labyrinth, but \n       he lost and he paid with his life. \n" +
                 "\nNo one has challenged him ever again, but you my child,");
         System.out.println("You wish to challenge him?");
-        return (yesORNo(theUserInput));
     }
 }
