@@ -78,9 +78,10 @@ public abstract class Monster extends DungeonCharacter {
      * @param theC_Damage (The amount of damage that a character takes)
      */
     @Override
-    protected void damageTaken(final int theC_Damage) {
+    protected boolean damageTaken(final int theC_Damage) {
         super.damageTaken(theC_Damage);
         heal();
+        return true;
 
     }
 

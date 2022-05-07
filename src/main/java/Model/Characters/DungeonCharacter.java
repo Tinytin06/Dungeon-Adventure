@@ -267,10 +267,11 @@ public abstract class DungeonCharacter {
      * This instance method makes sure that damage is dealt to the character.
      * @param theC_Damage (The amount of damage that a character takes)
      */
-    protected void damageTaken(final int theC_Damage) {
+    protected boolean damageTaken(final int theC_Damage) {
         if (theC_Damage < 0) {
             throw new IllegalArgumentException("The chance to attack has to be greater than 0 and less than or equal to 1.");
         }
+
         System.out.println("\n" + getCharacter_Name() + " Has taken <<" + theC_Damage + ">> damage");
 
         myCharacter_HealthPoints -= theC_Damage;
@@ -282,7 +283,7 @@ public abstract class DungeonCharacter {
             System.out.println(getCharacter_Name() + "'s health is now at <<" + myCharacter_HealthPoints + ">>\n");
         }
 
-
+        return true;
     }
 
     /**

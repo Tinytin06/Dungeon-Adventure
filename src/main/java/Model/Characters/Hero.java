@@ -119,12 +119,16 @@ public abstract class Hero extends DungeonCharacter {
      * @param theC_Damage (The amount of damage that a character takes)
      */
     @Override
-    protected void damageTaken(final int theC_Damage) {
+    protected boolean damageTaken(final int theC_Damage) {
         if (randomGen.nextDouble() <= myChance2Block) {
             System.out.println((getCharacter_Name() + " blocked the attack!\n"));
+            return false;
+
 
         } else {
             super.damageTaken(theC_Damage);
+            return true;
+
         }
     }
 
@@ -237,7 +241,7 @@ public abstract class Hero extends DungeonCharacter {
     protected void runAway() {
         myRunAway = true;
         killCharacter();
-        System.out.println(getCharacter_Name() + " has ran away.");
+        //System.out.println(getCharacter_Name() + " has ran away.");
 
     }
 
@@ -250,7 +254,9 @@ public abstract class Hero extends DungeonCharacter {
      * @param theC_Chance2Block
      */
     protected final void chance2Block_Validator(final double theC_Chance2Block) {
-        if (theC_Chance2Block > 1 || theC_Chance2Block < 0) {
+        Double greaterThan100Percent = 1.0;
+        Double lessThan0Percent = 0.0;
+        if (theC_Chance2Block > greaterThan100Percent || theC_Chance2Block < lessThan0Percent) {
             throw new IllegalArgumentException("Chance to block cannot be less 0 or greater than 1");
         }
         myChance2Block = theC_Chance2Block;
@@ -261,7 +267,9 @@ public abstract class Hero extends DungeonCharacter {
      * @param theC_SpecialSkill_Chance
      */
     protected final void specialSkill_Chance_Validator(final double theC_SpecialSkill_Chance) {
-        if (theC_SpecialSkill_Chance < 0 || theC_SpecialSkill_Chance > 1) {
+        Double greaterThan100Percent = 1.0;
+        Double lessThan0Percent = 0.0;
+        if (theC_SpecialSkill_Chance < lessThan0Percent || theC_SpecialSkill_Chance > greaterThan100Percent) {
             throw new IllegalArgumentException("Special Skill cannot be less 0 or greater than 1");
         }
         mySpecialSkillChance = theC_SpecialSkill_Chance;

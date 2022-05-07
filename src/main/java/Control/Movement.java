@@ -1,5 +1,6 @@
 package Control;
 
+import Model.Characters.DungeonCharacter;
 import Model.Characters.Hero;
 import Model.Characters.Warrior;
 import View.ConsoleOutput;
@@ -34,6 +35,7 @@ public class Movement   {
         }
         return selection;
     }
+
 
     public static void main(String[] args) {
         Warrior testWarrior=new Warrior("sup");
