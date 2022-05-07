@@ -8,17 +8,17 @@ import java.util.Scanner;
 
 public class Movement   {
 
-
-
     public static int GetChoiceCreator (Hero theHero){
     int selection = 0;
+    int selectTooSmall = 0;
+    int selectTooBig = 3;
         boolean correctAnswer = false;
         while (!correctAnswer) {
-            Scanner input = ConsoleOutput.choicePrinter(theHero);
-
+            Scanner input = new Scanner(System.in);;
+            ConsoleOutput.choicePrinter(theHero);
             if (input.hasNextInt()) {
                 selection = input.nextInt();
-                if (selection <= 0 || selection > 3) {
+                if (selection <= selectTooSmall || selection > selectTooBig) {
                     ConsoleOutput.invalidInput();
                 } else {
 
