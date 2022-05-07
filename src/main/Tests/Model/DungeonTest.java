@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
@@ -419,6 +420,93 @@ class DungeonTest {
         assertTrue(west);
         assertFalse(north);
         assertFalse(south);
+
+    }
+
+    @Test
+    void exitMakerTest1() {
+        int myDungeonSize = 5;
+        boolean exitExists = false;
+        /*
+         * A random dungeon will be created and test will check if
+         * an exit is present in the last row of the dungeon.
+         */
+        myDungeon = new Dungeon(myDungeonSize);
+        for (int i = 0; i < myDungeonSize; i++) {
+            if(!myDungeon.getRoom(myDungeonSize-1, i).getMyRoomInventory().contains(RoomType.EXIT.type)) {
+                exitExists = true;
+                break;
+            }
+        }
+        assertTrue(exitExists); // Check for multiple Exits// Check for no Exits
+
+    }
+    @Test
+    /**
+     * Checking if created dungeon has the 2 crowns.
+     */
+    void crownSetterTest() {
+        int myDungeonSize = 5;
+        boolean foundFirstCrown = false;
+        boolean foundSecondCrown = false;
+
+        myDungeon = new Dungeon(myDungeonSize);
+
+
+        for (int i = 0; i < myDungeonSize; i++) {
+            for (int j = 0; j < myDungeonSize; j++) {
+                if(myDungeon.getRoom(i, j).getMyRoomInventory().contains(RoomType.CODING_CROWN_1.type)) {
+                    foundFirstCrown = true;
+                } else if(myDungeon.getRoom(i, j).getMyRoomInventory().contains(RoomType.CODING_CROWN_2.type)) {
+                    foundSecondCrown = true;
+                }
+            }
+        }
+        assertTrue(foundFirstCrown);
+        assertTrue(foundSecondCrown);
+
+    }
+
+    @Test
+    /**
+     * Checking if created dungeon has the 2 crowns.
+     * Checking if there are multiple of the same kind.
+     */
+    void crownSetterTest2() {
+        int myDungeonSize = 5;
+        boolean foundFirstCrown = false;
+        boolean foundSecondCrown = false;
+
+        boolean foundADuplicate = false;
+
+        myDungeon = new Dungeon(myDungeonSize);
+
+
+        for (int i = 0; i < myDungeonSize; i++) {
+            for (int j = 0; j < myDungeonSize; j++) {
+
+                if(myDungeon.getRoom(i, j).getMyRoomInventory().contains(RoomType.CODING_CROWN_1.type)) {
+
+                    if (foundFirstCrown) {
+                        //Found a duplicate
+                        foundADuplicate = true;
+                        break;
+                    } else {
+                        foundFirstCrown = true;
+                    }
+                } else if(myDungeon.getRoom(i, j).getMyRoomInventory().contains(RoomType.CODING_CROWN_2.type)) {
+
+                    if (foundSecondCrown) {
+                        //Found a duplicate
+                        foundADuplicate = true;
+                        break;
+                    } else {
+                        foundSecondCrown = true;
+                    }
+                }
+            }
+        }
+        assertFalse(foundADuplicate);
 
     }
 
