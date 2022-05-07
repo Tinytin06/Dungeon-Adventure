@@ -9,7 +9,10 @@ public enum RoomType {
     ENTRANCE('E'),
     HEALING('H'),
     VISION('V'),
-    PLAYER('*');
+    PLAYER('*'),
+    CODING_CROWN_1('K'),
+    CODING_CROWN_2('Q');
+
 
     public final char type;
 

@@ -134,16 +134,19 @@ public class Dungeon {
 
     }
 
-//    private void crownSetter (final ArrayList<ArrayList<Room>> theDungeon) {
-//        boolean haveEntrance = false;
-//        boolean haveExit = false;
-//        boolean haveCrown = false;
-//        boolean have2ndCrown = false;
-//
+    private void crownSetter (final ArrayList<ArrayList<Room>> theDungeon) {
+        Random rand = new Random();
+        Room roomSetter;
+        boolean haveEntrance = false;
+        boolean haveExit = false;
+        boolean haveCrown = false;
+        boolean have2ndCrown = false;
+
+
 //        while (!haveCrown || !have2ndCrown) {
 //            if (Math.random() < .1 && !haveCrown) {
 //                roomSetter = theDungeon.get(rand.nextInt(theDungeonSize - 1)).get(rand.nextInt(theDungeonSize - 1));
-//                if (!roomSetter.getHasASecondCrown() && !roomSetter.getHasEnterance() && !roomSetter.getHasExit()) {
+//                if (!roomSetter.getMyRoomInventory().contains() && !roomSetter.getHasEnterance() && !roomSetter.getHasExit()) {
 //                    roomSetter.setHasMy_Crown(true);
 //                    roomSetter.addRoomInventory("Coding Crown");
 //                    haveCrown = true;
@@ -160,7 +163,7 @@ public class Dungeon {
 //            }
 //
 //        }
-//    }
+    }
 
 
 
@@ -339,6 +342,18 @@ public class Dungeon {
 
                     case("*"):
                         myNewRoom = new Room(RoomType.PLAYER);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("K"):
+                        myNewRoom = new Room(RoomType.CODING_CROWN_1);
+                        dungeonRow.add(myNewRoom);
+                        myNewRoom.exploreTheRoom();
+                        break;
+
+                    case("Q"):
+                        myNewRoom = new Room(RoomType.CODING_CROWN_2);
                         dungeonRow.add(myNewRoom);
                         myNewRoom.exploreTheRoom();
                         break;
