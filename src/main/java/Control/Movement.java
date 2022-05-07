@@ -35,7 +35,11 @@ public class Movement   {
         }
         return selection;
     }
+    void setDamageTaken(DungeonCharacter theDungeonCharacter, int damageAmount){
+        if(theDungeonCharacter.damageTaken(damageAmount)){
 
+        }
+    }
 
     public static void main(String[] args) {
         Warrior testWarrior=new Warrior("sup");
