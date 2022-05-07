@@ -41,6 +41,9 @@ public class Room {
         }
 
     }
+    public String getMyRoomDisplayIcon() {
+        return myDisplayIcon;
+    }
 
     /**
      * This method sets the icon of the room with the passed String

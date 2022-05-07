@@ -98,6 +98,7 @@ public class Dungeon {
         return dungeonPrint.toString() ;
     }
 
+
     private void entranceCreator(final ArrayList<ArrayList<Room>> theDungeon) {
         Random rand = new Random();
         boolean haveEntrance = false;
@@ -258,6 +259,7 @@ public class Dungeon {
         boolean south = (dummyPoint.y + 1 <= myDungeonSize-1);
         boolean west = (dummyPoint.x - 1 >= firstIndex);
         boolean east = (dummyPoint.x + 1 <= myDungeonSize-1);
+
         if (north) {
             dummyPoint.translate(0,-1);
             currentLocation.add(dummyPoint);
@@ -312,67 +314,65 @@ public class Dungeon {
                     case("F"):
                         myNewRoom = new Room(RoomType.FIGHT);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
                         break;
 
                     case("P"):
                         myNewRoom = new Room(RoomType.PIT);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     case("N"):
                         myNewRoom = new Room(RoomType.NORMAL);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     case("I"):
                         myNewRoom = new Room(RoomType.PILLAR);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     case("X"):
                         myNewRoom = new Room(RoomType.EXIT);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
                         break;
 
                     case("E"):
                         myNewRoom = new Room(RoomType.ENTRANCE);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     case("H"):
                         myNewRoom = new Room(RoomType.HEALING);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     case("V"):
                         myNewRoom = new Room(RoomType.VISION);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     case("*"):
                         myNewRoom = new Room(RoomType.PLAYER);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     case("K"):
                         myNewRoom = new Room(RoomType.CODING_CROWN_1);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     case("Q"):
                         myNewRoom = new Room(RoomType.CODING_CROWN_2);
                         dungeonRow.add(myNewRoom);
-                        myNewRoom.exploreTheRoom();
+
                         break;
 
                     default:
