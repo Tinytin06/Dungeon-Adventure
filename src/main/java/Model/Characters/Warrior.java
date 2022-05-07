@@ -35,7 +35,7 @@ public class Warrior extends Hero {
                 0);
 
     }
-
+//NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
     /**
      * This is a overridden special attack method for this class.
      * @param enemy
