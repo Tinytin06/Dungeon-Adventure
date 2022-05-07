@@ -1,3 +1,16 @@
+
+/*
+ * The original program was designed to be used in single package, now unless we set everything to public nothing will
+ * work. Even with protected there is trouble, I should be able to use method of hero through Warrior however
+ * the method are not working reasons not known to me. We should talk about this on Monday and get started on the
+ * dungeon Adventure.
+ * - Varun
+ */
+
+
+
+
+
 //package Control;/*
 // * Varun Parbhakar
 // *
@@ -9,6 +22,7 @@
 //import Model.Characters.Skeleton;
 //import Model.Characters.Warrior;
 //import Model.Dungeon;
+//import Model.Room;
 //import View.ConsoleOutput;
 //
 //
@@ -36,14 +50,16 @@
 //                Hero hero = new Warrior(name);
 //                Monster monster = new Skeleton("Null Pointer");
 //                int myDungeonSize = 5;
-//                Dungeon myDungeon = new Dungeon(myDungeonSize, hero);
+//                Dungeon myDungeon = new Dungeon(myDungeonSize);
+//                Point dungeonEntrance = myDungeon.addHeroToDungeon();
+//                hero.setCharacterLocation(dungeonEntrance.x, dungeonEntrance.y);
+//
 //                // These are the names needs to be used in order to activate the cheat
 //                // I dont have a method in the Dungeon Adventure for revealing all of the
 //                // room, I thought that it better fit for the Dungeon class to have that kind of power.
 //                if (name.equals("Varun") || name.equals("Bryce")) {
 //                    myDungeon.setMyCheatEnabled();
 //                }
-//
 //
 //                while(hero.alive()) {
 //                    mover(userInput, hero, myDungeonSize, myDungeon, monster);

@@ -351,7 +351,7 @@ public abstract class Hero extends DungeonCharacter {
      * @param theX
      * @param theY
      */
-    protected void setCharacterLocation(final int theX, final int theY) {
+     void setCharacterLocation(final int theX, final int theY) {
         myCharacterLocationY = theY;
         myCharacterLocationX = theX;
     }
@@ -401,7 +401,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * This methods adds 1 to the healing potion field.
      */
-    protected  void addHealingPotion() {
+    protected void addHealingPotion() {
         myHealingPotions++;
     }
 

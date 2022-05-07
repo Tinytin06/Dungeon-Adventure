@@ -6,6 +6,8 @@ package Model;
 
 
 
+import Model.Characters.Hero;
+
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,6 +27,9 @@ public class Dungeon {
     private int myDungeonSize;
     private ArrayList<ArrayList<Room>> myDungeon;
     private boolean myCheatEnabled;
+    private Point myEntranceLocation;
+
+
 
 
     /**
@@ -33,19 +38,34 @@ public class Dungeon {
      * @throws FileNotFoundException
      */
     Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
+
         if(theDungeonLength < 2) {
             throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");
         }
         myDungeonSize = theDungeonLength;
         readFromFile(theFile);
     }
+
+    /**
+     * Returns the entrance of the dungeon.
+     * @return
+     */
+    Point addHeroToDungeon() {
+        if(myDungeon.size() <= 0) {
+            throw new IllegalStateException("The dungeon doesn't exist, current dungeon size: " + myDungeonSize);
+        } else {
+            myDungeon.get(myEntranceLocation.x).get(myEntranceLocation.y).addTo_MyRoomInventory(RoomType.PLAYER);
+        }
+        return myEntranceLocation;
+    }
+
     /**
      * This constructor creates the dungeon with the use of the specified dungeon size from
      * the user.
      * @param theDungeonLength
      *
      */
-    Dungeon(final int theDungeonLength) {
+    public Dungeon(final int theDungeonLength) {
         if(theDungeonLength < 2) {
             throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");
         }
@@ -83,7 +103,6 @@ public class Dungeon {
     Room getRoom(final int row, final int column ) {
         return myDungeon.get(row).get(column);
     }
-
     /**
      * To string method for the dungeon.
      * @return (String containing the layout of the dungeon)
@@ -113,6 +132,7 @@ public class Dungeon {
                 roomNumber = rand.nextInt(myDungeonSize - 1);
                 roomSetter = theDungeon.get(0).get(roomNumber);
                 roomSetter.setEntrance();
+                myEntranceLocation = new Point(0, roomNumber);
                 haveEntrance = true;
             }
         }
