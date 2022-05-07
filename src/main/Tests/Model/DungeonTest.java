@@ -193,6 +193,11 @@ class DungeonTest {
 
 
     @Test
+    /**
+     * Testing if the vision potion properly illuminates the 4 rooms around the player.
+     *
+     * Testing Center of the map
+     */
     void visionPotionTest1() throws FileNotFoundException {
         //Map containing Fights in every location.
         String myFileName = "VisionPotionTest1.txt";
@@ -210,7 +215,7 @@ class DungeonTest {
         // with assertTrue there seems to be an error for some reason.
         boolean east = (myDungeon.getRoom(playerLocation.x, playerLocation.y-1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //East
         boolean west = (myDungeon.getRoom(playerLocation.x, playerLocation.y+1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //West
-        boolean north = (myDungeon.getRoom(playerLocation.x-1, 2).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
+        boolean north = (myDungeon.getRoom(playerLocation.x-1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
         boolean south = (myDungeon.getRoom(playerLocation.x+1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //South
 
         assertTrue(east);
@@ -221,6 +226,11 @@ class DungeonTest {
     }
 
     @Test
+    /**
+     * Testing if the vision potion properly illuminates the 4 rooms around the player.
+     *
+     * Testing the top left corner of the map.
+     */
     void visionPotionTest2() throws FileNotFoundException {
         //Map containing Fights in every location.
         String myFileName = "VisionPotionTest2.txt";
@@ -238,13 +248,177 @@ class DungeonTest {
         // with assertTrue there seems to be an error for some reason.
         //boolean east = (myDungeon.getRoom(playerLocation.x, playerLocation.y-1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //East
         boolean west = (myDungeon.getRoom(playerLocation.x, playerLocation.y+1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //West
-        //boolean north = (myDungeon.getRoom(playerLocation.x-1, 2).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
+        //boolean north = (myDungeon.getRoom(playerLocation.x-1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
         boolean south = (myDungeon.getRoom(playerLocation.x+1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //South
 
 //        assertTrue(east);
         assertTrue(west);
 //        assertTrue(north);
         assertTrue(south);
+
+    }
+
+    @Test
+    /**
+     * Testing if the vision potion properly illuminates the 4 rooms around the player.
+     *
+     *  Testing the south wall.
+     */
+    void visionPotionTest3() throws FileNotFoundException {
+        //Map containing Fights in every location.
+        String myFileName = "VisionPotionTest3.txt";
+        int myDungeonSize = 6;
+
+        myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
+
+
+        Point playerLocation = new Point(5,3);
+
+        myDungeon.deployVisionPotion(playerLocation);
+
+
+        //for some reason if I true to check if this whole boolean statement is true or false
+        // with assertTrue there seems to be an error for some reason.
+        boolean east = (myDungeon.getRoom(playerLocation.x, playerLocation.y-1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //East
+        boolean west = (myDungeon.getRoom(playerLocation.x, playerLocation.y+1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //West
+        boolean north = (myDungeon.getRoom(playerLocation.x-1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
+//        boolean south = (myDungeon.getRoom(playerLocation.x+1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //South
+
+        assertTrue(east);
+        assertTrue(west);
+        assertTrue(north);
+//        assertTrue(south);
+
+    }
+    @Test
+    /**
+     * Testing if the vision potion properly illuminates the 4 rooms around the player.
+     *
+     * Testing the North.
+     */
+    void visionPotionTest4() throws FileNotFoundException {
+        //Map containing Fights in every location.
+        String myFileName = "VisionPotionTest4.txt";
+        int myDungeonSize = 6;
+
+        myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
+
+
+        Point playerLocation = new Point(2,2);
+
+        myDungeon.deployVisionPotion(playerLocation);
+
+
+        //for some reason if I true to check if this whole boolean statement is true or false
+        // with assertTrue there seems to be an error for some reason.
+        boolean east = (myDungeon.getRoom(playerLocation.x, playerLocation.y-1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //East
+        boolean west = (myDungeon.getRoom(playerLocation.x, playerLocation.y+1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //West
+        boolean north = (myDungeon.getRoom(playerLocation.x-1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
+        boolean south = (myDungeon.getRoom(playerLocation.x+1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //South
+
+        assertFalse(east);
+        assertFalse(west);
+        assertTrue(north);
+        assertFalse(south);
+
+    }
+
+    @Test
+    /**
+     * Testing if the vision potion properly illuminates the 4 rooms around the player.
+     *
+     * Testing the East.
+     */
+    void visionPotionTest5() throws FileNotFoundException {
+        //Map containing Fights in every location.
+        String myFileName = "VisionPotionTest5.txt";
+        int myDungeonSize = 6;
+
+        myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
+
+
+        Point playerLocation = new Point(2,2);
+
+        myDungeon.deployVisionPotion(playerLocation);
+
+
+        //for some reason if I true to check if this whole boolean statement is true or false
+        // with assertTrue there seems to be an error for some reason.
+        boolean east = (myDungeon.getRoom(playerLocation.x, playerLocation.y-1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //East
+        boolean west = (myDungeon.getRoom(playerLocation.x, playerLocation.y+1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //West
+        boolean north = (myDungeon.getRoom(playerLocation.x-1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
+        boolean south = (myDungeon.getRoom(playerLocation.x+1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //South
+
+        assertTrue(east);
+        assertFalse(west);
+        assertFalse(north);
+        assertFalse(south);
+
+    }
+
+    @Test
+    /**
+     * Testing if the vision potion properly illuminates the 4 rooms around the player.
+     *
+     * Testing the South.
+     */
+    void visionPotionTest6() throws FileNotFoundException {
+        //Map containing Fights in every location.
+        String myFileName = "VisionPotionTest6.txt";
+        int myDungeonSize = 6;
+
+        myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
+
+
+        Point playerLocation = new Point(2,2);
+
+        myDungeon.deployVisionPotion(playerLocation);
+
+
+        //for some reason if I true to check if this whole boolean statement is true or false
+        // with assertTrue there seems to be an error for some reason.
+        boolean east = (myDungeon.getRoom(playerLocation.x, playerLocation.y-1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //East
+        boolean west = (myDungeon.getRoom(playerLocation.x, playerLocation.y+1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //West
+        boolean north = (myDungeon.getRoom(playerLocation.x-1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
+        boolean south = (myDungeon.getRoom(playerLocation.x+1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //South
+
+        assertFalse(east);
+        assertFalse(west);
+        assertFalse(north);
+        assertTrue(south);
+
+    }
+
+    @Test
+    /**
+     * Testing if the vision potion properly illuminates the 4 rooms around the player.
+     *
+     * Testing the West.
+     */
+    void visionPotionTest7() throws FileNotFoundException {
+        //Map containing Fights in every location.
+        String myFileName = "VisionPotionTest7.txt";
+        int myDungeonSize = 6;
+
+        myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
+
+
+        Point playerLocation = new Point(2,2);
+
+        myDungeon.deployVisionPotion(playerLocation);
+
+
+        //for some reason if I true to check if this whole boolean statement is true or false
+        // with assertTrue there seems to be an error for some reason.
+        boolean east = (myDungeon.getRoom(playerLocation.x, playerLocation.y-1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //East
+        boolean west = (myDungeon.getRoom(playerLocation.x, playerLocation.y+1).getMyRoomInventory().contains(RoomType.FIGHT.type)); //West
+        boolean north = (myDungeon.getRoom(playerLocation.x-1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //North
+        boolean south = (myDungeon.getRoom(playerLocation.x+1, playerLocation.y).getMyRoomInventory().contains(RoomType.FIGHT.type)); //South
+
+        assertFalse(east);
+        assertTrue(west);
+        assertFalse(north);
+        assertFalse(south);
 
     }
 

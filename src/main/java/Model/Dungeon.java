@@ -253,11 +253,10 @@ public class Dungeon {
         ArrayList<Point> currentLocation = new ArrayList<>();
         Point dummyPoint = (Point)(theLocation.clone());
 
-        int firstIndex = 0;
-
-        boolean north = (dummyPoint.y - 1 >= firstIndex);
+        //Checking where the vision potion will illuminate the room.
+        boolean north = (dummyPoint.y - 1 >= 0);
         boolean south = (dummyPoint.y + 1 <= myDungeonSize-1);
-        boolean west = (dummyPoint.x - 1 >= firstIndex);
+        boolean west = (dummyPoint.x - 1 >= 0);
         boolean east = (dummyPoint.x + 1 <= myDungeonSize-1);
 
         if (north) {
@@ -278,6 +277,8 @@ public class Dungeon {
             dummyPoint = (Point)(theLocation.clone());
         }
 
+        //An improvement this might be instead of storing all the room in an array list, we simply
+        //reveal the contents of the room as we translate to it, In 4 lines above this.
         for (Point local: currentLocation){
             dummyRoom = myDungeon.get(local.y).get(local.x);
             dummyRoom.exploreTheRoom();
