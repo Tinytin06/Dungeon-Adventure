@@ -1,8 +1,5 @@
 package Model;
-import Model.Room;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -65,7 +62,7 @@ class RoomTest {
     void setMyRoomInventory() {
         Room roomTest = new Room();
         roomTest.setEmptyRoom();
-        roomTest.setMyRoomInventory(RoomType.NORMAL);
+        roomTest.addTo_MyRoomInventory(RoomType.NORMAL);
         HashSet roomInventory = roomTest.getMyRoomInventory();
         assertEquals(true, roomInventory.contains(RoomType.NORMAL.type));//test looks awful might change it so that there is less ellipses references
     }
@@ -84,7 +81,7 @@ class RoomTest {
     @Test
     void removeMyTypes() {
         Room roomTest = new Room(RoomType.PIT);
-        roomTest.setMyRoomInventory(RoomType.PLAYER);
+        roomTest.addTo_MyRoomInventory(RoomType.PLAYER);
         String playerIcon = "* ";
         assertEquals(playerIcon, roomTest.toString());
         roomTest.removeMyTypes(RoomType.PLAYER);
@@ -99,7 +96,7 @@ class RoomTest {
      */
     void testToStringPlayer() {
         Room roomTest = new Room(RoomType.PIT);
-        roomTest.setMyRoomInventory(RoomType.PLAYER);
+        roomTest.addTo_MyRoomInventory(RoomType.PLAYER);
         String playerIcon = "* ";
         assertEquals(playerIcon, roomTest.toString());
     }
@@ -129,7 +126,7 @@ class RoomTest {
     @Test
     void setEmptyRoom() {
         Room roomTest = new Room(RoomType.PIT);
-        roomTest.setMyRoomInventory(RoomType.PILLAR);
+        roomTest.addTo_MyRoomInventory(RoomType.PILLAR);
         String tooManyRoomIcon = "I ";
 
         roomTest.exploreTheRoom();
@@ -167,7 +164,7 @@ class RoomTest {
      */
     void exploreTheRoomTooMuch() {
         Room roomTest = new Room(RoomType.PIT);
-        roomTest.setMyRoomInventory(RoomType.NORMAL);
+        roomTest.addTo_MyRoomInventory(RoomType.NORMAL);
         String tooMuchIcon = "M ";
         String hiddenIcon = "? ";
 

@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import static Model.RoomType.*;
 /**
@@ -15,7 +14,7 @@ public class Room {
 
 
     Room(final RoomType theType) {
-        setMyRoomInventory(theType);
+        addTo_MyRoomInventory(theType);
     }
 
 
@@ -26,19 +25,19 @@ public class Room {
     public Room() {
         //is there a way to make this a switch statement?
         if (Math.random() < .1) {
-            setMyRoomInventory(HEALING);
+            addTo_MyRoomInventory(HEALING);
         }
         if (Math.random() < .05) {
-            setMyRoomInventory(VISION);
+            addTo_MyRoomInventory(VISION);
         }
         if (Math.random() < .1) {
-            setMyRoomInventory(PIT);
+            addTo_MyRoomInventory(PIT);
         }
         if (Math.random() < .1) {
-            setMyRoomInventory(FIGHT);
+            addTo_MyRoomInventory(FIGHT);
         }
         if(myRoomInventory.isEmpty()){
-            setMyRoomInventory(NORMAL);
+            addTo_MyRoomInventory(NORMAL);
         }
 
     }
@@ -58,7 +57,7 @@ public class Room {
      * This method adds the passed item to the room inventory Set.
      * @param theType
      */
-    void setMyRoomInventory(RoomType theType) {
+    void addTo_MyRoomInventory(RoomType theType) {
         myRoomInventory.add(theType.type);
     }
 
@@ -131,7 +130,7 @@ public class Room {
      */
     void setEntrance(){
         setEmptyRoom();
-        setMyRoomInventory(ENTRANCE);
+        addTo_MyRoomInventory(ENTRANCE);
         setMyDisplayIcon(ENTRANCE.type + " ");
     }
     /**
@@ -140,7 +139,7 @@ public class Room {
      */
     void setExit(){
         setEmptyRoom();
-        setMyRoomInventory(EXIT);
+        addTo_MyRoomInventory(EXIT);
 
         //If the exit needs to be shielded/hidden from the player the
 
@@ -151,8 +150,8 @@ public class Room {
      * @param
      */
     void setPillar(){
-        setMyRoomInventory(FIGHT);
-        setMyRoomInventory(PILLAR);
+        addTo_MyRoomInventory(FIGHT);
+        addTo_MyRoomInventory(PILLAR);
     }
 
 

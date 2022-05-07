@@ -53,7 +53,8 @@ public class Dungeon {
         myDungeon = new ArrayList<>();
         dungeonBuilder();
         entranceCreator(myDungeon);
-        createExitEntrance(myDungeon, myDungeonSize);
+        exitCreator(myDungeon);
+        crownSetter(myDungeon);
     }
 
     /**
@@ -134,70 +135,89 @@ public class Dungeon {
 
     }
 
+    /**
+     * This method creates sets the crown in a random room except for the rooms that contain
+     * the entrance or the exit.
+     *
+     * There is a chance that a two of the crown can be placed into the same room.
+     *
+     * @param theDungeon
+     */
     private void crownSetter (final ArrayList<ArrayList<Room>> theDungeon) {
         Random rand = new Random();
         Room roomSetter;
-        boolean haveEntrance = false;
-        boolean haveExit = false;
         boolean haveCrown = false;
         boolean have2ndCrown = false;
 
 
-//        while (!haveCrown || !have2ndCrown) {
-//            if (Math.random() < .1 && !haveCrown) {
-//                roomSetter = theDungeon.get(rand.nextInt(theDungeonSize - 1)).get(rand.nextInt(theDungeonSize - 1));
-//                if (!roomSetter.getMyRoomInventory().contains() && !roomSetter.getHasEnterance() && !roomSetter.getHasExit()) {
-//                    roomSetter.setHasMy_Crown(true);
-//                    roomSetter.addRoomInventory("Coding Crown");
-//                    haveCrown = true;
-//                }
-//
-//            }
-//            if (Math.random() < .1 && !have2ndCrown) {
-//                roomSetter = theDungeon.get(rand.nextInt(theDungeonSize - 1)).get(rand.nextInt(theDungeonSize - 1));
-//                if (!roomSetter.getHasACrown() && !roomSetter.getHasEnterance() && !roomSetter.getHasExit()) {
-//                    roomSetter.setHasMy_SecondCrown(true);
-//                    roomSetter.addRoomInventory("Second Coding Crown");
-//                    have2ndCrown = true;
-//                }
-//            }
-//
-//        }
-    }
+        while (!haveCrown || !have2ndCrown) {
 
+            //Locating a room for a Coding Crown 1
+            if (Math.random() < .1 && !haveCrown) {
+                roomSetter = theDungeon.get(rand.nextInt(myDungeonSize - 1)).get(rand.nextInt(myDungeonSize - 1));
+                //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
+                if (
+                        !roomSetter.getMyRoomInventory().contains(RoomType.CODING_CROWN_1) && //Does it already have the Crown?
+                        !roomSetter.getMyRoomInventory().contains(RoomType.ENTRANCE) && //Does it already have the Entrance?
+                        !roomSetter.getMyRoomInventory().contains(RoomType.EXIT)) { //Does it already have an exit?
 
+                    roomSetter.addTo_MyRoomInventory(RoomType.CODING_CROWN_1);
+                    haveCrown = true;
+                }
 
-
-
-    /**
-     * This method creates and exit, entrance and populates the dungeon with 2 crowns.
-     * @param theDungeon
-     * @param theDungeonSize
-     * need to breakup method cus does too many things
-     */
-    private void createExitEntrance(final ArrayList<ArrayList<Room>> theDungeon, final int theDungeonSize){
-        Random rand = new Random();
-        Room thisRoom = new Room();
-//        System.out.println(theDungeon.forEach(ArrayList::contains));
-        boolean haveEntrance = false;//need to check preexisting dungeon to see if they have an entrance or exit this should not fly
-        boolean haveExit = false;
-        int roomNumber;
-        Room roomSetter;
-        while (!haveEntrance || !haveExit) {
-            if (Math.random() < .1 && !haveEntrance) {
-                roomNumber = rand.nextInt(theDungeonSize - 1);
-                roomSetter = theDungeon.get(0).get(roomNumber);
-                roomSetter.setEntrance();
-
-                haveEntrance = true;
-            } if (Math.random() < .1 && !haveExit) {
-                roomSetter = theDungeon.get(theDungeonSize - 1).get(rand.nextInt(theDungeonSize));
-                roomSetter.setExit();
-
-                haveExit = true;
             }
+            //Locating a room for a Coding Crown 2
+            if (Math.random() < .1 && !have2ndCrown) {
+                roomSetter = theDungeon.get(rand.nextInt(myDungeonSize - 1)).get(rand.nextInt(myDungeonSize - 1));
+
+                //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
+                if (
+                        !roomSetter.getMyRoomInventory().contains(RoomType.CODING_CROWN_2) && //Does it already have the Crown?
+                        !roomSetter.getMyRoomInventory().contains(RoomType.ENTRANCE) && //Does it already have the Entrance?
+                        !roomSetter.getMyRoomInventory().contains(RoomType.EXIT)) { //Does it already have an exit?
+
+
+                    roomSetter.addTo_MyRoomInventory(RoomType.CODING_CROWN_2);
+                    have2ndCrown = true;
+                }
+            }
+
         }
     }
+
+
+
+
+
+//    /**
+//     * This method creates and exit, entrance and populates the dungeon with 2 crowns.
+//     * @param theDungeon
+//     * @param theDungeonSize
+//     * need to breakup method cus does too many things
+//     */
+//    private void createExitEntrance(final ArrayList<ArrayList<Room>> theDungeon, final int theDungeonSize){
+//        Random rand = new Random();
+//        Room thisRoom = new Room();
+////        System.out.println(theDungeon.forEach(ArrayList::contains));
+//        boolean haveEntrance = false;//need to check preexisting dungeon to see if they have an entrance or exit this should not fly
+//        boolean haveExit = false;
+//        int roomNumber;
+//        Room roomSetter;
+//        while (!haveEntrance || !haveExit) {
+//            if (Math.random() < .1 && !haveEntrance) {
+//                roomNumber = rand.nextInt(theDungeonSize - 1);
+//                roomSetter = theDungeon.get(0).get(roomNumber);
+//                roomSetter.setEntrance();
+//
+//                haveEntrance = true;
+//            } if (Math.random() < .1 && !haveExit) {
+//                roomSetter = theDungeon.get(theDungeonSize - 1).get(rand.nextInt(theDungeonSize));
+//                roomSetter.setExit();
+//
+//                haveExit = true;
+//            }
+//        }
+//    }
 
     /**
      * This method returns a room object that is located at the passed location
