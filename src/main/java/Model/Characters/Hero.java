@@ -119,7 +119,7 @@ public abstract class Hero extends DungeonCharacter {
      * @param theC_Damage (The amount of damage that a character takes)
      */
     @Override
-    protected boolean damageTaken(final int theC_Damage) {
+    public boolean damageTaken(final int theC_Damage) {
         if (randomGen.nextDouble() <= myChance2Block) {
             System.out.println((getCharacter_Name() + " blocked the attack!\n"));
             return false;
