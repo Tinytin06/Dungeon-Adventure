@@ -70,7 +70,12 @@ public abstract class Hero extends DungeonCharacter {
             specialSkill_MinDamage_Validator(theC_SpecialSkill_MinDamage);
             specialSkill_MaxDamage_Validator(theC_SpecialSkill_MaxDamage);
         }
-        setCharacterLocation(theCharacterX,theCharacterY);
+
+//        setCharacterLocation(theCharacterX,theCharacterY);
+        myCharacterLocationX = theCharacterX;
+        myCharacterLocationY = theCharacterY;
+
+
         myHealingPotions = 0;
         myVisionPotions = 0;
         myCrownPieces = 0;
@@ -81,12 +86,12 @@ public abstract class Hero extends DungeonCharacter {
     // Getters
 
 
-    /**
-     * This methods sets the health for the hero characters.
-     */
-    protected void setMyHealth(final int theHP) {
-        super.setMyCharacter_HealthPoints(theHP);
-    }
+//    /**
+//     * This methods sets the health for the hero characters.
+//     */
+//    protected void setMyHealth(final int theHP) {
+//        super.setMyCharacter_HealthPoints(theHP);
+//    }
 
 
     /**
@@ -95,7 +100,7 @@ public abstract class Hero extends DungeonCharacter {
      * @return (An integer between the range of minimum and maximum damage)
      */
     protected int specialDamageGenerator() {
-        return super.damageRangeCalculator(mySpecialSkill_MinDamage, mySpecialSkill_MaxDamage);
+        return damageRangeCalculator(mySpecialSkill_MinDamage, mySpecialSkill_MaxDamage);
     }
 
     /**
@@ -124,7 +129,6 @@ public abstract class Hero extends DungeonCharacter {
             System.out.println((getCharacter_Name() + " blocked the attack!\n"));
             return false;
 
-
         } else {
             super.damageTaken(theC_Damage);
             return true;
@@ -143,6 +147,8 @@ public abstract class Hero extends DungeonCharacter {
      * This method is used for the characters to attack.
      * @param theEnemy (The enemy player)
      */
+
+// add parameter fo attack choice in here
     protected void attacks(final DungeonCharacter theEnemy) {
         int attackChoice = 0;
         int tooLowOfAttackSpeedRatio= 0;
@@ -150,21 +156,25 @@ public abstract class Hero extends DungeonCharacter {
         myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
         if (myNumberOfAttacks == tooLowOfAttackSpeedRatio) {
             myNumberOfAttacks = fixesLowRatio;
-
         }
+
+// WE NEED TO ADD CHANGE THIS WHILE LOOP TO DUNGEON ADVENTURE TOO
         while (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway) {
+
+// this check is for when we test this method
             if (theEnemy == null) {
                 throw new IllegalArgumentException("The passed enemy is set to null");
             }
+
+// ERROR attackChoiceValidator will be moved to the DungeonAdeventure class.
             attackChoice = attackChoiceValidator();
+//            attackChoice = attackChoiceValidator();
             if (attackChoice == SPECIAL_ATTACK) {
                 specialAttack(theEnemy);
-            }
-            else if (attackChoice == NORMAL_ATTACK) {
+            } else if (attackChoice == NORMAL_ATTACK) {
                 super.attacks(theEnemy);
             } else {
                 runAway();
-
             }
             myNumberOfAttacks--;
 
@@ -172,7 +182,8 @@ public abstract class Hero extends DungeonCharacter {
 
     }
 
-
+// this will get moved to dunegon adventure when its ready
+// we will validate the attack there before we call the attack function.
     /**
      * This method insures that the user selects the right attack
      * and also performs input validation.
@@ -185,27 +196,20 @@ public abstract class Hero extends DungeonCharacter {
                 "\n1: Special Attack" +
                 "\n2: Normal Attack" +
                 "\n3: Run Away");
-        boolean correctAnswer = false;
-        while (!correctAnswer) {
-
+        while (selection == 0) {
             System.out.println(choices);
             if (userInput.hasNextInt()) {
 
                 selection = userInput.nextInt();
                 if (selection <= 0 || selection > 3) {
                     System.out.println("Invalid Choice");
-                } else {
-
-                    correctAnswer = true;
                 }
-
-
             } else {
                 System.out.println("Invalid Choice");
                 userInput.next();
             }
-
         }
+
         return selection;
     }
 
@@ -215,12 +219,7 @@ public abstract class Hero extends DungeonCharacter {
      * @return (Returns if user can use a special attack)
      */
     protected final boolean canUseSpecialAttack() {
-        if (mySpecialSkillChance >= randomGen.nextDouble()) {
-            return true;
-
-        } else {
-            return false;
-        }
+        return (mySpecialSkillChance >= randomGen.nextDouble());
     }
 
     /**
@@ -242,7 +241,6 @@ public abstract class Hero extends DungeonCharacter {
         myRunAway = true;
         killCharacter();
         //System.out.println(getCharacter_Name() + " has ran away.");
-
     }
 
 
@@ -254,9 +252,11 @@ public abstract class Hero extends DungeonCharacter {
      * @param theC_Chance2Block
      */
     protected final void chance2Block_Validator(final double theC_Chance2Block) {
-        Double greaterThan100Percent = 1.0;
-        Double lessThan0Percent = 0.0;
-        if (theC_Chance2Block > greaterThan100Percent || theC_Chance2Block < lessThan0Percent) {
+//        double greaterThan100Percent = 1.0;
+//        double lessThan0Percent = 0.0;
+
+// this next check if good for when we test the method.
+        if (theC_Chance2Block > 1.0 || theC_Chance2Block < 0.0) {
             throw new IllegalArgumentException("Chance to block cannot be less 0 or greater than 1");
         }
         myChance2Block = theC_Chance2Block;
@@ -269,7 +269,9 @@ public abstract class Hero extends DungeonCharacter {
     protected final void specialSkill_Chance_Validator(final double theC_SpecialSkill_Chance) {
         Double greaterThan100Percent = 1.0;
         Double lessThan0Percent = 0.0;
-        if (theC_SpecialSkill_Chance < lessThan0Percent || theC_SpecialSkill_Chance > greaterThan100Percent) {
+
+// this next check if good for when we test the method.
+        if (theC_SpecialSkill_Chance < 1.0 || theC_SpecialSkill_Chance > 0.0) {
             throw new IllegalArgumentException("Special Skill cannot be less 0 or greater than 1");
         }
         mySpecialSkillChance = theC_SpecialSkill_Chance;
@@ -280,6 +282,7 @@ public abstract class Hero extends DungeonCharacter {
      * @param theC_SpecialSkill_MinDamage
      */
     protected final void specialSkill_MinDamage_Validator(final int theC_SpecialSkill_MinDamage) {
+// this next check if good for when we test the method.
         if (theC_SpecialSkill_MinDamage <= 0) {
             throw new IllegalArgumentException("The minimum damage points set for the character has to be greater than 0.");
         }
@@ -308,9 +311,9 @@ public abstract class Hero extends DungeonCharacter {
                                                        final int theC_SMaxDamage) {
         if (theC_SMinDamage > theC_SMaxDamage) {
             throw new IllegalArgumentException("The minimum special damage cannot be greater than the maximum special damage.");
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     /**
@@ -318,8 +321,7 @@ public abstract class Hero extends DungeonCharacter {
      * @return
      */
     protected Point getCharacterLocation() {
-        Point location = new Point(myCharacterLocationX, myCharacterLocationY);
-        return location;
+        return new Point(myCharacterLocationX, myCharacterLocationY);
     }
 
     /**
@@ -354,15 +356,19 @@ public abstract class Hero extends DungeonCharacter {
         return myCharacterLocationX;
     }
 
+
     /**
      * This method sets the location of the character.
      * @param theX
      * @param theY
      */
-     void setCharacterLocation(final int theX, final int theY) {
-        myCharacterLocationY = theY;
-        myCharacterLocationX = theX;
-    }
+//     void setCharacterLocation(final int theX, final int theY) {
+//        myCharacterLocationY = theY;
+//        myCharacterLocationX = theX;
+//    }
+
+
+
 
     /**
      * This method adds the passed item to the hero's inventory.
@@ -425,6 +431,7 @@ public abstract class Hero extends DungeonCharacter {
      * healing potions and coding crown.
      * @return String (Stats)
      */
+// send this to console output when we are ready.
     public String toString() {
         String stats = ("Name: " + getCharacter_Name()
                 + "\nHealth: " + super.getCharacter_HealthPoints()

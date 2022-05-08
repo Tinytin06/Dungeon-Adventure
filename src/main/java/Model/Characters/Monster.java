@@ -69,7 +69,7 @@ public abstract class Monster extends DungeonCharacter {
      * @return (An integer between the range of minimum and maximum points)
      */
     protected int healGenerator() {
-        return super.damageRangeCalculator(myHeal_MinPoints, myHeal_MaxPoints);
+        return damageRangeCalculator(myHeal_MinPoints, myHeal_MaxPoints);
     }
 
     /**
@@ -85,6 +85,7 @@ public abstract class Monster extends DungeonCharacter {
 
     }
 
+// add console output.
     /**
      * This method calculates the chances of the monster
      * succeeding at healing himself.
@@ -111,8 +112,8 @@ public abstract class Monster extends DungeonCharacter {
         myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
         if (myNumberOfAttacks == 0) {
             myNumberOfAttacks = 1;
-
         }
+
         while (myNumberOfAttacks > 0 && theEnemy.alive() ) {
             super.attacks(theEnemy);
             myNumberOfAttacks--;
@@ -128,7 +129,7 @@ public abstract class Monster extends DungeonCharacter {
      * @param theC_Chance2Heal
      */
     protected final void chance2Heal_Validator(final double theC_Chance2Heal) {
-        if (theC_Chance2Heal > 1 || theC_Chance2Heal < 0) {
+        if (theC_Chance2Heal > 1.0 || theC_Chance2Heal < 0.0) {
             throw new IllegalArgumentException("Chance to heal cannot be less 0 or greater than 1");
         }
         myChance2Heal = theC_Chance2Heal;
@@ -140,7 +141,7 @@ public abstract class Monster extends DungeonCharacter {
      * @param theC_Heal_MinPoints
      */
     protected final void heal_MinPoints_Validator(final int theC_Heal_MinPoints) {
-        if (theC_Heal_MinPoints <= 0) {
+        if (theC_Heal_MinPoints <= 0.0) {
             throw new IllegalArgumentException("The minimum special set for the character has to be greater than 0.");
         }
         myHeal_MinPoints = theC_Heal_MinPoints;
@@ -151,7 +152,7 @@ public abstract class Monster extends DungeonCharacter {
      * @param theC_Heal_MaxPoints
      */
     protected final void heal_MaxPoints_Validator(final int theC_Heal_MaxPoints) {
-        if (theC_Heal_MaxPoints <= 0) {
+        if (theC_Heal_MaxPoints <= 0.0) {
             throw new IllegalArgumentException("The maximum special points set for the character has to be greater than 0.");
         }
         myHeal_MaxPoints = theC_Heal_MaxPoints;
@@ -167,9 +168,10 @@ public abstract class Monster extends DungeonCharacter {
                                                final int theC_SMaxDamage) {
         if (theC_SMinDamage > theC_SMaxDamage) {
             throw new IllegalArgumentException("The minimum special heal points cannot be greater than the maximum special heal points.");
-        } else {
-            return true;
         }
+//        else {
+            return true;
+//        }
     }
 }
 //END
