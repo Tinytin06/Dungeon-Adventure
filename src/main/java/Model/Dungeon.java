@@ -7,6 +7,7 @@ package Model;
 
 
 import Model.Characters.Hero;
+import Model.Characters.Warrior;
 
 import java.awt.*;
 import java.io.File;
