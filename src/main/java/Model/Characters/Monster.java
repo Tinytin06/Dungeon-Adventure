@@ -107,7 +107,7 @@ public abstract class Monster extends DungeonCharacter {
      * @param theEnemy (The enemy player)
      */
     @Override
-    protected void attacks(final DungeonCharacter theEnemy){
+    public void attacks(final DungeonCharacter theEnemy){
         myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
         if (myNumberOfAttacks == 0) {
             myNumberOfAttacks = 1;

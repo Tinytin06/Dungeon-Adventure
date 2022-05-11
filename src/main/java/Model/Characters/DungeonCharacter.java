@@ -214,7 +214,7 @@ public abstract class DungeonCharacter {
      * This instance method return if the character is alive or not.
      * @return
      */
-    protected final boolean alive() {
+    public final boolean alive() {
         return !(myCharacter_HealthPoints <= 0);
     }
     //END OF GETTERS
@@ -230,7 +230,7 @@ public abstract class DungeonCharacter {
     /**
      * This instance method kills the character.
      */
-    protected final void killCharacter() {
+    public final void killCharacter() {
         myCharacter_HealthPoints = 0;
     }
 

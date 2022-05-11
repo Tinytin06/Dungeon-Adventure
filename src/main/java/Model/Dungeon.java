@@ -37,7 +37,7 @@ public class Dungeon {
      * @param theFile
      * @throws FileNotFoundException
      */
-    Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
+   public Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
 
         if(theDungeonLength < 2) {
             throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");
@@ -247,7 +247,7 @@ public class Dungeon {
      * @param theX (The X coordinate)
      * @return (Room)
      */
-    Room getContent(final int theY, final int theX) {
+    public Room getContent(final int theY, final int theX) {
         return myDungeon.get(theY).get(theX);
     }
 
@@ -255,7 +255,7 @@ public class Dungeon {
     /**
      * This is a cheat method which reveals all the items in the dungeon.
      */
-    protected void revealAll() {
+    public void revealAll() {
         Room dummyRoom;
         for(int i = 0; i < myDungeonSize; i++){
             for (int j = 0; j < myDungeonSize; j++) {
@@ -270,7 +270,7 @@ public class Dungeon {
      * This method searches for the possible directions and reveals the room accordingly.
      * @param theLocation (Location of the hero)
      */
-    protected void deployVisionPotion(final Point theLocation) {
+    public void deployVisionPotion(final Point theLocation) {
         Room dummyRoom = null;
         ArrayList<Point> currentLocation = new ArrayList<>();
         Point dummyPoint = (Point)(theLocation.clone());
@@ -310,7 +310,7 @@ public class Dungeon {
     /**
      * This method sets the myCheatEnabled to true;
      */
-    protected void setMyCheatEnabled(){
+    public void setMyCheatEnabled(){
         System.out.println("Cheat has been enabled!");
         myCheatEnabled = true;
     }
@@ -319,7 +319,7 @@ public class Dungeon {
      * This method returns the status of the myCheatEnabled field.
      * @return
      */
-    protected boolean getMyCheat(){
+    public boolean getMyCheat(){
         return myCheatEnabled;
     }
 

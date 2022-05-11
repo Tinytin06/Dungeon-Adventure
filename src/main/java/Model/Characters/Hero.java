@@ -101,7 +101,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * This method generates a random value and heals the player accordingly.
      */
-    protected void healingPotion() {
+    public void healingPotion() {
         super.setMyCharacter_HealthPoints(randomGen.nextInt(20));
     }
 
@@ -109,7 +109,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method generates a random value and reduces that value from the
      * character's healthpoints.
      */
-    protected void heroTakesDamage() {
+    public void heroTakesDamage() {
         super.setMyCharacter_HealthPoints(-randomGen.nextInt(30));
     }
 
@@ -143,7 +143,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method is used for the characters to attack.
      * @param theEnemy (The enemy player)
      */
-    protected void attacks(final DungeonCharacter theEnemy) {
+    public void attacks(final DungeonCharacter theEnemy) {
         int attackChoice = 0;
         int tooLowOfAttackSpeedRatio= 0;
         int fixesLowRatio = 1;
@@ -317,7 +317,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the location of the character as a point object.
      * @return
      */
-    protected Point getCharacterLocation() {
+    public Point getCharacterLocation() {
         Point location = new Point(myCharacterLocationX, myCharacterLocationY);
         return location;
     }
@@ -326,7 +326,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method sets the Y coordinate of the dungeon character.
      * @param theY
      */
-    protected void setCharacterLocationY(final int theY) {
+    public void setCharacterLocationY(final int theY) {
         myCharacterLocationY += theY;
     }
 
@@ -334,7 +334,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method sets the X coordinate of the dungeon character.
      * @param theX
      */
-    protected void setCharacterLocationX(final int theX) {
+    public void setCharacterLocationX(final int theX) {
         myCharacterLocationX += theX;
     }
 
@@ -342,7 +342,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the Y coordinate of the character.
      * @return
      */
-    protected int getCharacterLocationY() {
+    public int getCharacterLocationY() {
         return myCharacterLocationY;
     }
 
@@ -350,7 +350,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the X coordinate of the character.
      * @return
      */
-    protected int getCharacterLocationX() {
+    public int getCharacterLocationX() {
         return myCharacterLocationX;
     }
 
@@ -377,7 +377,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method removes the passed item from the hero's inventory.
      * @param theItem
      */
-    protected void removeSatchelItem(final String theItem) {
+    public void removeSatchelItem(final String theItem) {
         mySatchel.remove(theItem);
 
     }
@@ -386,7 +386,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the hero's inventory.
      * @return
      */
-    protected ArrayList<String> getHeroSatchel(){
+    public ArrayList<String> getHeroSatchel(){
         return mySatchel;
     }
 
@@ -394,14 +394,14 @@ public abstract class Hero extends DungeonCharacter {
      * This method return a boolean to indicate if the hero has both of the crowns or not.
      * @return
      */
-    protected boolean hasBothCrowns() {
+    public boolean hasBothCrowns() {
         return (mySatchel.contains("Coding Crown") && mySatchel.contains("Second Coding Crown"));
     }
 
     /**
      * This methods adds 1 to the crown piece field.
      */
-    protected void addCrownPiece(){
+    public void addCrownPiece(){
         myCrownPieces++;
 
     }
@@ -409,14 +409,14 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * This methods adds 1 to the healing potion field.
      */
-    protected void addHealingPotion() {
+    public void addHealingPotion() {
         myHealingPotions++;
     }
 
     /**
      * This methods adds 1 to the vision potion field.
      */
-    protected void addVisionPotion(){
+    public void addVisionPotion(){
         myVisionPotions++;
     }
 

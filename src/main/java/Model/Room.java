@@ -58,7 +58,7 @@ public class Room {
      * This method adds the passed item to the room inventory Set.
      * @param theType
      */
-    void addTo_MyRoomInventory(RoomType theType) {
+    public void addTo_MyRoomInventory(RoomType theType) {
         myRoomInventory.add(theType.type);
     }
 
@@ -66,7 +66,7 @@ public class Room {
      * This method return the room's inventory.
      * @return
      */
-    HashSet<Character> getMyRoomInventory(){
+    public HashSet<Character> getMyRoomInventory(){
         return myRoomInventory;
     }
 
@@ -74,7 +74,7 @@ public class Room {
      * removes from myRoomInventory theType of room from set
      * @param theType
      */
-    void removeMyTypes(RoomType theType){
+    public void removeMyTypes(RoomType theType){
         myRoomInventory.remove(theType.type);
     }
 
@@ -100,7 +100,7 @@ public class Room {
     /**
      * This is the explore method which searches the room and sets the icon of that room accordingly.
      */
-    void exploreTheRoom() {
+    public void exploreTheRoom() {
         if (myRoomInventory.contains(ENTRANCE) || myRoomInventory.contains(EXIT)||myRoomInventory.contains(PILLAR.type)) {
             if (myRoomInventory.contains(ENTRANCE)) {
                 setMyDisplayIcon(ENTRANCE.type + " ");
