@@ -40,6 +40,7 @@ import View.ConsoleOutput;
 
 
 import java.awt.*;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -68,7 +69,10 @@ public class DungeonAdventure {
 
                 //Placing the hero into the dungeon entrance
                 hero.setCharacterLocation(myDungeon.getEntrancePoint());
-                System.out.println("Entrance is at: " + myDungeon.getEntrancePoint());
+
+                ConsoleOutput.printString("Entrance is at: "+ myDungeon.getEntrancePoint() + "\n");
+
+//                System.out.println("Entrance is at: " + myDungeon.getEntrancePoint());
 
 
 
@@ -85,6 +89,7 @@ public class DungeonAdventure {
 
                 while(hero.alive()) {
                     System.out.println("Hero's current Location: " + hero.getCharacterLocation());
+
                     mover(userInput, hero, myDungeonSize, myDungeon);
 
                 }
