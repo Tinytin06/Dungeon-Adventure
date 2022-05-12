@@ -1,3 +1,28 @@
+/*
+ * There is a bug where the player icon appears in the room before the room even has
+ * the chance to update the player in, with the changes made to the dungeon class
+ * I think it should be fixed but keep it in check
+ *
+ *
+ * Hero satchel needs an update so it gets updated accordingly
+ *
+ *  Mover method need decoupling and split into Hero Satchel and Hero Mover
+ *
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 package Control;/*
  * Varun Parbhakar
  *
