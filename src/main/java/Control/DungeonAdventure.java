@@ -193,7 +193,7 @@ public class DungeonAdventure {
             System.out.println(theDungeon);
             checkRoom(theHero, myRoom, theDungeon);
             System.out.print("This room has: "); // Dont print if room doesn't have anything
-            System.out.println(myRoom.getMyRoomInventory());
+            System.out.println(myRoom.showMyRoomInventory());
 
             heroItemPicker(myRoom, theHero);
 
