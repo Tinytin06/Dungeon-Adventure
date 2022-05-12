@@ -111,11 +111,11 @@ public class Room {
                     myRoomInventory.contains(EXIT.type) ||
                     myRoomInventory.contains(PILLAR.type)) {
 
-                if (myRoomInventory.contains(ENTRANCE)) {
+                if (myRoomInventory.contains(ENTRANCE.type)) {
                     setMyDisplayIcon(ENTRANCE.type + " ");
                     return;
                 }
-                if (myRoomInventory.contains(EXIT)) {
+                if (myRoomInventory.contains(EXIT.type)) {
                     setMyDisplayIcon(EXIT.type + " ");
                     return;
                 }
@@ -165,6 +165,11 @@ public class Room {
         addTo_MyRoomInventory(PILLAR);
     }
 
-
+    public HashSet showMyRoomInventory(){
+      HashSet<Character> nonSpecialRooms = (HashSet<Character>) myRoomInventory.clone();
+      nonSpecialRooms.remove(PLAYER.type);
+      nonSpecialRooms.remove(NORMAL.type);
+      return nonSpecialRooms;
+    }
 
 }
