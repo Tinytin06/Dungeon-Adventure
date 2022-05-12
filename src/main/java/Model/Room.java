@@ -11,7 +11,6 @@ import static Model.RoomType.*;
 public class Room {
     private HashSet<Character> myRoomInventory = new HashSet<>();
     private String myDisplayIcon = "? ";
-    private final String TOOMUCH = "M ";
 
 
     Room(final RoomType theType) {
@@ -54,6 +53,12 @@ public class Room {
             myDisplayIcon = theIcon;
         }
     }
+
+    public boolean hasRoomType (final RoomType theItem) {
+        return myRoomInventory.contains(theItem);
+    }
+
+
     /**
      * This method adds the passed item to the room inventory Set.
      * @param theType
@@ -101,7 +106,10 @@ public class Room {
      * This is the explore method which searches the room and sets the icon of that room accordingly.
      */
     public void exploreTheRoom() {
-        if (myRoomInventory.contains(ENTRANCE) || myRoomInventory.contains(EXIT)||myRoomInventory.contains(PILLAR.type)) {
+        if (myRoomInventory.contains(ENTRANCE) ||
+                myRoomInventory.contains(EXIT) ||
+                myRoomInventory.contains(PILLAR.type)) {
+
             if (myRoomInventory.contains(ENTRANCE)) {
                 setMyDisplayIcon(ENTRANCE.type + " ");
                 return;
@@ -121,7 +129,7 @@ public class Room {
                 }
             }
         } else if (myRoomInventory.size() > 1){
-            setMyDisplayIcon(TOOMUCH);
+            setMyDisplayIcon("M ");
     }
     }
 

@@ -6,15 +6,11 @@ package Model;
 
 
 
-import Model.Characters.Hero;
-import Model.Characters.Warrior;
-
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -38,7 +34,7 @@ public class Dungeon {
      * @param theFile
      * @throws FileNotFoundException
      */
-   public Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
+    Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
 
         if(theDungeonLength < 2) {
             throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");
@@ -51,11 +47,9 @@ public class Dungeon {
      * Returns the entrance of the dungeon.
      * @return
      */
-    Point addHeroToDungeon() {
+    public Point getEntrancePoint() {
         if(myDungeon.size() <= 0) {
             throw new IllegalStateException("The dungeon doesn't exist, current dungeon size: " + myDungeonSize);
-        } else {
-            myDungeon.get(myEntranceLocation.x).get(myEntranceLocation.y).addTo_MyRoomInventory(RoomType.PLAYER);
         }
         return myEntranceLocation;
     }
@@ -133,7 +127,7 @@ public class Dungeon {
                 roomNumber = rand.nextInt(myDungeonSize - 1);
                 roomSetter = theDungeon.get(0).get(roomNumber);
                 roomSetter.setEntrance();
-                myEntranceLocation = new Point(0, roomNumber);
+                myEntranceLocation = new Point(roomNumber, 0);
                 haveEntrance = true;
             }
         }
@@ -151,7 +145,7 @@ public class Dungeon {
             if (Math.random() < .1 && !haveExit) {
                 roomNumber = rand.nextInt(myDungeonSize - 1);
                 roomSetter = theDungeon.get(myDungeonSize-1).get(roomNumber);
-                roomSetter.setEntrance();
+                roomSetter.setExit();
                 haveExit = true;
             }
         }
@@ -320,7 +314,7 @@ public class Dungeon {
      * This method returns the status of the myCheatEnabled field.
      * @return
      */
-    public boolean getMyCheat(){
+    public boolean isCheatEnabled(){
         return myCheatEnabled;
     }
 

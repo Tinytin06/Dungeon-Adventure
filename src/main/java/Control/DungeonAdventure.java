@@ -1,3 +1,28 @@
+/*
+ * There is a bug where the player icon appears in the room before the room even has
+ * the chance to update the player in, with the changes made to the dungeon class
+ * I think it should be fixed but keep it in check
+ *
+ *
+ * Hero satchel needs an update so it gets updated accordingly
+ *
+ *  Mover method need decoupling and split into Hero Satchel and Hero Mover
+ *
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 package Control;/*
  * Varun Parbhakar
  *
@@ -16,6 +41,7 @@ import View.ConsoleOutput;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -30,25 +56,36 @@ public class DungeonAdventure {
      */
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
-        if(introduction(userInput)) {
+        if(true){   //if(introduction(userInput)) {
             boolean playAgain = false;
             while(!playAgain) {
-                String name = heroName(userInput);
+                //String name = heroName(userInput);
+                String name = "test";
 
                 Hero hero = new Warrior(name);
-                Monster monster = new Skeleton("Null Pointer");
                 int myDungeonSize = 5;
                 Dungeon myDungeon = new Dungeon(myDungeonSize);
+
+                //Placing the hero into the dungeon entrance
+                hero.setCharacterLocation(myDungeon.getEntrancePoint());
+                System.out.println("Entrance is at: " + myDungeon.getEntrancePoint());
+
+
+
+
+
                 // These are the names needs to be used in order to activate the cheat
                 // I dont have a method in the Dungeon Adventure for revealing all of the
                 // room, I thought that it better fit for the Dungeon class to have that kind of power.
                 if (name.equals("Varun") || name.equals("Bryce")) {
+
                     myDungeon.setMyCheatEnabled();
                 }
 
 
                 while(hero.alive()) {
-                    mover(userInput, hero, myDungeonSize, myDungeon, monster);
+                    System.out.println("Hero's current Location: " + hero.getCharacterLocation());
+                    mover(userInput, hero, myDungeonSize, myDungeon);
 
                 }
                 System.out.println("\nThis is the dungeon fully revealed");
@@ -114,23 +151,24 @@ public class DungeonAdventure {
      * @param theHero (Hero)
      * @param theDungeonSize (Int Size of the dungeon)
      * @param theDungeon (Dungeon)
-     * @param theMonster (Monster)
      */
     public static void mover(final Scanner theUserInput,
                              final Hero theHero,
                              final int theDungeonSize,
-                             final Dungeon theDungeon,
-                             final Monster theMonster) {
+                             final Dungeon theDungeon) {
 
         // Checks if the cheat is enabled
-        if (theDungeon.getMyCheat()) {
+        if (theDungeon.isCheatEnabled()) {
             theDungeon.revealAll();
         }
         if (theHero.alive()) {
             Point location = theHero.getCharacterLocation();
             Room myRoom = theDungeon.getContent(theHero.getCharacterLocationY(),theHero.getCharacterLocationX());
+            myRoom.addTo_MyRoomInventory(RoomType.PLAYER); //Adding player to the room
             myRoom.exploreTheRoom();
-            ArrayList<String> roomItemList = (ArrayList)(myRoom.getMyRoomInventory()).clone();
+
+
+            // Checking for hero's satchel
             if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
                 String potionChoice = ("You have unused potions, you can press 'y' to use your item 'n' for no");
                 System.out.println(potionChoice);
@@ -150,14 +188,14 @@ public class DungeonAdventure {
                     }
                 }
             }
-//myRoom.setisPlayerinRoom(true); was this
-            myRoom.addTo_MyRoomInventory(RoomType.PLAYER);
-            System.out.println(theDungeon);
-            roomItemList = checkRoom(theHero, roomItemList, theMonster, theUserInput, theDungeon);
-            System.out.print("This room has: ");
-            System.out.println(roomItemList);
 
-            heroItemPicker(roomItemList, myRoom, theHero);
+//            myRoom.setisPlayerinRoom(true);
+            System.out.println(theDungeon);
+            checkRoom(theHero, myRoom, theDungeon);
+            System.out.print("This room has: "); // Dont print if room doesn't have anything
+            System.out.println(myRoom.getMyRoomInventory());
+
+            heroItemPicker(myRoom, theHero);
 
             if (!isHeroAtExit(myRoom, theHero, theUserInput)){
                 if (!theHero.alive()){
@@ -169,26 +207,26 @@ public class DungeonAdventure {
                     System.out.print(theHero.getCharacter_Name()+ "'s Inventory: ");
                     System.out.println(theHero.getHeroSatchel());
                     String direction = directionChecker(theUserInput, location, theDungeonSize);
+                    myRoom.removeMyTypes(RoomType.PLAYER);
                     if (direction.equals("k")){
-                        for (String key : theDungeon.mapLegend()) {
-                            System.out.println(key);
-                        }
+//                        for (String key : theDungeon.mapLegend()) {
+//                            System.out.println(key);
+//                        }
                     }
                     if (direction.equals("n")){
-                        theHero.setCharacterLocationY(-1);
+                        theHero.translateCharacterY(-1);
                     }
                     if (direction.equals("s")){
-                        theHero.setCharacterLocationY(1);
+                        theHero.translateCharacterY(1);
                     }
                     if (direction.equals("e")){
-                        theHero.setCharacterLocationX(1);
+                        theHero.translateCharacterX(1);
                     }
                     if (direction.equals("w")){
-                        theHero.setCharacterLocationX(-1);
+                        theHero.translateCharacterX(-1);
                     }
-//myRoom.setisPlayerinRoom(false); was this
-                    myRoom.removeMyTypes(RoomType.PLAYER);
 
+//                    myRoom.setisPlayerinRoom(false);
                 }
             }
         }
@@ -206,7 +244,7 @@ public class DungeonAdventure {
     public static boolean isHeroAtExit(final Room theRoom,
                                        final Hero theHero,
                                        final Scanner theUserInput) {
-        if (theRoom.getHasExit()) {
+        if (theRoom.getMyRoomInventory().contains(RoomType.EXIT.type)) {
             ConsoleOutput.printString("You are on the exit!\n");
             System.out.println("You are on the exit!");
             if (theHero.hasBothCrowns()) {
@@ -259,40 +297,43 @@ public class DungeonAdventure {
 
     /**
      * This method takes the items from the room inventory and deposits the items into the hero's inventory.
-     * @param theRoomItems (Items present in the room)
+     *
      * @param theRoom (The room object)
      * @param theHero (The hero object)
      */
-    public static void heroItemPicker(final ArrayList<String> theRoomItems,
-                                      final Room theRoom,
+    public static void heroItemPicker(final Room theRoom,
                                       final Hero theHero) {
-        for( String theItem : theRoomItems) {
-            if (theItem.equals("Coding Crown")){
-                theRoom.pickUP(theItem, theHero);
+
+//There needs to be a way to move the item from the room to the hero's satchel.
+//theRoom.pickUP(theItem, theHero); removes it from Room inventory and moves it to hero inventory
+
+
+
+        for( Character theItem : theRoom.getMyRoomInventory()) {
+//Dont replace it with Switch statement just yet
+            if (theItem == RoomType.CODING_CROWN_1.type){
+                //theRoom.pickUP(theItem, theHero);
                 System.out.println("You have picked up the Coding Crown!");
-                theHero.addCrownPiece();
-                continue;
+                //theHero.addCrownPiece();
 
-            }if (theItem.equals("Second Coding Crown")){
-                theRoom.pickUP(theItem, theHero);
-                theHero.addCrownPiece();
+            }else if (theItem == RoomType.CODING_CROWN_2.type){
+//                theRoom.pickUP(theItem, theHero);
+//                theHero.addCrownPiece();
                 System.out.println("You have picked up the Second Coding Crown!");
-                continue;
 
-            }
-            if (theItem.equals("Healing Potion")){
-                theRoom.pickUP(theItem, theHero);
-                theHero.addHealingPotion();
+
+            } else if (theItem == RoomType.HEALING.type){
+//                theRoom.pickUP(theItem, theHero);
+//                theHero.addHealingPotion();
                 System.out.println("You have picked up the Healing Potion!");
-                continue;
 
-            }
-            if (theItem.equals("Vision Potion")){
-                theRoom.pickUP(theItem, theHero);
-                theHero.addVisionPotion();
+
+            }else if (theItem == RoomType.VISION.type){
+//                theRoom.pickUP(theItem, theHero);
+//                theHero.addVisionPotion();
                 System.out.println("You have picked up the Vision Potion!");
 
-                continue;
+
             }
 
 
@@ -305,41 +346,53 @@ public class DungeonAdventure {
      * this method initiates a fight, if there is a pit then this method reduces player's
      * health to accommodate for the fall.
      * @param theHero
-     * @param theRoomItems
-     * @param theMonster
-     * @param theUserInput
+     * @param theRoom
      * @param theDungeon
      * @return (Returns an updated list of the room)
      */
-    public static ArrayList<String> checkRoom(final Hero theHero,
-                                              final ArrayList<String> theRoomItems,
-                                              final Monster theMonster,
-                                              final Scanner theUserInput,
-                                              final Dungeon theDungeon) {
-        ArrayList<String> copyList = (ArrayList)(theRoomItems.clone());
-        for (String theItem: copyList) {
-            if (theItem.equals("Monster!")){
-                int roundCounter = 1;
-                while (theHero.alive() && theMonster.alive()) {
-                    System.out.println("\t\t\t Round: " + roundCounter + "\n");
-                    System.out.println("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
-                    theHero.attacks(theMonster);
-                    theMonster.attacks(theHero);
-                    roundCounter++;
-                    System.out.print("END OF ROUND, PRESS ANY KEY TO CONTINUE");
-                    theUserInput.nextLine();
-                } if (!theMonster.alive()){
-                    theRoomItems.remove("Monster!");
-                    System.out.println(theDungeon);
-                }
-            } if (theItem.equals("Pit!")) {
-                theHero.heroTakesDamage();
-            }
+    public static void checkRoom(final Hero theHero,
+                                               final Room theRoom,
+                                               final Dungeon theDungeon) {
 
+
+        if (theRoom.hasRoomType(RoomType.FIGHT)){
+            Monster monster = new Skeleton("Null Pointer");
+            initiateFight(theHero, monster, theDungeon, theRoom);
         }
-        return theRoomItems;
+
+        if (theRoom.hasRoomType(RoomType.PIT)) {
+            theHero.heroTakesDamage();
+        }
+
+
+
+
 
     }
+
+    public static void initiateFight(final Hero theHero,
+                                     final Monster theMonster,
+                                     final Dungeon theDungeon,
+                                     final Room theRoom) {
+        Scanner theUserInput = new Scanner(System.in);
+
+        int roundCounter = 1;
+        while (theHero.alive() && theMonster.alive()) {
+            System.out.println("\t\t\t Round: " + roundCounter + "\n");
+            System.out.println("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
+            theHero.attacks(theMonster);
+            theMonster.attacks(theHero);
+            roundCounter++;
+            System.out.print("END OF ROUND, PRESS ANY KEY TO CONTINUE");
+            theUserInput.nextLine();
+        } if (!theMonster.alive()){
+            theRoom.removeMyTypes(RoomType.FIGHT);
+            System.out.println(theDungeon);
+        }
+    }
+
+
+
 
     /**
      * This method takes in the user input and validates the direction that the user picks.
