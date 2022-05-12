@@ -164,9 +164,10 @@ public class DungeonAdventure {
         if (theHero.alive()) {
             Point location = theHero.getCharacterLocation();
             Room myRoom = theDungeon.getContent(theHero.getCharacterLocationY(),theHero.getCharacterLocationX());
-            myRoom.addTo_MyRoomInventory(RoomType.PLAYER); //Adding player to the room
-            myRoom.exploreTheRoom();
 
+
+            myRoom.exploreTheRoom();
+            myRoom.addTo_MyRoomInventory(RoomType.PLAYER);//Adding player to the room
 
             // Checking for hero's satchel
             if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
