@@ -164,8 +164,8 @@ public class DungeonAdventure {
         if (theHero.alive()) {
             Point location = theHero.getCharacterLocation();
             Room myRoom = theDungeon.getContent(theHero.getCharacterLocationY(),theHero.getCharacterLocationX());
-            myRoom.addTo_MyRoomInventory(RoomType.PLAYER); //Adding player to the room
             myRoom.exploreTheRoom();
+            myRoom.addTo_MyRoomInventory(RoomType.PLAYER); //Adding player to the room
 
 
             // Checking for hero's satchel
@@ -193,7 +193,7 @@ public class DungeonAdventure {
             System.out.println(theDungeon);
             checkRoom(theHero, myRoom, theDungeon);
             System.out.print("This room has: "); // Dont print if room doesn't have anything
-            System.out.println(myRoom.getMyRoomInventory());
+            System.out.println(myRoom.getMyRoomInventory());// Room has a method for printing
 
             heroItemPicker(myRoom, theHero);
 
@@ -356,6 +356,9 @@ public class DungeonAdventure {
 
 
         if (theRoom.hasRoomType(RoomType.FIGHT)){
+
+            //SQL INJECTTION HEEERRE
+
             Monster monster = new Skeleton("Null Pointer");
             initiateFight(theHero, monster, theDungeon, theRoom);
         }

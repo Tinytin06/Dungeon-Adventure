@@ -275,6 +275,9 @@ public class Dungeon {
         boolean south = (dummyPoint.y + 1 <= myDungeonSize-1);
         boolean west = (dummyPoint.x - 1 >= 0);
         boolean east = (dummyPoint.x + 1 <= myDungeonSize-1);
+        //Ask Tom if this structure can be improved
+
+
 
         if (north) {
             dummyPoint.translate(0,-1);
@@ -328,6 +331,17 @@ public class Dungeon {
 
             for (int j = 0; j < myDungeonSize; j++) {
                 Room myNewRoom;
+
+                //Add code from room and just
+
+//                for (RoomType roomTypes : RoomType.values()) {
+//                    if (myRoomInventory.contains(roomTypes.type)) {
+//                        setMyDisplayIcon(roomTypes.type + " ");
+//                    }
+//                }
+
+
+
                 switch (row[j]){
                     case("F"):
                         myNewRoom = new Room(RoomType.FIGHT);

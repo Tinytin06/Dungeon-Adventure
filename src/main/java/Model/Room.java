@@ -106,15 +106,15 @@ public class Room {
      * This is the explore method which searches the room and sets the icon of that room accordingly.
      */
     public void exploreTheRoom() {
-        if (myRoomInventory.contains(ENTRANCE) ||
-                myRoomInventory.contains(EXIT) ||
+        if (myRoomInventory.contains(ENTRANCE.type) ||
+                myRoomInventory.contains(EXIT.type) ||
                 myRoomInventory.contains(PILLAR.type)) {
 
-            if (myRoomInventory.contains(ENTRANCE)) {
+            if (myRoomInventory.contains(ENTRANCE.type)) {
                 setMyDisplayIcon(ENTRANCE.type + " ");
                 return;
             }
-            if (myRoomInventory.contains(EXIT)) {
+            if (myRoomInventory.contains(EXIT.type)) {
                 setMyDisplayIcon(EXIT.type + " ");
                 return;
             }
