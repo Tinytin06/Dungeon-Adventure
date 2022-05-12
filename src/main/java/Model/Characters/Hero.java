@@ -106,7 +106,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * This method generates a random value and heals the player accordingly.
      */
-    protected void healingPotion() {
+    public void healingPotion() {
         super.setMyCharacter_HealthPoints(randomGen.nextInt(20));
     }
 
@@ -114,7 +114,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method generates a random value and reduces that value from the
      * character's healthpoints.
      */
-    protected void heroTakesDamage() {
+    public void heroTakesDamage() {
         super.setMyCharacter_HealthPoints(-randomGen.nextInt(30));
     }
 
@@ -149,7 +149,7 @@ public abstract class Hero extends DungeonCharacter {
      */
 
 // add parameter fo attack choice in here
-    protected void attacks(final DungeonCharacter theEnemy) {
+    public void attacks(final DungeonCharacter theEnemy) {
         int attackChoice = 0;
         int tooLowOfAttackSpeedRatio= 0;
         int fixesLowRatio = 1;
@@ -271,7 +271,7 @@ public abstract class Hero extends DungeonCharacter {
         Double lessThan0Percent = 0.0;
 
 // this next check if good for when we test the method.
-        if (theC_SpecialSkill_Chance < 1.0 || theC_SpecialSkill_Chance > 0.0) {
+        if (theC_SpecialSkill_Chance > 1.0 || theC_SpecialSkill_Chance <= 0.0) {
             throw new IllegalArgumentException("Special Skill cannot be less 0 or greater than 1");
         }
         mySpecialSkillChance = theC_SpecialSkill_Chance;
@@ -320,7 +320,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the location of the character as a point object.
      * @return
      */
-    protected Point getCharacterLocation() {
+    public Point getCharacterLocation() {
         return new Point(myCharacterLocationX, myCharacterLocationY);
     }
 
@@ -328,7 +328,8 @@ public abstract class Hero extends DungeonCharacter {
      * This method sets the Y coordinate of the dungeon character.
      * @param theY
      */
-    protected void setCharacterLocationY(final int theY) {
+    public void translateCharacterY(final int theY) {
+        //Check param
         myCharacterLocationY += theY;
     }
 
@@ -336,7 +337,8 @@ public abstract class Hero extends DungeonCharacter {
      * This method sets the X coordinate of the dungeon character.
      * @param theX
      */
-    protected void setCharacterLocationX(final int theX) {
+    public void translateCharacterX(final int theX) {
+        //Check param
         myCharacterLocationX += theX;
     }
 
@@ -344,7 +346,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the Y coordinate of the character.
      * @return
      */
-    protected int getCharacterLocationY() {
+    public int getCharacterLocationY() {
         return myCharacterLocationY;
     }
 
@@ -352,21 +354,19 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the X coordinate of the character.
      * @return
      */
-    protected int getCharacterLocationX() {
+    public int getCharacterLocationX() {
         return myCharacterLocationX;
     }
 
 
     /**
      * This method sets the location of the character.
-     * @param theX
-     * @param theY
-     */
-//     void setCharacterLocation(final int theX, final int theY) {
-//        myCharacterLocationY = theY;
-//        myCharacterLocationX = theX;
-//    }
 
+     */
+     public void setCharacterLocation(final Point theCharacterLocation ) {
+        myCharacterLocationY = theCharacterLocation.y;
+        myCharacterLocationX = theCharacterLocation.x;
+     }
 
 
 
@@ -383,7 +383,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method removes the passed item from the hero's inventory.
      * @param theItem
      */
-    protected void removeSatchelItem(final String theItem) {
+    public void removeSatchelItem(final String theItem) {
         mySatchel.remove(theItem);
 
     }
@@ -392,7 +392,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the hero's inventory.
      * @return
      */
-    protected ArrayList<String> getHeroSatchel(){
+    public ArrayList<String> getHeroSatchel(){
         return mySatchel;
     }
 
@@ -400,7 +400,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return a boolean to indicate if the hero has both of the crowns or not.
      * @return
      */
-    protected boolean hasBothCrowns() {
+    public boolean hasBothCrowns() {
         return (mySatchel.contains("Coding Crown") && mySatchel.contains("Second Coding Crown"));
     }
 

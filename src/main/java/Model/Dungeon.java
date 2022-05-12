@@ -6,15 +6,11 @@ package Model;
 
 
 
-import Model.Characters.Hero;
-import Model.Characters.Warrior;
-
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -51,11 +47,9 @@ public class Dungeon {
      * Returns the entrance of the dungeon.
      * @return
      */
-    Point addHeroToDungeon() {
+    public Point getEntrancePoint() {
         if(myDungeon.size() <= 0) {
             throw new IllegalStateException("The dungeon doesn't exist, current dungeon size: " + myDungeonSize);
-        } else {
-            myDungeon.get(myEntranceLocation.x).get(myEntranceLocation.y).addTo_MyRoomInventory(RoomType.PLAYER);
         }
         return myEntranceLocation;
     }
@@ -133,7 +127,7 @@ public class Dungeon {
                 roomNumber = rand.nextInt(myDungeonSize - 1);
                 roomSetter = theDungeon.get(0).get(roomNumber);
                 roomSetter.setEntrance();
-                myEntranceLocation = new Point(0, roomNumber);
+                myEntranceLocation = new Point(roomNumber, 0);
                 haveEntrance = true;
             }
         }
@@ -151,7 +145,7 @@ public class Dungeon {
             if (Math.random() < .1 && !haveExit) {
                 roomNumber = rand.nextInt(myDungeonSize - 1);
                 roomSetter = theDungeon.get(myDungeonSize-1).get(roomNumber);
-                roomSetter.setEntrance();
+                roomSetter.setExit();
                 haveExit = true;
             }
         }
@@ -248,7 +242,7 @@ public class Dungeon {
      * @param theX (The X coordinate)
      * @return (Room)
      */
-    Room getContent(final int theY, final int theX) {
+    public Room getContent(final int theY, final int theX) {
         return myDungeon.get(theY).get(theX);
     }
 
@@ -256,7 +250,7 @@ public class Dungeon {
     /**
      * This is a cheat method which reveals all the items in the dungeon.
      */
-    protected void revealAll() {
+    public void revealAll() {
         Room dummyRoom;
         for(int i = 0; i < myDungeonSize; i++){
             for (int j = 0; j < myDungeonSize; j++) {
@@ -271,7 +265,7 @@ public class Dungeon {
      * This method searches for the possible directions and reveals the room accordingly.
      * @param theLocation (Location of the hero)
      */
-    protected void deployVisionPotion(final Point theLocation) {
+    public void deployVisionPotion(final Point theLocation) {
         Room dummyRoom = null;
         ArrayList<Point> currentLocation = new ArrayList<>();
         Point dummyPoint = (Point)(theLocation.clone());
@@ -311,7 +305,7 @@ public class Dungeon {
     /**
      * This method sets the myCheatEnabled to true;
      */
-    protected void setMyCheatEnabled(){
+    public void setMyCheatEnabled(){
         System.out.println("Cheat has been enabled!");
         myCheatEnabled = true;
     }
@@ -320,7 +314,7 @@ public class Dungeon {
      * This method returns the status of the myCheatEnabled field.
      * @return
      */
-    protected boolean getMyCheat(){
+    public boolean isCheatEnabled(){
         return myCheatEnabled;
     }
 

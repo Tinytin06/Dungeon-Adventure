@@ -11,7 +11,6 @@ import static Model.RoomType.*;
 public class Room {
     private HashSet<Character> myRoomInventory = new HashSet<>();
     private String myDisplayIcon = "? ";
-    private final String TOOMUCH = "M ";
 
 
     Room(final RoomType theType) {
@@ -54,11 +53,17 @@ public class Room {
             myDisplayIcon = theIcon;
         }
     }
+
+    public boolean hasRoomType (final RoomType theItem) {
+        return myRoomInventory.contains(theItem);
+    }
+
+
     /**
      * This method adds the passed item to the room inventory Set.
      * @param theType
      */
-    void addTo_MyRoomInventory(RoomType theType) {
+    public void addTo_MyRoomInventory(RoomType theType) {
         myRoomInventory.add(theType.type);
     }
 
@@ -66,7 +71,7 @@ public class Room {
      * This method return the room's inventory.
      * @return
      */
-    HashSet<Character> getMyRoomInventory(){
+    public HashSet<Character> getMyRoomInventory(){
         return myRoomInventory;
     }
 
@@ -74,7 +79,7 @@ public class Room {
      * removes from myRoomInventory theType of room from set
      * @param theType
      */
-    void removeMyTypes(RoomType theType){
+    public void removeMyTypes(RoomType theType){
         myRoomInventory.remove(theType.type);
     }
 
@@ -100,8 +105,11 @@ public class Room {
     /**
      * This is the explore method which searches the room and sets the icon of that room accordingly.
      */
-    void exploreTheRoom() {
-        if (myRoomInventory.contains(ENTRANCE) || myRoomInventory.contains(EXIT)||myRoomInventory.contains(PILLAR.type)) {
+    public void exploreTheRoom() {
+        if (myRoomInventory.contains(ENTRANCE) ||
+                myRoomInventory.contains(EXIT) ||
+                myRoomInventory.contains(PILLAR.type)) {
+
             if (myRoomInventory.contains(ENTRANCE)) {
                 setMyDisplayIcon(ENTRANCE.type + " ");
                 return;
@@ -121,7 +129,7 @@ public class Room {
                 }
             }
         } else if (myRoomInventory.size() > 1){
-            setMyDisplayIcon(TOOMUCH);
+            setMyDisplayIcon("M ");
     }
     }
 
