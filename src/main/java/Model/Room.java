@@ -109,7 +109,9 @@ public class Room {
 
             if (myRoomInventory.contains(ENTRANCE.type) ||
                     myRoomInventory.contains(EXIT.type) ||
-                    myRoomInventory.contains(PILLAR.type)) {
+                    myRoomInventory.contains(PILLAR.type) ||
+                    myRoomInventory.contains(CODING_CROWN_1.type) ||
+                    myRoomInventory.contains(CODING_CROWN_2.type)) {
 
                 if (myRoomInventory.contains(ENTRANCE.type)) {
                     setMyDisplayIcon(ENTRANCE.type + " ");
@@ -121,6 +123,14 @@ public class Room {
                 }
                 if (myRoomInventory.contains(PILLAR.type)) {
                     setMyDisplayIcon(PILLAR.type + " ");
+                    return;
+                }
+                if (myRoomInventory.contains(CODING_CROWN_1.type)){
+                    setMyDisplayIcon(CODING_CROWN_1.type + " ");
+                    return;
+                }
+                if (myRoomInventory.contains(CODING_CROWN_2.type)){
+                    setMyDisplayIcon(CODING_CROWN_2.type + " ");
                     return;
                 }
             } else if (myRoomInventory.size() == 1) {
