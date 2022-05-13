@@ -339,78 +339,91 @@ public class Dungeon {
 //                        setMyDisplayIcon(roomTypes.type + " ");
 //                    }
 //                }
+                int singularChar = 0;
+                boolean hasRoomType = false;
+                for(RoomType roomType : RoomType.values()){
 
-
-
-                switch (row[j]){
-                    case("F"):
-                        myNewRoom = new Room(RoomType.FIGHT);
+                    if(row[j].charAt(singularChar)==roomType.type){
+                        myNewRoom = new Room(roomType);
                         dungeonRow.add(myNewRoom);
+                        hasRoomType=true;
                         break;
-
-                    case("P"):
-                        myNewRoom = new Room(RoomType.PIT);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    case("N"):
-                        myNewRoom = new Room(RoomType.NORMAL);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    case("I"):
-                        myNewRoom = new Room(RoomType.PILLAR);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    case("X"):
-                        myNewRoom = new Room(RoomType.EXIT);
-                        dungeonRow.add(myNewRoom);
-                        break;
-
-                    case("E"):
-                        myNewRoom = new Room(RoomType.ENTRANCE);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    case("H"):
-                        myNewRoom = new Room(RoomType.HEALING);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    case("V"):
-                        myNewRoom = new Room(RoomType.VISION);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    case("*"):
-                        myNewRoom = new Room(RoomType.PLAYER);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    case("K"):
-                        myNewRoom = new Room(RoomType.CODING_CROWN_1);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    case("Q"):
-                        myNewRoom = new Room(RoomType.CODING_CROWN_2);
-                        dungeonRow.add(myNewRoom);
-
-                        break;
-
-                    default:
-                        throw new IllegalArgumentException(row[j] + " is not a correct room.");
-
+                    }
                 }
+                if(!hasRoomType){
+                    throw new IllegalArgumentException(row[j] + " is not a correct room.");
+                }//need to figure out default case
+
+
+//                switch (row[j]){
+//                    case("F"):
+//                        myNewRoom = new Room(RoomType.FIGHT);
+//                        dungeonRow.add(myNewRoom);
+//                        break;
+//
+//                    case("P"):
+//                        myNewRoom = new Room(RoomType.PIT);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    case("N"):
+//                        myNewRoom = new Room(RoomType.NORMAL);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    case("I"):
+//                        myNewRoom = new Room(RoomType.PILLAR);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    case("X"):
+//                        myNewRoom = new Room(RoomType.EXIT);
+//                        dungeonRow.add(myNewRoom);
+//                        break;
+//
+//                    case("E"):
+//                        myNewRoom = new Room(RoomType.ENTRANCE);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    case("H"):
+//                        myNewRoom = new Room(RoomType.HEALING);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    case("V"):
+//                        myNewRoom = new Room(RoomType.VISION);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    case("*"):
+//                        myNewRoom = new Room(RoomType.PLAYER);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    case("K"):
+//                        myNewRoom = new Room(RoomType.CODING_CROWN_1);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    case("Q"):
+//                        myNewRoom = new Room(RoomType.CODING_CROWN_2);
+//                        dungeonRow.add(myNewRoom);
+//
+//                        break;
+//
+//                    default:
+//                        throw new IllegalArgumentException(row[j] + " is not a correct room.");
+//
+//                }
                 //myNewRoom.exploreTheRoom();           //
             }
             myDungeon.add(dungeonRow);
