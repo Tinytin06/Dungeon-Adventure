@@ -106,31 +106,43 @@ public class Room {
      * This is the explore method which searches the room and sets the icon of that room accordingly.
      */
     public void exploreTheRoom() {
-        if (myRoomInventory.contains(ENTRANCE.type) ||
-                myRoomInventory.contains(EXIT.type) ||
-                myRoomInventory.contains(PILLAR.type)) {
 
-            if (myRoomInventory.contains(ENTRANCE.type)) {
-                setMyDisplayIcon(ENTRANCE.type + " ");
-                return;
-            }
-            if (myRoomInventory.contains(EXIT.type)) {
-                setMyDisplayIcon(EXIT.type + " ");
-                return;
-            }
-            if (myRoomInventory.contains(PILLAR.type)) {
-                setMyDisplayIcon(PILLAR.type + " ");
-                return;
-            }
-        } else if (myRoomInventory.size() == 1) {
-            for (RoomType roomTypes : RoomType.values()) {
-                if (myRoomInventory.contains(roomTypes.type)) {
-                    setMyDisplayIcon(roomTypes.type + " ");
+            if (myRoomInventory.contains(ENTRANCE.type) ||
+                    myRoomInventory.contains(EXIT.type) ||
+                    myRoomInventory.contains(PILLAR.type) ||
+                    myRoomInventory.contains(CODING_CROWN_1.type) ||
+                    myRoomInventory.contains(CODING_CROWN_2.type)) {
+
+                if (myRoomInventory.contains(ENTRANCE.type)) {
+                    setMyDisplayIcon(ENTRANCE.type + " ");
+                    return;
                 }
+                if (myRoomInventory.contains(EXIT.type)) {
+                    setMyDisplayIcon(EXIT.type + " ");
+                    return;
+                }
+                if (myRoomInventory.contains(PILLAR.type)) {
+                    setMyDisplayIcon(PILLAR.type + " ");
+                    return;
+                }
+                if (myRoomInventory.contains(CODING_CROWN_1.type)){
+                    setMyDisplayIcon(CODING_CROWN_1.type + " ");
+                    return;
+                }
+                if (myRoomInventory.contains(CODING_CROWN_2.type)){
+                    setMyDisplayIcon(CODING_CROWN_2.type + " ");
+                    return;
+                }
+            } else if (myRoomInventory.size() == 1) {
+                for (RoomType roomTypes : RoomType.values()) {
+                    if (myRoomInventory.contains(roomTypes.type)) {
+                        setMyDisplayIcon(roomTypes.type + " ");
+                    }
+                }
+            } else if (myRoomInventory.size() > 1) {
+                setMyDisplayIcon("M ");
             }
-        } else if (myRoomInventory.size() > 1){
-            setMyDisplayIcon("M ");
-    }
+
     }
 
     /**
@@ -163,6 +175,11 @@ public class Room {
         addTo_MyRoomInventory(PILLAR);
     }
 
-
+    public HashSet showMyRoomInventory(){
+      HashSet<Character> nonSpecialRooms = (HashSet<Character>) myRoomInventory.clone();
+      nonSpecialRooms.remove(PLAYER.type);
+      nonSpecialRooms.remove(NORMAL.type);
+      return nonSpecialRooms;
+    }
 
 }
