@@ -187,30 +187,30 @@ public class DungeonAdventure {
 
             checkHeroSatchel(theHero, theDungeon);
 
-            // Checking for hero's satchel
-            if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
-                String potionChoice = ("You have unused potions, you can press 'y' to use your item 'n' for no");
-//                System.out.println(potionChoice);
-                ConsoleOutput.printString(potionChoice + "\n");
-
-//                System.out.print("These are your available potions " + theHero.getHeroSatchel());
-                ConsoleOutput.printString("These are your available potions " + theHero.getHeroSatchel() + "\n");
-
-                if (yesORNo(theUserInput)){
-                    if (theHero.getHeroSatchel().contains("Vision Potion")) {
-                        theDungeon.deployVisionPotion(theHero.getCharacterLocation());
-                        theHero.removeSatchelItem("Vision Potion");
-                    }
-                    if (theHero.getHeroSatchel().contains("Healing Potion")) {
-                        theHero.healingPotion();
-                        theHero.removeSatchelItem("Healing Potion");
-                    }
-                    if (theHero.getHeroSatchel().contains("Vision Potion") && theHero.getHeroSatchel().contains("Healing Potion")) {
-                        theHero.removeSatchelItem("Healing Potion");
-                        theHero.removeSatchelItem("Vision Potion");
-                    }
-                }
-            }
+//            // Checking for hero's satchel
+//            if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
+//                String potionChoice = ("You have unused potions, you can press 'y' to use your item 'n' for no");
+////                System.out.println(potionChoice);
+//                ConsoleOutput.printString(potionChoice + "\n");
+//
+////                System.out.print("These are your available potions " + theHero.getHeroSatchel());
+//                ConsoleOutput.printString("These are your available potions " + theHero.getHeroSatchel() + "\n");
+//
+//                if (yesORNo(theUserInput)){
+//                    if (theHero.getHeroSatchel().contains("Vision Potion")) {
+//                        theDungeon.deployVisionPotion(theHero.getCharacterLocation());
+//                        theHero.removeSatchelItem("Vision Potion");
+//                    }
+//                    if (theHero.getHeroSatchel().contains("Healing Potion")) {
+//                        theHero.healingPotion();
+//                        theHero.removeSatchelItem("Healing Potion");
+//                    }
+//                    if (theHero.getHeroSatchel().contains("Vision Potion") && theHero.getHeroSatchel().contains("Healing Potion")) {
+//                        theHero.removeSatchelItem("Healing Potion");
+//                        theHero.removeSatchelItem("Vision Potion");
+//                    }
+//                }
+//            }
 
 
 //            myRoom.setisPlayerinRoom(true);
@@ -278,22 +278,24 @@ public class DungeonAdventure {
     public static void checkHeroSatchel (final Hero theHero, final Dungeon theDungeon) {
         Scanner theUserInput = new Scanner(System.in);
         // Checking for hero's satchel
-        if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
-            System.out.println("You have unused potions, you can press 'y' to use your item 'n' for no");
-            System.out.print("These are your available potions " + theHero.getHeroSatchel());
+        if (theHero.satchelContains(RoomType.VISION) || theHero.satchelContains(RoomType.HEALING)) {
+            ConsoleOutput.printString("You have unused potions, you can press 'y' to use your item 'n' for no\n");
+//            System.out.println("You have unused potions, you can press 'y' to use your item 'n' for no");
+//            System.out.print("These are your available potions " + theHero.getHeroSatchel());
+            ConsoleOutput.printString("These are your available potions " + theHero.getHeroSatchel() + "\n");
             if (yesORNo(theUserInput)){
-                if (theHero.getHeroSatchel().contains("Vision Potion")) {
+                if (theHero.satchelContains(RoomType.VISION)) {
                     theDungeon.deployVisionPotion(theHero.getCharacterLocation());
-                    theHero.removeSatchelItem("Vision Potion");
+                    theHero.removeSatchelItem(RoomType.VISION);
                 }
-                if (theHero.getHeroSatchel().contains("Healing Potion")) {
+                if (theHero.satchelContains(RoomType.HEALING)) {
                     theHero.healingPotion();
-                    theHero.removeSatchelItem("Healing Potion");
+                    theHero.removeSatchelItem(RoomType.HEALING);
                 }
-                if (theHero.getHeroSatchel().contains("Vision Potion") && theHero.getHeroSatchel().contains("Healing Potion")) {
-                    theHero.removeSatchelItem("Healing Potion");
-                    theHero.removeSatchelItem("Vision Potion");
-                }
+//                if (theHero.getHeroSatchel().contains("Vision Potion") && theHero.getHeroSatchel().contains("Healing Potion")) {
+//                    theHero.removeSatchelItem("Healing Potion");
+//                    theHero.removeSatchelItem("Vision Potion");
+//                }
             }
         }
     }
@@ -314,6 +316,7 @@ public class DungeonAdventure {
 //            System.out.println("You are on the exit!");
             ConsoleOutput.printString("You are on the exit!\n");
 
+            //Whenever the two crowns are picked up, the hero is not recognizing that
             if (theHero.hasBothCrowns()) {
 //                System.out.println("Would you like to exit the dungeon?");
                 ConsoleOutput.printString("Would you like to exit the dungeon?\n");
@@ -395,18 +398,21 @@ public class DungeonAdventure {
 //                System.out.println("You have picked up the Coding Crown!");
                 ConsoleOutput.printString("You have picked up the Coding Crown!\n");
 
-                //theHero.addCrownPiece();
+                theHero.addItem2Satchel(RoomType.CODING_CROWN_1);
 
             }else if (theItem == RoomType.CODING_CROWN_2.type){
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addCrownPiece();
 
 //                System.out.println("You have picked up the Second Coding Crown!");
+                theHero.addItem2Satchel(RoomType.CODING_CROWN_2);
                 ConsoleOutput.printString("You have picked up the Second Coding Crown!\n");
 
 
 
             } else if (theItem == RoomType.HEALING.type){
+
+                theHero.addItem2Satchel(RoomType.HEALING);
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addHealingPotion();
 
@@ -416,6 +422,8 @@ public class DungeonAdventure {
 
 
             }else if (theItem == RoomType.VISION.type){
+
+                theHero.addItem2Satchel(RoomType.VISION);
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addVisionPotion();
 

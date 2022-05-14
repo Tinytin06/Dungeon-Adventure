@@ -198,5 +198,44 @@ class RoomTest {
         assertEquals(pillarIcon, roomTest.toString());
     }
 
+    @Test
+    /**
+     * Testing if the hasRoomItems method works properly and returning the correct output.
+     */
+    void hasRoomItemTest1() {
+        Room myRoom = new Room();
+        boolean hasItems = true;
+        for(RoomType type : RoomType.values()) {
+            myRoom.addTo_MyRoomInventory(type);
+
+        }
+
+        for(RoomType type : RoomType.values()) {
+            if(!myRoom.hasRoomType(type)) {
+                hasItems = false;
+                System.out.println("Room doesn't have " + type);
+            }
+
+        }
+
+        assertTrue(hasItems);
+
+    }
+    @Test
+    /**
+     * Testing if the hasRoomItems method works properly and returning the correct output.
+     *
+     * Checking if the method return false.
+     */
+    void hasRoomItemTest2() {
+        Room myRoom = new Room();
+
+        myRoom.addTo_MyRoomInventory(RoomType.PLAYER);
+        myRoom.addTo_MyRoomInventory(RoomType.PIT);
+
+        assertFalse(myRoom.hasRoomType(RoomType.ENTRANCE));
+
+    }
+
 
 }

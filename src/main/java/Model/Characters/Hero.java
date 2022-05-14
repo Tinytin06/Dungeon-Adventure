@@ -5,6 +5,8 @@ package Model.Characters;/*
  * Heroes VS Monster (Dungeon DLC)
  */
 
+import Model.RoomType;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -22,10 +24,12 @@ public abstract class Hero extends DungeonCharacter {
     private int myNumberOfAttacks;
     private int myCharacterLocationX;
     private int myCharacterLocationY;
-    private ArrayList<String> mySatchel = new ArrayList<>();
+    private ArrayList<Character> mySatchel = new ArrayList<>();
     private int myHealingPotions;
     private int myVisionPotions;
     private int myCrownPieces;
+
+    private int myPillarPieces;
 
     private static final int SPECIAL_ATTACK = 1;
     private static final int NORMAL_ATTACK = 2;
@@ -79,6 +83,7 @@ public abstract class Hero extends DungeonCharacter {
         myHealingPotions = 0;
         myVisionPotions = 0;
         myCrownPieces = 0;
+        myPillarPieces = 0;
 
 
     }
@@ -374,17 +379,37 @@ public abstract class Hero extends DungeonCharacter {
      * This method adds the passed item to the hero's inventory.
      * @param theItem
      */
-    protected void addItem2Satchel(final String theItem) {
-        mySatchel.add(theItem);
+    public void addItem2Satchel(final RoomType theItem) {
+        if(theItem.type == RoomType.CODING_CROWN_1.type
+                ||theItem.type == RoomType.CODING_CROWN_2.type ) {
+            addCrownPiece();
+        } if(theItem.type == RoomType.HEALING.type) {
+            addHealingPotion();
+        } if(theItem.type == RoomType.VISION.type) {
+            addVisionPotion();
+        } if(theItem.type == RoomType.PILLAR.type) {
+            addPillarPiece();
+        }
+
+
+        mySatchel.add(theItem.type);
 
     }
+
+    public boolean satchelContains(RoomType theItem) {
+        return mySatchel.contains(theItem.type);
+    }
+
+
+
 
     /**
      * This method removes the passed item from the hero's inventory.
      * @param theItem
      */
-    public void removeSatchelItem(final String theItem) {
-        mySatchel.remove(theItem);
+    public void removeSatchelItem(final RoomType theItem) {
+        mySatchel.remove(Character.valueOf(theItem.type));
+
 
     }
 
@@ -392,7 +417,7 @@ public abstract class Hero extends DungeonCharacter {
      * This method return the hero's inventory.
      * @return
      */
-    public ArrayList<String> getHeroSatchel(){
+    public ArrayList<Character> getHeroSatchel(){
         return mySatchel;
     }
 
@@ -401,7 +426,7 @@ public abstract class Hero extends DungeonCharacter {
      * @return
      */
     public boolean hasBothCrowns() {
-        return (mySatchel.contains("Coding Crown") && mySatchel.contains("Second Coding Crown"));
+        return (mySatchel.contains(RoomType.CODING_CROWN_1.type) && mySatchel.contains(RoomType.CODING_CROWN_2.type));
     }
 
     /**
@@ -409,6 +434,14 @@ public abstract class Hero extends DungeonCharacter {
      */
     protected void addCrownPiece(){
         myCrownPieces++;
+
+    }
+
+    /**
+     * This methods adds 1 to the crown piece field.
+     */
+    protected void addPillarPiece(){
+        myPillarPieces++;
 
     }
 
