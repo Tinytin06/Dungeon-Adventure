@@ -40,6 +40,7 @@ import View.ConsoleOutput;
 
 
 import java.awt.*;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -68,7 +69,9 @@ public class DungeonAdventure {
 
                 //Placing the hero into the dungeon entrance
                 hero.setCharacterLocation(myDungeon.getEntrancePoint());
-                System.out.println("Entrance is at: " + myDungeon.getEntrancePoint());
+
+                ConsoleOutput.printString("Entrance is at: "+ myDungeon.getEntrancePoint() + "\n");
+//                System.out.println("Entrance is at: " + myDungeon.getEntrancePoint());
 
 
 
@@ -84,21 +87,31 @@ public class DungeonAdventure {
 
 
                 while(hero.alive()) {
-                    System.out.println("Hero's current Location: " + hero.getCharacterLocation());
+//                    System.out.println("Hero's current Location: " + hero.getCharacterLocation());
+                    ConsoleOutput.printString("Hero's current Location: " + hero.getCharacterLocation() + "\n");
+
                     mover(userInput, hero, myDungeonSize, myDungeon);
 
                 }
-                System.out.println("\nThis is the dungeon fully revealed");
+//                System.out.println("\nThis is the dungeon fully revealed");
+                ConsoleOutput.printString("\nThis is the dungeon fully revealed\n");
+
                 myDungeon.revealAll();
-                System.out.println(myDungeon);
-                System.out.println("\nWould you like to play again?");
+
+//                System.out.println(myDungeon);
+                ConsoleOutput.printString(myDungeon + "\n");
+
+//                System.out.println("\nWould you like to play again?");
+                ConsoleOutput.printString("\nWould you like to play again?\n");
+
                 if (!yesORNo(userInput)) {
                     playAgain = true;
                 }
 
             }
         } else {
-            System.out.println("A wise choice, now MOVE ALONG!");
+//            System.out.println("A wise choice, now MOVE ALONG!");
+            ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
         }
     }
 
@@ -108,16 +121,17 @@ public class DungeonAdventure {
      * @param theUserInput (Scanner)
      * @return
      */
-    public static boolean introduction(final Scanner theUserInput) {
-        System.out.println("------------------ Welcome!!! -------------------");
-        System.out.println("---------------- Hear Ye Hear Ye ----------------");
-        System.out.println("A long time ago, a warrior had challenged" +
-                " the creator, \n the programmer himself, to a game of " +
-                "Labyrinth, but \n       he lost and he paid with his life. \n" +
-                "\nNo one has challenged him ever again, but you my child,");
-        System.out.println("You wish to challenge him?");
-        return (yesORNo(theUserInput));
-    }
+// THIS IS IN CONSOLE OUTPUT ALREADY!
+//    public static boolean introduction(final Scanner theUserInput) {
+//        System.out.println("------------------ Welcome!!! -------------------");
+//        System.out.println("---------------- Hear Ye Hear Ye ----------------");
+//        System.out.println("A long time ago, a warrior had challenged" +
+//                " the creator, \n the programmer himself, to a game of " +
+//                "Labyrinth, but \n       he lost and he paid with his life. \n" +
+//                "\nNo one has challenged him ever again, but you my child,");
+//        System.out.println("You wish to challenge him?");
+//        return (yesORNo(theUserInput));
+//    }
     /**
      * This method is responsible for making sure the user inputs a name for the hero,
      * this method is also performs input validation.
@@ -129,9 +143,13 @@ public class DungeonAdventure {
         String heroName = null;
 
         while (!correctAnswer) {
-            System.out.print("Please enter a name for your hero: ");
+//            System.out.print("Please enter a name for your hero: ");
+            ConsoleOutput.printString("Please enter a name for your hero: \n");
+
             if (userInput.hasNextInt() || userInput.hasNextDouble()) {
-                System.out.println("Invalid input");
+//                System.out.println("Invalid input");
+                ConsoleOutput.printString("Invalid input\n");
+
                 userInput.next();
             } else {
                 heroName = userInput.next();
@@ -164,15 +182,19 @@ public class DungeonAdventure {
         if (theHero.alive()) {
             Point location = theHero.getCharacterLocation();
             Room myRoom = theDungeon.getContent(theHero.getCharacterLocationY(),theHero.getCharacterLocationX());
-
             myRoom.exploreTheRoom();
             myRoom.addTo_MyRoomInventory(RoomType.PLAYER); //Adding player to the room
+
 
             // Checking for hero's satchel
             if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
                 String potionChoice = ("You have unused potions, you can press 'y' to use your item 'n' for no");
-                System.out.println(potionChoice);
-                System.out.print("These are your available potions " + theHero.getHeroSatchel());
+//                System.out.println(potionChoice);
+                ConsoleOutput.printString(potionChoice + "\n");
+
+//                System.out.print("These are your available potions " + theHero.getHeroSatchel());
+                ConsoleOutput.printString("These are your available potions " + theHero.getHeroSatchel() + "\n");
+
                 if (yesORNo(theUserInput)){
                     if (theHero.getHeroSatchel().contains("Vision Potion")) {
                         theDungeon.deployVisionPotion(theHero.getCharacterLocation());
@@ -190,22 +212,38 @@ public class DungeonAdventure {
             }
 
 //            myRoom.setisPlayerinRoom(true);
-            System.out.println(theDungeon);
+
+//            System.out.println(theDungeon);
+            ConsoleOutput.printString(theDungeon + "\n");
+
             checkRoom(theHero, myRoom, theDungeon);
-            System.out.print("This room has: "); // Dont print if room doesn't have anything
-            System.out.println(myRoom.showMyRoomInventory());
+
+//            System.out.print("This room has: "); // Dont print if room doesn't have anything
+            ConsoleOutput.printString("This room has: \n");
+
+//            System.out.println(myRoom.getMyRoomInventory());// Room has a method for printing
+            ConsoleOutput.printString(myRoom.getMyRoomInventory() + "\n");
 
             heroItemPicker(myRoom, theHero);
 
             if (!isHeroAtExit(myRoom, theHero, theUserInput)){
                 if (!theHero.alive()){
-                    System.out.println("You came here with such life yet here you lie");
-                    System.out.println("               lifeless.");
-                    System.out.println("        Better Luck Next time!");
+                    String output = "You came here with such life yet here you lie\n\t\tlifeless.\nBetter Luck Next time!";
+                    ConsoleOutput.printString(output + "\n");
+
+//                    System.out.println("You came here with such life yet here you lie");
+//                    System.out.println("               lifeless.");
+//                    System.out.println("        Better Luck Next time!");
                 } else {
-                    System.out.println(theHero);
-                    System.out.print(theHero.getCharacter_Name()+ "'s Inventory: ");
-                    System.out.println(theHero.getHeroSatchel());
+//                    System.out.println(theHero);
+                    ConsoleOutput.printString(theHero + "\n");
+
+//                    System.out.print(theHero.getCharacter_Name()+ "'s Inventory: ");
+                    ConsoleOutput.printString(theHero.getCharacter_Name()+ "'s Inventory:");
+
+//                    System.out.println(theHero.getHeroSatchel());
+                    ConsoleOutput.printString(theHero.getHeroSatchel() + "\n");
+
                     String direction = directionChecker(theUserInput, location, theDungeonSize);
                     myRoom.removeMyTypes(RoomType.PLAYER);
                     if (direction.equals("k")){
@@ -245,18 +283,27 @@ public class DungeonAdventure {
                                        final Hero theHero,
                                        final Scanner theUserInput) {
         if (theRoom.getMyRoomInventory().contains(RoomType.EXIT.type)) {
+//            System.out.println("You are on the exit!");
             ConsoleOutput.printString("You are on the exit!\n");
-            System.out.println("You are on the exit!");
+
             if (theHero.hasBothCrowns()) {
-                System.out.println("Would you like to exit the dungeon?");
+//                System.out.println("Would you like to exit the dungeon?");
+                ConsoleOutput.printString("Would you like to exit the dungeon?\n");
+
                 if (yesORNo(theUserInput)) {
-                    System.out.println("               You did great out there!");
-                    System.out.println("the programmer didn't even notice the missing coding crowns.");
+//                    System.out.println("               You did great out there!");
+                    ConsoleOutput.printString("\t\t\tYou did great out there!\n");
+
+//                    System.out.println("the programmer didn't even notice the missing coding crowns.");
+                    ConsoleOutput.printString("the programmer didn't even notice the missing coding crowns.\n");
+
                     theHero.killCharacter();
                     return true;
                 }
             } else {
-                System.out.println("You have to keep looking for more treasure!");
+//                System.out.println("You have to keep looking for more treasure!");
+                ConsoleOutput.printString("You have to keep looking for more treasure!\n");
+
                 return false;
             }
         }
@@ -272,8 +319,9 @@ public class DungeonAdventure {
         boolean correctAnswer = false;
         String choice = null;
         while (!correctAnswer) {
-            ConsoleOutput.printString("'y' for yes, 'n' for no: ");
+
             //System.out.print("'y' for yes, 'n' for no: ");
+            ConsoleOutput.printString("'y' for yes, 'n' for no: ");
 
             if (theUserInput.hasNext()) {
                 choice = theUserInput.next();
@@ -285,7 +333,9 @@ public class DungeonAdventure {
                         return false;
                     }
                 } else {
-                    System.out.println("Please select the correct response");
+//                    System.out.println("Please select the correct response");
+                    ConsoleOutput.printString("Please select the correct response\n");
+
                 }
             } else {
                 ConsoleOutput.invalidInput();
@@ -313,25 +363,36 @@ public class DungeonAdventure {
 //Dont replace it with Switch statement just yet
             if (theItem == RoomType.CODING_CROWN_1.type){
                 //theRoom.pickUP(theItem, theHero);
-                System.out.println("You have picked up the Coding Crown!");
+
+//                System.out.println("You have picked up the Coding Crown!");
+                ConsoleOutput.printString("You have picked up the Coding Crown!\n");
+
                 //theHero.addCrownPiece();
 
             }else if (theItem == RoomType.CODING_CROWN_2.type){
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addCrownPiece();
-                System.out.println("You have picked up the Second Coding Crown!");
+
+//                System.out.println("You have picked up the Second Coding Crown!");
+                ConsoleOutput.printString("You have picked up the Second Coding Crown!\n");
+
 
 
             } else if (theItem == RoomType.HEALING.type){
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addHealingPotion();
-                System.out.println("You have picked up the Healing Potion!");
+
+//                System.out.println("You have picked up the Healing Potion!");
+                ConsoleOutput.printString("You have picked up the Healing Potion!\n");
+
 
 
             }else if (theItem == RoomType.VISION.type){
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addVisionPotion();
-                System.out.println("You have picked up the Vision Potion!");
+
+//                System.out.println("You have picked up the Vision Potion!");
+                ConsoleOutput.printString("You have picked up the Vision Potion!\n");
 
 
             }
@@ -351,11 +412,14 @@ public class DungeonAdventure {
      * @return (Returns an updated list of the room)
      */
     public static void checkRoom(final Hero theHero,
-                                               final Room theRoom,
-                                               final Dungeon theDungeon) {
+                                 final Room theRoom,
+                                 final Dungeon theDungeon) {
 
 
         if (theRoom.hasRoomType(RoomType.FIGHT)){
+
+            //SQL INJECTTION HEEERRE
+
             Monster monster = new Skeleton("Null Pointer");
             initiateFight(theHero, monster, theDungeon, theRoom);
         }
@@ -378,18 +442,26 @@ public class DungeonAdventure {
 
         int roundCounter = 1;
         while (theHero.alive() && theMonster.alive()) {
-            System.out.println("\t\t\t Round: " + roundCounter + "\n");
-            System.out.println("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
+//            System.out.println("\t\t\t Round: " + roundCounter + "\n");
+//            System.out.println("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
+            ConsoleOutput.printString("\t\t\t Round: " + roundCounter + "\n");
+            ConsoleOutput.printString("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
+
+
             theHero.attacks(theMonster);
-
             theMonster.attacks(theHero);
-
             roundCounter++;
-            System.out.print("END OF ROUND, PRESS ANY KEY TO CONTINUE");
+
+//            System.out.print("END OF ROUND, PRESS ANY KEY TO CONTINUE");
+            ConsoleOutput.printString("END OF ROUND, PRESS ANY KEY TO CONTINUE");
+
             theUserInput.nextLine();
         } if (!theMonster.alive()){
             theRoom.removeMyTypes(RoomType.FIGHT);
-            System.out.println(theDungeon);
+
+//            System.out.println(theDungeon);
+            ConsoleOutput.printString(theDungeon.toString());
+
         }
     }
 
@@ -413,8 +485,12 @@ public class DungeonAdventure {
 
         // Input Validation
         while (!correctAnswer) {
-            System.out.println(choices);
-            System.out.print("These are your available moves " + choiceList + ": ");
+//            System.out.println(choices);
+//            System.out.print("These are your available moves " + choiceList + ": ");
+
+            ConsoleOutput.printString(choices + "\n");
+            ConsoleOutput.printString("These are your available moves " + choiceList + ": ");
+
 
             if (userInput.hasNext()) {
                 direction = userInput.next();
@@ -428,12 +504,16 @@ public class DungeonAdventure {
                     }
 
                 } else {
-                    System.out.println("Please select the correct direction");
+//                    System.out.println("Please select the correct direction");
+                    ConsoleOutput.printString("Please select the correct direction\n");
+
 
                 }
 
             } else {
-                System.out.println("Invalid Input\n");
+//                System.out.println("Invalid Input\n");
+                ConsoleOutput.printString("Invalid Input\n\n");
+
                 userInput.next();
             }
 
