@@ -449,7 +449,9 @@ public class DungeonAdventure {
 
 
             theHero.attacks(theMonster);
+
             theMonster.attacks(theHero);
+
             roundCounter++;
 
 //            System.out.print("END OF ROUND, PRESS ANY KEY TO CONTINUE");
