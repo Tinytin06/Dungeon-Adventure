@@ -421,6 +421,10 @@ public abstract class Hero extends DungeonCharacter {
         return mySatchel;
     }
 
+
+
+
+
     /**
      * This method return a boolean to indicate if the hero has both of the crowns or not.
      * @return
