@@ -83,7 +83,7 @@ public class DungeonAdventure {
                     myDungeon.setMyCheatEnabled();
                 }
 
-                myDungeon.setMyCheatEnabled();// Testing purposes
+                //myDungeon.setMyCheatEnabled();// Testing purposes
                 while(hero.alive()) {
 //                    System.out.println("Hero's current Location: " + hero.getCharacterLocation());
                     ConsoleOutput.printString("Hero's current Location: " + hero.getCharacterLocation() + "\n");
