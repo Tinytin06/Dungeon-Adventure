@@ -85,12 +85,12 @@ public class DungeonAdventure {
                     myDungeon.setMyCheatEnabled();
                 }
 
-
+                myDungeon.setMyCheatEnabled();// Testing purposes
                 while(hero.alive()) {
 //                    System.out.println("Hero's current Location: " + hero.getCharacterLocation());
                     ConsoleOutput.printString("Hero's current Location: " + hero.getCharacterLocation() + "\n");
 
-                    mover(userInput, hero, myDungeonSize, myDungeon);
+                    driver(userInput, hero, myDungeonSize, myDungeon);
 
                 }
 //                System.out.println("\nThis is the dungeon fully revealed");
@@ -138,7 +138,7 @@ public class DungeonAdventure {
      *
      * @return String (The name of the hero)
      */
-    public static String heroName(final Scanner userInput) {
+    public static String userNameValidator(final Scanner userInput) {
         boolean correctAnswer = false;
         String heroName = null;
 
@@ -170,10 +170,10 @@ public class DungeonAdventure {
      * @param theDungeonSize (Int Size of the dungeon)
      * @param theDungeon (Dungeon)
      */
-    public static void mover(final Scanner theUserInput,
-                             final Hero theHero,
-                             final int theDungeonSize,
-                             final Dungeon theDungeon) {
+    public static void driver(final Scanner theUserInput,
+                              final Hero theHero,
+                              final int theDungeonSize,
+                              final Dungeon theDungeon) {
 
         // Checks if the cheat is enabled
         if (theDungeon.isCheatEnabled()) {
@@ -185,6 +185,7 @@ public class DungeonAdventure {
             myRoom.exploreTheRoom();
             myRoom.addTo_MyRoomInventory(RoomType.PLAYER); //Adding player to the room
 
+            checkHeroSatchel(theHero, theDungeon);
 
             // Checking for hero's satchel
             if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
@@ -211,6 +212,7 @@ public class DungeonAdventure {
                 }
             }
 
+
 //            myRoom.setisPlayerinRoom(true);
 
 //            System.out.println(theDungeon);
@@ -225,6 +227,10 @@ public class DungeonAdventure {
             ConsoleOutput.printString(myRoom.showMyRoomInventory() + "\n");
 
             heroItemPicker(myRoom, theHero);
+
+
+            //Checking if the hero is at the exit
+
 
             if (!isHeroAtExit(myRoom, theHero, theUserInput)){
                 if (!theHero.alive()){
@@ -247,24 +253,46 @@ public class DungeonAdventure {
                     String direction = directionChecker(theUserInput, location, theDungeonSize);
                     myRoom.removeMyTypes(RoomType.PLAYER);
                     if (direction.equals("k")){
+                        // Print the legend for dungeon
 //                        for (String key : theDungeon.mapLegend()) {
 //                            System.out.println(key);
 //                        }
-                    }
-                    if (direction.equals("n")){
+                    } else if (direction.equals("n")){
                         theHero.translateCharacterY(-1);
-                    }
-                    if (direction.equals("s")){
+                    } else if (direction.equals("s")){
                         theHero.translateCharacterY(1);
-                    }
-                    if (direction.equals("e")){
+                    } else if (direction.equals("e")){
                         theHero.translateCharacterX(1);
-                    }
-                    if (direction.equals("w")){
+                    } else if (direction.equals("w")){
                         theHero.translateCharacterX(-1);
                     }
 
 //                    myRoom.setisPlayerinRoom(false);
+                }
+            }
+
+
+        }
+    }
+
+    public static void checkHeroSatchel (final Hero theHero, final Dungeon theDungeon) {
+        Scanner theUserInput = new Scanner(System.in);
+        // Checking for hero's satchel
+        if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
+            System.out.println("You have unused potions, you can press 'y' to use your item 'n' for no");
+            System.out.print("These are your available potions " + theHero.getHeroSatchel());
+            if (yesORNo(theUserInput)){
+                if (theHero.getHeroSatchel().contains("Vision Potion")) {
+                    theDungeon.deployVisionPotion(theHero.getCharacterLocation());
+                    theHero.removeSatchelItem("Vision Potion");
+                }
+                if (theHero.getHeroSatchel().contains("Healing Potion")) {
+                    theHero.healingPotion();
+                    theHero.removeSatchelItem("Healing Potion");
+                }
+                if (theHero.getHeroSatchel().contains("Vision Potion") && theHero.getHeroSatchel().contains("Healing Potion")) {
+                    theHero.removeSatchelItem("Healing Potion");
+                    theHero.removeSatchelItem("Vision Potion");
                 }
             }
         }

@@ -20,7 +20,7 @@ public class ConsoleOutput {
         System.out.print(theString);
     }
 
-    public static void introduction(final String theUserInput) {
+    public static void introduction() {
         System.out.println("------------------ Welcome!!! -------------------");
         System.out.println("---------------- Hear Ye Hear Ye ----------------");
         System.out.println("A long time ago, a warrior had challenged" +

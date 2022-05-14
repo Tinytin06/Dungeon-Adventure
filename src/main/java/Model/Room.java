@@ -55,7 +55,7 @@ public class Room {
     }
 
     public boolean hasRoomType (final RoomType theItem) {
-        return myRoomInventory.contains(theItem);
+        return myRoomInventory.contains(theItem.type);
     }
 
 
