@@ -50,8 +50,6 @@ public class Warrior extends Hero {
         } else {
             System.out.println("\nbut Zeus said NO!, special attack has failed.");
         }
-
-
     }
 }
 //END

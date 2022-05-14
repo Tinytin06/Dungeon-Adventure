@@ -491,7 +491,14 @@ public class DungeonAdventure {
             ConsoleOutput.printString("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
 
 
-            theHero.attacks(theMonster);
+//            while(Movement.GetChoiceCreator(theHero)) {
+            while(theHero.canAttack(theMonster)) {
+                int attackChoice = Movement.GetChoiceCreator(theHero);
+                theHero.attacks(theMonster, attackChoice);
+            }
+
+
+
             theMonster.attacks(theHero);
             roundCounter++;
 

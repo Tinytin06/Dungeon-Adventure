@@ -153,18 +153,85 @@ public abstract class Hero extends DungeonCharacter {
      * @param theEnemy (The enemy player)
      */
 
+
+    /**
+     * This method is used for the characters to attack.
+     * @param theEnemy (The enemy player)
+     */
+
 // add parameter fo attack choice in here
-    public void attacks(final DungeonCharacter theEnemy) {
-        int attackChoice = 0;
-        int tooLowOfAttackSpeedRatio= 0;
-        int fixesLowRatio = 1;
-        myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
-        if (myNumberOfAttacks == tooLowOfAttackSpeedRatio) {
-            myNumberOfAttacks = fixesLowRatio;
-        }
+//    public void attacks(final DungeonCharacter theEnemy) {
+//        int attackChoice = 0;
+//        int tooLowOfAttackSpeedRatio= 0;
+//        int fixesLowRatio = 1;
+//        myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
+//        if (myNumberOfAttacks == tooLowOfAttackSpeedRatio) {
+//            myNumberOfAttacks = fixesLowRatio;
+//        }
+//
+//// WE NEED TO ADD CHANGE THIS WHILE LOOP TO DUNGEON ADVENTURE TOO
+//        while (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway) {
+//
+//// this check is for when we test this method
+//            if (theEnemy == null) {
+//                throw new IllegalArgumentException("The passed enemy is set to null");
+//            }
+//
+//// ERROR attackChoiceValidator will be moved to the DungeonAdeventure class.
+//            attackChoice = attackChoiceValidator();
+////            attackChoice = attackChoiceValidator();
+//            if (attackChoice == SPECIAL_ATTACK) {
+//                specialAttack(theEnemy);
+//            } else if (attackChoice == NORMAL_ATTACK) {
+//                super.attacks(theEnemy);
+//            } else {
+//                runAway();
+//            }
+//            myNumberOfAttacks--;
+//
+//        }
+//
+//    }
+//
+//// this will get moved to dunegon adventure when its ready
+//// we will validate the attack there before we call the attack function.
+//    /**
+//     * This method insures that the user selects the right attack
+//     * and also performs input validation.
+//     * @return (Corresponding number related to the attack choice)
+//     */
+//    protected final int attackChoiceValidator() {
+//        int selection = 0;
+//        //maybe pull out choices string and sout to the view and control parts of the method
+//        String choices = (getCharacter_Name() + " select your attack:" +
+//                "\n1: Special Attack" +
+//                "\n2: Normal Attack" +
+//                "\n3: Run Away");
+//        while (selection == 0) {
+//            System.out.println(choices);
+//            if (userInput.hasNextInt()) {
+//
+//                selection = userInput.nextInt();
+//                if (selection <= 0 || selection > 3) {
+//                    System.out.println("Invalid Choice");
+//                }
+//            } else {
+//                System.out.println("Invalid Choice");
+//                userInput.next();
+//            }
+//        }
+//
+//        return selection;
+//    }
+
+
+
+// add parameter fo attack choice in here
+
+    public void attacks(final DungeonCharacter theEnemy, final int attackChoice) {
 
 // WE NEED TO ADD CHANGE THIS WHILE LOOP TO DUNGEON ADVENTURE TOO
-        while (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway) {
+//        while () {
 
 // this check is for when we test this method
             if (theEnemy == null) {
@@ -172,8 +239,8 @@ public abstract class Hero extends DungeonCharacter {
             }
 
 // ERROR attackChoiceValidator will be moved to the DungeonAdeventure class.
-            attackChoice = attackChoiceValidator();
 //            attackChoice = attackChoiceValidator();
+
             if (attackChoice == SPECIAL_ATTACK) {
                 specialAttack(theEnemy);
             } else if (attackChoice == NORMAL_ATTACK) {
@@ -182,10 +249,22 @@ public abstract class Hero extends DungeonCharacter {
                 runAway();
             }
             myNumberOfAttacks--;
-
-        }
+//        }
 
     }
+
+    public boolean canAttack(final DungeonCharacter theEnemy){
+        int tooLowOfAttackSpeedRatio= 0;
+        int fixesLowRatio = 1;
+        myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
+        if (myNumberOfAttacks == tooLowOfAttackSpeedRatio) {
+            myNumberOfAttacks = fixesLowRatio;
+        }
+
+        return (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway);
+    }
+
+
 
 // this will get moved to dunegon adventure when its ready
 // we will validate the attack there before we call the attack function.
@@ -194,29 +273,29 @@ public abstract class Hero extends DungeonCharacter {
      * and also performs input validation.
      * @return (Corresponding number related to the attack choice)
      */
-    protected final int attackChoiceValidator() {
-        int selection = 0;
-        //maybe pull out choices string and sout to the view and control parts of the method
-        String choices = (getCharacter_Name() + " select your attack:" +
-                "\n1: Special Attack" +
-                "\n2: Normal Attack" +
-                "\n3: Run Away");
-        while (selection == 0) {
-            System.out.println(choices);
-            if (userInput.hasNextInt()) {
-
-                selection = userInput.nextInt();
-                if (selection <= 0 || selection > 3) {
-                    System.out.println("Invalid Choice");
-                }
-            } else {
-                System.out.println("Invalid Choice");
-                userInput.next();
-            }
-        }
-
-        return selection;
-    }
+//    protected final int attackChoiceValidator() {
+//        int selection = 0;
+//        //maybe pull out choices string and sout to the view and control parts of the method
+//        String choices = (getCharacter_Name() + " select your attack:" +
+//                "\n1: Special Attack" +
+//                "\n2: Normal Attack" +
+//                "\n3: Run Away");
+//        while (selection == 0) {
+//            System.out.println(choices);
+//            if (userInput.hasNextInt()) {
+//
+//                selection = userInput.nextInt();
+//                if (selection <= 0 || selection > 3) {
+//                    System.out.println("Invalid Choice");
+//                }
+//            } else {
+//                System.out.println("Invalid Choice");
+//                userInput.next();
+//            }
+//        }
+//
+//        return selection;
+//    }
 
     /**
      * This method calculates if the hero has a chance to use
