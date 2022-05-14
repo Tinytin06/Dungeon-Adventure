@@ -222,7 +222,7 @@ public class DungeonAdventure {
             ConsoleOutput.printString("This room has: \n");
 
 //            System.out.println(myRoom.getMyRoomInventory());// Room has a method for printing
-            ConsoleOutput.printString(myRoom.getMyRoomInventory() + "\n");
+            ConsoleOutput.printString(myRoom.showMyRoomInventory() + "\n");
 
             heroItemPicker(myRoom, theHero);
 
