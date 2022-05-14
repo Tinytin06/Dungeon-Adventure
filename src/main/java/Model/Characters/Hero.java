@@ -234,21 +234,21 @@ public abstract class Hero extends DungeonCharacter {
 //        while () {
 
 // this check is for when we test this method
-            if (theEnemy == null) {
-                throw new IllegalArgumentException("The passed enemy is set to null");
-            }
+        if (theEnemy == null) {
+            throw new IllegalArgumentException("The passed enemy is set to null");
+        }
 
 // ERROR attackChoiceValidator will be moved to the DungeonAdeventure class.
 //            attackChoice = attackChoiceValidator();
 
-            if (attackChoice == SPECIAL_ATTACK) {
-                specialAttack(theEnemy);
-            } else if (attackChoice == NORMAL_ATTACK) {
-                super.attacks(theEnemy);
-            } else {
-                runAway();
-            }
-            myNumberOfAttacks--;
+        if (attackChoice == SPECIAL_ATTACK) {
+            specialAttack(theEnemy);
+        } else if (attackChoice == NORMAL_ATTACK) {
+            super.attacks(theEnemy);
+        } else {
+            runAway();
+        }
+        myNumberOfAttacks--;
 //        }
 
     }
@@ -447,10 +447,10 @@ public abstract class Hero extends DungeonCharacter {
      * This method sets the location of the character.
 
      */
-     public void setCharacterLocation(final Point theCharacterLocation ) {
+    public void setCharacterLocation(final Point theCharacterLocation ) {
         myCharacterLocationY = theCharacterLocation.y;
         myCharacterLocationX = theCharacterLocation.x;
-     }
+    }
 
 
 
@@ -558,4 +558,3 @@ public abstract class Hero extends DungeonCharacter {
     }
 }
 //END
-

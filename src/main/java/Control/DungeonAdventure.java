@@ -10,25 +10,7 @@
  *
  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-package Control;/*
- * Varun Parbhakar
- *
- * TCSS-143
- * Heroes VS Monster (Dungeon DLC)
- */
+package Control;
 import Model.Characters.Hero;
 import Model.Characters.Monster;
 import Model.Characters.Skeleton;

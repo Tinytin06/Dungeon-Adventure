@@ -37,12 +37,6 @@ public class Movement   {
     }
 
 
-    void setDamageTaken(DungeonCharacter theDungeonCharacter, int damageAmount){
-        if(theDungeonCharacter.damageTaken(damageAmount)){
-
-        }
-    }
-
     public static void main(String[] args) {
         Warrior testWarrior=new Warrior("sup");
         System.out.println(GetChoiceCreator(testWarrior ));
