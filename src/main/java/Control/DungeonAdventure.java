@@ -196,7 +196,7 @@ public class DungeonAdventure {
 //                System.out.print("These are your available potions " + theHero.getHeroSatchel());
                 ConsoleOutput.printString("These are your available potions " + theHero.getHeroSatchel() + "\n");
 
-                if (yesORNo(theUserInput)){
+                if(yesORNo(theUserInput)){
                     if (theHero.getHeroSatchel().contains("Vision Potion")) {
                         theDungeon.deployVisionPotion(theHero.getCharacterLocation());
                         theHero.removeSatchelItem("Vision Potion");
@@ -281,7 +281,7 @@ public class DungeonAdventure {
         if (theHero.getHeroSatchel().contains("Vision Potion") || theHero.getHeroSatchel().contains("Healing Potion")) {
             System.out.println("You have unused potions, you can press 'y' to use your item 'n' for no");
             System.out.print("These are your available potions " + theHero.getHeroSatchel());
-            if (yesORNo(theUserInput)){
+            if(yesORNo(theUserInput)){
                 if (theHero.getHeroSatchel().contains("Vision Potion")) {
                     theDungeon.deployVisionPotion(theHero.getCharacterLocation());
                     theHero.removeSatchelItem("Vision Potion");
@@ -476,7 +476,14 @@ public class DungeonAdventure {
             ConsoleOutput.printString("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
 
 
-            theHero.attacks(theMonster);
+//            while(Movement.GetChoiceCreator(theHero)) {
+            while(theHero.canAttack(theMonster)) {
+                int attackChoice = Movement.GetChoiceCreator(theHero);
+                theHero.attacks(theMonster, attackChoice);
+            }
+
+
+
             theMonster.attacks(theHero);
             roundCounter++;
 
