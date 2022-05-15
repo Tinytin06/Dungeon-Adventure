@@ -236,6 +236,10 @@ class RoomTest {
         assertFalse(myRoom.hasRoomType(RoomType.ENTRANCE));
 
     }
+    @Test
+    void showRoomInventoryTest(){
+
+    }
 
 
 }

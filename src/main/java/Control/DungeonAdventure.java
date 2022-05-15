@@ -10,25 +10,7 @@
  *
  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-package Control;/*
- * Varun Parbhakar
- *
- * TCSS-143
- * Heroes VS Monster (Dungeon DLC)
- */
+package Control;
 import Model.Characters.Hero;
 import Model.Characters.Monster;
 import Model.Characters.Skeleton;
@@ -40,9 +22,7 @@ import View.ConsoleOutput;
 
 
 import java.awt.*;
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -85,7 +65,7 @@ public class DungeonAdventure {
                     myDungeon.setMyCheatEnabled();
                 }
 
-                myDungeon.setMyCheatEnabled();// Testing purposes
+                //myDungeon.setMyCheatEnabled();// Testing purposes
                 while(hero.alive()) {
 //                    System.out.println("Hero's current Location: " + hero.getCharacterLocation());
                     ConsoleOutput.printString("Hero's current Location: " + hero.getCharacterLocation() + "\n");
@@ -104,7 +84,7 @@ public class DungeonAdventure {
 //                System.out.println("\nWould you like to play again?");
                 ConsoleOutput.printString("\nWould you like to play again?\n");
 
-                if (!yesORNo(userInput)) {
+                if (!inputValidatorYN(userInput)) {
                     playAgain = true;
                 }
 
@@ -250,22 +230,12 @@ public class DungeonAdventure {
 //                    System.out.println(theHero.getHeroSatchel());
                     ConsoleOutput.printString(theHero.getHeroSatchel() + "\n");
 
-                    String direction = directionChecker(theUserInput, location, theDungeonSize);
+                    //Removing player from the Room
+
                     myRoom.removeMyTypes(RoomType.PLAYER);
-                    if (direction.equals("k")){
-                        // Print the legend for dungeon
-//                        for (String key : theDungeon.mapLegend()) {
-//                            System.out.println(key);
-//                        }
-                    } else if (direction.equals("n")){
-                        theHero.translateCharacterY(-1);
-                    } else if (direction.equals("s")){
-                        theHero.translateCharacterY(1);
-                    } else if (direction.equals("e")){
-                        theHero.translateCharacterX(1);
-                    } else if (direction.equals("w")){
-                        theHero.translateCharacterX(-1);
-                    }
+
+                    //Selecting Player's next move
+                    playerSelectDirection(location, theDungeonSize, theHero);
 
 //                    myRoom.setisPlayerinRoom(false);
                 }
@@ -275,6 +245,25 @@ public class DungeonAdventure {
         }
     }
 
+    public static void playerSelectDirection(final Point location, final int theDungeonSize, final Hero theHero) {
+        Scanner theUserInput = new Scanner(System.in);
+        String direction = directionChecker(theUserInput, location, theDungeonSize);
+
+        if (direction.equals("k")){
+            // Print the legend for dungeon
+            ConsoleOutput.printString(RoomType.legend() + "\n");
+        } else if (direction.equals("n")){
+            theHero.translateCharacterY(-1);
+        } else if (direction.equals("s")){
+            theHero.translateCharacterY(1);
+        } else if (direction.equals("e")){
+            theHero.translateCharacterX(1);
+        } else if (direction.equals("w")){
+            theHero.translateCharacterX(-1);
+        }
+    }
+
+
     public static void checkHeroSatchel (final Hero theHero, final Dungeon theDungeon) {
         Scanner theUserInput = new Scanner(System.in);
         // Checking for hero's satchel
@@ -283,7 +272,7 @@ public class DungeonAdventure {
 //            System.out.println("You have unused potions, you can press 'y' to use your item 'n' for no");
 //            System.out.print("These are your available potions " + theHero.getHeroSatchel());
             ConsoleOutput.printString("These are your available potions " + theHero.getHeroSatchel() + "\n");
-            if (yesORNo(theUserInput)){
+            if (inputValidatorYN(theUserInput)){
                 if (theHero.satchelContains(RoomType.VISION)) {
                     theDungeon.deployVisionPotion(theHero.getCharacterLocation());
                     theHero.removeSatchelItem(RoomType.VISION);
@@ -321,7 +310,7 @@ public class DungeonAdventure {
 //                System.out.println("Would you like to exit the dungeon?");
                 ConsoleOutput.printString("Would you like to exit the dungeon?\n");
 
-                if (yesORNo(theUserInput)) {
+                if (inputValidatorYN(theUserInput)) {
 //                    System.out.println("               You did great out there!");
                     ConsoleOutput.printString("\t\t\tYou did great out there!\n");
 
@@ -346,7 +335,7 @@ public class DungeonAdventure {
      * @param theUserInput (Scanner)
      * @return (Boolean YES or No)
      */
-    public static boolean yesORNo(final Scanner theUserInput) {
+    public static boolean inputValidatorYN(final Scanner theUserInput) {
         boolean correctAnswer = false;
         String choice = null;
         while (!correctAnswer) {
@@ -522,7 +511,7 @@ public class DungeonAdventure {
                                           final Point theLocation,
                                           final int theDungeonSize){
         String choices = "Please select your movement(n for North, s for South, e for East, w for West or k for Map Legend)";
-        ArrayList<String> choiceList = availableChoices(theLocation, theDungeonSize);
+        ArrayList<String> choiceList = availableDirectionChoices(theLocation, theDungeonSize);
         String direction = null;
         boolean correctAnswer = false;
 
@@ -540,7 +529,8 @@ public class DungeonAdventure {
 
                 if (direction.equals("n") || direction.equals("s") || direction.equals("w") || direction.equals("e") || direction.equals("k")) {
                     if (direction.equals("k")){
-                        return direction;
+                        //When K is return to the main function, it prints the legend of the map
+                        return direction; // This needs to be checked
                     }
                     if (choiceList.contains(direction)){
                         correctAnswer = true;
@@ -570,8 +560,8 @@ public class DungeonAdventure {
      * @param theSize (The size of the dungeon)
      * @return (The list contains the valid directions that a user can take)
      */
-    public static ArrayList<String> availableChoices(final Point theLocation,
-                                                     final int theSize) {
+    public static ArrayList<String> availableDirectionChoices(final Point theLocation,
+                                                              final int theSize) {
         ArrayList<String> availableChoices = new ArrayList<>();
         boolean north = theLocation.y > 0;
         boolean south = theLocation.y < theSize-1;
