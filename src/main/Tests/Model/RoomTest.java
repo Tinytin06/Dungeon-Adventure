@@ -189,14 +189,14 @@ class RoomTest {
         assertEquals(exitIcon, roomTest.toString());
     }
 
-    @Test
-    void setPillar() {
-        Room roomTest = new Room();
-        roomTest.setPillar();
-        String pillarIcon = "I ";
-        roomTest.exploreTheRoom();
-        assertEquals(pillarIcon, roomTest.toString());
-    }
+//    @Test
+//    void setPillar() {
+//        Room roomTest = new Room();
+//        roomTest.setPillar();
+//        String pillarIcon = "I ";
+//        roomTest.exploreTheRoom();
+//        assertEquals(pillarIcon, roomTest.toString());
+//    }
 
     @Test
     /**
@@ -238,8 +238,17 @@ class RoomTest {
     }
     @Test
     void showRoomInventoryTest(){
-
+        Room myRoom = new Room(RoomType.PLAYER);
+        myRoom.addTo_MyRoomInventory(RoomType.PIT);
+        HashSet roomInventory = myRoom.showMyRoomInventory();
+        assertEquals(true, roomInventory.contains(RoomType.PIT.type));
     }
 
-
+    @Test
+    void showRoomInventoryTest2(){
+        Room myRoom = new Room(RoomType.NORMAL);
+        myRoom.addTo_MyRoomInventory(RoomType.PIT);
+        HashSet roomInventory = myRoom.showMyRoomInventory();
+        assertEquals(true, roomInventory.contains(RoomType.PIT.type));
+    }
 }
