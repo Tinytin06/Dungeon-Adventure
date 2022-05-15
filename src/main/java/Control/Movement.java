@@ -6,7 +6,7 @@ import Model.Characters.Warrior;
 import View.ConsoleOutput;
 
 import java.util.Scanner;
-
+//maybe rename this to hero controller
 public class Movement   {
 
     public static int GetChoiceCreator (Hero theHero){
@@ -35,7 +35,11 @@ public class Movement   {
         }
         return selection;
     }
-
+ public void damageTakenHero(Hero theHero, int theDamageTaken){
+        if (!theHero.damageTaken(theDamageTaken)){
+            ConsoleOutput.printString(theHero.getCharacter_Name() + " blocked the attack!\n");
+        }
+ }
 
     public static void main(String[] args) {
         Warrior testWarrior=new Warrior("sup");
