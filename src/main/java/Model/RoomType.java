@@ -5,6 +5,10 @@ public enum RoomType {
     PIT('P'),
     NORMAL('N'),
     PILLAR('I'),
+    INHERITANCE('H'),
+    ENCAPSULATION('C'),
+    POLYMORPHISM('O'),
+    ABSTRACTION('A'),
     EXIT('X'),
     ENTRANCE('E'),
     HEALING('H'),
@@ -46,6 +50,14 @@ public enum RoomType {
                 legend.append("K: Coding Crown 1, ");
             } else if (type == RoomType.CODING_CROWN_2) {
                 legend.append("Q: Coding Crown 2");
+            } else if (type == RoomType.POLYMORPHISM){
+
+            } else if (type == RoomType.ENCAPSULATION){
+
+            } else if (type == RoomType.ABSTRACTION){
+
+            } else if (type == RoomType.INHERITANCE){
+
             }
         }
         return legend.toString() + ".";
