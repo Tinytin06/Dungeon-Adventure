@@ -311,9 +311,9 @@ public abstract class Hero extends DungeonCharacter {
      * each characters.
      * @param theAttacks (The amount of attacks needed to be added)
      */
-    protected void setNumberOfAttacks(final int theAttacks) {
-        myNumberOfAttacks += theAttacks;
-    }
+//    protected void setNumberOfAttacks(final int theAttacks) {
+//        myNumberOfAttacks += theAttacks;
+//    }
 
 
     /**
@@ -536,6 +536,10 @@ public abstract class Hero extends DungeonCharacter {
      */
     protected void addVisionPotion(){
         myVisionPotions++;
+    }
+
+    public int getNumberOfAttacks(){
+        return myNumberOfAttacks;
     }
 
     /**
