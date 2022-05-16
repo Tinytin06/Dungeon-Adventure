@@ -343,6 +343,13 @@ public abstract class Hero extends DungeonCharacter {
     }
 
 
+    public void incrementHealingPotion() {
+        myHealingPotions++;
+    }
+
+    public void incrementVisionPotion() {
+        myVisionPotions++;
+    }
 
     /**
      * This method adds the passed item to the hero's inventory.
@@ -443,6 +450,10 @@ public abstract class Hero extends DungeonCharacter {
                 + "\nHealing Potions found: " + myHealingPotions
                 + "\nPillars of OOP found: " + myPillarPieces);
         return stats;
+    }
+
+    public void incrementPillars() {
+        myPillarPieces++;
     }
 }
 //END

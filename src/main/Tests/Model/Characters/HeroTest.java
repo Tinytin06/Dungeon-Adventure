@@ -447,7 +447,7 @@ class HeroTest {
 
         assertTrue(hero.getMyHealingPotions() == 0);
         //Make a Setter for this heal potion counter
-        //hero.addHealingPotion();
+        hero.incrementHealingPotion();
 
         assertTrue(hero.getMyHealingPotions() == 1);
     }
@@ -458,8 +458,8 @@ class HeroTest {
         Hero hero = new Warrior("TempWarrior");
 
         assertTrue(hero.getMyVisionPotions() == 0);
-        //Make a Setter
-        //hero.addVisionPotion();
+
+        hero.incrementVisionPotion();
 
         assertTrue(hero.getMyVisionPotions() == 1);
     }
@@ -468,15 +468,17 @@ class HeroTest {
     void testToString() {
         Hero hero = new Warrior("TempWarrior");
         hero.setMyCharacter_HealthPoints(75);
-//        hero.addVisionPotion();
-//        hero.addHealingPotion();
-//        hero.addCrownPiece();
+
+        hero.incrementHealingPotion();
+        hero.incrementVisionPotion();
+        hero.incrementPillars();
+
 
         String expected = "Name: " + "TempWarrior"
                 + "\nHealth: " + 200
                 + "\nVision Potions found: " + 1
                 + "\nHealing Potions found: " + 1
-                + "\nCoding Crowns found: " + 1;
+                + "\nPillars of OOP found: " + 1;
 
         assertTrue(hero.toString().equals(expected));
     }

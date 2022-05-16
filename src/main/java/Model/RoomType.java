@@ -33,12 +33,12 @@ public enum RoomType {
     public static ArrayList<RoomType> getMyPotions() {
         RoomType[] myPotions = {HEALING, VISION};
 
-        return (ArrayList<RoomType>) Arrays.asList(myPotions);
+        return new ArrayList<>(Arrays.asList(myPotions));
     }
 
     public static ArrayList<RoomType> getMYPillars() {
         RoomType[] myPillars = {INHERITANCE, ENCAPSULATION, ABSTRACTION, POLYMORPHISM};
-        return (ArrayList<RoomType>) Arrays.asList(myPillars);
+        return new ArrayList<>(Arrays.asList(myPillars));
     }
 
 
