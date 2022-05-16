@@ -194,10 +194,13 @@ class RoomTest {
     @Test
     void setPillar() {
         Room roomTest = new Room();
+        roomTest.setEmptyRoom();
         roomTest.setMonster();
-        String pillarIcon = "I ";
+
+        String pillarIcon = "F ";
         roomTest.exploreTheRoom();
         assertEquals(pillarIcon, roomTest.toString());
+
     }
 
 
