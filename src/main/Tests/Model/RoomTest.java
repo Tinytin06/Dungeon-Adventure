@@ -60,11 +60,13 @@ class RoomTest {
      * tests to see if setting the inventory of MyRoomInventory actually gets added to the hashset
      */
     void setMyRoomInventory() {
-        Room roomTest = new Room();
-        roomTest.setEmptyRoom();
-        roomTest.addTo_MyRoomInventory(RoomType.NORMAL);
-        HashSet roomInventory = roomTest.getMyRoomInventory();
-        assertEquals(true, roomInventory.contains(RoomType.NORMAL.type));//test looks awful might change it so that there is less ellipses references
+        for (RoomType roomType:RoomType.values()) {
+            Room roomTest = new Room();
+            roomTest.setEmptyRoom();
+            roomTest.addTo_MyRoomInventory(roomType);
+            HashSet roomInventory = roomTest.getMyRoomInventory();
+            assertEquals(true, roomInventory.contains(roomType.type));
+        }
     }
 
     @Test
@@ -198,6 +200,7 @@ class RoomTest {
         assertEquals(pillarIcon, roomTest.toString());
     }
 
+
     @Test
     /**
      * Testing if the hasRoomItems method works properly and returning the correct output.
@@ -238,8 +241,17 @@ class RoomTest {
     }
     @Test
     void showRoomInventoryTest(){
-
+        Room myRoom = new Room(RoomType.PLAYER);
+        myRoom.addTo_MyRoomInventory(RoomType.PIT);
+        HashSet roomInventory = myRoom.showMyRoomInventory();
+        assertEquals(true, roomInventory.contains(RoomType.PIT.type));
     }
 
-
+    @Test
+    void showRoomInventoryTest2(){
+        Room myRoom = new Room(RoomType.NORMAL);
+        myRoom.addTo_MyRoomInventory(RoomType.PIT);
+        HashSet roomInventory = myRoom.showMyRoomInventory();
+        assertEquals(true, roomInventory.contains(RoomType.PIT.type));
+    }
 }
