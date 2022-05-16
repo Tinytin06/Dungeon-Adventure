@@ -24,10 +24,11 @@ public abstract class Hero extends DungeonCharacter {
     private int myNumberOfAttacks;
     private int myCharacterLocationX;
     private int myCharacterLocationY;
-    private ArrayList<Character> mySatchel = new ArrayList<>();
+    private ArrayList<Character> mySatchel;
+
+    private ArrayList<Character> myPotions;
     private int myHealingPotions;
     private int myVisionPotions;
-    private int myCrownPieces;
 
     private int myPillarPieces;
 
@@ -78,11 +79,12 @@ public abstract class Hero extends DungeonCharacter {
 //        setCharacterLocation(theCharacterX,theCharacterY);
         myCharacterLocationX = theCharacterX;
         myCharacterLocationY = theCharacterY;
+        mySatchel = new ArrayList<>();
+        myPotions = new ArrayList<>();
 
 
         myHealingPotions = 0;
         myVisionPotions = 0;
-        myCrownPieces = 0;
         myPillarPieces = 0;
 
 
@@ -111,7 +113,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * This method generates a random value and heals the player accordingly.
      */
-    public void healingPotion() {
+    public void useHealingPotion() {
         super.setMyCharacter_HealthPoints(randomGen.nextInt(20));
     }
 
@@ -459,15 +461,19 @@ public abstract class Hero extends DungeonCharacter {
      * @param theItem
      */
     public void addItem2Satchel(final RoomType theItem) {
-        if(theItem.type == RoomType.CODING_CROWN_1.type
-                ||theItem.type == RoomType.CODING_CROWN_2.type ) {
-            addCrownPiece();
-        } if(theItem.type == RoomType.HEALING.type) {
-            addHealingPotion();
-        } if(theItem.type == RoomType.VISION.type) {
-            addVisionPotion();
-        } if(theItem.type == RoomType.PILLAR.type) {
-            addPillarPiece();
+        //Checking for the Pillars
+        for (RoomType type : RoomType.getMYPillars()) {
+            if(type == theItem) {
+                myPillarPieces++;
+            }
+        }
+        //Checking for the Potions
+        for (RoomType type : RoomType.getMyPotions()) {
+            if(type == RoomType.HEALING) {
+                myHealingPotions++;
+            } else if(type == RoomType.VISION) {
+                myVisionPotions++;
+            }
         }
 
 
@@ -504,43 +510,17 @@ public abstract class Hero extends DungeonCharacter {
 
 
 
+
     /**
-     * This method return a boolean to indicate if the hero has both of the crowns or not.
+     * This method return a boolean to indicate if the hero has collected all the pillars.
      * @return
      */
-    public boolean hasBothCrowns() {
-        return (mySatchel.contains(RoomType.CODING_CROWN_1.type) && mySatchel.contains(RoomType.CODING_CROWN_2.type));
+    public boolean hasCollectedEveryPillar() {
+        return myPillarPieces == 4;
     }
 
-    /**
-     * This methods adds 1 to the crown piece field.
-     */
-    protected void addCrownPiece(){
-        myCrownPieces++;
 
-    }
 
-    /**
-     * This methods adds 1 to the crown piece field.
-     */
-    protected void addPillarPiece(){
-        myPillarPieces++;
-
-    }
-
-    /**
-     * This methods adds 1 to the healing potion field.
-     */
-    protected void addHealingPotion() {
-        myHealingPotions++;
-    }
-
-    /**
-     * This methods adds 1 to the vision potion field.
-     */
-    protected void addVisionPotion(){
-        myVisionPotions++;
-    }
 
     public int getNumberOfAttacks(){
         return myNumberOfAttacks;
@@ -557,7 +537,7 @@ public abstract class Hero extends DungeonCharacter {
                 + "\nHealth: " + super.getCharacter_HealthPoints()
                 + "\nVision Potions found: " + myVisionPotions
                 + "\nHealing Potions found: " + myHealingPotions
-                + "\nCoding Crowns found: " + myCrownPieces);
+                + "\nPillars of OOP found: " + myPillarPieces);
         return stats;
     }
 }

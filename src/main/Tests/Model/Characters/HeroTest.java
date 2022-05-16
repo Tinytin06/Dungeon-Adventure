@@ -1,8 +1,6 @@
 package Model.Characters;
 
-import Control.Movement;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.Random;
 
@@ -24,7 +22,7 @@ class HeroTest {
         for(int i = 0; i < 10; i++) {
             int previousHealthPoints = hero.getCharacter_HealthPoints();
 
-            hero.healingPotion();
+            hero.useHealingPotion();
 
             int newHealthPoints = hero.getCharacter_HealthPoints();
 

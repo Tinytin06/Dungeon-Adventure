@@ -123,18 +123,18 @@ class RoomTest {
         HashSet RoomInventory = roomTest.getMyRoomInventory();
         assertTrue(RoomInventory.isEmpty());
     }
-    @Test
-    void setEmptyRoom() {
-        Room roomTest = new Room(RoomType.PIT);
-        roomTest.addTo_MyRoomInventory(RoomType.PILLAR);
-        String tooManyRoomIcon = "I ";
-
-        roomTest.exploreTheRoom();
-        assertEquals(tooManyRoomIcon,roomTest.toString());
-        roomTest.setEmptyRoom();
-        HashSet RoomInventory = roomTest.getMyRoomInventory();
-        assertTrue(RoomInventory.isEmpty());
-    }
+//    @Test
+//    void setEmptyRoom() {
+//        Room roomTest = new Room(RoomType.PIT);
+//        roomTest.addTo_MyRoomInventory(RoomType.PILLAR);
+//        String tooManyRoomIcon = "I ";
+//
+//        roomTest.exploreTheRoom();
+//        assertEquals(tooManyRoomIcon,roomTest.toString());
+//        roomTest.setEmptyRoom();
+//        HashSet RoomInventory = roomTest.getMyRoomInventory();
+//        assertTrue(RoomInventory.isEmpty());
+//    }
 
     @Test
     /**
@@ -146,16 +146,16 @@ class RoomTest {
         roomTest.exploreTheRoom();
         assertEquals("P ",roomTest.toString());
     }
-    @Test
-    /**
-     * tests if exploring the room reveals the room
-     */
-    void exploreTheRoomPillar() {
-        Room roomTest = new Room(RoomType.PILLAR);
-        assertEquals("? ",roomTest.toString());
-        roomTest.exploreTheRoom();
-        assertEquals("I ",roomTest.toString());
-    }
+//    @Test
+//    /**
+//     * tests if exploring the room reveals the room
+//     */
+//    void exploreTheRoomPillar() {
+//        Room roomTest = new Room(RoomType.PILLAR);
+//        assertEquals("? ",roomTest.toString());
+//        roomTest.exploreTheRoom();
+//        assertEquals("I ",roomTest.toString());
+//    }
 
 
     @Test
@@ -192,7 +192,7 @@ class RoomTest {
     @Test
     void setPillar() {
         Room roomTest = new Room();
-        roomTest.setPillar();
+        roomTest.setMonster();
         String pillarIcon = "I ";
         roomTest.exploreTheRoom();
         assertEquals(pillarIcon, roomTest.toString());

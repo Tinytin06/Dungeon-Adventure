@@ -1,12 +1,7 @@
 /*
- * There is a bug where the player icon appears in the room before the room even has
- * the chance to update the player in, with the changes made to the dungeon class
- * I think it should be fixed but keep it in check
+ * Hero needs to have a potion inventory
  *
  *
- * Hero satchel needs an update so it gets updated accordingly
- *
- *  Mover method need decoupling and split into Hero Satchel and Hero Mover
  *
  */
 
@@ -23,6 +18,7 @@ import View.ConsoleOutput;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -41,16 +37,16 @@ public class DungeonAdventure {
             boolean playAgain = false;
             while(!playAgain) {
                 //String name = heroName(userInput);
-                String name = "test";
+                String name = "BETA";
 
                 Hero hero = new Warrior(name);
                 int myDungeonSize = 5;
                 Dungeon myDungeon = new Dungeon(myDungeonSize);
 
+
                 //Placing the hero into the dungeon entrance
                 hero.setCharacterLocation(myDungeon.getEntrancePoint());
 
-                ConsoleOutput.printString("Entrance is at: "+ myDungeon.getEntrancePoint() + "\n");
 //                System.out.println("Entrance is at: " + myDungeon.getEntrancePoint());
 
 
@@ -64,11 +60,11 @@ public class DungeonAdventure {
 
                     myDungeon.setMyCheatEnabled();
                 }
+                myDungeon.setMyCheatEnabled();
 
                 //myDungeon.setMyCheatEnabled();// Testing purposes
                 while(hero.alive()) {
 //                    System.out.println("Hero's current Location: " + hero.getCharacterLocation());
-                    ConsoleOutput.printString("Hero's current Location: " + hero.getCharacterLocation() + "\n");
 
                     driver(userInput, hero, myDungeonSize, myDungeon);
 
@@ -86,6 +82,9 @@ public class DungeonAdventure {
 
                 if (!inputValidatorYN(userInput)) {
                     playAgain = true;
+                } else {
+                    ConsoleOutput.printString("Thank you for playing!");
+
                 }
 
             }
@@ -228,7 +227,7 @@ public class DungeonAdventure {
                     ConsoleOutput.printString(theHero.getCharacter_Name()+ "'s Inventory:");
 
 //                    System.out.println(theHero.getHeroSatchel());
-                    ConsoleOutput.printString(theHero.getHeroSatchel() + "\n");
+                    ConsoleOutput.printString(theHero.getHeroSatchel() + "\n\n");
 
                     //Removing player from the Room
 
@@ -274,11 +273,11 @@ public class DungeonAdventure {
             ConsoleOutput.printString("These are your available potions " + theHero.getHeroSatchel() + "\n");
             if (inputValidatorYN(theUserInput)){
                 if (theHero.satchelContains(RoomType.VISION)) {
-                    theDungeon.deployVisionPotion(theHero.getCharacterLocation());
+                    theDungeon.useVisionPotion(theHero.getCharacterLocation());
                     theHero.removeSatchelItem(RoomType.VISION);
                 }
                 if (theHero.satchelContains(RoomType.HEALING)) {
-                    theHero.healingPotion();
+                    theHero.useHealingPotion();
                     theHero.removeSatchelItem(RoomType.HEALING);
                 }
 //                if (theHero.getHeroSatchel().contains("Vision Potion") && theHero.getHeroSatchel().contains("Healing Potion")) {
@@ -306,7 +305,7 @@ public class DungeonAdventure {
             ConsoleOutput.printString("You are on the exit!\n");
 
             //Whenever the two crowns are picked up, the hero is not recognizing that
-            if (theHero.hasBothCrowns()) {
+            if (theHero.hasCollectedEveryPillar()) {
 //                System.out.println("Would you like to exit the dungeon?");
                 ConsoleOutput.printString("Would you like to exit the dungeon?\n");
 
@@ -374,34 +373,78 @@ public class DungeonAdventure {
     public static void heroItemPicker(final Room theRoom,
                                       final Hero theHero) {
 
+
+        ArrayList<RoomType> deleteItems = new ArrayList<>();
+
 //There needs to be a way to move the item from the room to the hero's satchel.
 //theRoom.pickUP(theItem, theHero); removes it from Room inventory and moves it to hero inventory
 
 
-
+        //There is a chance that a single room will contain multiple items, so we use this structure.
         for( Character theItem : theRoom.getMyRoomInventory()) {
-//Dont replace it with Switch statement just yet
-            if (theItem == RoomType.CODING_CROWN_1.type){
+            if(RoomType.getMyPotions().contains(theItem)) {
+
+            }
+
+
+
+
+
+
+            if (theItem == RoomType.INHERITANCE.type){
                 //theRoom.pickUP(theItem, theHero);
 
-//                System.out.println("You have picked up the Coding Crown!");
-                ConsoleOutput.printString("You have picked up the Coding Crown!\n");
+//                System.out.println("You have picked up the Coding Crown!")
+                theHero.addItem2Satchel(RoomType.INHERITANCE);
 
-                theHero.addItem2Satchel(RoomType.CODING_CROWN_1);
+//                theRoom.removeMyTypes(RoomType.INHERITANCE);
+                deleteItems.add(RoomType.INHERITANCE);
 
-            }else if (theItem == RoomType.CODING_CROWN_2.type){
+
+                ConsoleOutput.printString("You have collected the Inheritance Pillar!\n");
+
+
+
+            } if (theItem == RoomType.ABSTRACTION.type){
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addCrownPiece();
 
 //                System.out.println("You have picked up the Second Coding Crown!");
-                theHero.addItem2Satchel(RoomType.CODING_CROWN_2);
-                ConsoleOutput.printString("You have picked up the Second Coding Crown!\n");
+                theHero.addItem2Satchel(RoomType.ABSTRACTION);
+                deleteItems.add(RoomType.ABSTRACTION);
+//                theRoom.removeMyTypes(RoomType.ABSTRACTION);
+                ConsoleOutput.printString("You have collected the Abstraction Pillar!\n");
 
 
 
-            } else if (theItem == RoomType.HEALING.type){
+            } if (theItem == RoomType.POLYMORPHISM.type){
+                //theRoom.pickUP(theItem, theHero);
+
+//                System.out.println("You have picked up the Coding Crown!")
+                theHero.addItem2Satchel(RoomType.POLYMORPHISM);
+                deleteItems.add(RoomType.POLYMORPHISM);
+//                theRoom.removeMyTypes(RoomType.POLYMORPHISM);
+                ConsoleOutput.printString("You have collected the Polymorphism Pillar!\n");
+
+
+
+            } if (theItem == RoomType.ENCAPSULATION.type){
+//                theRoom.pickUP(theItem, theHero);
+//                theHero.addCrownPiece();
+
+//                System.out.println("You have picked up the Second Coding Crown!");
+                theHero.addItem2Satchel(RoomType.ENCAPSULATION);
+                deleteItems.add(RoomType.ENCAPSULATION);
+//                theRoom.removeMyTypes(RoomType.ENCAPSULATION);
+                ConsoleOutput.printString("You have collected the Encapsulation Pillar!\n");
+
+
+
+            } if (theItem == RoomType.HEALING.type){
 
                 theHero.addItem2Satchel(RoomType.HEALING);
+                deleteItems.add(RoomType.HEALING);
+//                theRoom.removeMyTypes(RoomType.HEALING);
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addHealingPotion();
 
@@ -410,9 +453,10 @@ public class DungeonAdventure {
 
 
 
-            }else if (theItem == RoomType.VISION.type){
+            } if (theItem == RoomType.VISION.type){
 
                 theHero.addItem2Satchel(RoomType.VISION);
+                deleteItems.add(RoomType.HEALING);
 //                theRoom.pickUP(theItem, theHero);
 //                theHero.addVisionPotion();
 
@@ -423,6 +467,9 @@ public class DungeonAdventure {
             }
 
 
+        }
+        for(RoomType item : deleteItems) {
+            theRoom.removeMyTypes(item);
         }
 
     }
@@ -450,6 +497,7 @@ public class DungeonAdventure {
         }
 
         if (theRoom.hasRoomType(RoomType.PIT)) {
+            ConsoleOutput.printString(theHero.getCharacter_Name() + " fell into a pit");
             theHero.heroTakesDamage();
         }
 
