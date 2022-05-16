@@ -32,6 +32,8 @@ public class DungeonAdventure {
      * @param args
      */
     public static void main(String[] args) {
+        //Trying to fix the .class files
+
         Scanner userInput = new Scanner(System.in);
         if(true){   //if(introduction(userInput)) {
             boolean playAgain = false;
