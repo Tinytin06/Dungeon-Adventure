@@ -69,7 +69,7 @@ public class Dungeon {
         dungeonBuilder();
         entranceCreator(myDungeon);
         exitCreator(myDungeon);
-        crownSetter(myDungeon);
+        pillarSetter(myDungeon);
     }
 
 
@@ -158,49 +158,56 @@ public class Dungeon {
      *
      * There is a chance that a two of the crown can be placed into the same room.
      *
-     * @param theDungeon
+     * @param theDungeonMap
      */
-    private void crownSetter (final ArrayList<ArrayList<Room>> theDungeon) {
-        Random rand = new Random();
-        Room roomSetter;
-        boolean haveCrown = false;
-        boolean have2ndCrown = false;
+    private void pillarSetter(final ArrayList<ArrayList<Room>> theDungeonMap) {
+        boolean hasInheritance = false;
+        boolean hasPolymorphism = false;
+        boolean hasEncapsulation = false;
+        boolean hasAbstraction = false;
 
 
-        while (!haveCrown || !have2ndCrown) {
+        while (!hasInheritance || !hasPolymorphism || !hasEncapsulation || !hasAbstraction) {
 
-            //Locating a room for a Coding Crown 1
-            if (Math.random() < .1 && !haveCrown) {
-                roomSetter = theDungeon.get(rand.nextInt(myDungeonSize - 1)).get(rand.nextInt(myDungeonSize - 1));
-                //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
-                if (
-                        !roomSetter.getMyRoomInventory().contains(RoomType.CODING_CROWN_1) && //Does it already have the Crown?
-                        !roomSetter.getMyRoomInventory().contains(RoomType.ENTRANCE) && //Does it already have the Entrance?
-                        !roomSetter.getMyRoomInventory().contains(RoomType.EXIT)) { //Does it already have an exit?
-
-                    roomSetter.addTo_MyRoomInventory(RoomType.CODING_CROWN_1);
-                    haveCrown = true;
-                }
-
+            //Locating a room for a Inheritance
+            if(!hasInheritance) {
+                hasInheritance = pillarSetterHelper(theDungeonMap, RoomType.INHERITANCE);
             }
-            //Locating a room for a Coding Crown 2
-            if (Math.random() < .1 && !have2ndCrown) {
-                roomSetter = theDungeon.get(rand.nextInt(myDungeonSize - 1)).get(rand.nextInt(myDungeonSize - 1));
-
-                //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
-                if (
-                        !roomSetter.getMyRoomInventory().contains(RoomType.CODING_CROWN_2) && //Does it already have the Crown?
-                        !roomSetter.getMyRoomInventory().contains(RoomType.ENTRANCE) && //Does it already have the Entrance?
-                        !roomSetter.getMyRoomInventory().contains(RoomType.EXIT)) { //Does it already have an exit?
-
-
-                    roomSetter.addTo_MyRoomInventory(RoomType.CODING_CROWN_2);
-                    have2ndCrown = true;
-                }
+            if(!hasPolymorphism) {
+                hasPolymorphism = pillarSetterHelper(theDungeonMap, RoomType.POLYMORPHISM);
             }
+            if(!hasEncapsulation) {
+                hasEncapsulation = pillarSetterHelper(theDungeonMap, RoomType.ENCAPSULATION);
+            }
+            if(!hasAbstraction) {
+                hasAbstraction = pillarSetterHelper(theDungeonMap, RoomType.ABSTRACTION);
+            }
+
+
 
         }
     }
+    public boolean pillarSetterHelper(final ArrayList<ArrayList<Room>> theDungeon, final RoomType theRoomType) {
+        Random rand = new Random();
+        Room roomSetter;
+        //Locating a room for Polymorphism
+        if (Math.random() < .1) {
+            roomSetter = theDungeon.get(rand.nextInt(myDungeonSize - 1)).get(rand.nextInt(myDungeonSize - 1));
+            //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
+            if (
+                    !roomSetter.hasRoomType(theRoomType) && //Does it already have the Pillar?
+                            !roomSetter.hasRoomType(RoomType.ENTRANCE) && //Does it already have the Entrance?
+                            !roomSetter.hasRoomType(RoomType.EXIT)) { //Does it already have an exit?
+
+                roomSetter.addTo_MyRoomInventory(theRoomType);
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+
 
 
 
@@ -265,7 +272,7 @@ public class Dungeon {
      * This method searches for the possible directions and reveals the room accordingly.
      * @param theLocation (Location of the hero)
      */
-    public void deployVisionPotion(final Point theLocation) {
+    public void useVisionPotion(final Point theLocation) {
         Room dummyRoom = null;
         ArrayList<Point> currentLocation = new ArrayList<>();
         Point dummyPoint = (Point)(theLocation.clone());
@@ -432,3 +439,4 @@ public class Dungeon {
     }
 
 }
+

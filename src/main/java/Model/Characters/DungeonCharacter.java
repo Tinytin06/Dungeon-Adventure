@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Varun Parbhakar
  */
 public abstract class DungeonCharacter {
-    // Scanner and Random number generator for all of the subclasses.
+    // Scanner and Random number generator for all the subclasses.
     public final static Scanner userInput = new Scanner(System.in);
     protected final static Random randomGen = new Random();
 
