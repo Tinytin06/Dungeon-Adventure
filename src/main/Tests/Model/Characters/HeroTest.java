@@ -397,41 +397,41 @@ class HeroTest {
 
 
 
-
-    @Test
-    void removeSatchelItem() {
-        Hero hero = new Warrior("TempWarrior");
-
-        RoomType roomType = RoomType.CODING_CROWN_1;
-
-        hero.addItem2Satchel(roomType);
-
-        assertTrue(hero.satchelContains(roomType));
-
-        hero.removeSatchelItem(roomType);
-
-        assertFalse(hero.satchelContains(roomType));
-    }
-
-    @Test
-    void getHeroSatchel() {
-        Hero hero = new Warrior("TempWarrior");
-
-        RoomType roomType1 = RoomType.CODING_CROWN_1;
-        RoomType roomType2 = RoomType.CODING_CROWN_2;
-        RoomType roomType3 = RoomType.HEALING;
-
-        hero.addItem2Satchel(roomType1);
-        hero.addItem2Satchel(roomType2);
-        hero.addItem2Satchel(roomType3);
-
-        ArrayList<Character> expectedSatchel = new ArrayList<>();
-        expectedSatchel.add(roomType1.type);
-        expectedSatchel.add(roomType2.type);
-        expectedSatchel.add(roomType3.type);
-
-        assertArrayEquals(hero.getHeroSatchel().toArray(), expectedSatchel.toArray());
-    }
+//
+//    @Test
+//    void removeSatchelItem() {
+//        Hero hero = new Warrior("TempWarrior");
+//
+//        RoomType roomType = RoomType.CODING_CROWN_1;
+//
+//        hero.addItem2Satchel(roomType);
+//
+//        assertTrue(hero.satchelContains(roomType));
+//
+//        hero.removeSatchelItem(roomType);
+//
+//        assertFalse(hero.satchelContains(roomType));
+//    }
+//
+//    @Test
+//    void getHeroSatchel() {
+//        Hero hero = new Warrior("TempWarrior");
+//
+////        RoomType roomType1 = RoomType.CODING_CROWN_1;
+////        RoomType roomType2 = RoomType.CODING_CROWN_2;
+//        RoomType roomType3 = RoomType.HEALING;
+//
+//        hero.addItem2Satchel(roomType1);
+//        hero.addItem2Satchel(roomType2);
+//        hero.addItem2Satchel(roomType3);
+//
+//        ArrayList<Character> expectedSatchel = new ArrayList<>();
+//        expectedSatchel.add(roomType1.type);
+//        expectedSatchel.add(roomType2.type);
+//        expectedSatchel.add(roomType3.type);
+//
+//        assertArrayEquals(hero.getHeroSatchel().toArray(), expectedSatchel.toArray());
+//    }
 
     @Test
     void hasBothCrowns() {

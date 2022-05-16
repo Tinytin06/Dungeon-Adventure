@@ -420,9 +420,6 @@ public abstract class Hero extends DungeonCharacter {
         return myVisionPotions;
     }
 
-    public int getMyCrownPieces() {
-        return myCrownPieces;
-    }
 
     public int getMyPillarPieces() {
         return myPillarPieces;
