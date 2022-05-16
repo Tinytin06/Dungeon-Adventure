@@ -151,6 +151,7 @@ class DungeonTest {
     void dungeonBuilderTest2() {
         int  myDungeonSize = 2;
 
+
         boolean hasRoom = true; //This boolean will false if the dungeon is not filled with rooms
         myDungeon = new Dungeon(myDungeonSize);
         System.out.println(myDungeon);
