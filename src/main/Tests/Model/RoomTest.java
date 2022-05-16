@@ -191,14 +191,7 @@ class RoomTest {
         assertEquals(exitIcon, roomTest.toString());
     }
 
-//    @Test
-//    void setPillar() {
-//        Room roomTest = new Room();
-//        roomTest.setPillar();
-//        String pillarIcon = "I ";
-//        roomTest.exploreTheRoom();
-//        assertEquals(pillarIcon, roomTest.toString());
-//    }
+
 
     @Test
     /**
