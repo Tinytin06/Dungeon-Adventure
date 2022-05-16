@@ -1,6 +1,8 @@
 package Model;
 
-import java.util.ArrayList;
+
+import Model.Characters.Monster;
+
 import java.util.HashSet;
 import static Model.RoomType.*;
 /**
@@ -64,6 +66,13 @@ public class Room {
      * @param theType
      */
     public void addTo_MyRoomInventory(RoomType theType) {
+        if(theType == INHERITANCE ||
+                theType == ABSTRACTION ||
+                theType == POLYMORPHISM||
+                theType == ENCAPSULATION) {
+
+            setMonster();
+        }
         myRoomInventory.add(theType.type);
     }
 
@@ -109,9 +118,10 @@ public class Room {
 
             if (myRoomInventory.contains(ENTRANCE.type) ||
                     myRoomInventory.contains(EXIT.type) ||
-                    myRoomInventory.contains(PILLAR.type) ||
-                    myRoomInventory.contains(CODING_CROWN_1.type) ||
-                    myRoomInventory.contains(CODING_CROWN_2.type)) {
+                    myRoomInventory.contains(INHERITANCE.type) ||
+                    myRoomInventory.contains(POLYMORPHISM.type) ||
+                    myRoomInventory.contains(ENCAPSULATION.type) ||
+                    myRoomInventory.contains(ABSTRACTION.type)) {
 
                 if (myRoomInventory.contains(ENTRANCE.type)) {
                     setMyDisplayIcon(ENTRANCE.type + " ");
@@ -121,16 +131,20 @@ public class Room {
                     setMyDisplayIcon(EXIT.type + " ");
                     return;
                 }
-                if (myRoomInventory.contains(PILLAR.type)) {
-                    setMyDisplayIcon(PILLAR.type + " ");
+                if (myRoomInventory.contains(INHERITANCE.type)) {
+                    setMyDisplayIcon(INHERITANCE.type + " ");
                     return;
                 }
-                if (myRoomInventory.contains(CODING_CROWN_1.type)){
-                    setMyDisplayIcon(CODING_CROWN_1.type + " ");
+                if (myRoomInventory.contains(ABSTRACTION.type)){
+                    setMyDisplayIcon(ABSTRACTION.type + " ");
                     return;
                 }
-                if (myRoomInventory.contains(CODING_CROWN_2.type)){
-                    setMyDisplayIcon(CODING_CROWN_2.type + " ");
+                if (myRoomInventory.contains(ENCAPSULATION.type)){
+                    setMyDisplayIcon(ENCAPSULATION.type + " ");
+                    return;
+                }
+                if (myRoomInventory.contains(POLYMORPHISM.type)){
+                    setMyDisplayIcon(POLYMORPHISM.type + " ");
                     return;
                 }
             } else if (myRoomInventory.size() == 1) {
@@ -170,9 +184,8 @@ public class Room {
      * This methods sets the room to be a pillar fight.
      * @param
      */
-    void setPillar(){
-        addTo_MyRoomInventory(FIGHT);
-        addTo_MyRoomInventory(PILLAR);
+    void setMonster(){
+        myRoomInventory.add(FIGHT.type);
     }
 
     public HashSet showMyRoomInventory(){
