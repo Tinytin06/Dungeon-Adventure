@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 public enum RoomType {
     FIGHT('F'),
     PIT('P'),
