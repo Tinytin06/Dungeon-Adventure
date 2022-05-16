@@ -60,11 +60,13 @@ class RoomTest {
      * tests to see if setting the inventory of MyRoomInventory actually gets added to the hashset
      */
     void setMyRoomInventory() {
-        Room roomTest = new Room();
-        roomTest.setEmptyRoom();
-        roomTest.addTo_MyRoomInventory(RoomType.NORMAL);
-        HashSet roomInventory = roomTest.getMyRoomInventory();
-        assertEquals(true, roomInventory.contains(RoomType.NORMAL.type));//test looks awful might change it so that there is less ellipses references
+        for (RoomType roomType:RoomType.values()) {
+            Room roomTest = new Room();
+            roomTest.setEmptyRoom();
+            roomTest.addTo_MyRoomInventory(roomType);
+            HashSet roomInventory = roomTest.getMyRoomInventory();
+            assertEquals(true, roomInventory.contains(roomType.type));
+        }
     }
 
     @Test
