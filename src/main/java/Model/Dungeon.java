@@ -34,7 +34,7 @@ public class Dungeon {
      * @param theFile
      * @throws FileNotFoundException
      */
-    Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
+    public Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
 
         if(theDungeonLength < 2) {
             throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");

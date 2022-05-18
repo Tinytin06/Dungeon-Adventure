@@ -7,7 +7,7 @@ import View.ConsoleOutput;
 
 import java.util.Scanner;
 //maybe rename this to hero controller
-public class Movement   {
+public class HeroController {
 
     public static int GetChoiceCreator (Hero theHero){
     int selection = 0;

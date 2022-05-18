@@ -18,7 +18,6 @@ import View.ConsoleOutput;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -525,7 +524,7 @@ public class DungeonAdventure {
 
 //            while(Movement.GetChoiceCreator(theHero)) {
             while(theHero.canAttack(theMonster)) {
-                int attackChoice = Movement.GetChoiceCreator(theHero);
+                int attackChoice = HeroController.GetChoiceCreator(theHero);
                 theHero.attacks(theMonster, attackChoice);
             }
 
