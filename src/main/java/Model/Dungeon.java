@@ -191,19 +191,15 @@ public class Dungeon {
         Random rand = new Random();
         Room roomSetter;
         //Locating a room for Polymorphism
-        if (Math.random() < .1) {
-            roomSetter = theDungeon.get(rand.nextInt(myDungeonSize - 1)).get(rand.nextInt(myDungeonSize - 1));
-            //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
-            if (
-                    !roomSetter.hasRoomType(theRoomType) && //Does it already have the Pillar?
-                            !roomSetter.hasRoomType(RoomType.ENTRANCE) && //Does it already have the Entrance?
-                            !roomSetter.hasRoomType(RoomType.EXIT)) { //Does it already have an exit?
+
+        roomSetter = theDungeon.get(rand.nextInt(myDungeonSize)).get(rand.nextInt(myDungeonSize));
+        //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
+            if (!roomSetter.hasRoomType(RoomType.ENTRANCE) && //Does it already have the Entrance?
+                !roomSetter.hasRoomType(RoomType.EXIT)) { //Does it already have an exit?
 
                 roomSetter.addTo_MyRoomInventory(theRoomType);
                 return true;
             }
-
-        }
         return false;
 
     }
