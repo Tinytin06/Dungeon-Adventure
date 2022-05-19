@@ -35,11 +35,11 @@ public class HeroController {
         }
         return selection;
     }
- public void damageTakenHero(Hero theHero, int theDamageTaken){
-        if (!theHero.damageTaken(theDamageTaken)){
-            ConsoleOutput.printString(theHero.getCharacter_Name() + " blocked the attack!\n");
-        }
- }
+// public void damageTakenHero(Hero theHero, int theDamageTaken){
+//        if (!theHero.damageTaken(theDamageTaken)){
+//            ConsoleOutput.printString(theHero.getCharacter_Name() + " blocked the attack!\n");
+//        }
+// }
 
     public static void main(String[] args) {
         Warrior testWarrior=new Warrior("sup");

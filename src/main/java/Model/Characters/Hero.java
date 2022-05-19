@@ -122,6 +122,8 @@ public abstract class Hero extends DungeonCharacter {
      */
     @Override
     public boolean damageTaken(final int theC_Damage) {
+        //Ask if this logic is okay to be in this class
+        //TRUE(getCharacter_Name() + " blocked the attack!\n")
         if (randomGen.nextDouble() <= myChance2Block) {
             System.out.println((getCharacter_Name() + " blocked the attack!\n"));
             return false;
@@ -196,7 +198,6 @@ public abstract class Hero extends DungeonCharacter {
     protected void runAway() {
         myRunAway = true;
         killCharacter();
-        //System.out.println(getCharacter_Name() + " has ran away.");
     }
 
     /**

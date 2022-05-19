@@ -85,7 +85,7 @@ public abstract class Monster extends DungeonCharacter {
 
     }
 
-// add console output.
+// add console output. also move these to control and view
     /**
      * This method calculates the chances of the monster
      * succeeding at healing himself.
@@ -169,9 +169,7 @@ public abstract class Monster extends DungeonCharacter {
         if (theC_SMinDamage > theC_SMaxDamage) {
             throw new IllegalArgumentException("The minimum special heal points cannot be greater than the maximum special heal points.");
         }
-//        else {
             return true;
-//        }
     }
 }
 //END
