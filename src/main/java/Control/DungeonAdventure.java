@@ -1,10 +1,3 @@
-/*
- * Hero needs to have a potion inventory
- *
- *
- *
- */
-
 package Control;
 import Model.Characters.Hero;
 import Model.Characters.Monster;
@@ -32,11 +25,13 @@ public class DungeonAdventure {
      */
     public static void main(String[] args) {
         //Trying to fix the .class files
+
         Scanner userInput = new Scanner(System.in);
-        if(true){
+        ConsoleOutput.introduction();
+        if(inputValidatorYN(userInput)) {
             boolean playAgain = false;
             while(!playAgain) {
-                String name = "BETA";
+                String name = userNameValidator(userInput);
 
                 Hero hero = new Warrior(name);
                 int myDungeonSize = 5;
