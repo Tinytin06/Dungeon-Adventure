@@ -60,7 +60,7 @@ public abstract class DungeonCharacter {
 
 
 
-//SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
+
     //Validators
 
     /**
@@ -74,7 +74,7 @@ public abstract class DungeonCharacter {
         myCharacter_Name = theC_Name;
     }
 
-//SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
+
     /**
      * This instance method validates the health of the character.
      * @param theC_Health (Health of the character)
@@ -86,7 +86,7 @@ public abstract class DungeonCharacter {
         myCharacter_HealthPoints = theC_Health;
     }
 
-//SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
+
     /**
      * This instance method validates the minimum damage of the character.
      * @param theC_MinDamage (Minimum damage of the character)
@@ -98,7 +98,7 @@ public abstract class DungeonCharacter {
         myCharacter_MinDamage = theC_MinDamage;
     }
 
-//SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
+
     /**
      * This instance method validates the maximum damage of the character.
      * @param theC_MaxDamage (Maximum damage of the character)
@@ -110,7 +110,7 @@ public abstract class DungeonCharacter {
         myCharacter_MaxDamage = theC_MaxDamage;
     }
 
-//SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
+
     /**
      * This instance method ensure the minimum damage is not higher than the maximum damage
      * @param theC_MinDamage
@@ -126,7 +126,7 @@ public abstract class DungeonCharacter {
         }
     }
 
-//SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
+
     /**
      * This instance method validates the attack speed of the character.
      * @param theC_AttackSpeed (Attack speed of the character)
@@ -138,7 +138,8 @@ public abstract class DungeonCharacter {
         myCharacter_AttackSpeed = theC_AttackSpeed;
     }
 
-//SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
+
+
     /**
      * This instance method validates the chance to attack.
      * @param theC_Chance2Attack (Chance to attack for the character)

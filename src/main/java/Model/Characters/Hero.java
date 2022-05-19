@@ -196,7 +196,6 @@ public abstract class Hero extends DungeonCharacter {
     protected void runAway() {
         myRunAway = true;
         killCharacter();
-        //System.out.println(getCharacter_Name() + " has ran away.");
     }
 
     /**
