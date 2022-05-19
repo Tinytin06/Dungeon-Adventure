@@ -1,3 +1,11 @@
+/*
+ * User Input validation -> Validating Directions, Validating Attack Choices, Validate Hero name, Validate Y&N
+ *
+ * HeroController -> playerSelectDirection, heroItemPicker,
+ */
+
+
+
 package Control;
 import Model.Characters.Hero;
 import Model.Characters.Monster;
@@ -461,17 +469,26 @@ public class DungeonAdventure {
         boolean west = theLocation.x > 0;
         boolean east = theLocation.x < theSize-1;
 
+
+        String direction_North = "n";
+        String direction_South = "s";
+        String direction_East = "e";
+        String direction_West = "w";
+
+
+
+
         if (north) {
-            availableChoices.add("n");
+            availableChoices.add(direction_North);
 
         }if (south) {
-            availableChoices.add("s");
+            availableChoices.add(direction_South);
 
         }if (east) {
-            availableChoices.add("e");
+            availableChoices.add(direction_East);
 
         }if (west) {
-            availableChoices.add("w");
+            availableChoices.add(direction_West);
 
         }
         return availableChoices;

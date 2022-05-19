@@ -291,6 +291,8 @@ public abstract class DungeonCharacter {
             System.out.println(getCharacter_Name() + "'s health is now at <<" + myCharacter_HealthPoints + ">>\n");
         }
 
+        //"\n" + getCharacter_Name() + " Has taken <<" + theC_Damage + ">> damage \n+ System.out.println(getCharacter_Name() + " has fainted\n");"
+
         return true;
     }
 
