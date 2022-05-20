@@ -78,11 +78,12 @@ public abstract class Monster extends DungeonCharacter {
      * @param theC_Damage (The amount of damage that a character takes)
      */
     @Override
-    public boolean damageTaken(final int theC_Damage) {
-        super.damageTaken(theC_Damage);
-        heal();
-        return true;
-
+    public String damageTaken(final int theC_Damage) {
+        StringBuilder outputHelper = new StringBuilder();
+        outputHelper.append(super.damageTaken(theC_Damage));
+        outputHelper.append(heal());
+//        return true;
+        return outputHelper.toString();
     }
 
 // add console output. also move these to control and view
@@ -90,17 +91,29 @@ public abstract class Monster extends DungeonCharacter {
      * This method calculates the chances of the monster
      * succeeding at healing himself.
      */
-    protected void heal() {
+    protected String heal() {
+        StringBuilder outputHelper = new StringBuilder();
+
         if (alive()) {
             if(myChance2Heal >= randomGen.nextDouble()) {
-                System.out.println("The " + getCharacter_Name() + " has healed himself.");
+                outputHelper.append("\n");
+                outputHelper.append("The ");
+                outputHelper.append(getCharacter_Name());
+                outputHelper.append(" has healed himself.");
+                outputHelper.append("\n");
                 setMyHealth(healGenerator());
 
             } else {
-                System.out.println(getCharacter_Name() + " tried to heal themselves but failed");
+                outputHelper.append("\n");
+                outputHelper.append(getCharacter_Name());
+                outputHelper.append(" tried to heal themselves but failed");
+                outputHelper.append("\n");
             }
+
+            return outputHelper.toString();
         }
 
+        return "";
     }
 
     /**
@@ -108,7 +121,7 @@ public abstract class Monster extends DungeonCharacter {
      * @param theEnemy (The enemy player)
      */
     @Override
-    public void attacks(final DungeonCharacter theEnemy){
+    public String attacks(final DungeonCharacter theEnemy){
         myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
         if (myNumberOfAttacks == 0) {
             myNumberOfAttacks = 1;
@@ -119,7 +132,7 @@ public abstract class Monster extends DungeonCharacter {
             myNumberOfAttacks--;
 
         }
-
+        return "";
     }
 
     // Validators
@@ -169,7 +182,7 @@ public abstract class Monster extends DungeonCharacter {
         if (theC_SMinDamage > theC_SMaxDamage) {
             throw new IllegalArgumentException("The minimum special heal points cannot be greater than the maximum special heal points.");
         }
-            return true;
+        return true;
     }
 }
 //END

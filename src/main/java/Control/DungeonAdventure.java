@@ -95,7 +95,7 @@ public class DungeonAdventure {
         String heroName = null;
 
         while (!correctAnswer) {
-            ConsoleOutput.printString("Please enter a name for your hero: \n");
+            ConsoleOutput.printString("Please enter a name for your hero: ");
             if (userInput.hasNextInt() || userInput.hasNextDouble()) {
                 ConsoleOutput.printString("Invalid input\n");
                 userInput.next();
@@ -389,11 +389,10 @@ public class DungeonAdventure {
 
             while(theHero.canAttack(theMonster)) {
                 int attackChoice = HeroController.GetChoiceCreator(theHero);
-                theHero.attacks(theMonster, attackChoice);
-
+                ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
             }
 
-            theMonster.attacks(theHero);
+            ConsoleOutput.printString(theMonster.attacks(theHero));
             roundCounter++;
             ConsoleOutput.printString("END OF ROUND, PRESS ANY KEY TO CONTINUE");
             theUserInput.nextLine();

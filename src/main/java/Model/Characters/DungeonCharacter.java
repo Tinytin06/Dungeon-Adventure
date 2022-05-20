@@ -254,20 +254,34 @@ public abstract class DungeonCharacter {
      * This instance method is used for attacking the enemy player.
      * @param enemy (The enemy player)
      */
-    protected void attacks(final DungeonCharacter enemy) {
+    protected String attacks(final DungeonCharacter enemy) {
         if (enemy == null) {
             throw new IllegalArgumentException("The passed enemy is set to null");
         }
+
+        StringBuilder outputHelper = new StringBuilder();
         if (alive()) {
             double randomDouble = randomGen.nextDouble();
             if (randomDouble <= myCharacter_AttackDamageProbability) {
                 int damageDone = damageGenerator();
-                System.out.println("\n" + getCharacter_Name() + " attacks " + enemy.getCharacter_Name());
-                enemy.damageTaken(damageDone);
+                outputHelper.append("\n");
+                outputHelper.append(getCharacter_Name());
+                outputHelper.append(" attacks ");
+                outputHelper.append(enemy.getCharacter_Name());
+
+                outputHelper.append(enemy.damageTaken(damageDone));
             } else {
-                System.out.println("\n" + getCharacter_Name() + "'s attacked on " + enemy.getCharacter_Name() + " but missed\n");
+                outputHelper.append("\n");
+                outputHelper.append(getCharacter_Name());
+                outputHelper.append("'s attacked on ");
+                outputHelper.append(enemy.getCharacter_Name());
+                outputHelper.append(" but missed\n");
             }
+
+            return outputHelper.toString();
         }
+
+        return "";
     }
 
 //NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
@@ -275,25 +289,39 @@ public abstract class DungeonCharacter {
      * This instance method makes sure that damage is dealt to the character.
      * @param theC_Damage (The amount of damage that a character takes)
      */
-    public boolean damageTaken(final int theC_Damage) {
+    public String damageTaken(final int theC_Damage) {
         if (theC_Damage < 0) {
             throw new IllegalArgumentException("The chance to attack has to be greater than 0 and less than or equal to 1.");
         }
 
-        System.out.println("\n" + getCharacter_Name() + " Has taken <<" + theC_Damage + ">> damage");
+        StringBuilder outputHelper = new StringBuilder();
+
+        outputHelper.append("\n");
+        outputHelper.append(getCharacter_Name());
+        outputHelper.append(" Has taken <<");
+        outputHelper.append(theC_Damage);
+        outputHelper.append(">> damage");
 
         myCharacter_HealthPoints -= theC_Damage;
 
         if (myCharacter_HealthPoints <= 0) {
             killCharacter();
-            System.out.println(getCharacter_Name() + " has fainted\n");
+            outputHelper.append("\n");
+            outputHelper.append(getCharacter_Name());
+            outputHelper.append(" has fainted\n");
         } else {
-            System.out.println(getCharacter_Name() + "'s health is now at <<" + myCharacter_HealthPoints + ">>\n");
+            outputHelper.append("\n");
+            outputHelper.append(getCharacter_Name());
+            outputHelper.append("'s health is now at <<");
+            outputHelper.append(myCharacter_HealthPoints);
+            outputHelper.append(">>\n");
         }
 
         //"\n" + getCharacter_Name() + " Has taken <<" + theC_Damage + ">> damage \n+ System.out.println(getCharacter_Name() + " has fainted\n");"
 
-        return true;
+//        return true;
+        //DOUBLE HCECK THIS RETURN STAMENT!!!
+        return outputHelper.toString();
     }
 
     /**

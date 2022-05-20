@@ -35,6 +35,9 @@ public class HeroController {
         }
         return selection;
     }
+
+//    static StringBuilder outputHelper = new StringBuilder();
+
 // public void damageTakenHero(Hero theHero, int theDamageTaken){
 //        if (!theHero.damageTaken(theDamageTaken)){
 //            ConsoleOutput.printString(theHero.getCharacter_Name() + " blocked the attack!\n");
