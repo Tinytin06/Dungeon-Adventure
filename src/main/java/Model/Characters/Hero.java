@@ -121,17 +121,15 @@ public abstract class Hero extends DungeonCharacter {
      * @param theC_Damage (The amount of damage that a character takes)
      */
     @Override
-    public boolean damageTaken(final int theC_Damage) {
+    public String damageTaken(final int theC_Damage) {
         //Ask if this logic is okay to be in this class
         //TRUE(getCharacter_Name() + " blocked the attack!\n")
         if (randomGen.nextDouble() <= myChance2Block) {
-            System.out.println((getCharacter_Name() + " blocked the attack!\n"));
-            return false;
-
+//            System.out.println((getCharacter_Name() + " blocked the attack!\n"));
+            return (getCharacter_Name() + " blocked the attack!\n");
         } else {
             super.damageTaken(theC_Damage);
-            return true;
-
+            return "true";
         }
     }
 
@@ -140,26 +138,28 @@ public abstract class Hero extends DungeonCharacter {
      * character that decides on using a special attack
      * @param enemy
      */
-    protected abstract void specialAttack(final DungeonCharacter enemy);
+    protected abstract String specialAttack(final DungeonCharacter enemy);
 
     /**
      * This method is used for the characters to attack.
      * @param theEnemy (The enemy player)
      */
-    public void attacks(final DungeonCharacter theEnemy, final int attackChoice) {
+    public String attacks(final DungeonCharacter theEnemy, final int attackChoice) {
         if(theEnemy == null) {
             throw new IllegalArgumentException("The passed enemy is set to null");
         }
+        StringBuilder outputHelper = new StringBuilder();
 
         if (attackChoice == SPECIAL_ATTACK) {
-            specialAttack(theEnemy);
+            outputHelper.append(specialAttack(theEnemy));
         } else if (attackChoice == NORMAL_ATTACK) {
-            super.attacks(theEnemy);
+            outputHelper.append(super.attacks(theEnemy));
         } else {
             runAway();
         }
         myNumberOfAttacks--;
 
+        return outputHelper.toString();
     }
 
     /**
