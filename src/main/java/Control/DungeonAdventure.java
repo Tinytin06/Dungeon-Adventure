@@ -18,6 +18,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Control.UserInputValidate.*;
+
 /**
  * This is the main client class for the dungeon adventure game it contains
  * the game player that initiates and continues with the game until the player decides to quit.
@@ -115,7 +117,7 @@ public class DungeonAdventure {
             ConsoleOutput.printString("This room has: ");
             ConsoleOutput.printString(myRoom.showMyRoomInventory() + "\n");
 
-            heroItemPicker(myRoom, theHero);
+            HeroController.heroItemPicker(myRoom, theHero);
 
             //Checking if the hero is at the exit
             if (!isHeroAtExit(myRoom, theHero, theUserInput)){
@@ -132,7 +134,7 @@ public class DungeonAdventure {
                     myRoom.removeMyTypes(RoomType.PLAYER);
 
                     //Selecting Player's next move
-                    playerSelectDirection(location, theDungeonSize, theHero);
+                    HeroController.playerSelectDirection(location, theDungeonSize, theHero);
 
                 }
             }
@@ -272,15 +274,9 @@ public class DungeonAdventure {
                 theHero.addItem2Satchel(RoomType.VISION);
                 deleteItems.add(RoomType.HEALING);
                 ConsoleOutput.printString("You have picked up the Vision Potion!\n");
-
-            }
-        }
-
-        for(RoomType item : deleteItems) {
-            theRoom.removeMyTypes(item);
-        }
-
     }
+
+
 
     /**
      * This method checks the room for monster and pits, if a monster is present
@@ -324,6 +320,7 @@ public class DungeonAdventure {
             ConsoleOutput.printString("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
 
             while(theHero.canAttack(theMonster)) {
+
                 int attackChoice = UserInputValidate.attackChoice(theHero);
                 ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
             }
