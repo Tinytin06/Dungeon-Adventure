@@ -4,20 +4,18 @@ import Model.Characters.Hero;
 import Model.Room;
 import Model.RoomType;
 import View.ConsoleOutput;
-import Control.UserInputValidate.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Control.UserInputValidate.directionChecker;
+
 
 //maybe rename this to hero controller
 public class HeroController {
 
-    public static void playerSelectDirection(final Point location, final int theDungeonSize, final Hero theHero) {
+    public static void moveCharacter(final Hero theHero, String theHeroHeading) {
         Scanner theUserInput = new Scanner(System.in);
-        String direction = directionChecker(theUserInput, location, theDungeonSize);
+        String direction = theHeroHeading;
 
         if (direction.equals("k")){
             // Print the legend for dungeon
@@ -43,8 +41,8 @@ public class HeroController {
      * @param theRoom (The room object)
      * @param theHero (The hero object)
      */
-    public static void heroItemPicker(final Room theRoom,
-                                      final Hero theHero) {
+    public static void itemPickUp(final Room theRoom,
+                                  final Hero theHero) {
 
 
         ArrayList<RoomType> deleteItems = new ArrayList<>();

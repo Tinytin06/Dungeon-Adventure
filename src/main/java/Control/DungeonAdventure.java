@@ -18,8 +18,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Control.UserInputValidate.*;
-
 /**
  * This is the main client class for the dungeon adventure game it contains
  * the game player that initiates and continues with the game until the player decides to quit.
@@ -117,7 +115,7 @@ public class DungeonAdventure {
             ConsoleOutput.printString("This room has: ");
             ConsoleOutput.printString(myRoom.showMyRoomInventory() + "\n");
 
-            HeroController.heroItemPicker(myRoom, theHero);
+            HeroController.itemPickUp(myRoom, theHero);
 
             //Checking if the hero is at the exit
             if (!isHeroAtExit(myRoom, theHero, theUserInput)){
@@ -134,7 +132,9 @@ public class DungeonAdventure {
                     myRoom.removeMyTypes(RoomType.PLAYER);
 
                     //Selecting Player's next move
-                    HeroController.playerSelectDirection(location, theDungeonSize, theHero);
+                    ArrayList<String> availableDirections = availableDirections(location, theDungeonSize);
+                    String heroHeading = UserInputValidate.heroDirectionHeading(theUserInput, availableDirections);
+                    HeroController.moveCharacter(theHero, heroHeading);
 
                 }
             }
@@ -142,28 +142,6 @@ public class DungeonAdventure {
         }
     }
 
-    public static void playerSelectDirection(final Point location, final int theDungeonSize, final Hero theHero) {
-        Scanner theUserInput = new Scanner(System.in);
-        ArrayList<String> availableDirections = availableDirections(location, theDungeonSize);
-        String direction = UserInputValidate.heroDirectionHeading(theUserInput, availableDirections);
-
-        if (direction.equals("k")){
-            // Print the legend for dungeon
-            ConsoleOutput.printString(RoomType.legend() + "\n");
-        } else if (direction.equals("n")){
-            theHero.translateCharacterY(-1);
-
-        } else if (direction.equals("s")){
-            theHero.translateCharacterY(1);
-
-        } else if (direction.equals("e")){
-            theHero.translateCharacterX(1);
-
-        } else if (direction.equals("w")){
-            theHero.translateCharacterX(-1);
-
-        }
-    }
 
 
     public static void checkHeroSatchel (final Hero theHero, final Dungeon theDungeon) {
@@ -224,57 +202,6 @@ public class DungeonAdventure {
     }
 
 
-    /**
-     * This method takes the items from the room inventory and deposits the items into the hero's inventory.
-     *
-     * @param theRoom (The room object)
-     * @param theHero (The hero object)
-     */
-    public static void heroItemPicker(final Room theRoom,
-                                      final Hero theHero) {
-
-
-        ArrayList<RoomType> deleteItems = new ArrayList<>();
-
-//There needs to be a way to move the item from the room to the hero's satchel.
-
-
-        //There is a chance that a single room will contain multiple items, so we use this structure.
-        for( Character theItem : theRoom.getMyRoomInventory()) {
-            if(RoomType.getMyPotions().contains(theItem)) {
-
-            }
-
-            if (theItem == RoomType.INHERITANCE.type){
-                theHero.addItem2Satchel(RoomType.INHERITANCE);
-                deleteItems.add(RoomType.INHERITANCE);
-                ConsoleOutput.printString("You have collected the Inheritance Pillar!\n");
-
-            } if (theItem == RoomType.ABSTRACTION.type){
-                theHero.addItem2Satchel(RoomType.ABSTRACTION);
-                deleteItems.add(RoomType.ABSTRACTION);
-                ConsoleOutput.printString("You have collected the Abstraction Pillar!\n");
-
-            } if (theItem == RoomType.POLYMORPHISM.type){
-                theHero.addItem2Satchel(RoomType.POLYMORPHISM);
-                deleteItems.add(RoomType.POLYMORPHISM);
-                ConsoleOutput.printString("You have collected the Polymorphism Pillar!\n");
-
-            } if (theItem == RoomType.ENCAPSULATION.type){
-                theHero.addItem2Satchel(RoomType.ENCAPSULATION);
-                deleteItems.add(RoomType.ENCAPSULATION);
-                ConsoleOutput.printString("You have collected the Encapsulation Pillar!\n");
-
-            } if (theItem == RoomType.HEALING.type){
-                theHero.addItem2Satchel(RoomType.HEALING);
-                deleteItems.add(RoomType.HEALING);
-                ConsoleOutput.printString("You have picked up the Healing Potion!\n");
-
-            } if (theItem == RoomType.VISION.type){
-                theHero.addItem2Satchel(RoomType.VISION);
-                deleteItems.add(RoomType.HEALING);
-                ConsoleOutput.printString("You have picked up the Vision Potion!\n");
-    }
 
 
 
