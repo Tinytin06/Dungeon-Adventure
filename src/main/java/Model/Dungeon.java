@@ -312,7 +312,6 @@ public class Dungeon {
      * This method sets the myCheatEnabled to true;
      */
     public void setMyCheatEnabled(){
-        System.out.println("Cheat has been enabled!");
         myCheatEnabled = true;
     }
 
