@@ -1,7 +1,6 @@
 /*
- * User Input validation -> Validating Directions, Validating Attack Choices, Validate Hero name, Validate Y&N
+ * User Input validation -> Validating Directions,
  *
- * HeroController -> playerSelectDirection, heroItemPicker,
  */
 
 
@@ -20,6 +19,8 @@ import View.ConsoleOutput;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static Control.UserInputValidate.*;
 
 /**
  * This is the main client class for the dungeon adventure game it contains
@@ -84,31 +85,7 @@ public class DungeonAdventure {
     }
 
 
-    /**
-     * This method is responsible for making sure the user inputs a name for the hero,
-     * this method is also performs input validation.
-     *
-     * @return String (The name of the hero)
-     */
-    public static String userNameValidator(final Scanner userInput) {
-        boolean correctAnswer = false;
-        String heroName = null;
 
-        while (!correctAnswer) {
-            ConsoleOutput.printString("Please enter a name for your hero: \n");
-            if (userInput.hasNextInt() || userInput.hasNextDouble()) {
-                ConsoleOutput.printString("Invalid input\n");
-                userInput.next();
-
-            } else {
-                heroName = userInput.next();
-                correctAnswer = true;
-
-            }
-        }
-        return heroName;
-
-    }
 
     /**
      * This is the driver method which makes sure that the player is alive and
@@ -142,7 +119,7 @@ public class DungeonAdventure {
             ConsoleOutput.printString("This room has: \n");
             ConsoleOutput.printString(myRoom.showMyRoomInventory() + "\n");
 
-            heroItemPicker(myRoom, theHero);
+            HeroController.heroItemPicker(myRoom, theHero);
 
             //Checking if the hero is at the exit
             if (!isHeroAtExit(myRoom, theHero, theUserInput)){
@@ -159,7 +136,7 @@ public class DungeonAdventure {
                     myRoom.removeMyTypes(RoomType.PLAYER);
 
                     //Selecting Player's next move
-                    playerSelectDirection(location, theDungeonSize, theHero);
+                    HeroController.playerSelectDirection(location, theDungeonSize, theHero);
 
                 }
             }
@@ -168,27 +145,6 @@ public class DungeonAdventure {
         }
     }
 
-    public static void playerSelectDirection(final Point location, final int theDungeonSize, final Hero theHero) {
-        Scanner theUserInput = new Scanner(System.in);
-        String direction = directionChecker(theUserInput, location, theDungeonSize);
-
-        if (direction.equals("k")){
-            // Print the legend for dungeon
-            ConsoleOutput.printString(RoomType.legend() + "\n");
-        } else if (direction.equals("n")){
-            theHero.translateCharacterY(-1);
-
-        } else if (direction.equals("s")){
-            theHero.translateCharacterY(1);
-
-        } else if (direction.equals("e")){
-            theHero.translateCharacterX(1);
-
-        } else if (direction.equals("w")){
-            theHero.translateCharacterX(-1);
-
-        }
-    }
 
 
     public static void checkHeroSatchel (final Hero theHero, final Dungeon theDungeon) {
@@ -248,99 +204,7 @@ public class DungeonAdventure {
         return false;
     }
 
-    /**
-     * This method asks the user for a yes or a no answer and insures the input is correct.
-     * @param theUserInput (Scanner)
-     * @return (Boolean YES or No)
-     */
-    public static boolean inputValidatorYN(final Scanner theUserInput) {
-        boolean correctAnswer = false;
-        String choice = null;
-        while (!correctAnswer) {
 
-            ConsoleOutput.printString("'y' for yes, 'n' for no: ");
-
-            if (theUserInput.hasNext()) {
-                choice = theUserInput.next();
-
-                if (choice.equals("n") || choice.equals("y")) {
-                    if (choice.equals("y")) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    ConsoleOutput.printString("Please select the correct response\n");
-
-                }
-            } else {
-                ConsoleOutput.invalidInput();
-                theUserInput.next();
-            }
-        }
-        return false;
-    }
-
-    /**
-     * This method takes the items from the room inventory and deposits the items into the hero's inventory.
-     *
-     * @param theRoom (The room object)
-     * @param theHero (The hero object)
-     */
-    public static void heroItemPicker(final Room theRoom,
-                                      final Hero theHero) {
-
-
-        ArrayList<RoomType> deleteItems = new ArrayList<>();
-
-//There needs to be a way to move the item from the room to the hero's satchel.
-
-
-        //There is a chance that a single room will contain multiple items, so we use this structure.
-        for( Character theItem : theRoom.getMyRoomInventory()) {
-            if(RoomType.getMyPotions().contains(theItem)) {
-
-            }
-
-
-            if (theItem == RoomType.INHERITANCE.type){
-                theHero.addItem2Satchel(RoomType.INHERITANCE);
-                deleteItems.add(RoomType.INHERITANCE);
-                ConsoleOutput.printString("You have collected the Inheritance Pillar!\n");
-
-            } if (theItem == RoomType.ABSTRACTION.type){
-                theHero.addItem2Satchel(RoomType.ABSTRACTION);
-                deleteItems.add(RoomType.ABSTRACTION);
-                ConsoleOutput.printString("You have collected the Abstraction Pillar!\n");
-
-            } if (theItem == RoomType.POLYMORPHISM.type){
-                theHero.addItem2Satchel(RoomType.POLYMORPHISM);
-                deleteItems.add(RoomType.POLYMORPHISM);
-                ConsoleOutput.printString("You have collected the Polymorphism Pillar!\n");
-
-            } if (theItem == RoomType.ENCAPSULATION.type){
-                theHero.addItem2Satchel(RoomType.ENCAPSULATION);
-                deleteItems.add(RoomType.ENCAPSULATION);
-                ConsoleOutput.printString("You have collected the Encapsulation Pillar!\n");
-
-            } if (theItem == RoomType.HEALING.type){
-                theHero.addItem2Satchel(RoomType.HEALING);
-                deleteItems.add(RoomType.HEALING);
-                ConsoleOutput.printString("You have picked up the Healing Potion!\n");
-
-            } if (theItem == RoomType.VISION.type){
-                theHero.addItem2Satchel(RoomType.VISION);
-                deleteItems.add(RoomType.HEALING);
-                ConsoleOutput.printString("You have picked up the Vision Potion!\n");
-
-            }
-        }
-
-        for(RoomType item : deleteItems) {
-            theRoom.removeMyTypes(item);
-        }
-
-    }
 
     /**
      * This method checks the room for monster and pits, if a monster is present
@@ -388,7 +252,7 @@ public class DungeonAdventure {
             ConsoleOutput.printString("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
 
             while(theHero.canAttack(theMonster)) {
-                int attackChoice = HeroController.GetChoiceCreator(theHero);
+                int attackChoice = UserInputValidate.GetChoiceCreator(theHero);
                 theHero.attacks(theMonster, attackChoice);
 
             }
@@ -405,54 +269,6 @@ public class DungeonAdventure {
         }
     }
 
-    /**
-     * This method takes in the user input and validates the direction that the user picks.
-     * @param userInput (Scanner)
-     * @param theLocation (The location of the player)
-     * @param theDungeonSize (The size of the dungeon)
-     * @return (Validated direction that a user can go into)
-     */
-    public static String directionChecker(final Scanner userInput,
-                                          final Point theLocation,
-                                          final int theDungeonSize){
-        String choices = "Please select your movement(n for North, s for South, e for East, w for West or k for Map Legend)";
-        ArrayList<String> choiceList = availableDirectionChoices(theLocation, theDungeonSize);
-        String direction = null;
-        boolean correctAnswer = false;
-
-        // Input Validation
-        while (!correctAnswer) {
-
-            ConsoleOutput.printString(choices + "\n");
-            ConsoleOutput.printString("These are your available moves " + choiceList + ": ");
-
-            if (userInput.hasNext()) {
-                direction = userInput.next();
-
-                if (direction.equals("n") || direction.equals("s") || direction.equals("w") || direction.equals("e") || direction.equals("k")) {
-                    if (direction.equals("k")){
-                        //When K is return to the main function, it prints the legend of the map
-                        return direction; // This needs to be checked
-
-                    }
-                    if (choiceList.contains(direction)){
-                        correctAnswer = true;
-
-                    }
-                } else {
-                    ConsoleOutput.printString("Please select the correct direction\n");
-
-                }
-
-            } else {
-                ConsoleOutput.printString("Invalid Input\n\n");
-                userInput.next();
-
-            }
-        }
-        return direction;
-
-    }
 
     /**
      * This method insures that the user's direction choice does not go out of bounds.
