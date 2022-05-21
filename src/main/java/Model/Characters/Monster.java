@@ -10,6 +10,7 @@ package Model.Characters;/*
  * @author Varun Parbhakar
  */
 public abstract class Monster extends DungeonCharacter implements Healable {
+
     private double myChance2Heal;
     private int myHeal_MinPoints;
     private int myHeal_MaxPoints;

@@ -14,6 +14,7 @@ import static Model.RoomType.*;
 public class Room {
     private HashSet<Character> myRoomInventory = new HashSet<>();
     private String myDisplayIcon = "? ";
+    private int myPillarCount;
 
 
     Room(final RoomType theType) {
@@ -71,10 +72,14 @@ public class Room {
                 theType == ABSTRACTION ||
                 theType == POLYMORPHISM||
                 theType == ENCAPSULATION) {
-
+            myPillarCount++;
             setMonster();
         }
         myRoomInventory.add(theType.type);
+    }
+
+    public boolean getHasPillar() {
+        return myPillarCount > 0;
     }
 
     /**

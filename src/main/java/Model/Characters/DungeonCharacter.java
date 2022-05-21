@@ -18,6 +18,8 @@ public abstract class DungeonCharacter {
 
     // Fields
     private String myCharacter_Name;
+
+
     private int myCharacter_HealthPoints;
     private int myCharacter_AttackSpeed;
     private int myCharacter_MinDamage;
