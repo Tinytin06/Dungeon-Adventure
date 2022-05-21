@@ -40,23 +40,23 @@ public class Thief extends Hero {
      * This is a overridden special attack method for this class.
      * @param enemy
      */
-    @Override
     protected String specialAttack(final DungeonCharacter enemy) {
         StringBuilder outputHelper = new StringBuilder();
-
+        outputHelper.append("\n");
         outputHelper.append(getCharacter_Name());
-        outputHelper.append(" tried to use the Zeus's Electro-Statico\n");
+        outputHelper.append(" russeled his bones \n");
         if (canUseSpecialAttack()) {
             int specialDamage = specialDamageGenerator();
-            outputHelper.append("\n and has zapped ");
+            outputHelper.append("and has hit ");
             outputHelper.append(enemy.getCharacter_Name());
-            outputHelper.append(" with ");
+            outputHelper.append(" with his spine ");
+            outputHelper.append(" and caused  ");
             outputHelper.append(specialDamage);
-            outputHelper.append(" electrons.");
+            outputHelper.append(" damage.\n");
 
             outputHelper.append(enemy.damageTaken(specialDamage));
         } else {
-            outputHelper.append("but Zeus said NO!, special attack has failed.\n");
+            outputHelper.append("but they failed to put them back together.\n");
         }
 
         return outputHelper.toString();

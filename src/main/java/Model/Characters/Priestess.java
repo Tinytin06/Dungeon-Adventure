@@ -45,18 +45,16 @@ public class Priestess extends Hero implements Healable{
         StringBuilder outputHelper = new StringBuilder();
 
         outputHelper.append(getCharacter_Name());
-        outputHelper.append(" tried to use the Zeus's Electro-Statico");
+        outputHelper.append(" initiated heal \n");
         if (canUseSpecialAttack()) {
-            int specialDamage = specialDamageGenerator();
-            outputHelper.append(" and has zapped ");
-            outputHelper.append(enemy.getCharacter_Name());
-            outputHelper.append(" with ");
-            outputHelper.append(specialDamage);
-            outputHelper.append(" electrons.");
+            //Method needs to updated so instead of causing damage she is going to
+            //heal herself.
+            //int specialDamage = specialDamageGenerator();
+            outputHelper.append(", the gods have blessed her with their healing magic.");
 
-            outputHelper.append(enemy.damageTaken(specialDamage));
+            //outputHelper.append(enemy.damageTaken(specialDamage));
         } else {
-            outputHelper.append("\nbut Zeus said NO!, special attack has failed.\n");
+            outputHelper.append("\nbut she forgot the spell.\n");
         }
 
         return outputHelper.toString();

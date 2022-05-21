@@ -29,37 +29,19 @@ public class DungeonAdventure {
      * @param args
      */
     public static void main(String[] args) {
-        //Testing
-//        for (int i = 0; i < 10; i++) {
-//            //Testing
-//            Hero myHero = new Warrior("Test_Hero");
-//            Monster myMonster = new Skeleton("Test_Monster");
-//            Dungeon theDungeon = new Dungeon(5);
-//            Room myRoom = new Room();
-//            myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
-//
-//            DungeonAdventure.initiateFight(myHero, myMonster, theDungeon, myRoom);
-//
-//        }
-        //Testing
+//        Testing
+        for (int i = 0; i < 10; i++) {
+            //Testing
+            Hero myHero = new Warrior("Test_Hero");
+            Monster myMonster = new Skeleton("Test_Monster");
+            Dungeon theDungeon = new Dungeon(5);
+            Room myRoom = new Room();
+            myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
 
+            DungeonAdventure.initiateFight(myHero, myMonster, theDungeon, myRoom);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+//        Testing
 
 
 
