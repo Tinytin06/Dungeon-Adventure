@@ -48,8 +48,8 @@ public class Priestess extends Hero implements Healable{
         outputHelper.append(" initiated heal \n");
         if (canUseSpecialAttack()) {
             //Method needs to updated so instead of causing damage she is going to
-            //heal herself.
-            //int specialDamage = specialDamageGenerator();
+            int healingPoints = specialDamageGenerator();
+            super.setMyCharacter_HealthPoints(healingPoints);
             outputHelper.append(", the gods have blessed her with their healing magic.");
 
             //outputHelper.append(enemy.damageTaken(specialDamage));
