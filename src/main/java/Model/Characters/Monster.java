@@ -9,7 +9,7 @@ package Model.Characters;/*
  * for all of the character that inherit from this Monster class.
  * @author Varun Parbhakar
  */
-public abstract class Monster extends DungeonCharacter {
+public abstract class Monster extends DungeonCharacter implements Healable {
     private double myChance2Heal;
     private int myHeal_MinPoints;
     private int myHeal_MaxPoints;
@@ -106,7 +106,7 @@ public abstract class Monster extends DungeonCharacter {
             } else {
                 outputHelper.append("\n");
                 outputHelper.append(getCharacter_Name());
-                outputHelper.append(" tried to heal themselves but failed");
+                outputHelper.append(" tried to heal themselves but failed.");
                 outputHelper.append("\n");
             }
 
@@ -122,17 +122,18 @@ public abstract class Monster extends DungeonCharacter {
      */
     @Override
     public String attacks(final DungeonCharacter theEnemy){
+        StringBuilder myReturn = new StringBuilder();
         myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
         if (myNumberOfAttacks == 0) {
             myNumberOfAttacks = 1;
         }
 
         while (myNumberOfAttacks > 0 && theEnemy.alive() ) {
-            super.attacks(theEnemy);
+            myReturn.append(super.attacks(theEnemy));
             myNumberOfAttacks--;
 
         }
-        return "";
+        return myReturn.toString();
     }
 
     // Validators

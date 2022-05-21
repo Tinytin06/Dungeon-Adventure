@@ -43,20 +43,20 @@ public class Warrior extends Hero {
     @Override
     protected String specialAttack(final DungeonCharacter enemy) {
         StringBuilder outputHelper = new StringBuilder();
-
+        outputHelper.append("\n");
         outputHelper.append(getCharacter_Name());
-        outputHelper.append(" tried to use the Zeus's Electro-Statico");
+        outputHelper.append(" tried to use the Zeus's Electro-Statico\n");
         if (canUseSpecialAttack()) {
             int specialDamage = specialDamageGenerator();
-            outputHelper.append(" and has zapped ");
+            outputHelper.append("and has zapped ");
             outputHelper.append(enemy.getCharacter_Name());
             outputHelper.append(" with ");
             outputHelper.append(specialDamage);
-            outputHelper.append(" electrons.");
+            outputHelper.append(" electrons.\n");
 
             outputHelper.append(enemy.damageTaken(specialDamage));
         } else {
-            outputHelper.append("\nbut Zeus said NO!, special attack has failed.\n");
+            outputHelper.append("but Zeus said NO!, special attack has failed.\n");
         }
 
         return outputHelper.toString();

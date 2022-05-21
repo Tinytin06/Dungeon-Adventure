@@ -29,6 +29,41 @@ public class DungeonAdventure {
      * @param args
      */
     public static void main(String[] args) {
+        //Testing
+//        for (int i = 0; i < 10; i++) {
+//            //Testing
+//            Hero myHero = new Warrior("Test_Hero");
+//            Monster myMonster = new Skeleton("Test_Monster");
+//            Dungeon theDungeon = new Dungeon(5);
+//            Room myRoom = new Room();
+//            myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
+//
+//            DungeonAdventure.initiateFight(myHero, myMonster, theDungeon, myRoom);
+//
+//        }
+        //Testing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Trying to fix the .class files
 
         Scanner userInput = new Scanner(System.in);
@@ -221,7 +256,7 @@ public class DungeonAdventure {
 
         if (theRoom.hasRoomType(RoomType.FIGHT)){
 
-            //SQL CODE GO HERE
+            //Make monster factory
 
             Monster monster = new Skeleton("Null Pointer");
             initiateFight(theHero, monster, theDungeon, theRoom);
@@ -254,7 +289,7 @@ public class DungeonAdventure {
 
             ConsoleOutput.printString(theMonster.attacks(theHero));
             roundCounter++;
-            ConsoleOutput.printString("END OF ROUND, PRESS ANY KEY TO CONTINUE");
+            ConsoleOutput.printString("\nEND OF ROUND, PRESS ANY KEY TO CONTINUE");
             theUserInput.nextLine();
 
         } if (!theMonster.alive()){

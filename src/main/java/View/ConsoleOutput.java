@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ConsoleOutput {
 
     public static void choicePrinter(Hero myHero){
-        String choices = (myHero.getCharacter_Name() + " select your attack:" +
+        String choices = ("\n" + myHero.getCharacter_Name() + " select your attack:" +
                 "\n1: Special Attack" +
                 "\n2: Normal Attack" +
                 "\n3: Run Away");

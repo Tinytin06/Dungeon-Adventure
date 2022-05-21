@@ -8,6 +8,7 @@ package Model.Characters;/*
  * This is a subclass of Monster.
  * @author Varun Parbhakar
  */
+
 public class Skeleton extends Monster {
 
     /**

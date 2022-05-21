@@ -8,7 +8,7 @@ package Model.Characters;/*
  * This is a subclass of Hero
  * @author Varun Parbhakar
  */
-public class Priestess extends Hero {
+public class Priestess extends Hero implements Healable{
 
     /**
      * This constructor initializes all of the values

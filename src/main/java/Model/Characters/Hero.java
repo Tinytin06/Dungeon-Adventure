@@ -50,6 +50,8 @@ public abstract class Hero extends DungeonCharacter {
      * @param theC_SpecialSkill_MinDamage (Minimum Damage for Special Attack)
      * @param theC_SpecialSkill_MaxDamage (Maximum Damage for Special Attack)
      */
+
+    //Make them final
     protected Hero(String theC_Name,
                    int theC_Health,
                    int theC_AttackSpeed,
@@ -72,6 +74,7 @@ public abstract class Hero extends DungeonCharacter {
 
         chance2Block_Validator(theC_Chance2Block);
         specialSkill_Chance_Validator(theC_SpecialSkill_Chance);
+
         if (sSkillDamageRangeValidator(theC_SpecialSkill_MinDamage, theC_SpecialSkill_MaxDamage)) {
             specialSkill_MinDamage_Validator(theC_SpecialSkill_MinDamage);
             specialSkill_MaxDamage_Validator(theC_SpecialSkill_MaxDamage);

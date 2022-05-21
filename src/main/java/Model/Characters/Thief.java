@@ -45,10 +45,10 @@ public class Thief extends Hero {
         StringBuilder outputHelper = new StringBuilder();
 
         outputHelper.append(getCharacter_Name());
-        outputHelper.append(" tried to use the Zeus's Electro-Statico");
+        outputHelper.append(" tried to use the Zeus's Electro-Statico\n");
         if (canUseSpecialAttack()) {
             int specialDamage = specialDamageGenerator();
-            outputHelper.append(" and has zapped ");
+            outputHelper.append("\n and has zapped ");
             outputHelper.append(enemy.getCharacter_Name());
             outputHelper.append(" with ");
             outputHelper.append(specialDamage);
@@ -56,7 +56,7 @@ public class Thief extends Hero {
 
             outputHelper.append(enemy.damageTaken(specialDamage));
         } else {
-            outputHelper.append("\nbut Zeus said NO!, special attack has failed.\n");
+            outputHelper.append("but Zeus said NO!, special attack has failed.\n");
         }
 
         return outputHelper.toString();

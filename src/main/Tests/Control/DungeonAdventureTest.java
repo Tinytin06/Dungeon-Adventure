@@ -1,7 +1,6 @@
 package Control;
 
-import Model.Characters.Hero;
-import Model.Characters.Warrior;
+import Model.Characters.*;
 
 import Model.*;
 import org.junit.jupiter.api.Test;
@@ -21,6 +20,23 @@ public class DungeonAdventureTest {
 //        testHero.setCharacterLocation(testDungeon.getEntrancePoint());
 //        DungeonAdventure.driver(theUserInput,testHero,theDungeonSize,testDungeon);
 //        DungeonAdventure.driver(theUserInput,testHero,theDungeonSize,testDungeon);
+//
+//    }
+
+    /**
+     * Testing for how the attack log is printed for the monster.
+     */
+//    @Test
+//    void initiateFightTest1() {
+//        Hero myHero = new Warrior("Test_Hero");
+//        Monster myMonster = new Skeleton("Test_Monster");
+//        Dungeon myDungeon = new Dungeon(5);
+//        Room myRoom = new Room();
+//        myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
+//
+//        DungeonAdventure.initiateFight(myHero, myMonster, myDungeon, myRoom);
+//
+//
 //
 //    }
 }
