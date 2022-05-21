@@ -1,9 +1,12 @@
-package Model.Characters;/*
+package Model.Characters.Monsters;/*
  * Varun Parbhakar
  *
  * TCSS-143
  * Heroes VS Monster (Dungeon DLC)
  */
+
+import Model.Characters.Monster;
+
 /**
  * This is a subclass of Monster.
  * @author Varun Parbhakar

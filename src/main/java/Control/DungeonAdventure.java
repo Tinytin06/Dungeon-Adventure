@@ -6,8 +6,8 @@
 package Control;
 import Model.Characters.Hero;
 import Model.Characters.Monster;
-import Model.Characters.Skeleton;
-import Model.Characters.Warrior;
+import Model.Characters.Monsters.Skeleton;
+import Model.Characters.Heroes.Warrior;
 import Model.Dungeon;
 import Model.Room;
 import Model.RoomType;
@@ -239,6 +239,9 @@ public class DungeonAdventure {
         if (theRoom.hasRoomType(RoomType.FIGHT)){
 
             //Make monster factory
+            //If hero is at exit then jourmunganda
+            //if contains pillars then guard
+            //Otherwise normal monster
 
             Monster monster = new Skeleton("Null Pointer");
             initiateFight(theHero, monster, theDungeon, theRoom);

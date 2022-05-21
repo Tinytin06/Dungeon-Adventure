@@ -1,14 +1,19 @@
-package Model.Characters;/*
+package Model.Characters.Heroes;/*
  * Varun Parbhakar
  *
  * TCSS-143
  * Heroes VS Monster (Dungeon DLC)
  */
+
+import Model.Characters.DungeonCharacter;
+import Model.Characters.Healable;
+import Model.Characters.Hero;
+
 /**
  * This is a subclass of Hero
  * @author Varun Parbhakar
  */
-public class Warrior extends Hero {
+public class Priestess extends Hero implements Healable {
 
     /**
      * This constructor initializes all of the values
@@ -19,15 +24,15 @@ public class Warrior extends Hero {
 
     //Ask him why does compile fail when this class is set to protected level
     //despite it being imported into the dungeon class.
-    public Warrior(final String theC_Name) {
+    public Priestess(final String theC_Name) {
 
         super(  theC_Name,
-                125,
-                4,
-                35,
-                60,
-                .8,
-                .2,
+                75,
+                5,
+                25,
+                45,
+                .7,
+                .3,
                 .40,
                 75,
                 175,
@@ -43,20 +48,18 @@ public class Warrior extends Hero {
     @Override
     protected String specialAttack(final DungeonCharacter enemy) {
         StringBuilder outputHelper = new StringBuilder();
-        outputHelper.append("\n");
-        outputHelper.append(getCharacter_Name());
-        outputHelper.append(" tried to use the Zeus's Electro-Statico\n");
-        if (canUseSpecialAttack()) {
-            int specialDamage = specialDamageGenerator();
-            outputHelper.append("and has zapped ");
-            outputHelper.append(enemy.getCharacter_Name());
-            outputHelper.append(" with ");
-            outputHelper.append(specialDamage);
-            outputHelper.append(" electrons.\n");
 
-            outputHelper.append(enemy.damageTaken(specialDamage));
+        outputHelper.append(getCharacter_Name());
+        outputHelper.append(" initiated heal \n");
+        if (canUseSpecialAttack()) {
+            //Method needs to updated so instead of causing damage she is going to
+            int healingPoints = specialDamageGenerator();
+            super.setMyCharacter_HealthPoints(healingPoints);
+            outputHelper.append(", the gods have blessed her with their healing magic.");
+
+            //outputHelper.append(enemy.damageTaken(specialDamage));
         } else {
-            outputHelper.append("but Zeus said NO!, special attack has failed.\n");
+            outputHelper.append("\nbut she forgot the spell.\n");
         }
 
         return outputHelper.toString();

@@ -1,14 +1,18 @@
-package Model.Characters;/*
+package Model.Characters.Heroes;/*
  * Varun Parbhakar
  *
  * TCSS-143
  * Heroes VS Monster (Dungeon DLC)
  */
+
+import Model.Characters.DungeonCharacter;
+import Model.Characters.Hero;
+
 /**
  * This is a subclass of Hero
  * @author Varun Parbhakar
  */
-public class Priestess extends Hero implements Healable{
+public class Thief extends Hero {
 
     /**
      * This constructor initializes all of the values
@@ -19,15 +23,15 @@ public class Priestess extends Hero implements Healable{
 
     //Ask him why does compile fail when this class is set to protected level
     //despite it being imported into the dungeon class.
-    public Priestess(final String theC_Name) {
+    public Thief(final String theC_Name) {
 
         super(  theC_Name,
                 75,
-                5,
-                25,
-                45,
-                .7,
-                .3,
+                6,
+                20,
+                40,
+                .8,
+                .4,
                 .40,
                 75,
                 175,
@@ -40,21 +44,23 @@ public class Priestess extends Hero implements Healable{
      * This is a overridden special attack method for this class.
      * @param enemy
      */
-    @Override
     protected String specialAttack(final DungeonCharacter enemy) {
         StringBuilder outputHelper = new StringBuilder();
-
+        outputHelper.append("\n");
         outputHelper.append(getCharacter_Name());
-        outputHelper.append(" initiated heal \n");
+        outputHelper.append(" russeled his bones \n");
         if (canUseSpecialAttack()) {
-            //Method needs to updated so instead of causing damage she is going to
-            int healingPoints = specialDamageGenerator();
-            super.setMyCharacter_HealthPoints(healingPoints);
-            outputHelper.append(", the gods have blessed her with their healing magic.");
+            int specialDamage = specialDamageGenerator();
+            outputHelper.append("and has hit ");
+            outputHelper.append(enemy.getCharacter_Name());
+            outputHelper.append(" with his spine ");
+            outputHelper.append(" and caused  ");
+            outputHelper.append(specialDamage);
+            outputHelper.append(" damage.\n");
 
-            //outputHelper.append(enemy.damageTaken(specialDamage));
+            outputHelper.append(enemy.damageTaken(specialDamage));
         } else {
-            outputHelper.append("\nbut she forgot the spell.\n");
+            outputHelper.append("but they failed to put them back together.\n");
         }
 
         return outputHelper.toString();
