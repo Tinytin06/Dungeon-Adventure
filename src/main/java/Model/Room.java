@@ -122,46 +122,56 @@ public class Room {
      */
     public void exploreTheRoom() {
 
-            if (myRoomInventory.contains(ENTRANCE.type) ||
-                    myRoomInventory.contains(EXIT.type) ||
-                    myRoomInventory.contains(INHERITANCE.type) ||
-                    myRoomInventory.contains(POLYMORPHISM.type) ||
-                    myRoomInventory.contains(ENCAPSULATION.type) ||
-                    myRoomInventory.contains(ABSTRACTION.type)) {
+        if (myRoomInventory.contains(ENTRANCE.type) ||
+                myRoomInventory.contains(EXIT.type)) {
+            if (myRoomInventory.contains(ENTRANCE.type)) {
+                setMyDisplayIcon(ENTRANCE.type + " ");
+                return;
+            }
+            if (myRoomInventory.contains(EXIT.type)) {
+                setMyDisplayIcon(EXIT.type + " ");
+                return;
+            }
 
-                if (myRoomInventory.contains(ENTRANCE.type)) {
-                    setMyDisplayIcon(ENTRANCE.type + " ");
-                    return;
+        } else if(myRoomInventory.contains(INHERITANCE.type) ||
+                myRoomInventory.contains(POLYMORPHISM.type) ||
+                myRoomInventory.contains(ENCAPSULATION.type) ||
+                myRoomInventory.contains(ABSTRACTION.type)){
+            int pillarCounter = 0;
+            for (RoomType roomTypes : RoomType.getMYPillars()) {
+                if (myRoomInventory.contains(roomTypes.type)) {
+                    pillarCounter++;
                 }
-                if (myRoomInventory.contains(EXIT.type)) {
-                    setMyDisplayIcon(EXIT.type + " ");
-                    return;
-                }
+            }
+            if (pillarCounter > 1) {
+                setMyDisplayIcon("M ");
+            } else {
                 if (myRoomInventory.contains(INHERITANCE.type)) {
                     setMyDisplayIcon(INHERITANCE.type + " ");
                     return;
                 }
-                if (myRoomInventory.contains(ABSTRACTION.type)){
+                if (myRoomInventory.contains(ABSTRACTION.type)) {
                     setMyDisplayIcon(ABSTRACTION.type + " ");
                     return;
                 }
-                if (myRoomInventory.contains(ENCAPSULATION.type)){
+                if (myRoomInventory.contains(ENCAPSULATION.type)) {
                     setMyDisplayIcon(ENCAPSULATION.type + " ");
                     return;
                 }
-                if (myRoomInventory.contains(POLYMORPHISM.type)){
+                if (myRoomInventory.contains(POLYMORPHISM.type)) {
                     setMyDisplayIcon(POLYMORPHISM.type + " ");
                     return;
                 }
-            } else if (myRoomInventory.size() == 1) {
-                for (RoomType roomTypes : RoomType.values()) {
-                    if (myRoomInventory.contains(roomTypes.type)) {
-                        setMyDisplayIcon(roomTypes.type + " ");
-                    }
-                }
-            } else if (myRoomInventory.size() > 1) {
-                setMyDisplayIcon("M ");
             }
+        }else if (myRoomInventory.size() == 1) {
+            for (RoomType roomTypes : RoomType.values()) {
+                if (myRoomInventory.contains(roomTypes.type)) {
+                    setMyDisplayIcon(roomTypes.type + " ");
+                }
+            }
+        } else if (myRoomInventory.size() > 1) {
+            setMyDisplayIcon("M ");
+        }
 
     }
 
