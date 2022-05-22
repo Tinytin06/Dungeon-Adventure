@@ -1,8 +1,8 @@
 /*
+ * Multiple pillars are being spwaned in a single room, FIX it so that only 1 pilar spawns at a time.
  *
- * HeroController -> playerSelectDirection, heroItemPicker,
+ * Fix the SQL
  */
-
 package Control;
 import Model.Characters.Hero;
 import Model.Characters.Monster;
