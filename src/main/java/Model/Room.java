@@ -95,6 +95,12 @@ public class Room {
      * @param theType
      */
     public void removeMyTypes(RoomType theType){
+        if(theType == INHERITANCE ||
+                theType == ABSTRACTION ||
+                theType == POLYMORPHISM||
+                theType == ENCAPSULATION) {
+            myPillarCount--;
+        }
         myRoomInventory.remove(theType.type);
     }
 

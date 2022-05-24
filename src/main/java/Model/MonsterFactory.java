@@ -4,6 +4,8 @@ import Model.Characters.Monsters.DungeonMonster;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class MonsterFactory {
     private SQLiteDataSource ds = null;

@@ -244,7 +244,16 @@ public class DungeonAdventure {
             //if contains pillars then guard
             //Otherwise normal monster
 
-            Monster monster = new Skeleton("Null Pointer");
+            MonsterFactory monsterFactory = new MonsterFactory();
+            Monster monster;
+            if(theRoom.getHasPillar()){
+                monster = monsterFactory.getRandomGuardMonster();
+            } else if(theRoom.hasRoomType(RoomType.EXIT)){
+                monster = monsterFactory.getRandomBossMonster();
+            } else {
+                monster = monsterFactory.getRandomNormalMonster();
+            }
+
             initiateFight(theHero, monster, theDungeon, theRoom);
         }
 
@@ -263,12 +272,12 @@ public class DungeonAdventure {
         Scanner theUserInput = new Scanner(System.in);
         int roundCounter = 1;
 
+
         while (theHero.alive() && theMonster.alive()) {
             ConsoleOutput.printString("\t\t\t Round: " + roundCounter + "\n");
             ConsoleOutput.printString("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
 
             while(theHero.canAttack(theMonster)) {
-
                 int attackChoice = UserInputValidate.attackChoice(theHero);
                 ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
             }
