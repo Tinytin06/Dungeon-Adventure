@@ -6,7 +6,6 @@
 package Control;
 import Model.Characters.Hero;
 import Model.Characters.Monster;
-import Model.Characters.Monsters.Skeleton;
 import Model.Characters.Heroes.Warrior;
 import Model.Dungeon;
 import Model.MonsterFactory;
@@ -16,7 +15,6 @@ import View.ConsoleOutput;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +22,6 @@ import java.util.*;
 
 
 import java.awt.*;
-import java.util.stream.Collectors;
 
 /**
  * This is the main client class for the dungeon adventure game it contains
@@ -68,14 +65,14 @@ public class DungeonAdventure implements Serializable {
             Hero hero = new Warrior("name");
             int myDungeonSize = 5;
             Dungeon myDungeon = new Dungeon(myDungeonSize);
-
-
+            myDungeon.setMyCheatEnabled();
+            myDungeon.revealAll();
         System.out.println(myDungeon);
         System.out.println(hero);
 
 
             try {
-                saveClass("may-30", myDungeon , hero);
+                saveGame("may-30", myDungeon , hero);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -94,7 +91,7 @@ public class DungeonAdventure implements Serializable {
         if(userPick >= 0 && userPick < allSaves.length) {
             FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
             ObjectInputStream in = new ObjectInputStream(file);
-
+            //System.out.println(in.readObject());
             hero = (Warrior) in.readObject();
 
 
@@ -104,7 +101,7 @@ public class DungeonAdventure implements Serializable {
             myDungeon = (Dungeon) in.readObject();
         }
 
-
+        myDungeon.revealAll();
         System.out.println(myDungeon);
         System.out.println(hero);
 
@@ -190,7 +187,7 @@ public class DungeonAdventure implements Serializable {
         return files;
     }
 
-    public static void saveClass(String theSaveName, Dungeon theDungeon, Hero theHero) throws IOException {
+    public static void saveGame(String theSaveName, Dungeon theDungeon, Hero theHero) throws IOException {
         if(theSaveName.equals("")){
             Date date = Calendar.getInstance().getTime();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");

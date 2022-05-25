@@ -58,6 +58,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      * @param theC_SpecialSkill_MaxDamage (Maximum Damage for Special Attack)
      */
 
+
     //Make them final
     protected Hero(String theC_Name,
                    int theC_Health,
@@ -98,6 +99,9 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         myPillarPieces = 0;
 
 
+    }
+    public Hero(){
+        super("",0,0,0,0,0);
     }
 
 

@@ -4,6 +4,8 @@ package Model.Characters;/*
  * TCSS-143
  * Heroes VS Monster (Dungeon DLC)
  */
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Random;
 import java.util.Scanner;
 /**
@@ -11,10 +13,12 @@ import java.util.Scanner;
  * this class contains the very basic attributes of a Dungeon Character.
  * @author Varun Parbhakar
  */
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Serializable {
     // Scanner and Random number generator for all the subclasses.
     public final static Scanner userInput = new Scanner(System.in);
     protected final static Random randomGen = new Random();
+    @Serial
+    private static final long serialVersionUID = 8276876816569082427L;
 
     // Fields
     private String myCharacter_Name;
