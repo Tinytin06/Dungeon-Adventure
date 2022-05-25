@@ -9,6 +9,7 @@ package Model.Characters;/*
 import Model.RoomType;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +17,9 @@ import java.util.ArrayList;
  * for all of the character that inherit from this hero class.
  * @author Varun Parbhakar
  */
-public abstract class Hero extends DungeonCharacter {
+public abstract class Hero extends DungeonCharacter implements Serializable {
+    private static final long serialversionUID = 249081233L;
+
     private double myChance2Block;
     private double mySpecialSkillChance;
     private int mySpecialSkill_MinDamage;
@@ -33,8 +36,8 @@ public abstract class Hero extends DungeonCharacter {
 
     private int myPillarPieces;
 
-    private static final int SPECIAL_ATTACK = 1;
-    private static final int NORMAL_ATTACK = 2;
+    private final int SPECIAL_ATTACK = 1;
+    private final int NORMAL_ATTACK = 2;
 
     /**
      * This abstract method initializes the values for all for

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -20,7 +21,10 @@ import java.util.Scanner;
  * @author Varun Parbhakar
  * @editor Austin Luu
  */
-public class Dungeon {
+public class Dungeon implements Serializable {
+    private static final long serialversionUID = 2291234122L;
+
+
     private int myDungeonSize;
     private ArrayList<ArrayList<Room>> myDungeon;
     private boolean myCheatEnabled;
@@ -187,6 +191,7 @@ public class Dungeon {
 
         }
     }
+
     public boolean pillarSetterHelper(final ArrayList<ArrayList<Room>> theDungeon, final RoomType theRoomType) {
         Random rand = new Random();
         Room roomSetter;
@@ -195,7 +200,7 @@ public class Dungeon {
         roomSetter = theDungeon.get(rand.nextInt(myDungeonSize)).get(rand.nextInt(myDungeonSize));
         //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
             if (!roomSetter.hasRoomType(RoomType.ENTRANCE) && //Does it already have the Entrance?
-                !roomSetter.hasRoomType(RoomType.EXIT)) { //Does it already have an exit?
+                !roomSetter.hasRoomType(RoomType.EXIT)  ) { //Does it already have an exit?
 
                 roomSetter.addTo_MyRoomInventory(theRoomType);
                 return true;

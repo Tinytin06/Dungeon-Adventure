@@ -257,6 +257,7 @@ public abstract class DungeonCharacter {
      * @param enemy (The enemy player)
      */
     protected String attacks(final DungeonCharacter enemy) {
+        System.out.println("a");
         if (enemy == null) {
             throw new IllegalArgumentException("The passed enemy is set to null");
         }
@@ -279,11 +280,9 @@ public abstract class DungeonCharacter {
                 outputHelper.append(enemy.getCharacter_Name());
                 outputHelper.append(" but missed\n");
             }
-
-            return outputHelper.toString();
         }
 
-        return "";
+        return outputHelper.toString();
     }
 
 //NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD

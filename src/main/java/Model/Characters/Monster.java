@@ -123,11 +123,14 @@ public abstract class Monster extends DungeonCharacter implements Healable {
      */
     @Override
     public String attacks(final DungeonCharacter theEnemy){
+        System.out.println("yo");
         StringBuilder myReturn = new StringBuilder();
         myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
         if (myNumberOfAttacks == 0) {
             myNumberOfAttacks = 1;
         }
+        System.out.println("yo");
+
 
         while (myNumberOfAttacks > 0 && theEnemy.alive() ) {
             myReturn.append(super.attacks(theEnemy));

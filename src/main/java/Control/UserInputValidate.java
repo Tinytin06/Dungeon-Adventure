@@ -147,5 +147,21 @@ public class UserInputValidate {
         }
         return selection;
     }
+
+    public static boolean saveGame(final Scanner userInput){
+        ConsoleOutput.printString("Would you like to save your game? (y for yes or any other key for no.)");
+        return userInput.next().equals("y");
+    }
+
+//    public static boolean loadGame(final Scanner userInput){
+//        ConsoleOutput.printString("Would you like to load your saved games? (y for yes or any other key for no.)");
+//        if(userInput.next().equals("y")){
+//
+//
+//        } else{
+//
+//        }
+//
+//    }
 }
 //END

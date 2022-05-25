@@ -4,6 +4,7 @@ package Model;
 
 import Model.Characters.Monster;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import static Model.RoomType.*;
 /**
@@ -11,7 +12,11 @@ import static Model.RoomType.*;
  * @author Varun Parbhakar
  * @editor Austin Luu
  */
-public class Room {
+public class Room implements Serializable {
+    private static final long serialversionUID = 2291551312L;
+
+
+
     private HashSet<Character> myRoomInventory = new HashSet<>();
     private String myDisplayIcon = "? ";
     private int myPillarCount;

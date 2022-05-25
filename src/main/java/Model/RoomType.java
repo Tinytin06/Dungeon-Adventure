@@ -65,6 +65,6 @@ public enum RoomType {
 //                legend.append("H: Healing, ");
         }
         return legend.toString() + ".";
-
     }
+
 }

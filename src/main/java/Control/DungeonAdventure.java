@@ -14,10 +14,23 @@ import Model.Room;
 import Model.RoomType;
 import View.ConsoleOutput;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 import java.awt.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * This is the main client class for the dungeon adventure game it contains
@@ -49,56 +62,124 @@ public class DungeonAdventure {
 
         //Trying to fix the .class files
 
+
         Scanner userInput = new Scanner(System.in);
-        ConsoleOutput.introduction();
-        if(UserInputValidate.getYN(userInput)) {
-            boolean playAgain = false;
-            while(!playAgain) {
-                String name = UserInputValidate.heroName(userInput);
 
-                Hero hero = new Warrior(name);
-                int myDungeonSize = 5;
-                Dungeon myDungeon = new Dungeon(myDungeonSize);
+//        if(UserInputValidate.saveGame(userInput)){
 
+            Hero hero = new Warrior("name");
+            int myDungeonSize = 5;
+            Dungeon myDungeon = new Dungeon(myDungeonSize);
 
-                //Placing the hero into the dungeon entrance
-                hero.setCharacterLocation(myDungeon.getEntrancePoint());
-
-                // These are the names needs to be used in order to activate the cheat
-                // I dont have a method in the Dungeon Adventure for revealing all of the
-                // room, I thought that it better fit for the Dungeon class to have that kind of power.
-                if (name.equals("Varun") || name.equals("Bryce")) {
-                    myDungeon.setMyCheatEnabled();
-
-                }
-                myDungeon.setMyCheatEnabled();//testing purposes
-                System.out.println("CHEATS ARE ACTIVE __ TESTING");
-
-                while(hero.alive()) {
-                    gameDriver(userInput, hero, myDungeonSize, myDungeon);
-
-                }
-                ConsoleOutput.printString("\nThis is the dungeon fully revealed\n");
-
-                myDungeon.revealAll();
-
-                ConsoleOutput.printString(myDungeon + "\n");
-                ConsoleOutput.printString("\nWould you like to play again?\n");
-
-                if (!UserInputValidate.getYN(userInput)) {
-                    playAgain = true;
-
-                } else {
-                    ConsoleOutput.printString("Thank you for playing!");
-
-                }
+            try {
+                saveClass("may-25", myDungeon , hero);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } else {
-            ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
+//        }
 
+        /*
+            - save
+                -imalmostdone
+                    -hero.bin
+                    -dun.bin
+                -may-25-2020
+                    -hero
+                    -dun
+                -ase
+         */
+//        ConsoleOutput.introduction();
+//        if(UserInputValidate.getYN(userInput)) {
+//            boolean playAgain = false;
+//            while(!playAgain) {
+//                String name = UserInputValidate.heroName(userInput);
+//
+//                Hero hero = new Warrior(name);
+//                int myDungeonSize = 5;
+//                Dungeon myDungeon = new Dungeon(myDungeonSize);
+//
+//
+//                //Placing the hero into the dungeon entrance
+//                hero.setCharacterLocation(myDungeon.getEntrancePoint());
+//
+//                // These are the names needs to be used in order to activate the cheat
+//                // I dont have a method in the Dungeon Adventure for revealing all of the
+//                // room, I thought that it better fit for the Dungeon class to have that kind of power.
+//                if (name.equals("Varun") || name.equals("Bryce")) {
+//                    myDungeon.setMyCheatEnabled();
+//
+//                }
+//                myDungeon.setMyCheatEnabled();//testing purposes
+//                System.out.println("CHEATS ARE ACTIVE __ TESTING");
+//
+//                while(hero.alive()) {
+//                    gameDriver(userInput, hero, myDungeonSize, myDungeon);
+//
+//                }
+//                ConsoleOutput.printString("\nThis is the dungeon fully revealed\n");
+//
+//                myDungeon.revealAll();
+//
+//                ConsoleOutput.printString(myDungeon + "\n");
+//                ConsoleOutput.printString("\nWould you like to play again?\n");
+//
+//                if (!UserInputValidate.getYN(userInput)) {
+//                    playAgain = true;
+//
+//                } else {
+//                    ConsoleOutput.printString("Thank you for playing!");
+//
+//                }
+//            }
+//        } else {
+//            ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
+//
+//        }
+    }
+
+
+    private static void sortAll(String dirName) {
+        File directory = new File(dirName);
+
+        File[] filesArray = directory.listFiles();
+
+        //sort all files
+
+        //print the sorted values
+        for (File file : filesArray) {
+            if (file.isFile()) {
+                System.out.println("File : " + file.getName());
+            } else if (file.isDirectory()) {
+                System.out.println("Directory : " + file.getName());
+            } else {
+                System.out.println("Unknown : " + file.getName());
+            }
         }
     }
 
+    public static void loadGame(){
+
+    }
+
+    public static void saveClass(String theSaveName, Dungeon theDungeon, Hero theHero) throws IOException {
+        if(theSaveName.equals("")){
+            Date date = Calendar.getInstance().getTime();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+            theSaveName = dateFormat.format(date);
+        }
+
+        FileOutputStream file = new FileOutputStream("./Saves");
+        ObjectOutputStream out = new ObjectOutputStream(file);
+        out.writeObject(theDungeon);
+
+
+//        file = new FileOutputStream("./Saves");
+//        out = new ObjectOutputStream(file);
+//        out.writeObject(theHero);
+
+        out.close();
+        file.close();
+    }
 
 
     /**
@@ -279,10 +360,11 @@ public class DungeonAdventure {
             theHero.resetAttackSpeed(theMonster);
             while(theHero.canAttack(theMonster)) {
                 int attackChoice = UserInputValidate.attackChoice(theHero);
-                ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
+//                ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
+                ConsoleOutput.printString(theMonster.attacks(theHero));
             }
 
-            ConsoleOutput.printString(theMonster.attacks(theHero));
+//            ConsoleOutput.printString(theMonster.attacks(theHero));
             roundCounter++;
             ConsoleOutput.printString("\nEND OF ROUND, PRESS ANY KEY TO CONTINUE");
             theUserInput.nextLine();
