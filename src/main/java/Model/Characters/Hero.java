@@ -9,6 +9,7 @@ package Model.Characters;/*
 import Model.RoomType;
 
 import java.awt.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -18,7 +19,10 @@ import java.util.ArrayList;
  * @author Varun Parbhakar
  */
 public abstract class Hero extends DungeonCharacter implements Serializable {
-    private static final long serialversionUID = 249081233L;
+
+
+    @Serial
+    private static final long serialVersionUID = -3591781281869975096L;
 
     private double myChance2Block;
     private double mySpecialSkillChance;

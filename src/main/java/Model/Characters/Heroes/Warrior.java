@@ -8,6 +8,7 @@ package Model.Characters.Heroes;/*
 import Model.Characters.DungeonCharacter;
 import Model.Characters.Hero;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,6 +16,10 @@ import java.io.Serializable;
  * @author Varun Parbhakar
  */
 public class Warrior extends Hero implements Serializable {
+
+
+    @Serial
+    private static final long serialVersionUID = -7581078960929808165L;
 
     /**
      * This constructor initializes all of the values

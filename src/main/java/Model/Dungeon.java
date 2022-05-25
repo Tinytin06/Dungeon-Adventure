@@ -10,6 +10,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -22,6 +23,8 @@ import java.util.Scanner;
  * @editor Austin Luu
  */
 public class Dungeon implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -6822445562500087830L;
 //    private static final long serialversionUID = 2291234122L;
 
 

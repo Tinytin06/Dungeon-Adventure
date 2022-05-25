@@ -32,6 +32,8 @@ import java.util.stream.Collectors;
  * @author Varun Parbhakar
  */
 public class DungeonAdventure implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 5586613526209979670L;
 //    private static final long serialversionUID =
 //            1493124918L;
     /**
@@ -67,16 +69,17 @@ public class DungeonAdventure implements Serializable {
             int myDungeonSize = 5;
             Dungeon myDungeon = new Dungeon(myDungeonSize);
 
-//
-//        System.out.println(myDungeon);
-//        System.out.println(hero);
-//
-//
-////            try {
-////                saveClass("may-30", myDungeon , hero);
-////            } catch (IOException e) {
-////                e.printStackTrace();
-////            }
+
+        System.out.println(myDungeon);
+        System.out.println(hero);
+
+
+            try {
+                saveClass("may-30", myDungeon , hero);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
         myDungeon=null;
         hero=null;
@@ -86,13 +89,13 @@ public class DungeonAdventure implements Serializable {
 
 
         File[] allSaves = loadGame();
-        int userPick = 0;
+        int userPick = 1;
 //        int userPick = userInput.nextInt();
         if(userPick >= 0 && userPick < allSaves.length) {
             FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
             ObjectInputStream in = new ObjectInputStream(file);
 
-            hero = (Hero) in.readObject();
+            hero = (Warrior) in.readObject();
 
 
             file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
@@ -171,7 +174,7 @@ public class DungeonAdventure implements Serializable {
 
 
     public static File[] loadGame(){
-        File dir = new File("./src/main/java/Saves");
+        File dir = new File("./main/java/Saves");
         File[] files = dir.listFiles();
 
 
@@ -193,7 +196,7 @@ public class DungeonAdventure implements Serializable {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             theSaveName = dateFormat.format(date);
         }
-        String fileDirectory = "./src/main/java/Saves/" + theSaveName;
+        String fileDirectory = "./main/java/Saves/" + theSaveName;
 
         if(!Files.exists(Paths.get(fileDirectory))){
             Files.createDirectories(Paths.get(fileDirectory));
