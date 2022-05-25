@@ -148,6 +148,7 @@ public abstract class Hero extends DungeonCharacter {
      * @param theEnemy (The enemy player)
      */
     public String attacks(final DungeonCharacter theEnemy, final int attackChoice) {
+
         if(theEnemy == null) {
             throw new IllegalArgumentException("The passed enemy is set to null");
         }
@@ -170,18 +171,18 @@ public abstract class Hero extends DungeonCharacter {
      * @param theEnemy (The enemy player)
      */
     public boolean canAttack(final DungeonCharacter theEnemy){
-        int tooLowOfAttackSpeedRatio= 0;
+        return (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway);
+       // return (alive() && theEnemy.alive() && !myRunAway);
+    }
+
+    public void resetAttackSpeed(final DungeonCharacter theEnemy){
+        int tooLowOfAttackSpeedRatio = 0;
         int fixesLowRatio = 1;
         myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
         if (myNumberOfAttacks == tooLowOfAttackSpeedRatio) {
             myNumberOfAttacks = fixesLowRatio;
         }
-
-//        return (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway);
-        return (alive() && theEnemy.alive() && !myRunAway);
     }
-
-
     /**
      * This method calculates if the hero has a chance to use
      * its special attack.

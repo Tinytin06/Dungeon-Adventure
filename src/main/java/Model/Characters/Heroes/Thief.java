@@ -48,22 +48,24 @@ public class Thief extends Hero {
         StringBuilder outputHelper = new StringBuilder();
         outputHelper.append("\n");
         outputHelper.append(getCharacter_Name());
-        outputHelper.append(" prepared a sneak attack \n");
+        outputHelper.append(" prepared a sneak attack. \n");
         if (canUseSpecialAttack()) {
             int specialDamage = specialDamageGenerator();
-            outputHelper.append("and has stunned ");
-            outputHelper.append(enemy.getCharacter_Name());
-            outputHelper.append("dealing");
+            outputHelper.append("And has stunned ");
+            outputHelper.append(enemy.getCharacter_Name()+".\n");
+            outputHelper.append("Dealing ");
             outputHelper.append(specialDamage);
             outputHelper.append(" damage.\n");
             outputHelper.append(enemy.damageTaken(specialDamage));
-            outputHelper.append(" attacking another time ");
-            attacks(enemy);
-
+            if(enemy.alive()) {
+                outputHelper.append("attacking another time ");
+                outputHelper.append(attacks(enemy));
+            }
 
 
         } else {
-            outputHelper.append(" but was caught and lost his attack.\n");
+            outputHelper.append("But was caught and lost his attack.\n");
+
         }
 
         return outputHelper.toString();

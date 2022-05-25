@@ -276,7 +276,7 @@ public class DungeonAdventure {
         while (theHero.alive() && theMonster.alive()) {
             ConsoleOutput.printString("\t\t\t Round: " + roundCounter + "\n");
             ConsoleOutput.printString("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
-
+            theHero.resetAttackSpeed(theMonster);
             while(theHero.canAttack(theMonster)) {
                 int attackChoice = UserInputValidate.attackChoice(theHero);
                 ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
