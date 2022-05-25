@@ -167,15 +167,19 @@ public class DungeonAdventure {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             theSaveName = dateFormat.format(date);
         }
+        String fileDirectory = "./main/java/Saves/" + theSaveName;
+        if(!Files.exists(Paths.get(fileDirectory))){
+            Files.createDirectories(Paths.get(fileDirectory));
+        }
 
-        FileOutputStream file = new FileOutputStream("./Saves");
+        FileOutputStream file = new FileOutputStream(fileDirectory + "/dungeon.bat");
         ObjectOutputStream out = new ObjectOutputStream(file);
         out.writeObject(theDungeon);
 
 
-//        file = new FileOutputStream("./Saves");
-//        out = new ObjectOutputStream(file);
-//        out.writeObject(theHero);
+        file = new FileOutputStream(fileDirectory + "/hero.bat");
+        out = new ObjectOutputStream(file);
+        out.writeObject(theHero);
 
         out.close();
         file.close();
