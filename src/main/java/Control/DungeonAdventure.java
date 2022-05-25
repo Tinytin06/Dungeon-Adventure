@@ -14,22 +14,16 @@ import Model.Room;
 import Model.RoomType;
 import View.ConsoleOutput;
 
-import java.io.File;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 
 import java.awt.*;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -37,12 +31,14 @@ import java.util.stream.Collectors;
  * the game player that initiates and continues with the game until the player decides to quit.
  * @author Varun Parbhakar
  */
-public class DungeonAdventure {
+public class DungeonAdventure implements Serializable {
+//    private static final long serialversionUID =
+//            1493124918L;
     /**
      * This main method initializes the dungeon, hero and the monster to prepare the game.
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 ////        Testing
 //        for (int i = 0; i < 10; i++) {
 //            //Testing
@@ -71,11 +67,44 @@ public class DungeonAdventure {
             int myDungeonSize = 5;
             Dungeon myDungeon = new Dungeon(myDungeonSize);
 
-            try {
-                saveClass("may-25", myDungeon , hero);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//
+//        System.out.println(myDungeon);
+//        System.out.println(hero);
+//
+//
+////            try {
+////                saveClass("may-30", myDungeon , hero);
+////            } catch (IOException e) {
+////                e.printStackTrace();
+////            }
+
+        myDungeon=null;
+        hero=null;
+
+        System.out.println(myDungeon);
+        System.out.println(hero);
+
+
+        File[] allSaves = loadGame();
+        int userPick = 0;
+//        int userPick = userInput.nextInt();
+        if(userPick >= 0 && userPick < allSaves.length) {
+            FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            hero = (Hero) in.readObject();
+
+
+            file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
+            in = new ObjectInputStream(file);
+
+            myDungeon = (Dungeon) in.readObject();
+        }
+
+
+        System.out.println(myDungeon);
+        System.out.println(hero);
+
 //        }
 
         /*
@@ -88,6 +117,7 @@ public class DungeonAdventure {
                     -dun
                 -ase
          */
+
 //        ConsoleOutput.introduction();
 //        if(UserInputValidate.getYN(userInput)) {
 //            boolean playAgain = false;
@@ -138,27 +168,23 @@ public class DungeonAdventure {
     }
 
 
-    private static void sortAll(String dirName) {
-        File directory = new File(dirName);
 
-        File[] filesArray = directory.listFiles();
 
-        //sort all files
+    public static File[] loadGame(){
+        File dir = new File("./src/main/java/Saves");
+        File[] files = dir.listFiles();
 
-        //print the sorted values
-        for (File file : filesArray) {
-            if (file.isFile()) {
-                System.out.println("File : " + file.getName());
-            } else if (file.isDirectory()) {
-                System.out.println("Directory : " + file.getName());
-            } else {
-                System.out.println("Unknown : " + file.getName());
+
+        if (files != null && files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    ConsoleOutput.printString(i + ") " + files[i].getName() + "\n");
+                }
             }
+        } else {
+            ConsoleOutput.printString("There are no saves yet!");
         }
-    }
-
-    public static void loadGame(){
-
+        return files;
     }
 
     public static void saveClass(String theSaveName, Dungeon theDungeon, Hero theHero) throws IOException {
@@ -167,7 +193,8 @@ public class DungeonAdventure {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             theSaveName = dateFormat.format(date);
         }
-        String fileDirectory = "./main/java/Saves/" + theSaveName;
+        String fileDirectory = "./src/main/java/Saves/" + theSaveName;
+
         if(!Files.exists(Paths.get(fileDirectory))){
             Files.createDirectories(Paths.get(fileDirectory));
         }

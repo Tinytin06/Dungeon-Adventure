@@ -22,7 +22,7 @@ import java.util.Scanner;
  * @editor Austin Luu
  */
 public class Dungeon implements Serializable {
-    private static final long serialversionUID = 2291234122L;
+//    private static final long serialversionUID = 2291234122L;
 
 
     private int myDungeonSize;

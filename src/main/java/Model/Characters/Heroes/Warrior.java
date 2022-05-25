@@ -8,11 +8,13 @@ package Model.Characters.Heroes;/*
 import Model.Characters.DungeonCharacter;
 import Model.Characters.Hero;
 
+import java.io.Serializable;
+
 /**
  * This is a subclass of Hero
  * @author Varun Parbhakar
  */
-public class Warrior extends Hero {
+public class Warrior extends Hero implements Serializable {
 
     /**
      * This constructor initializes all of the values
