@@ -441,5 +441,8 @@ public class Dungeon implements Serializable {
 
     }
 
+    public int getMyDungeonSize(){
+        return myDungeonSize;
+    }
 }
 

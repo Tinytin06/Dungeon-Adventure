@@ -20,8 +20,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import java.util.regex.Pattern;
 
 import java.awt.*;
+import java.util.regex.Matcher;
 
 /**
  * This is the main client class for the dungeon adventure game it contains
@@ -53,57 +55,50 @@ public class DungeonAdventure implements Serializable {
 ////        Testing
 
 
-
-
-        //Trying to fix the .class files
-
-
-        Scanner userInput = new Scanner(System.in);
-
 //        if(UserInputValidate.saveGame(userInput)){
 
-            Hero hero = new Warrior("name");
-            int myDungeonSize = 5;
-            Dungeon myDungeon = new Dungeon(myDungeonSize);
-            myDungeon.setMyCheatEnabled();
-            myDungeon.revealAll();
-        System.out.println(myDungeon);
-        System.out.println(hero);
-
-
-            try {
-                saveGame("may-30", myDungeon , hero);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        myDungeon=null;
-        hero=null;
-
-        System.out.println(myDungeon);
-        System.out.println(hero);
-
-
-        File[] allSaves = loadGame();
-        int userPick = 1;
-//        int userPick = userInput.nextInt();
-        if(userPick >= 0 && userPick < allSaves.length) {
-            FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
-            ObjectInputStream in = new ObjectInputStream(file);
-            //System.out.println(in.readObject());
-            hero = (Warrior) in.readObject();
-
-
-            file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
-            in = new ObjectInputStream(file);
-
-            myDungeon = (Dungeon) in.readObject();
-        }
-
-        myDungeon.revealAll();
-        System.out.println(myDungeon);
-        System.out.println(hero);
+//            Hero hero = new Warrior("name");
+//            int myDungeonSize = 5;
+//            Dungeon myDungeon = new Dungeon(myDungeonSize);
+//            myDungeon.setMyCheatEnabled();
+//            myDungeon.revealAll();
+//        System.out.println(myDungeon);
+//        System.out.println(hero);
+//
+//
+//            try {
+//                saveGame("may-30", myDungeon , hero);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//        myDungeon=null;
+//        hero=null;
+//
+//        System.out.println(myDungeon);
+//        System.out.println(hero);
+//
+////
+//        File[] allSaves = loadGame();
+//        int userPick = 0;
+////        int userPick = userInput.nextInt();
+//        if(userPick >= 0 && userPick < allSaves.length) {
+//            FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
+//            ObjectInputStream in = new ObjectInputStream(file);
+//            //System.out.println(in.readObject());
+//            hero = (Warrior) in.readObject();
+//
+//
+//            file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
+//            in = new ObjectInputStream(file);
+//
+//            myDungeon = (Dungeon) in.readObject();
+//        }
+//
+//        myDungeon.revealAll();
+//        System.out.println(myDungeon);
+//        System.out.println(hero);
 
 //        }
 
@@ -118,53 +113,76 @@ public class DungeonAdventure implements Serializable {
                 -ase
          */
 
-//        ConsoleOutput.introduction();
-//        if(UserInputValidate.getYN(userInput)) {
-//            boolean playAgain = false;
-//            while(!playAgain) {
-//                String name = UserInputValidate.heroName(userInput);
-//
-//                Hero hero = new Warrior(name);
-//                int myDungeonSize = 5;
-//                Dungeon myDungeon = new Dungeon(myDungeonSize);
-//
-//
-//                //Placing the hero into the dungeon entrance
-//                hero.setCharacterLocation(myDungeon.getEntrancePoint());
-//
-//                // These are the names needs to be used in order to activate the cheat
-//                // I dont have a method in the Dungeon Adventure for revealing all of the
-//                // room, I thought that it better fit for the Dungeon class to have that kind of power.
-//                if (name.equals("Varun") || name.equals("Bryce")) {
-//                    myDungeon.setMyCheatEnabled();
-//
-//                }
-//                myDungeon.setMyCheatEnabled();//testing purposes
-//                System.out.println("CHEATS ARE ACTIVE __ TESTING");
-//
-//                while(hero.alive()) {
-//                    gameDriver(userInput, hero, myDungeonSize, myDungeon);
-//
-//                }
-//                ConsoleOutput.printString("\nThis is the dungeon fully revealed\n");
-//
-//                myDungeon.revealAll();
-//
-//                ConsoleOutput.printString(myDungeon + "\n");
-//                ConsoleOutput.printString("\nWould you like to play again?\n");
-//
-//                if (!UserInputValidate.getYN(userInput)) {
-//                    playAgain = true;
-//
-//                } else {
-//                    ConsoleOutput.printString("Thank you for playing!");
-//
-//                }
-//            }
-//        } else {
-//            ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
-//
-//        }
+        Scanner userInput = new Scanner(System.in);
+        ConsoleOutput.introduction();
+        if(UserInputValidate.getYN(userInput)) {
+            boolean playAgain = false;
+            while(!playAgain) {
+
+                ConsoleOutput.printString("\nWould you like to load a previously saved game?\n");
+
+                Hero hero = null;
+                Dungeon myDungeon = null;
+                if(UserInputValidate.getYN(userInput)) {
+
+                    File[] allSaves = loadGame();
+                    int userPick = UserInputValidate.getLoadNumber(userInput, allSaves.length-1);
+
+                    FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
+                    ObjectInputStream in = new ObjectInputStream(file);
+                    hero = (Warrior) in.readObject();
+
+
+                    file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
+                    in = new ObjectInputStream(file);
+                    myDungeon = (Dungeon) in.readObject();
+
+                    ConsoleOutput.printString("\n\n Game has succesfully been loaded.\n\n");
+                } else {
+                    String name = UserInputValidate.heroName(userInput);
+
+                    hero = new Warrior(name);
+                    int myDungeonSize = 5;
+                    myDungeon = new Dungeon(myDungeonSize);
+
+                    //Placing the hero into the dungeon entrance
+                    hero.setCharacterLocation(myDungeon.getEntrancePoint());
+
+                    // These are the names needs to be used in order to activate the cheat
+                    // I dont have a method in the Dungeon Adventure for revealing all of the
+                    // room, I thought that it better fit for the Dungeon class to have that kind of power.
+                    if (name.equals("Varun") || name.equals("Bryce")) {
+                        myDungeon.setMyCheatEnabled();
+
+                    }
+                    myDungeon.setMyCheatEnabled();//testing purposes
+                    System.out.println("CHEATS ARE ACTIVE __ TESTING");
+                }
+
+
+                while(hero.alive()) {
+                    gameDriver(userInput, hero, myDungeon.getMyDungeonSize(), myDungeon);
+                }
+
+                ConsoleOutput.printString("\nThis is the dungeon fully revealed\n");
+
+                myDungeon.revealAll();
+
+                ConsoleOutput.printString(myDungeon + "\n");
+                ConsoleOutput.printString("\nWould you like to play again?\n");
+
+                if (!UserInputValidate.getYN(userInput)) {
+                    playAgain = true;
+
+                } else {
+                    ConsoleOutput.printString("Thank you for playing!");
+
+                }
+            }
+        } else {
+            ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
+
+        }
     }
 
 
@@ -178,7 +196,7 @@ public class DungeonAdventure implements Serializable {
         if (files != null && files.length > 0) {
             for (int i = 0; i < files.length; i++) {
                 if (files[i].isDirectory()) {
-                    ConsoleOutput.printString(i + ") " + files[i].getName() + "\n");
+                    ConsoleOutput.printString("\n" +  i + ") " + files[i].getName() );
                 }
             }
         } else {
@@ -264,7 +282,22 @@ public class DungeonAdventure implements Serializable {
                     //Selecting Player's next move
                     ArrayList<String> availableDirections = availableDirections(location, theDungeonSize);
                     String heroHeading = UserInputValidate.heroDirectionHeading(theUserInput, availableDirections);
-                    HeroController.moveCharacter(theHero, heroHeading);
+
+                    System.out.println(heroHeading);
+                    if(heroHeading.equals("saveGame")){
+
+                        try {
+                            ConsoleOutput.printString("Saving Game....");
+                            String fileName = UserInputValidate.getFileName(new Scanner(System.in));
+                            saveGame(fileName, theDungeon, theHero);
+                            ConsoleOutput.printString("Thank you for playing the game! The session has been saved to " + fileName);
+                            System.exit(0);
+                        } catch (IOException e) {
+                            ConsoleOutput.printString("ERROR SAVING GAME.");
+                        }
+                    } else {
+                        HeroController.moveCharacter(theHero, heroHeading);
+                    }
 
                 }
             }
