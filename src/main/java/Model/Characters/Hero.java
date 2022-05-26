@@ -139,7 +139,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         //Ask if this logic is okay to be in this class
         //TRUE(getCharacter_Name() + " blocked the attack!\n")
         if (randomGen.nextDouble() <= myChance2Block) {
-            return (getCharacter_Name() + " blocked the attack!\n");
+            return ("\n"+ getCharacter_Name() + " blocked the attack!\n");
         } else {
             return super.damageTaken(theC_Damage);
         }

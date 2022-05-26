@@ -38,19 +38,21 @@ public class DungeonAdventure implements Serializable {
      * @param args
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-////        Testing
+//        Testing
 //        for (int i = 0; i < 10; i++) {
 //            //Testing
 //            Hero myHero = new Warrior("Test_Hero");
-//            Monster myMonster = new Skeleton("Test_Monster");
+//            MonsterFactory mF = new MonsterFactory();
+//            Monster myMonster = mF.getNormalMonsters().get(0);
 //            Dungeon theDungeon = new Dungeon(5);
 //            Room myRoom = new Room();
+//
 //            myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
 //
 //            DungeonAdventure.initiateFight(myHero, myMonster, theDungeon, myRoom);
 //
 //        }
-////        Testing
+//        Testing
 
 
 
@@ -60,50 +62,50 @@ public class DungeonAdventure implements Serializable {
 
         Scanner userInput = new Scanner(System.in);
 
-//        if(UserInputValidate.saveGame(userInput)){
-
-            Hero hero = new Warrior("name");
-            int myDungeonSize = 5;
-            Dungeon myDungeon = new Dungeon(myDungeonSize);
-            myDungeon.setMyCheatEnabled();
-            myDungeon.revealAll();
-        System.out.println(myDungeon);
-        System.out.println(hero);
-
-
-            try {
-                saveGame("may-30", myDungeon , hero);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        myDungeon=null;
-        hero=null;
-
-        System.out.println(myDungeon);
-        System.out.println(hero);
-
-
-        File[] allSaves = loadGame();
-        int userPick = 1;
-//        int userPick = userInput.nextInt();
-        if(userPick >= 0 && userPick < allSaves.length) {
-            FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
-            ObjectInputStream in = new ObjectInputStream(file);
-            //System.out.println(in.readObject());
-            hero = (Warrior) in.readObject();
-
-
-            file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
-            in = new ObjectInputStream(file);
-
-            myDungeon = (Dungeon) in.readObject();
-        }
-
-        myDungeon.revealAll();
-        System.out.println(myDungeon);
-        System.out.println(hero);
+////        if(UserInputValidate.saveGame(userInput)){
+//
+//            Hero hero = new Warrior("name");
+//            int myDungeonSize = 5;
+//            Dungeon myDungeon = new Dungeon(myDungeonSize);
+//            myDungeon.setMyCheatEnabled();
+//            myDungeon.revealAll();
+//        System.out.println(myDungeon);
+//        System.out.println(hero);
+//
+//
+//            try {
+//                saveGame("may-30", myDungeon , hero);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//        myDungeon=null;
+//        hero=null;
+//
+//        System.out.println(myDungeon);
+//        System.out.println(hero);
+//
+//
+//        File[] allSaves = loadGame();
+//        int userPick = 1;
+////        int userPick = userInput.nextInt();
+//        if(userPick >= 0 && userPick < allSaves.length) {
+//            FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
+//            ObjectInputStream in = new ObjectInputStream(file);
+//            //System.out.println(in.readObject());
+//            hero = (Warrior) in.readObject();
+//
+//
+//            file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
+//            in = new ObjectInputStream(file);
+//
+//            myDungeon = (Dungeon) in.readObject();
+//        }
+//
+//        myDungeon.revealAll();
+//        System.out.println(myDungeon);
+//        System.out.println(hero);
 
 //        }
 
@@ -118,53 +120,63 @@ public class DungeonAdventure implements Serializable {
                 -ase
          */
 
-//        ConsoleOutput.introduction();
-//        if(UserInputValidate.getYN(userInput)) {
-//            boolean playAgain = false;
-//            while(!playAgain) {
-//                String name = UserInputValidate.heroName(userInput);
-//
-//                Hero hero = new Warrior(name);
-//                int myDungeonSize = 5;
-//                Dungeon myDungeon = new Dungeon(myDungeonSize);
-//
-//
-//                //Placing the hero into the dungeon entrance
-//                hero.setCharacterLocation(myDungeon.getEntrancePoint());
-//
-//                // These are the names needs to be used in order to activate the cheat
-//                // I dont have a method in the Dungeon Adventure for revealing all of the
-//                // room, I thought that it better fit for the Dungeon class to have that kind of power.
-//                if (name.equals("Varun") || name.equals("Bryce")) {
-//                    myDungeon.setMyCheatEnabled();
-//
-//                }
-//                myDungeon.setMyCheatEnabled();//testing purposes
-//                System.out.println("CHEATS ARE ACTIVE __ TESTING");
-//
-//                while(hero.alive()) {
-//                    gameDriver(userInput, hero, myDungeonSize, myDungeon);
-//
-//                }
-//                ConsoleOutput.printString("\nThis is the dungeon fully revealed\n");
-//
-//                myDungeon.revealAll();
-//
-//                ConsoleOutput.printString(myDungeon + "\n");
-//                ConsoleOutput.printString("\nWould you like to play again?\n");
-//
-//                if (!UserInputValidate.getYN(userInput)) {
-//                    playAgain = true;
-//
-//                } else {
-//                    ConsoleOutput.printString("Thank you for playing!");
-//
-//                }
-//            }
-//        } else {
-//            ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
-//
-//        }
+        ConsoleOutput.introduction();
+
+        if(UserInputValidate.getYN(userInput)) {
+            boolean playAgain = false;
+            while(!playAgain) {
+                String name = UserInputValidate.heroName(userInput);
+
+                Hero hero = new Warrior(name);
+                int myDungeonSize = 5;
+                Dungeon myDungeon = new Dungeon(myDungeonSize);
+
+
+                //Placing the hero into the dungeon entrance
+                hero.setCharacterLocation(myDungeon.getEntrancePoint());
+
+                // These are the names needs to be used in order to activate the cheat
+                // I dont have a method in the Dungeon Adventure for revealing all of the
+                // room, I thought that it better fit for the Dungeon class to have that kind of power.
+                if (name.equals("Varun") || name.equals("Bryce")) {
+                    myDungeon.setMyCheatEnabled();
+
+                }
+                myDungeon.setMyCheatEnabled();//testing purposes
+                System.out.println("CHEATS ARE ACTIVE __ TESTING");
+
+                while(hero.alive()) {
+                    gameDriver(userInput, hero, myDungeonSize, myDungeon);
+
+                }
+                ConsoleOutput.printString("\nThe dungeon is fully revealed\n");
+
+                myDungeon.revealAll();
+
+                ConsoleOutput.printString(myDungeon + "\n");
+                ConsoleOutput.printString("\nWould you like to play again?\n");
+
+                if (!UserInputValidate.getYN(userInput)) {
+                    playAgain = true;
+
+                } else {
+                    ConsoleOutput.printString("Thank you for playing!");
+
+                }
+            }
+        } else {
+            ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
+
+        }
+    }
+
+
+
+    public static void checkSaveGame(Scanner theUserInput) {
+        File dir = new File("./main/java/Saves");
+        File[] files = dir.listFiles();
+
+
     }
 
 
@@ -245,15 +257,16 @@ public class DungeonAdventure implements Serializable {
             ConsoleOutput.printString("This room has: ");
             ConsoleOutput.printString(myRoom.showMyRoomInventory() + "\n");
 
-            HeroController.itemPickUp(myRoom, theHero);
+
 
             //Checking if the hero is at the exit
             if (!isHeroAtExit(myRoom, theHero, theUserInput)){
                 if (!theHero.alive()){
-                    String output = "You came here with such life yet here you lie\n\t\tlifeless.\nBetter Luck Next time!";
+                    String output = "\nYou came here with such life yet here you lie\n\t\t\t\tlifeless.\nBetter Luck Next time!";
                     ConsoleOutput.printString(output + "\n");
 
                 } else {
+                    HeroController.itemPickUp(myRoom, theHero);
                     ConsoleOutput.printString(theHero + "\n");
                     ConsoleOutput.printString(theHero.getCharacter_Name()+ "'s Inventory:");
                     ConsoleOutput.printString(theHero.getHeroSatchel() + "\n\n");
@@ -386,16 +399,22 @@ public class DungeonAdventure implements Serializable {
 
 
         while (theHero.alive() && theMonster.alive()) {
-            ConsoleOutput.printString("\t\t\t Round: " + roundCounter + "\n");
+            ConsoleOutput.printString("\n\t\t\t Round: " + roundCounter + "\n");
             ConsoleOutput.printString("Player HP: " + theHero.getCharacter_HealthPoints() + "\t\t Monster's HP: " + theMonster.getCharacter_HealthPoints() + "\n");
             theHero.resetAttackSpeed(theMonster);
+            int attackChoice = 0;
             while(theHero.canAttack(theMonster)) {
-                int attackChoice = UserInputValidate.attackChoice(theHero);
-//                ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
+                attackChoice = UserInputValidate.attackChoice(theHero);
+                ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
                 ConsoleOutput.printString(theMonster.attacks(theHero));
             }
 
 //            ConsoleOutput.printString(theMonster.attacks(theHero));
+            if(attackChoice == 3) {
+                ConsoleOutput.printString("You turned your back on the monster and\n");
+                ConsoleOutput.printString("  now your soul is within his grasp.\n");
+                break;
+            }
             roundCounter++;
             ConsoleOutput.printString("\nEND OF ROUND, PRESS ANY KEY TO CONTINUE");
             theUserInput.nextLine();
