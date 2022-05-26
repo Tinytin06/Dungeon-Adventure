@@ -261,7 +261,7 @@ public abstract class DungeonCharacter implements Serializable {
      * @param enemy (The enemy player)
      */
     protected String attacks(final DungeonCharacter enemy) {
-        System.out.println("a");
+
         if (enemy == null) {
             throw new IllegalArgumentException("The passed enemy is set to null");
         }
@@ -282,7 +282,7 @@ public abstract class DungeonCharacter implements Serializable {
                 outputHelper.append(getCharacter_Name());
                 outputHelper.append("'s attacked on ");
                 outputHelper.append(enemy.getCharacter_Name());
-                outputHelper.append(" but missed\n");
+                outputHelper.append(" but missed.\n");
             }
         }
 
