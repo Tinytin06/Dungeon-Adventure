@@ -25,6 +25,7 @@ public abstract class DungeonCharacter implements Serializable {
 
 
     private int myCharacter_HealthPoints;
+    private int myCharacter_MaxHealthPoints;
     private int myCharacter_AttackSpeed;
     private int myCharacter_MinDamage;
     private int myCharacter_MaxDamage;
@@ -90,6 +91,7 @@ public abstract class DungeonCharacter implements Serializable {
             throw new IllegalArgumentException("The default character's health has to be greater than 0.");
         }
         myCharacter_HealthPoints = theC_Health;
+        myCharacter_MaxHealthPoints = theC_Health;
     }
 
 
@@ -231,7 +233,11 @@ public abstract class DungeonCharacter implements Serializable {
      * @param theHP (Health points of the character)
      */
     protected void setMyCharacter_HealthPoints(final int theHP) {
+        if(myCharacter_HealthPoints+theHP <= myCharacter_MaxHealthPoints)
         myCharacter_HealthPoints += theHP;
+        else{
+            myCharacter_HealthPoints = myCharacter_MaxHealthPoints;
+        }
     }
 
     /**
