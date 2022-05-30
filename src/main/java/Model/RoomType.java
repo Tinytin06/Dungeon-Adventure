@@ -6,14 +6,14 @@ import java.util.Arrays;
 
 public enum RoomType {
     FIGHT('F'),
-    PIT('P'),
+    PIT('X'),
     NORMAL('N'),
     INHERITANCE('I'),
-    ENCAPSULATION('C'),
-    POLYMORPHISM('O'),
+    ENCAPSULATION('E'),
+    POLYMORPHISM('P'),
     ABSTRACTION('A'),
-    EXIT('X'),
-    ENTRANCE('E'),
+    EXIT('O'),
+    ENTRANCE('i'),
     HEALING('H'),
     VISION('V'),
     PLAYER('*');
