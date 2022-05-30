@@ -26,7 +26,7 @@ public class MonsterFactory {
         //establish connection (creates db file if it does not exist :-)
         try {
             ds = new SQLiteDataSource();
-            ds.setUrl("jdbc:sqlite:MonstersDatabase.db");
+            ds.setUrl("jdbc:sqlite:MonstersDatabase1.db");
         } catch ( Exception e ) {
             e.printStackTrace();
             System.exit(0);

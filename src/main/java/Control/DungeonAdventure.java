@@ -40,21 +40,21 @@ public class DungeonAdventure implements Serializable {
      * @param args
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        //Testing
+        for (int i = 0; i < 10; i++) {
+            //Testing
+            Hero myHero = new Warrior("Test_Hero");
+            MonsterFactory mF = new MonsterFactory();
+            Monster myMonster = mF.getBossMonsters().get(0);
+            Dungeon theDungeon = new Dungeon(5);
+            Room myRoom = new Room();
+
+            myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
+
+            DungeonAdventure.initiateFight(myHero, myMonster, theDungeon, myRoom);
+
+        }
 //        Testing
-//        for (int i = 0; i < 10; i++) {
-//            //Testing
-//            Hero myHero = new Warrior("Test_Hero");
-//            MonsterFactory mF = new MonsterFactory();
-//            Monster myMonster = mF.getNormalMonsters().get(0);
-//            Dungeon theDungeon = new Dungeon(5);
-//            Room myRoom = new Room();
-//
-//            myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
-//
-//            DungeonAdventure.initiateFight(myHero, myMonster, theDungeon, myRoom);
-//
-//        }
-////        Testing
 
 
 //        if(UserInputValidate.saveGame(userInput)){
