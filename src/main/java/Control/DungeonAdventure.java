@@ -5,6 +5,8 @@
  */
 package Control;
 import Model.Characters.Hero;
+import Model.Characters.Heroes.Priestess;
+import Model.Characters.Heroes.Thief;
 import Model.Characters.Monster;
 import Model.Characters.Heroes.Warrior;
 import Model.Dungeon;
@@ -40,21 +42,21 @@ public class DungeonAdventure implements Serializable {
      * @param args
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        //Testing
-        for (int i = 0; i < 10; i++) {
-            //Testing
-            Hero myHero = new Warrior("Test_Hero");
-            MonsterFactory mF = new MonsterFactory();
-            Monster myMonster = mF.getBossMonsters().get(0);
-            Dungeon theDungeon = new Dungeon(5);
-            Room myRoom = new Room();
-
-            myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
-
-            DungeonAdventure.initiateFight(myHero, myMonster, theDungeon, myRoom);
-
-        }
-//        Testing
+//        //Testing
+//        for (int i = 0; i < 10; i++) {
+//            //Testing
+//            Hero myHero = new Warrior("Test_Hero");
+//            MonsterFactory mF = new MonsterFactory();
+//            Monster myMonster = mF.getBossMonsters().get(0);
+//            Dungeon theDungeon = new Dungeon(5);
+//            Room myRoom = new Room();
+//
+//            myRoom.addTo_MyRoomInventory(RoomType.FIGHT);
+//
+//            DungeonAdventure.initiateFight(myHero, myMonster, theDungeon, myRoom);
+//
+//        }
+////        Testing
 
 
 //        if(UserInputValidate.saveGame(userInput)){
@@ -141,9 +143,8 @@ public class DungeonAdventure implements Serializable {
 
                     ConsoleOutput.printString("\n\n Game has succesfully been loaded.\n\n");
                 } else {
-                    String name = UserInputValidate.heroName(userInput);
 
-                    hero = new Warrior(name);
+                    hero = heroSelector();
                     int myDungeonSize = 5;
                     myDungeon = new Dungeon(myDungeonSize);
 
@@ -153,7 +154,7 @@ public class DungeonAdventure implements Serializable {
                     // These are the names needs to be used in order to activate the cheat
                     // I dont have a method in the Dungeon Adventure for revealing all of the
                     // room, I thought that it better fit for the Dungeon class to have that kind of power.
-                    if (name.equals("Varun") || name.equals("Bryce")) {
+                    if (hero.getCharacter_Name().equals("Varun") || hero.getCharacter_Name().equals("Bryce")) {
                         myDungeon.setMyCheatEnabled();
 
                     }
@@ -185,6 +186,25 @@ public class DungeonAdventure implements Serializable {
             ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
 
         }
+    }
+
+    public static Hero heroSelector() {
+        Scanner userInput = new Scanner(System.in);
+        String name = UserInputValidate.heroName(userInput);
+        int heroSelection = UserInputValidate.heroSelector(name);
+        Hero myHero;
+        if(heroSelection == 1) {
+            myHero = new Thief(name);
+
+        } else if(heroSelection == 2) {
+            myHero = new Warrior(name);
+
+        } else {
+            myHero = new Priestess(name);
+
+        }
+        return myHero;
+
     }
 
 

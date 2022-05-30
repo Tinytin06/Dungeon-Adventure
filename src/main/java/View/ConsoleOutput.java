@@ -13,6 +13,16 @@ public class ConsoleOutput {
                 "\n3: Run Away");
         System.out.println(choices);
     }
+
+    public static void heroSelection(String myHero) {
+        String choices = ("\n" + myHero + ", What kind of hero do you want to be? " +
+                "\n1: Thief" +
+                "\n2: Warrior" +
+                "\n3: Priestess\n" +
+                "Please choose from the selection: ");
+        System.out.print(choices);
+    }
+
     public static void invalidInput(){
         System.out.println("Invalid Choice");
     }

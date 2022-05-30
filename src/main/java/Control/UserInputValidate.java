@@ -202,6 +202,33 @@ public class UserInputValidate {
         return loadNumber;
     }
 
+    public static int heroSelector(String name){
+        // 1: Thief, 2: Warrior, 3:Priestess
+        int selection = 0;
+        int selectTooSmall = 0;
+        int selectTooBig = 3;
+        boolean correctAnswer = false;
+        while (!correctAnswer) {
+            Scanner input = new Scanner(System.in);
+            ConsoleOutput.heroSelection(name);
+            if (input.hasNextInt()) {
+                selection = input.nextInt();
+                if (selection <= selectTooSmall || selection > selectTooBig) {
+                    ConsoleOutput.invalidInput();
+                } else {
+
+                    correctAnswer = true;
+                }
+            } else {
+                ConsoleOutput.invalidInput();
+                input.next();
+            }
+
+        }
+        return selection;
+    }
+
+
 //    public static boolean loadGame(final Scanner userInput){
 //        ConsoleOutput.printString("Would you like to load your saved games? (y for yes or any other key for no.)");
 //        if(userInput.next().equals("y")){
