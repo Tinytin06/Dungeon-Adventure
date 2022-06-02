@@ -84,7 +84,7 @@ public class HeroController {
 
             } if (theItem == RoomType.VISION.type){
                 theHero.addItem2Satchel(RoomType.VISION);
-                deleteItems.add(RoomType.HEALING);
+                deleteItems.add(RoomType.VISION);
                 ConsoleOutput.printString("You have picked up the Vision Potion!\n");
 
             }

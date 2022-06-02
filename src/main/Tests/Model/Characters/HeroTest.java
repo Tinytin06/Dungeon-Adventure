@@ -1,5 +1,6 @@
 //package Model.Characters;
 //
+//import Model.Characters.Heroes.Warrior;
 //import Model.RoomType;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.params.ParameterizedTest;
@@ -232,8 +233,7 @@
 //    }
 //
 //
-//package Model.Characters;
-////
+//    //
 ////import Model.RoomType;
 ////import org.junit.jupiter.api.Test;
 ////import org.junit.jupiter.params.ParameterizedTest;
@@ -408,27 +408,27 @@
 ////    }
 ////
 ////
-//////    @Test
-//////    /**
-//////     * Testing for canAttack when myNumberofAttacks is = to 1;
-//////     *
-//////     * Expected: we should only be allowed one attack and the next one should output false;
-//////     */
-//////    void canAttack2() {
-//////        Hero hero = new Warrior("TempWarrior");
-//////        hero.attackSpeedValidator(1);
-//////
-//////        Monster monster = new Skeleton("TempSkeleton");
-//////        monster.attackSpeedValidator(1);
-//////
-//////        assertTrue(hero.canAttack(monster));
-//////
-//////        System.out.println(hero.getNumberOfAttacks() + " " + hero.canAttack(monster));
-//////        hero.attacks(monster, 2);
-//////        System.out.println(hero.getNumberOfAttacks() + " " + hero.canAttack(monster));
-//////
-//////        assertFalse(hero.canAttack(monster));
-//////    }
+////    @Test
+////    /**
+////     * Testing for canAttack when myNumberofAttacks is = to 1;
+////     *
+////     * Expected: we should only be allowed one attack and the next one should output false;
+////     */
+////    void canAttack2() {
+////        Hero hero = new Warrior("TempWarrior");
+////        hero.attackSpeedValidator(1);
+////
+////        Monster monster = new Skeleton("TempSkeleton");
+////        monster.attackSpeedValidator(1);
+////
+////        assertTrue(hero.canAttack(monster));
+////
+////        System.out.println(hero.getNumberOfAttacks() + " " + hero.canAttack(monster));
+////        hero.attacks(monster, 2);
+////        System.out.println(hero.getNumberOfAttacks() + " " + hero.canAttack(monster));
+////
+////        assertFalse(hero.canAttack(monster));
+////    }
 ////
 ////
 ////    @Test
@@ -558,8 +558,8 @@
 ////    }
 ////
 ////
-////    @ParameterizedTest
-////    @ValueSource(ints = {0,-1,-2,-3,-4,-5})
+//    @ParameterizedTest
+//    @ValueSource(ints = {0,-1,-2,-3,-4,-5})
 ////    void specialSkill_MaxDamage_Validator2(int specialSkill_MaxDamage) {
 ////        Hero hero = new Warrior("TempWarrior");
 ////
@@ -626,41 +626,41 @@
 ////
 ////
 ////
-//////
-//////    @Test
-//////    void removeSatchelItem() {
-//////        Hero hero = new Warrior("TempWarrior");
-//////
-//////        RoomType roomType = RoomType.CODING_CROWN_1;
-//////
-//////        hero.addItem2Satchel(roomType);
-//////
-//////        assertTrue(hero.satchelContains(roomType));
-//////
-//////        hero.removeSatchelItem(roomType);
-//////
-//////        assertFalse(hero.satchelContains(roomType));
-//////    }
-//////
-//////    @Test
-//////    void getHeroSatchel() {
-//////        Hero hero = new Warrior("TempWarrior");
-//////
-////////        RoomType roomType1 = RoomType.CODING_CROWN_1;
-////////        RoomType roomType2 = RoomType.CODING_CROWN_2;
-//////        RoomType roomType3 = RoomType.HEALING;
-//////
-//////        hero.addItem2Satchel(roomType1);
-//////        hero.addItem2Satchel(roomType2);
-//////        hero.addItem2Satchel(roomType3);
-//////
-//////        ArrayList<Character> expectedSatchel = new ArrayList<>();
-//////        expectedSatchel.add(roomType1.type);
-//////        expectedSatchel.add(roomType2.type);
-//////        expectedSatchel.add(roomType3.type);
-//////
-//////        assertArrayEquals(hero.getHeroSatchel().toArray(), expectedSatchel.toArray());
-//////    }
+////
+////    @Test
+////    void removeSatchelItem() {
+////        Hero hero = new Warrior("TempWarrior");
+////
+////        RoomType roomType = RoomType.CODING_CROWN_1;
+////
+////        hero.addItem2Satchel(roomType);
+////
+////        assertTrue(hero.satchelContains(roomType));
+////
+////        hero.removeSatchelItem(roomType);
+////
+////        assertFalse(hero.satchelContains(roomType));
+////    }
+////
+////    @Test
+////    void getHeroSatchel() {
+////        Hero hero = new Warrior("TempWarrior");
+////
+//////        RoomType roomType1 = RoomType.CODING_CROWN_1;
+//////        RoomType roomType2 = RoomType.CODING_CROWN_2;
+////        RoomType roomType3 = RoomType.HEALING;
+////
+////        hero.addItem2Satchel(roomType1);
+////        hero.addItem2Satchel(roomType2);
+////        hero.addItem2Satchel(roomType3);
+////
+////        ArrayList<Character> expectedSatchel = new ArrayList<>();
+////        expectedSatchel.add(roomType1.type);
+////        expectedSatchel.add(roomType2.type);
+////        expectedSatchel.add(roomType3.type);
+////
+////        assertArrayEquals(hero.getHeroSatchel().toArray(), expectedSatchel.toArray());
+////    }
 ////
 ////    @Test
 ////    void hasBothCrowns() {
@@ -724,6 +724,7 @@
 //
 //
 //    }
+//package Model.Characters;
 //
 //
 //
@@ -891,8 +892,8 @@
 ////    void getHeroSatchel() {
 ////        Hero hero = new Warrior("TempWarrior");
 ////
-//////        RoomType roomType1 = RoomType.CODING_CROWN_1;
-//////        RoomType roomType2 = RoomType.CODING_CROWN_2;
+////        RoomType roomType1 = RoomType.CODING_CROWN_1;
+////        RoomType roomType2 = RoomType.CODING_CROWN_2;
 ////        RoomType roomType3 = RoomType.HEALING;
 ////
 ////        hero.addItem2Satchel(roomType1);

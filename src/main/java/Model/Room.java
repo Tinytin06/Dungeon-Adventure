@@ -22,7 +22,7 @@ public class Room implements Serializable {
     private int myPillarCount;
 
 
-    Room(final RoomType theType) {
+    public Room(final RoomType theType) {
         addTo_MyRoomInventory(theType);
     }
 

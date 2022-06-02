@@ -29,6 +29,27 @@ public abstract class DungeonCharacter implements Serializable {
     private int myCharacter_AttackSpeed;
     private int myCharacter_MinDamage;
     private int myCharacter_MaxDamage;
+
+    public int getMyCharacter_MaxHealthPoints() {
+        return myCharacter_MaxHealthPoints;
+    }
+
+    public int getMyCharacter_MinDamage() {
+        return myCharacter_MinDamage;
+    }
+
+    public int getMyCharacter_MaxDamage() {
+        return myCharacter_MaxDamage;
+    }
+
+    public double getMyCharacter_AttackDamageProbability() {
+        return myCharacter_AttackDamageProbability;
+    }
+
+    public boolean isMyWinner() {
+        return myWinner;
+    }
+
     private double myCharacter_AttackDamageProbability;
     private boolean myWinner;
 
@@ -224,7 +245,7 @@ public abstract class DungeonCharacter implements Serializable {
      * @return
      */
     public final boolean alive() {
-        return !(myCharacter_HealthPoints <= 0);
+        return (myCharacter_HealthPoints > 0);
     }
     //END OF GETTERS
 
@@ -233,8 +254,8 @@ public abstract class DungeonCharacter implements Serializable {
      * @param theHP (Health points of the character)
      */
     protected void setMyCharacter_HealthPoints(final int theHP) {
-        if(myCharacter_HealthPoints+theHP <= myCharacter_MaxHealthPoints)
-        myCharacter_HealthPoints += theHP;
+        if(myCharacter_HealthPoints + theHP <= myCharacter_MaxHealthPoints)
+            myCharacter_HealthPoints += theHP;
         else{
             myCharacter_HealthPoints = myCharacter_MaxHealthPoints;
         }

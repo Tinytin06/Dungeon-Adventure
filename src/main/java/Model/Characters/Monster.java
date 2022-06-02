@@ -4,6 +4,9 @@ package Model.Characters;/*
  * TCSS-143
  * Heroes VS Monster (Dungeon DLC)
  */
+
+import java.io.Serial;
+
 /**
  * This abstract class contains all of the necessary instance methods
  * for all of the character that inherit from this Monster class.
@@ -11,10 +14,25 @@ package Model.Characters;/*
  */
 public abstract class Monster extends DungeonCharacter implements Healable {
 
+    @Serial
+    private static final long serialVersionUID = 6586368167250317279L;
+
     private double myChance2Heal;
+
+    public double getMyChance2Heal() {
+        return myChance2Heal;
+    }
+
+    public int getMyHeal_MinPoints() {
+        return myHeal_MinPoints;
+    }
+
+    public int getMyHeal_MaxPoints() {
+        return myHeal_MaxPoints;
+    }
+
     private int myHeal_MinPoints;
     private int myHeal_MaxPoints;
-    private int myNumberOfAttacks;
 
     /**
      * This abstract method initializes the values for all for
@@ -125,7 +143,7 @@ public abstract class Monster extends DungeonCharacter implements Healable {
     public String attacks(final DungeonCharacter theEnemy){
 
         StringBuilder myReturn = new StringBuilder();
-        myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
+        int myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());
         if (myNumberOfAttacks == 0) {
             myNumberOfAttacks = 1;
         }

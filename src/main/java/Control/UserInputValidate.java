@@ -2,7 +2,6 @@ package Control;
 
 import Model.Characters.Hero;
 import View.ConsoleOutput;
-import org.junit.platform.commons.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,7 +30,6 @@ public class UserInputValidate {
             } else {
                 heroName = userInput.next();
                 correctAnswer = true;
-
             }
         }
         return heroName;
@@ -101,15 +99,13 @@ public class UserInputValidate {
 
                     }
                     if(direction.equals("save")){
-                        return "saveGame";
+                        return direction;
                     }
                     if (choiceList.contains(direction)){
                         correctAnswer = true;
-
                     }
                 } else {
                     ConsoleOutput.printString("Please select the correct direction\n");
-
                 }
 
             } else {
@@ -125,15 +121,15 @@ public class UserInputValidate {
     /**
      * This method insures that the user selects the correct attack choice and validates their input.
      * @param theHero
+     * @param input
      * @return
      */
-    public static int attackChoice(Hero theHero){
+    public static int attackChoice(Hero theHero, Scanner input){
         int selection = 0;
         int selectTooSmall = 0;
         int selectTooBig = 3;
         boolean correctAnswer = false;
         while (!correctAnswer) {
-            Scanner input = new Scanner(System.in);;
             ConsoleOutput.choicePrinter(theHero);
             if (input.hasNextInt()) {
                 selection = input.nextInt();
@@ -202,21 +198,19 @@ public class UserInputValidate {
         return loadNumber;
     }
 
-    public static int heroSelector(String name){
+    public static int heroSelector(String name, Scanner input){
         // 1: Thief, 2: Warrior, 3:Priestess
         int selection = 0;
         int selectTooSmall = 0;
         int selectTooBig = 3;
         boolean correctAnswer = false;
         while (!correctAnswer) {
-            Scanner input = new Scanner(System.in);
             ConsoleOutput.heroSelection(name);
             if (input.hasNextInt()) {
                 selection = input.nextInt();
                 if (selection <= selectTooSmall || selection > selectTooBig) {
                     ConsoleOutput.invalidInput();
                 } else {
-
                     correctAnswer = true;
                 }
             } else {
