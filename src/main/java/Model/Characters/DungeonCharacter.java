@@ -229,7 +229,6 @@ public abstract class DungeonCharacter implements Serializable {
     protected static int damageRangeCalculator(final int theC_MinDamage,
                                                final int theC_MaxDamage) {
         return theC_MinDamage + randomGen.nextInt(theC_MaxDamage - theC_MinDamage + 1);
-
     }
     /**
      * This instance method addition to damageRangeCalculator(),
