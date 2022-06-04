@@ -191,7 +191,7 @@ public class DungeonAdventure implements Serializable {
     public static Hero heroSelector() {
         Scanner userInput = new Scanner(System.in);
         String name = UserInputValidate.heroName(userInput);
-        int heroSelection = UserInputValidate.heroSelector(name);
+        int heroSelection = UserInputValidate.heroSelector(name, userInput);
         Hero myHero;
         if(heroSelection == 1) {
             myHero = new Thief(name);
@@ -447,7 +447,7 @@ public class DungeonAdventure implements Serializable {
             theHero.resetAttackSpeed(theMonster);
             int attackChoice = 0;
             while(theHero.canAttack(theMonster)) {
-                attackChoice = UserInputValidate.attackChoice(theHero);
+                attackChoice = UserInputValidate.attackChoice(theHero, theUserInput);
                 ConsoleOutput.printString(theHero.attacks(theMonster, attackChoice));
                 ConsoleOutput.printString(theMonster.attacks(theHero));
             }
@@ -459,7 +459,7 @@ public class DungeonAdventure implements Serializable {
                 break;
             }
             roundCounter++;
-            ConsoleOutput.printString("\nEND OF ROUND, PRESS ANY KEY TO CONTINUE");
+            ConsoleOutput.printString("\n----------END OF ROUND----------");
             theUserInput.nextLine();
 
         } if (!theMonster.alive()){

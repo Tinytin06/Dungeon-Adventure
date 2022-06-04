@@ -22,13 +22,14 @@ public class UserInputValidate {
         String heroName = null;
 
         while (!correctAnswer) {
-            ConsoleOutput.printString("\nPlease enter a name for your hero: ");
-            if (userInput.hasNextInt() || userInput.hasNextDouble()) {
-                ConsoleOutput.printString("Invalid input\n");
-                userInput.next();
+            ConsoleOutput.printString("\nPlease enter a name for your hero(No Spaces): ");
+            heroName = userInput.nextLine();
 
+
+
+            if(heroName.matches(".*[^[a-zA-Z]].*")) {
+                ConsoleOutput.printString("Invalid input\n");
             } else {
-                heroName = userInput.next();
                 correctAnswer = true;
             }
         }
