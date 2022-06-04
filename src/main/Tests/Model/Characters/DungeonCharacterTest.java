@@ -150,8 +150,11 @@ class DungeonCharacterTest {
     @CsvSource({"0,30, 100", "40, 40, 100"})
     void setMyCharacter_HealthPoints(int prevHealth, int toAddHealth, int maxHealth) {
         DungeonCharacter test = new Skeleton("test_monster");
-        test.healthValidator(maxHealth);
+
+        test.killCharacter();
+        test.setMyCharacter_HealthPoints(prevHealth);
         test.setMyCharacter_HealthPoints(toAddHealth);
+
         int expectedHealth = prevHealth + toAddHealth;
 
         assertEquals(test.getCharacter_HealthPoints(), expectedHealth);
@@ -162,7 +165,10 @@ class DungeonCharacterTest {
     @CsvSource({"10,90, 100", "20, 200, 100"})
     void setMyCharacter_HealthPoints1(int prevHealth, int toAddHealth, int maxHealth) {
         DungeonCharacter test = new Skeleton("test_monster");
-        test.healthValidator(maxHealth);
+
+
+        test.killCharacter();
+        test.setMyCharacter_HealthPoints(prevHealth);
         test.setMyCharacter_HealthPoints(toAddHealth);
 
         assertEquals(test.getCharacter_HealthPoints(), maxHealth);
@@ -222,8 +228,7 @@ class DungeonCharacterTest {
         int damage = 20;
 
         String output = test.damageTaken(damage);
-        String expected = "\ntest_monster Has taken <<" + damage + ">> damage\n" +
-                "test_monster's health is now at <<" + (test.getCharacter_HealthPoints()) + ">>\n";
+        String expected = "Has taken <<" + damage + ">> damage";
 
         assertTrue(output.contains(expected));
         assertNotEquals(test.getCharacter_HealthPoints(), 0);
