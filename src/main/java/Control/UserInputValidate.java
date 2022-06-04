@@ -91,7 +91,7 @@ public class UserInputValidate {
             if (userInput.hasNext()) {
                 direction = userInput.next();
 
-                if (direction.equals("n") || direction.equals("saveGame") || direction.equals("s") || direction.equals("w") || direction.equals("e") || direction.equals("k")) {
+                if (direction.equals(Directions.NORTH.direction) || direction.equals("saveGame") || direction.equals(Directions.SOUTH.direction)|| direction.equals(Directions.EAST.direction) ||direction.equals(Directions.WEST.direction)|| direction.equals("k")) {
                     if (direction.equals("k")){
                         //When K is return to the main function, it prints the legend of the map
                         return direction; // This needs to be checked

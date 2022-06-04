@@ -493,25 +493,21 @@ public class DungeonAdventure implements Serializable {
         boolean east = theLocation.x < theSize-1;
 
 
-        String direction_North = "n";
-        String direction_South = "s";
-        String direction_East = "e";
-        String direction_West = "w";
 
 
 
 
         if (north) {
-            availableChoices.add(direction_North);
+            availableChoices.add(Directions.NORTH.direction);
 
         }if (south) {
-            availableChoices.add(direction_South);
+            availableChoices.add(Directions.SOUTH.direction);
 
         }if (east) {
-            availableChoices.add(direction_East);
+            availableChoices.add(Directions.EAST.direction);
 
         }if (west) {
-            availableChoices.add(direction_West);
+            availableChoices.add(Directions.WEST.direction);
 
         }
         return availableChoices;

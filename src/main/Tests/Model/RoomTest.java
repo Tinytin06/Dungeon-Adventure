@@ -88,7 +88,7 @@ class RoomTest {
         assertEquals(playerIcon, roomTest.toString());
         roomTest.removeMyTypes(RoomType.PLAYER);
         roomTest.exploreTheRoom();
-        String pitIcon = "P ";
+        String pitIcon = "X ";
         assertEquals(pitIcon, roomTest.toString());
     }
 
@@ -110,7 +110,7 @@ class RoomTest {
     void testToString() {
         Room roomTest = new Room(RoomType.PIT);
         String hiddenRoomIcon = "? ";
-        String pitRoomIcon = "P ";
+        String pitRoomIcon = "X ";
         assertEquals(hiddenRoomIcon,roomTest.toString());
         roomTest.exploreTheRoom();
         assertEquals(pitRoomIcon,roomTest.toString());
@@ -118,7 +118,7 @@ class RoomTest {
     @Test
     void setEmptyRoomOne() {
         Room roomTest = new Room(RoomType.PIT);
-        String pitRoomIcon = "P ";
+        String pitRoomIcon = "X ";
         roomTest.exploreTheRoom();
         assertEquals(pitRoomIcon,roomTest.toString());
         roomTest.setEmptyRoom();
@@ -146,7 +146,7 @@ class RoomTest {
         Room roomTest = new Room(RoomType.PIT);
         assertEquals("? ",roomTest.toString());
         roomTest.exploreTheRoom();
-        assertEquals("P ",roomTest.toString());
+        assertEquals("X ",roomTest.toString());
     }
 //    @Test
 //    /**
@@ -178,7 +178,7 @@ class RoomTest {
     void setEntrance() {
         Room roomTest = new Room();
         roomTest.setEntrance();
-        String entranceIcon = "E ";
+        String entranceIcon = "i ";
         assertEquals(entranceIcon, roomTest.toString());
     }
 
@@ -186,7 +186,7 @@ class RoomTest {
     void setExit() {
         Room roomTest = new Room();
         roomTest.setExit();
-        String exitIcon = "X ";
+        String exitIcon = "O ";
         roomTest.exploreTheRoom();
         assertEquals(exitIcon, roomTest.toString());
     }
