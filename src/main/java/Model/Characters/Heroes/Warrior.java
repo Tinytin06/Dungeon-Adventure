@@ -52,7 +52,7 @@ public class Warrior extends Hero implements Serializable {
      * @param enemy
      */
     @Override
-    protected String specialAttack(final DungeonCharacter enemy) {
+    public String specialAttack(final DungeonCharacter enemy) {
         StringBuilder outputHelper = new StringBuilder();
         outputHelper.append("\n");
         outputHelper.append(getCharacter_Name());

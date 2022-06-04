@@ -25,8 +25,6 @@ public class UserInputValidate {
             ConsoleOutput.printString("\nPlease enter a name for your hero(No Spaces): ");
             heroName = userInput.nextLine();
 
-
-
             if(heroName.matches(".*[^[a-zA-Z]].*")) {
                 ConsoleOutput.printString("Invalid input\n");
             } else {
