@@ -134,7 +134,15 @@ public class DungeonAdventure implements Serializable {
 
                     FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
                     ObjectInputStream in = new ObjectInputStream(file);
-                    hero = (Warrior) in.readObject();
+                    Object obj = in.readObject();
+
+                    if(obj.getClass() == Warrior.class){
+                        hero = (Warrior) obj;
+                    } else if (obj.getClass() == Thief.class){
+                        hero = (Thief) obj;
+                    } else {
+                        hero = (Priestess) obj;
+                    }
 
 
                     file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");

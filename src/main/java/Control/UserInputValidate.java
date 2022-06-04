@@ -79,7 +79,7 @@ public class UserInputValidate {
      */
     public static String heroDirectionHeading(final Scanner userInput,
                                               final ArrayList<String> availableDirection){
-        String choices = "Please select your movement(n for North, s for South, e for East, w for West or k for Map Legend) or type save to save your current game.";
+        String choices = "Please select your movement(n for North, s for South, e for East, w for West or k for Map Legend) or type saveGame to save your current game.";
         ArrayList<String> choiceList = availableDirection;
         String direction = null;
         boolean correctAnswer = false;
@@ -93,14 +93,14 @@ public class UserInputValidate {
             if (userInput.hasNext()) {
                 direction = userInput.next();
 
-                if (direction.equals("n") || direction.equals("save") || direction.equals("s") || direction.equals("w") || direction.equals("e") || direction.equals("k")) {
+                if (direction.equals("n") || direction.equals("saveGame") || direction.equals("s") || direction.equals("w") || direction.equals("e") || direction.equals("k")) {
                     if (direction.equals("k")){
                         //When K is return to the main function, it prints the legend of the map
                         return direction; // This needs to be checked
 
                     }
-                    if(direction.equals("save")){
-                        return direction;
+                    if(direction.equals("saveGame")){
+                        return "";
                     }
                     if (choiceList.contains(direction)){
                         correctAnswer = true;

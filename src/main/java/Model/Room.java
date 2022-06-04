@@ -176,7 +176,7 @@ public class Room implements Serializable {
             }
         }else if (myRoomInventory.size() == 1) {
             for (RoomType roomTypes : RoomType.values()) {
-                if (myRoomInventory.contains(roomTypes.type)) {
+                    if (myRoomInventory.contains(roomTypes.type)) {
                     setMyDisplayIcon(roomTypes.type + " ");
                 }
             }
