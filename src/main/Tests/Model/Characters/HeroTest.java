@@ -3,7 +3,7 @@ package Model.Characters;
 import Model.Characters.Heroes.Warrior;
 import Model.Characters.Monsters.Skeleton;
 import Model.RoomType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -122,6 +122,7 @@ class HeroTest {
         Hero hero = new Warrior("TempWarrior");
         Monster monster = new Skeleton("TempSkeleton");
 
+        hero.resetAttackSpeed(monster);
         assertTrue(hero.canAttack(monster));
         monster.setMyCharacter_HealthPoints(-100);
 
@@ -162,9 +163,9 @@ class HeroTest {
         Hero hero = new Warrior("TempWarrior");
         Monster monster = new Skeleton("TempSkeleton");
 
+        hero.resetAttackSpeed(monster);
         assertTrue(hero.canAttack(monster));
-        hero.setMyCharacter_HealthPoints(-125);
-
+        hero.killCharacter();
         assertFalse(hero.canAttack(monster));
     }
 
@@ -179,6 +180,7 @@ class HeroTest {
         Hero hero = new Warrior("TempWarrior");
         Monster monster = new Skeleton("TempSkeleton");
 
+        hero.resetAttackSpeed(monster);
         assertTrue(hero.canAttack(monster));
         hero.runAway();
 
@@ -304,6 +306,60 @@ class HeroTest {
         assertThrows(IllegalArgumentException.class, ()-> hero.sSkillDamageRangeValidator(theC_SMinDamage, theC_SMaxDamage));
     }
 
+    @Test
+    void translateCharacterX(){
+        Hero hero = new Warrior("TempWarrior");
+        assertEquals(0,  hero.getCharacterLocationX());
+        hero.translateCharacterX(1);
+        assertEquals(1,  hero.getCharacterLocationX());
+    }
+
+    @Test
+    void translateCharacterX1(){
+        Hero hero = new Warrior("TempWarrior");
+        assertEquals(0,  hero.getCharacterLocationX());
+        hero.translateCharacterX(-1);
+        assertEquals(-1,  hero.getCharacterLocationX());
+    }
+
+
+
+    @ParameterizedTest
+    @ValueSource(ints = {Integer.MIN_VALUE, -2, 0, 2, Integer.MAX_VALUE})
+    void translateCharacterX2(int input){
+        Hero hero = new Warrior("TempWarrior");
+        assertEquals(0,  hero.getCharacterLocationX());
+        assertThrows(IllegalArgumentException.class, ()-> hero.translateCharacterX(input));
+    }
+
+
+
+    @Test
+    void translateCharacterY(){
+        Hero hero = new Warrior("TempWarrior");
+        assertEquals(0,  hero.getCharacterLocationY());
+        hero.translateCharacterY(1);
+        assertEquals(1,  hero.getCharacterLocationY());
+    }
+
+    @Test
+    void translateCharacterY1(){
+        Hero hero = new Warrior("TempWarrior");
+        assertEquals(0,  hero.getCharacterLocationY());
+        hero.translateCharacterY(-1);
+        assertEquals(-1,  hero.getCharacterLocationY());
+    }
+
+
+
+    @ParameterizedTest
+    @ValueSource(ints = {Integer.MIN_VALUE, -2, 0, 2, Integer.MAX_VALUE})
+    void translateCharacterY2(int input){
+        Hero hero = new Warrior("TempWarrior");
+        assertEquals(0,  hero.getCharacterLocationY());
+        assertThrows(IllegalArgumentException.class, ()-> hero.translateCharacterY(input));
+    }
+
 
 
     @Test
@@ -328,8 +384,6 @@ class HeroTest {
         assertEquals(0,  hero.getCharacterLocationY());
     }
 
-
-
     @ParameterizedTest
     @EnumSource(RoomType.class)
     void addItem2Satchel(RoomType roomType) {
@@ -341,9 +395,6 @@ class HeroTest {
 
         assertTrue(hero.satchelContains(roomType));
     }
-
-
-
 
     @Test
     void removeSatchelItem() {
@@ -406,7 +457,6 @@ class HeroTest {
     @Test
     void testToString() {
         Hero hero = new Warrior("TempWarrior");
-        hero.setMyCharacter_HealthPoints(75);
 
         hero.incrementHealingPotion();
         hero.incrementVisionPotion();
@@ -414,7 +464,7 @@ class HeroTest {
 
 
         String expected = "Name: " + "TempWarrior"
-                + "\nHealth: " + 200
+                + "\nHealth: " + 125
                 + "\nVision Potions found: " + 1
                 + "\nHealing Potions found: " + 1
                 + "\nPillars of OOP found: " + 1;

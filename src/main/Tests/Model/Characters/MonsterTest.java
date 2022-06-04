@@ -10,27 +10,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MonsterTest {
 
-    @Test
-    void setMyHealth() {
-//        Monster test = new
-    }
-
-    @Test
-    void healGenerator() {
-    }
-
-    @Test
-    void damageTaken() {
-    }
 
     @Test
     void heal() {
+        Monster monster = new Skeleton("test_monster");
+        monster.killCharacter();
+        assertEquals(monster.heal(), "");
     }
 
     @Test
-    void attacks() {
+    void heal1() {
+        Monster monster = new Skeleton("test_monster");
+        String output = monster.heal();
+        assertTrue(output.contains("has healed himself") || output.contains("tried to heal"));
     }
 
+
+    @Test
+    void attacks() {
+        Monster monster = new Skeleton("test_monster");
+        assertThrows(IllegalArgumentException.class, ()-> monster.nameValidator(null));
+    }
 
     @ParameterizedTest
     @ValueSource(doubles = {0.1, 0.2, 0.0, 0.5, 0.999})

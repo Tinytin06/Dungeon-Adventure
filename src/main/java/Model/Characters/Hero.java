@@ -181,7 +181,6 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      */
     public boolean canAttack(final DungeonCharacter theEnemy){
         return (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway);
-       // return (alive() && theEnemy.alive() && !myRunAway);
     }
 
     public void resetAttackSpeed(final DungeonCharacter theEnemy){
@@ -318,8 +317,11 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      * @param theY
      */
     public void translateCharacterY(final int theY) {
-        //Check param
-        myCharacterLocationY += theY;
+        if(theY == -1 || theY == 1) {
+            myCharacterLocationY += theY;
+        } else {
+            throw new IllegalArgumentException("Passed in Parameter is invalid (" + theY + "); range must be -1 or 1.");
+        }
     }
 
     /**
@@ -327,8 +329,11 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      * @param theX
      */
     public void translateCharacterX(final int theX) {
-        //Check param
-        myCharacterLocationX += theX;
+        if(theX == -1 || theX == 1) {
+            myCharacterLocationX += theX;
+        } else {
+            throw new IllegalArgumentException("Passed in Parameter is invalid (" + theX + "); range must be -1 or 1.");
+        }
     }
 
     /**

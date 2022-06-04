@@ -141,6 +141,9 @@ public abstract class Monster extends DungeonCharacter implements Healable {
      */
     @Override
     public String attacks(final DungeonCharacter theEnemy){
+        if (theEnemy == null) {
+            throw new IllegalArgumentException("The passed enemy is set to null");
+        }
 
         StringBuilder myReturn = new StringBuilder();
         int myNumberOfAttacks = (getCharacter_AttackSpeed() / theEnemy.getCharacter_AttackSpeed());

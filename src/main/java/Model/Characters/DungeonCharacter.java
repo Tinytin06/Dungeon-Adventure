@@ -288,9 +288,6 @@ public abstract class DungeonCharacter implements Serializable {
      */
     protected String attacks(final DungeonCharacter enemy) {
 
-        if (enemy == null) {
-            throw new IllegalArgumentException("The passed enemy is set to null");
-        }
 
         StringBuilder outputHelper = new StringBuilder();
         if (alive()) {
