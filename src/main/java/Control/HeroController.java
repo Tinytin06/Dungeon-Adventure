@@ -20,16 +20,16 @@ public class HeroController {
         if (direction.equals("k")){
             // Print the legend for dungeon
             ConsoleOutput.printString(RoomType.legend() + "\n");
-        } else if (direction.equals("n")){
+        } else if (direction.equals(Directions.NORTH.direction)){
             theHero.translateCharacterY(-1);
 
-        } else if (direction.equals("s")){
+        } else if (direction.equals(Directions.SOUTH.direction)){
             theHero.translateCharacterY(1);
 
-        } else if (direction.equals("e")){
+        } else if (direction.equals(Directions.EAST.direction)){
             theHero.translateCharacterX(1);
 
-        } else if (direction.equals("w")){
+        } else if (direction.equals(Directions.WEST.direction)){
             theHero.translateCharacterX(-1);
 
         }
