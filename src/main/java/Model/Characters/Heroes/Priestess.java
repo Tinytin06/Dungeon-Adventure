@@ -6,14 +6,14 @@ package Model.Characters.Heroes;/*
  */
 
 import Model.Characters.DungeonCharacter;
-import Model.Characters.Healable;
+
 import Model.Characters.Hero;
 
 /**
  * This is a subclass of Hero
  * @author Varun Parbhakar
  */
-public class Priestess extends Hero implements Healable {
+public class Priestess extends Hero  {
 
     /**
      * This constructor initializes all of the values
@@ -52,12 +52,11 @@ public class Priestess extends Hero implements Healable {
         outputHelper.append(getCharacter_Name());
         outputHelper.append(" initiated heal. \n");
         if (canUseSpecialAttack()) {
-            //Method needs to updated so instead of causing damage she is going to
             int healingPoints = specialDamageGenerator();
             super.setMyCharacter_HealthPoints(healingPoints);
             outputHelper.append(" The gods have blessed her with their healing magic.\n");
             outputHelper.append("healing " +healingPoints+ " Health.");
-            //outputHelper.append(enemy.damageTaken(specialDamage));
+
         } else {
             outputHelper.append("\nbut she forgot the spell.\n");
         }

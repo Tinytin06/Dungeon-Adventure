@@ -448,10 +448,6 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
     }
 
 
-    public int getMyPillarPieces() {
-        return myPillarPieces;
-    }
-
 
 
     public int getNumberOfAttacks(){

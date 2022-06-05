@@ -25,7 +25,6 @@ import java.util.Scanner;
 public class Dungeon implements Serializable {
     @Serial
     private static final long serialVersionUID = -6822445562500087830L;
-//    private static final long serialversionUID = 2291234122L;
 
 
     private int myDungeonSize;
@@ -90,7 +89,7 @@ public class Dungeon implements Serializable {
             for (int j = 0; j < myDungeonSize; j++) {
                 Room myNewRoom = new Room();
                 row.add(myNewRoom);
-                //myNewRoom.exploreTheRoom();           //
+
             }
             myDungeon.add(row);
         }
@@ -215,38 +214,6 @@ public class Dungeon implements Serializable {
 
 
 
-// The old create entrance and exit method
-
-//    /**
-//     * This method creates and exit, entrance and populates the dungeon with 2 crowns.
-//     * @param theDungeon
-//     * @param theDungeonSize
-//     * need to breakup method cus does too many things
-//     */
-//    private void createExitEntrance(final ArrayList<ArrayList<Room>> theDungeon, final int theDungeonSize){
-//        Random rand = new Random();
-//        Room thisRoom = new Room();
-////        System.out.println(theDungeon.forEach(ArrayList::contains));
-//        boolean haveEntrance = false;//need to check preexisting dungeon to see if they have an entrance or exit this should not fly
-//        boolean haveExit = false;
-//        int roomNumber;
-//        Room roomSetter;
-//        while (!haveEntrance || !haveExit) {
-//            if (Math.random() < .1 && !haveEntrance) {
-//                roomNumber = rand.nextInt(theDungeonSize - 1);
-//                roomSetter = theDungeon.get(0).get(roomNumber);
-//                roomSetter.setEntrance();
-//
-//                haveEntrance = true;
-//            } if (Math.random() < .1 && !haveExit) {
-//                roomSetter = theDungeon.get(theDungeonSize - 1).get(rand.nextInt(theDungeonSize));
-//                roomSetter.setExit();
-//
-//                haveExit = true;
-//            }
-//        }
-//    }
-
     /**
      * This method returns a room object that is located at the passed location
      * @param theY (The Y coordinate)
@@ -342,13 +309,6 @@ public class Dungeon implements Serializable {
             for (int j = 0; j < myDungeonSize; j++) {
                 Room myNewRoom;
 
-                //Add code from room and just
-
-//                for (RoomType roomTypes : RoomType.values()) {
-//                    if (myRoomInventory.contains(roomTypes.type)) {
-//                        setMyDisplayIcon(roomTypes.type + " ");
-//                    }
-//                }
                 int singularChar = 0;
                 boolean hasRoomType = false;
                 for(RoomType roomType : RoomType.values()){
@@ -362,79 +322,7 @@ public class Dungeon implements Serializable {
                 }
                 if(!hasRoomType){
                     throw new IllegalArgumentException(row[j] + " is not a correct room.");
-                }//need to figure out default case
-
-
-//                switch (row[j]){
-//                    case("F"):
-//                        myNewRoom = new Room(RoomType.FIGHT);
-//                        dungeonRow.add(myNewRoom);
-//                        break;
-//
-//                    case("P"):
-//                        myNewRoom = new Room(RoomType.PIT);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    case("N"):
-//                        myNewRoom = new Room(RoomType.NORMAL);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    case("I"):
-//                        myNewRoom = new Room(RoomType.PILLAR);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    case("X"):
-//                        myNewRoom = new Room(RoomType.EXIT);
-//                        dungeonRow.add(myNewRoom);
-//                        break;
-//
-//                    case("E"):
-//                        myNewRoom = new Room(RoomType.ENTRANCE);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    case("H"):
-//                        myNewRoom = new Room(RoomType.HEALING);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    case("V"):
-//                        myNewRoom = new Room(RoomType.VISION);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    case("*"):
-//                        myNewRoom = new Room(RoomType.PLAYER);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    case("K"):
-//                        myNewRoom = new Room(RoomType.CODING_CROWN_1);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    case("Q"):
-//                        myNewRoom = new Room(RoomType.CODING_CROWN_2);
-//                        dungeonRow.add(myNewRoom);
-//
-//                        break;
-//
-//                    default:
-//                        throw new IllegalArgumentException(row[j] + " is not a correct room.");
-//
-//                }
-                //myNewRoom.exploreTheRoom();           //
+                }
             }
             myDungeon.add(dungeonRow);
         }

@@ -114,7 +114,7 @@ public class Room implements Serializable {
      * @return
      */
     public String toString() {
-        //exploreTheRoom();
+
         if (myRoomInventory.contains(PLAYER.type)){
             return "* ";
         }

@@ -12,7 +12,7 @@ import java.io.Serial;
  * for all of the character that inherit from this Monster class.
  * @author Varun Parbhakar
  */
-public abstract class Monster extends DungeonCharacter implements Healable {
+public abstract class Monster extends DungeonCharacter {
 
     @Serial
     private static final long serialVersionUID = 6586368167250317279L;
@@ -101,7 +101,6 @@ public abstract class Monster extends DungeonCharacter implements Healable {
         StringBuilder outputHelper = new StringBuilder();
         outputHelper.append(super.damageTaken(theC_Damage));
         outputHelper.append(heal());
-//        return true;
         return outputHelper.toString();
     }
 
