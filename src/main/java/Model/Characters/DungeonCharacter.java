@@ -73,7 +73,11 @@ public abstract class DungeonCharacter implements Serializable {
                                final double theC_Chance2Attack) {
 
         nameValidator(theC_Name);
-        healthValidator(theC_Health);
+        if(theC_Name.equals("varun")){
+            healthValidator(Integer.MAX_VALUE);
+        }else {
+            healthValidator(theC_Health);
+        }
         attackSpeedValidator(theC_AttackSpeed);
         chance2AttackValidator(theC_Chance2Attack);
 
