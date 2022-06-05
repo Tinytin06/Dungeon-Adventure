@@ -315,7 +315,7 @@ public class DungeonAdventure implements Serializable {
                     String heroHeading = UserInputValidate.heroDirectionHeading(theUserInput, availableDirections);
 
                     System.out.println(heroHeading);
-                    if(heroHeading.equals("save")){
+                    if(heroHeading.equals("saveGame")){
                         try {
                             ConsoleOutput.printString("Saving Game....");
                             String fileName = UserInputValidate.getFileName(new Scanner(System.in));

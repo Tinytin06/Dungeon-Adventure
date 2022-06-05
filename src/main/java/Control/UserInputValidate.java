@@ -98,7 +98,7 @@ public class UserInputValidate {
 
                     }
                     if(direction.equals("saveGame")){
-                        return "";
+                        return direction;
                     }
                     if (choiceList.contains(direction)){
                         correctAnswer = true;
