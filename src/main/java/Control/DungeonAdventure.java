@@ -219,7 +219,7 @@ public class DungeonAdventure implements Serializable {
 
 
     public static File[] loadGame(){
-        File dir = new File("./main/java/Saves");
+        File dir = new File("./src/main/java/Saves");
         File[] files = dir.listFiles();
 
 
@@ -241,7 +241,7 @@ public class DungeonAdventure implements Serializable {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             theSaveName = dateFormat.format(date);
         }
-        String fileDirectory = "./main/java/Saves/" + theSaveName;
+        String fileDirectory = "./src/main/java/Saves/" + theSaveName;
 
         if(!Files.exists(Paths.get(fileDirectory))){
             Files.createDirectories(Paths.get(fileDirectory));
@@ -433,7 +433,7 @@ public class DungeonAdventure implements Serializable {
         }
 
         if (theRoom.hasRoomType(RoomType.PIT)) {
-            ConsoleOutput.printString(theHero.getCharacter_Name() + " fell into a pit");
+            ConsoleOutput.printString(theHero.getCharacter_Name() + " fell into a pit\n");
             theHero.heroTakesDamage();
         }
 
@@ -466,7 +466,7 @@ public class DungeonAdventure implements Serializable {
                 break;
             }
             roundCounter++;
-            ConsoleOutput.printString("\n----------END OF ROUND----------");
+            ConsoleOutput.printString("\n----------END OF ROUND----------\n");
             theUserInput.nextLine();
 
         } if (!theMonster.alive()){
