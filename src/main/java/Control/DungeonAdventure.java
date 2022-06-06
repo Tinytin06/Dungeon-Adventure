@@ -297,7 +297,7 @@ public class DungeonAdventure implements Serializable {
 
 
             //Checking if the hero is at the exit
-            if (!isHeroAtExit(myRoom, theHero, theUserInput)){
+            if (!isHeroAtExit(myRoom, theHero, theUserInput,theDungeon)){
                 if (!theHero.alive()){
                     String output = "\nYou came here with such life yet here you lie\n\t\t\t\tlifeless.\nBetter Luck Next time!";
                     ConsoleOutput.printString(output + "\n");
@@ -371,7 +371,8 @@ public class DungeonAdventure implements Serializable {
      */
     public static boolean isHeroAtExit(final Room theRoom,
                                        final Hero theHero,
-                                       final Scanner theUserInput) {
+                                       final Scanner theUserInput,
+                                       final Dungeon theDungeon) {
         if (theRoom.getMyRoomInventory().contains(RoomType.EXIT.type)) {
             ConsoleOutput.printString("You are on the exit!\n");
 
@@ -381,6 +382,15 @@ public class DungeonAdventure implements Serializable {
 
                 if (UserInputValidate.getYN(theUserInput)) {
                     ConsoleOutput.printString("\t\t\tYou did great out there!\n");
+                    ConsoleOutput.printString("But there is one more challenge you have to face.\n");
+
+                    MonsterFactory monsterFactory = new MonsterFactory();
+                    Monster monster = monsterFactory.getRandomBossMonster();
+
+                    ConsoleOutput.printString("\t\t\t\tmeet "+monster.getCharacter_Name()+".\n");
+                    initiateFight(theHero, monster, theDungeon, theRoom);
+
+                    ConsoleOutput.printString("\t\t\tCongratulations you have beaten the game!!!\n");
                     ConsoleOutput.printString("the programmer didn't even notice the missing coding crowns.\n");
                     theHero.killCharacter();
                     return true;
