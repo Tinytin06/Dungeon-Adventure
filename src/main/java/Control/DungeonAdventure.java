@@ -162,10 +162,9 @@ public class DungeonAdventure implements Serializable {
                     // These are the names needs to be used in order to activate the cheat
                     // I dont have a method in the Dungeon Adventure for revealing all of the
                     // room, I thought that it better fit for the Dungeon class to have that kind of power.
-                    if (hero.getCharacter_Name().equals("Austin") ) {
+                    if (hero.getCharacter_Name().equals("Varun")  || hero.getCharacter_Name().equals("Austin")) {
                         ConsoleOutput.printString("CHEATS ARE ACTIVE!\n");
                         myDungeon.setMyCheatEnabled();
-
                     }
                     //myDungeon.setMyCheatEnabled();//testing purposes
                     //System.out.println("CHEATS ARE ACTIVE __ TESTING");
