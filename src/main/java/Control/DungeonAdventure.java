@@ -387,7 +387,7 @@ public class DungeonAdventure implements Serializable {
                     MonsterFactory monsterFactory = new MonsterFactory();
                     Monster monster = monsterFactory.getRandomBossMonster();
 
-                    ConsoleOutput.printString("\t\t\t\tmeet "+monster.getCharacter_Name()+".\n");
+                    ConsoleOutput.printString("\t\t\t\tMeet "+monster.getCharacter_Name()+".\n");
                     initiateFight(theHero, monster, theDungeon, theRoom);
 
                     ConsoleOutput.printString("\t\t\tCongratulations you have beaten the game!!!\n");

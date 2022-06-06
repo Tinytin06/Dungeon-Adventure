@@ -26,7 +26,7 @@ class DungeonTest {
      */
     void readFromFileTest1() throws FileNotFoundException {
         int myDungeonSize = 5;
-        String myFileName = "readFromText1.txt";
+        String myFileName = "./src/main/Tests/TestFiles/readFromText1.txt";
         boolean hasDifferentRooms = false;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -51,7 +51,7 @@ class DungeonTest {
      */
     void readFromFileTest2() throws FileNotFoundException {
         int myDungeonSize = 5;
-        String myFileName = "readFromText2.txt";
+        String myFileName = "./src/main/Tests/TestFiles/readFromText2.txt";
         boolean hasDifferentRooms = false;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -80,8 +80,8 @@ class DungeonTest {
      */
     void readFromFileTest3() throws FileNotFoundException {
         int myDungeonSize = 5;
-        String myFileName = "readFromText3.txt";
-        String myFakeFile = "readFromText4.txt";
+        String myFileName = "./src/main/Tests/TestFiles/readFromText3.txt";
+        String myFakeFile = "./src/main/Tests/TestFiles/readFromText4.txt";
         boolean hasDifferentRooms = false;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -107,7 +107,7 @@ class DungeonTest {
      */
     void readFromFileTest4() throws FileNotFoundException {
         int myDungeonSize = 5;
-        String myFileName = "readFromText4.txt";
+        String myFileName = "./src/main/Tests/TestFiles/readFromText4.txt";
         boolean caughtError = false;
 
         try {
@@ -175,7 +175,7 @@ class DungeonTest {
      * This method will check if an entrance is created via the enteranceCreator method.
      */
     void entranceCreatorTest1() {
-        String myTestFile = "entranceCreatorTest1.txt";
+        String myTestFile = "./src/main/Tests/TestFiles/entranceCreatorTest1.txt";
         int myDungeonSize = 5;
         boolean entranceExists = false;
         /*
@@ -201,7 +201,7 @@ class DungeonTest {
      */
     void visionPotionTest1() throws FileNotFoundException {
         //Map containing Fights in every location.
-        String myFileName = "VisionPotionTest1.txt";
+        String myFileName = "./src/main/Tests/TestFiles/VisionPotionTest1.txt";
         int myDungeonSize = 6;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -234,7 +234,7 @@ class DungeonTest {
      */
     void visionPotionTest2() throws FileNotFoundException {
         //Map containing Fights in every location.
-        String myFileName = "VisionPotionTest2.txt";
+        String myFileName = "./src/main/Tests/TestFiles/VisionPotionTest2.txt";
         int myDungeonSize = 6;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -267,7 +267,7 @@ class DungeonTest {
      */
     void visionPotionTest3() throws FileNotFoundException {
         //Map containing Fights in every location.
-        String myFileName = "VisionPotionTest3.txt";
+        String myFileName = "./src/main/Tests/TestFiles/VisionPotionTest3.txt";
         int myDungeonSize = 6;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -299,7 +299,7 @@ class DungeonTest {
      */
     void visionPotionTest4() throws FileNotFoundException {
         //Map containing Fights in every location.
-        String myFileName = "VisionPotionTest4.txt";
+        String myFileName = "./src/main/Tests/TestFiles/VisionPotionTest4.txt";
         int myDungeonSize = 6;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -332,7 +332,7 @@ class DungeonTest {
      */
     void visionPotionTest5() throws FileNotFoundException {
         //Map containing Fights in every location.
-        String myFileName = "VisionPotionTest5.txt";
+        String myFileName = "./src/main/Tests/TestFiles/VisionPotionTest5.txt";
         int myDungeonSize = 6;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -365,7 +365,7 @@ class DungeonTest {
      */
     void visionPotionTest6() throws FileNotFoundException {
         //Map containing Fights in every location.
-        String myFileName = "VisionPotionTest6.txt";
+        String myFileName = "./src/main/Tests/TestFiles/VisionPotionTest6.txt";
         int myDungeonSize = 6;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
@@ -398,7 +398,7 @@ class DungeonTest {
      */
     void visionPotionTest7() throws FileNotFoundException {
         //Map containing Fights in every location.
-        String myFileName = "VisionPotionTest7.txt";
+        String myFileName = "./src/main/Tests/TestFiles/VisionPotionTest7.txt";
         int myDungeonSize = 6;
 
         myDungeon = new Dungeon(new File(myFileName), myDungeonSize);
