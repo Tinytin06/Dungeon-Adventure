@@ -378,18 +378,16 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
     public void addItem2Satchel(final RoomType theItem) {
         //Checking for the Pillars
         for (RoomType type : RoomType.getMYPillars()) {
-            if(type == theItem) {
+            if(type.type == theItem.type) {
                 myPillarPieces++;
             }
         }
-        //Checking for the Potions
-        for (RoomType type : RoomType.getMyPotions()) {
-            if(type == RoomType.HEALING) {
-                myHealingPotions++;
-            } else if(type == RoomType.VISION) {
-                myVisionPotions++;
-            }
+        if(theItem.type == RoomType.HEALING.type) {
+            myHealingPotions++;
+        } else if(theItem.type == RoomType.VISION.type) {
+            myVisionPotions++;
         }
+
 
 
         mySatchel.add(theItem.type);
