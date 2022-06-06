@@ -36,7 +36,7 @@ public class Room implements Serializable {
         if (Math.random() < .1) {
             addTo_MyRoomInventory(HEALING);
         }
-        if (Math.random() < .05) {
+        if (Math.random() < .1) {
             addTo_MyRoomInventory(VISION);
         }
         if (Math.random() < .1) {

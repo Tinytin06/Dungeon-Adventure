@@ -126,7 +126,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      * character's healthpoints.
      */
     public void heroTakesDamage() {
-        super.setMyCharacter_HealthPoints(-randomGen.nextInt(30));
+        super.setMyCharacter_HealthPoints(-randomGen.nextInt(20)+1);
     }
 
     /**
