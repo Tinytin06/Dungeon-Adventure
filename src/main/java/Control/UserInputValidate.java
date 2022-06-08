@@ -165,13 +165,14 @@ public class UserInputValidate {
             ConsoleOutput.printString("NOTE: File name cant contain: <, >, :, \", /, \\, |, ?, *\n");
             inputtedFileName = userInput.next();
             String regex = "[.<>:\"\\/\\\\\\|\\?*]+";
+
             Matcher matcher = Pattern.compile(regex).matcher(inputtedFileName);
 
 
             if (!matcher.find()) {
                 correctAnswer = true;
             } else {
-                ConsoleOutput.printString("\n\nPlease try again, inputted file name has wrong keys.");
+                ConsoleOutput.printString("\n\nPlease try again, inputted file name has wrong keys.\n");
             }
         }
 
