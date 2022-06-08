@@ -22,38 +22,41 @@ public enum RoomType {
     VISION('V'),
     PLAYER('*');
 
-
-
     public final char type;
 
+    /**
+     * Constructor: Takes char and assigns it to the public char type.
+     */
     RoomType(char theType) {
         type = theType;
     }
 
+    /**
+     * @return the type assigned.
+     */
     public char getType() {
         return type;
     }
 
-    public static ArrayList<RoomType> getMyPotions() {
-        RoomType[] myPotions = {HEALING, VISION};
 
-        return new ArrayList<>(Arrays.asList(myPotions));
-    }
-
-    public static ArrayList<RoomType> getMYPillars() {
+    /**
+     * @return the pillar
+     */
+    public static ArrayList<RoomType> getMyPillars() {
         RoomType[] myPillars = {INHERITANCE, ENCAPSULATION, ABSTRACTION, POLYMORPHISM};
         return new ArrayList<>(Arrays.asList(myPillars));
     }
 
 
+    /**
+     * @return the legend of the map: the room type char with the the room type name.
+     */
     public static String legend() {
         StringBuilder legend = new StringBuilder();
 
         for (RoomType roomType : RoomType.values()) {
             legend.append(roomType.type + ": " + roomType +", ");
-
         }
-        return legend.toString() + ".";
+        return legend + ".";
     }
-
 }

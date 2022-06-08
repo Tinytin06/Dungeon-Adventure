@@ -2,8 +2,7 @@ package Model;
 
 // YO
 
-import Model.Characters.Monster;
-
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import static Model.RoomType.*;
@@ -13,15 +12,17 @@ import static Model.RoomType.*;
  * @version 06/07/2022
  */
 public class Room implements Serializable {
-    private static final long serialversionUID = 2291551312L;
+    @Serial
+    private static final long serialVersionUID = -2047190118226397346L;
 
 
-
-    private HashSet<Character> myRoomInventory = new HashSet<>();
+    private final HashSet<Character> myRoomInventory = new HashSet<>();
     private String myDisplayIcon = "? ";
     private int myPillarCount;
 
-
+    /**
+     * Constructor: Takes room type and add its to the inventory for this room.
+     */
     public Room(final RoomType theType) {
         addTo_MyRoomInventory(theType);
     }
@@ -63,6 +64,11 @@ public class Room implements Serializable {
         }
     }
 
+
+    /**
+     * @param theItem room type to search for.
+     * @return if the type passed in is contained in the inventory list.
+     */
     public boolean hasRoomType (final RoomType theItem) {
         return myRoomInventory.contains(theItem.type);
     }
@@ -83,6 +89,9 @@ public class Room implements Serializable {
         myRoomInventory.add(theType.type);
     }
 
+    /**
+     * @return if it has pillars (pillar count > 0).
+     */
     public boolean getHasPillar() {
         return myPillarCount > 0;
     }
@@ -149,7 +158,7 @@ public class Room implements Serializable {
                 myRoomInventory.contains(ENCAPSULATION.type) ||
                 myRoomInventory.contains(ABSTRACTION.type)){
             int pillarCounter = 0;
-            for (RoomType roomTypes : RoomType.getMYPillars()) {
+            for (RoomType roomTypes : RoomType.getMyPillars()) {
                 if (myRoomInventory.contains(roomTypes.type)) {
                     pillarCounter++;
                 }
@@ -195,6 +204,7 @@ public class Room implements Serializable {
         addTo_MyRoomInventory(ENTRANCE);
         setMyDisplayIcon(ENTRANCE.type + " ");
     }
+
     /**
      * This methods sets the room to be the exit.
      * @param
@@ -215,7 +225,12 @@ public class Room implements Serializable {
         myRoomInventory.add(FIGHT.type);
     }
 
-    public HashSet showMyRoomInventory(){
+
+    /**
+     * This methods prints the room inventory.
+     * @return hashset of room inventory.
+     */
+    public HashSet<Character> showMyRoomInventory(){
       HashSet<Character> nonSpecialRooms = (HashSet<Character>) myRoomInventory.clone();
       nonSpecialRooms.remove(PLAYER.type);
       nonSpecialRooms.remove(NORMAL.type);

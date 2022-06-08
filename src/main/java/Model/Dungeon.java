@@ -83,7 +83,6 @@ public class Dungeon implements Serializable {
     /**
      * This method builds a dungeon by creating rooms in the ArrayList
      */
-
     void dungeonBuilder(){
         for (int i = 0; i < myDungeonSize; i++) {
             ArrayList<Room> row = new ArrayList<>();
@@ -105,6 +104,7 @@ public class Dungeon implements Serializable {
     Room getRoom(final int row, final int column ) {
         return myDungeon.get(row).get(column);
     }
+
     /**
      * To string method for the dungeon.
      * @return (String containing the layout of the dungeon)

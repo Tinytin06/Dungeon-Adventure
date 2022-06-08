@@ -10,7 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MonsterTest {
 
-
+    /**
+     * Monster cant heal when its dead thus should be an empty string.
+     */
     @Test
     void heal() {
         Monster monster = new Skeleton("test_monster");
@@ -18,6 +20,9 @@ class MonsterTest {
         assertEquals(monster.heal(), "");
     }
 
+    /**
+     * Monster can heal when its alive thus should be a string containing it has or tried to heal.
+     */
     @Test
     void heal1() {
         Monster monster = new Skeleton("test_monster");
@@ -25,13 +30,20 @@ class MonsterTest {
         assertTrue(output.contains("has healed himself") || output.contains("tried to heal"));
     }
 
-
+    /**
+     * Cant name monster null.
+     * Expected: IllegalArgumentException to be thrown
+     */
     @Test
-    void attacks() {
+    void nameValidator() {
         Monster monster = new Skeleton("test_monster");
         assertThrows(IllegalArgumentException.class, ()-> monster.nameValidator(null));
     }
 
+    /**
+     * Chance to heal should be set.
+     * Expected: chance to heal value should be our input.
+     */
     @ParameterizedTest
     @ValueSource(doubles = {0.1, 0.2, 0.0, 0.5, 0.999})
     void chance2Heal_Validator(double input) {
@@ -40,6 +52,10 @@ class MonsterTest {
         assertEquals(test.getMyChance2Heal(), input);
     }
 
+    /**
+     * Testing for when input chance to heal is negative.
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(doubles = {-0.1, 1.1})
     void chance2Heal_Validator1(double input) {
@@ -49,6 +65,10 @@ class MonsterTest {
 
 
 
+    /**
+     * Min heal points should be set.
+     * Expected: Min heal points value should be our input.
+     */
     @ParameterizedTest
     @ValueSource(ints = {1, 2, Integer.MAX_VALUE})
     void heal_MinPoints_Validator(int input) {
@@ -57,6 +77,10 @@ class MonsterTest {
         assertEquals(test.getMyHeal_MinPoints(), input);
     }
 
+    /**
+     * Min heal points should throw exception when its 0 or negative.
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(ints = {0, -1, Integer.MIN_VALUE})
     void heal_MinPoints_Validator1(int input) {
@@ -65,7 +89,10 @@ class MonsterTest {
     }
 
 
-
+    /**
+     * Max heal points should be set.
+     * Expected: Max heal points value should be our input.
+     */
     @ParameterizedTest
     @ValueSource(ints = {1, 2, Integer.MAX_VALUE})
     void heal_MaxPoints_Validator(int input) {
@@ -74,6 +101,10 @@ class MonsterTest {
         assertEquals(test.getMyHeal_MaxPoints(), input);
     }
 
+    /**
+     * Max heal points should throw exception when its 0 or negative.
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(ints = {0, -1, Integer.MIN_VALUE})
     void heal_MaxPoints_Validator1(int input) {
@@ -81,6 +112,10 @@ class MonsterTest {
         assertThrows(IllegalArgumentException.class, ()-> test.heal_MaxPoints_Validator(input));
     }
 
+
+    /**
+     * Testing for when the heal range validator is valid (min < max).
+     */
     @ParameterizedTest
     @CsvSource({"0,100", "100,200", "130,191"})
     void healRangeValidator(int theC_MinDamage, int theC_MaxDamage) {
@@ -88,6 +123,10 @@ class MonsterTest {
         assertTrue(test.healRangeValidator(theC_MinDamage, theC_MaxDamage));
     }
 
+
+    /**
+     * Testing for when the heal range validator isn't valid (max < min).
+     */
     @ParameterizedTest
     @CsvSource({"1,0", "200,100", "151,121"})
     void healRangeValidator1(int theC_MinDamage, int theC_MaxDamage) {

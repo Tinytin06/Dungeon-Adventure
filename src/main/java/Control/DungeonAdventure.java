@@ -13,6 +13,7 @@ import View.ConsoleOutput;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -171,8 +172,10 @@ public class DungeonAdventure implements Serializable {
         }
         String fileDirectory = "./src/main/java/Saves/" + theSaveName;
 
-        if(!Files.exists(Paths.get(fileDirectory))){
-            Files.createDirectories(Paths.get(fileDirectory));
+        Path pathOfFile = Path.of(fileDirectory);
+
+        if(!Files.exists(pathOfFile)){
+            Files.createDirectories(pathOfFile);
         }
 
         FileOutputStream file = new FileOutputStream(fileDirectory + "/dungeon.bat");

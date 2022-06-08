@@ -16,6 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HeroTest {
 
+    /**
+     * When we use heal potion, health is support to go up by at max 20.
+     */
     @Test
     void healingPotion() {
         Hero hero = new Warrior("TempWarrior");
@@ -31,7 +34,9 @@ class HeroTest {
         }
     }
 
-
+    /**
+     * When we use hero takes damage, health is support to go down by at max 30.
+     */
     @Test
     void heroTakesDamage() {
         Hero hero = new Warrior("TempWarrior");
@@ -48,7 +53,9 @@ class HeroTest {
         }
     }
 
-
+    /**
+     * When we use special attack, we want the output to contain "zapped" signifying that the special attack has worked.
+     */
     @Test
     void specialAttack() {
         Warrior hero = new Warrior("TempWarrior");
@@ -63,6 +70,10 @@ class HeroTest {
     }
 
 
+    /**
+     * Testing when we pass AttackChoice 1 (special attack) that it actually registered a special attack.
+     * We confirm that the number of attack lefts went down by one.
+     */
     @Test
     void attacks() {
         Hero hero = new Warrior("TempWarrior");
@@ -74,7 +85,10 @@ class HeroTest {
         assertTrue(specialAttackWentThrough);
     }
 
-
+    /**
+     * Testing when we pass AttackChoice 2 (normal attack) that it actually registered a normal attack.
+     * We confirm that the number of attack lefts went down by one.
+     */
     @Test
     void attacks1() {
         Hero hero = new Warrior("TempWarrior");
@@ -88,7 +102,10 @@ class HeroTest {
         assertEquals(previousNumberOfAttacks-newNumberOfAttacks, 1);
     }
 
-
+    /**
+     * Testing when we pass AttackChoice 3 (run attack) that it actually registered running away.
+     * We confirm that the number of attack lefts went down by one.
+     */
     @Test
     void attacks2() {
         Hero hero = new Warrior("TempWarrior");
@@ -101,6 +118,10 @@ class HeroTest {
         assertEquals(previousNumberOfAttacks-newNumberOfAttacks, 1);
     }
 
+    /**
+     * Testing for when the enemy passed in to attack is null, an exception is called.
+     * Expected: IllegalArgumentException to be thrown
+     */
     @Test
     void attacks3() {
         Hero hero = new Warrior("TempWarrior");
@@ -188,7 +209,11 @@ class HeroTest {
     }
 
 
-
+    /**
+     * Testing for rynning away.
+     *
+     * Expected: we should be killed thus character's health should be 0.
+     */
     @Test
     void runAway() {
         Hero hero = new Warrior("TempWarrior");
@@ -201,7 +226,11 @@ class HeroTest {
     }
 
 
-
+    /**
+     * Testing for chance to block to be set to our input.
+     *
+     * Expected: difference of the two should be 0 because they are the same number.
+     */
     @ParameterizedTest
     @ValueSource(doubles = {0.2, 0.3, 0.4, 0.5, 0.77, 0.99, 0.12})
     void chance2Block_Validator(double currentChance2Block) {
@@ -213,6 +242,11 @@ class HeroTest {
     }
 
 
+    /**
+     * Testing for chance to block to throw exception when number is negative.
+     *
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(doubles = {-111.0, -0.1, -1.0, 1.1, 1.2, 10.1, 10.0, 100.0})
     void chance2Block_Validator2(double currentChance2Block) {
@@ -221,7 +255,11 @@ class HeroTest {
         assertThrows(IllegalArgumentException.class, ()-> hero.chance2Block_Validator(currentChance2Block));
     }
 
-
+    /**
+     * Testing for Special Skill Chance to be set to our input.
+     *
+     * Expected: getting the value - our value should be 0 because they are the same number.
+     */
     @ParameterizedTest
     @ValueSource(doubles = {0.2, 0.3, 0.4, 0.5, 0.77, 0.99, 0.12})
     void specialSkill_Chance_Validator(double specialSkillChance) {
@@ -232,7 +270,11 @@ class HeroTest {
         assertTrue(Double.compare(hero.getMySpecialSkillChance(), specialSkillChance) == 0);
     }
 
-
+    /**
+     * Testing Special Skill Chance to throw exception when number is negative or zero.
+     *
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(doubles = {0.0, -0.1, -1.0, 1.1, 1.2, 10.1, 10.0, 100.0})
     void specialSkill_Chance_Validator2(double specialSkillChance) {
@@ -242,7 +284,11 @@ class HeroTest {
     }
 
 
-
+    /**
+     * Testing for Special Skill min damage to be set to our input.
+     *
+     * Expected: getting the value == our value because they should be the same number.
+     */
     @ParameterizedTest
     @ValueSource(ints = {1,2,3,4,5})
     void specialSkill_MinDamage_Validator(int specialSkill_MinDamage) {
@@ -253,7 +299,11 @@ class HeroTest {
         assertTrue(hero.getMySpecialSkill_MinDamage() == specialSkill_MinDamage);
     }
 
-
+    /**
+     * Testing for Special Skill min damage to throw exception when number is negative.
+     *
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(ints = {0,-1,-2,-3,-4,-5})
     void specialSkill_MinDamage_Validator2(int specialSkill_MinDamage) {
@@ -266,7 +316,11 @@ class HeroTest {
 
 
 
-
+    /**
+     * Testing for Special Skill max damage to be set to our input.
+     *
+     * Expected: getting the value == our value because they should be the same number.
+     */
     @ParameterizedTest
     @ValueSource(ints = {1,2,3,4,5})
     void specialSkill_MaxDamage_Validator(int specialSkill_MaxDamage) {
@@ -277,7 +331,11 @@ class HeroTest {
         assertTrue(hero.getMySpecialSkill_MaxDamage() == specialSkill_MaxDamage);
     }
 
-
+    /**
+     * Testing for Special Skill max damage to throw exception when number is negative or zero.
+     *
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(ints = {0,-1,-2,-3,-4,-5})
     void specialSkill_MaxDamage_Validator2(int specialSkill_MaxDamage) {
@@ -288,7 +346,9 @@ class HeroTest {
     }
 
 
-
+    /**
+     * Testing for when the skill damage range validator is valid (min < max).
+     */
     @ParameterizedTest
     @CsvSource({"0,1", "1,2", "4,5"})
     void sSkillDamageRangeValidator(int theC_SMinDamage, int theC_SMaxDamage) {
@@ -297,7 +357,10 @@ class HeroTest {
         assertTrue(hero.sSkillDamageRangeValidator(theC_SMinDamage, theC_SMaxDamage));
     }
 
-
+    /**
+     * Testing for when the damage range validator is invalid (max < min).
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @CsvSource({"1,0", "10,0", "6,5"})
     void sSkillDamageRangeValidator2(int theC_SMinDamage, int theC_SMaxDamage) {
@@ -306,6 +369,9 @@ class HeroTest {
         assertThrows(IllegalArgumentException.class, ()-> hero.sSkillDamageRangeValidator(theC_SMinDamage, theC_SMaxDamage));
     }
 
+    /**
+     * Testing for when we call translate x by 1 that the new x position is moved by 1.
+     */
     @Test
     void translateCharacterX(){
         Hero hero = new Warrior("TempWarrior");
@@ -314,6 +380,9 @@ class HeroTest {
         assertEquals(1,  hero.getCharacterLocationX());
     }
 
+    /**
+     * Testing for when we call translate x by -1 that the new x position is moved by -1.
+     */
     @Test
     void translateCharacterX1(){
         Hero hero = new Warrior("TempWarrior");
@@ -323,7 +392,11 @@ class HeroTest {
     }
 
 
-
+    /**
+     * Testing for when we passed is a value not equal to 1 or -1. The most we can move at one step is 1 or -1.
+     *
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(ints = {Integer.MIN_VALUE, -2, 0, 2, Integer.MAX_VALUE})
     void translateCharacterX2(int input){
@@ -333,7 +406,9 @@ class HeroTest {
     }
 
 
-
+    /**
+     * Testing for when we call translate y by 1 that the new y position is moved by 1.
+     */
     @Test
     void translateCharacterY(){
         Hero hero = new Warrior("TempWarrior");
@@ -342,6 +417,9 @@ class HeroTest {
         assertEquals(1,  hero.getCharacterLocationY());
     }
 
+    /**
+     * Testing for when we call translate y by -1 that the new y position is moved by -1.
+     */
     @Test
     void translateCharacterY1(){
         Hero hero = new Warrior("TempWarrior");
@@ -351,7 +429,11 @@ class HeroTest {
     }
 
 
-
+    /**
+     * Testing for when we passed is a value not equal to 1 or -1. The most we can move at one step is 1 or -1.
+     *
+     * Expected: IllegalArgumentException to be thrown
+     */
     @ParameterizedTest
     @ValueSource(ints = {Integer.MIN_VALUE, -2, 0, 2, Integer.MAX_VALUE})
     void translateCharacterY2(int input){
@@ -361,7 +443,9 @@ class HeroTest {
     }
 
 
-
+    /**
+     * Testing for get character location to return a new point of (0,0).
+     */
     @Test
     void getCharacterLocation() {
         Hero hero = new Warrior("TempWarrior");
@@ -369,7 +453,9 @@ class HeroTest {
         assertEquals(new Point(0,0),  hero.getCharacterLocation());
     }
 
-
+    /**
+     * Testing for get character location to return a the x point of 0.
+     */
     @Test
     void getCharacterLocationX() {
         Hero hero = new Warrior("TempWarrior");
@@ -377,6 +463,10 @@ class HeroTest {
         assertEquals(0,  hero.getCharacterLocationX());
     }
 
+
+    /**
+     * Testing for get character location to return a the x point of 0.
+     */
     @Test
     void getCharacterLocationY() {
         Hero hero = new Warrior("TempWarrior");
@@ -384,6 +474,12 @@ class HeroTest {
         assertEquals(0,  hero.getCharacterLocationY());
     }
 
+
+    /**
+     * When we add to satchel, the element should be present in the array.
+     *
+     * Before we add, we check to make sure its not in then after we add we check to make sure its contained.
+     */
     @ParameterizedTest
     @EnumSource(RoomType.class)
     void addItem2Satchel(RoomType roomType) {
@@ -396,6 +492,12 @@ class HeroTest {
         assertTrue(hero.satchelContains(roomType));
     }
 
+
+    /**
+     * When we removed the pillar, it should not contain it which is what we are testing for.
+     *
+     * We add the pillar, make sure its in the array, remove the pillar then make sure its not in the array anymore.
+     */
     @Test
     void removeSatchelItem() {
         Hero hero = new Warrior("TempWarrior");
@@ -411,6 +513,10 @@ class HeroTest {
         assertFalse(hero.satchelContains(roomType));
     }
 
+
+    /**
+     * We make sure get hero satchel returns the correct arraylist.
+     */
     @Test
     void getHeroSatchel() {
         Hero hero = new Warrior("TempWarrior");
@@ -432,6 +538,9 @@ class HeroTest {
     }
 
 
+    /**
+     * Default health potions should be zero, when we add a healing, the number should move up to 1.
+     */
     @Test
     void addHealingPotion() {
         Hero hero = new Warrior("TempWarrior");
@@ -442,7 +551,9 @@ class HeroTest {
         assertTrue(hero.getMyHealingPotions() == 1);
     }
 
-
+    /**
+     * Default vision potions should be zero, when we add a healing, the number should move up to 1.
+     */
     @Test
     void addVisionPotion() {
         Hero hero = new Warrior("TempWarrior");
@@ -454,6 +565,9 @@ class HeroTest {
         assertTrue(hero.getMyVisionPotions() == 1);
     }
 
+    /**
+     * Test that the hero.toString() represent that same value as what we expect.
+     */
     @Test
     void testToString() {
         Hero hero = new Warrior("TempWarrior");

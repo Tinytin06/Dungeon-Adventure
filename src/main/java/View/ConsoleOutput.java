@@ -2,10 +2,16 @@ package View;
 
 import Model.Characters.Hero;
 
-import java.util.Scanner;
-
+/**
+ * This is the console output class in charge of printing to the console (MVC).
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour.
+ * @version 06/07/2022
+ */
 public class ConsoleOutput {
 
+    /**
+     * Prints the attack choices to the user.
+     */
     public static void choicePrinter(Hero myHero){
         String choices = ("\n" + myHero.getCharacter_Name() + " select your attack:" +
                 "\n1: Special Attack" +
@@ -14,6 +20,10 @@ public class ConsoleOutput {
         System.out.println(choices);
     }
 
+
+    /**
+     * Prints the different hero choices they can select to the user.
+     */
     public static void heroSelection(String myHero) {
         String choices = ("\n" + myHero + ", What kind of hero do you want to be? " +
                 "\n1: Thief" +
@@ -23,13 +33,24 @@ public class ConsoleOutput {
         System.out.print(choices);
     }
 
+    /**
+     * Prints the Invalid choice to the user.
+     */
     public static void invalidInput(){
         System.out.println("Invalid Choice");
     }
+
+    /**
+     * Prints the inputted string to the user.
+     * @param  theString: string to output to user.
+     */
     public static void printString(final String theString) {
         System.out.print(theString);
     }
 
+    /**
+     * Prints the introduction to the user.
+     */
     public static void introduction() {
         System.out.println("------------------ Welcome!!! -------------------");
         System.out.println("---------------- Hear Ye Hear Ye ----------------");
