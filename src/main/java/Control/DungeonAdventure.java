@@ -46,32 +46,39 @@ public class DungeonAdventure implements Serializable {
 
                 Hero hero = null;
                 Dungeon myDungeon = null;
+
+                boolean chosen = false;
                 if(UserInputValidate.getYN(userInput)) {
 
                     File[] allSaves = loadGame();
-                    int userPick = UserInputValidate.getLoadNumber(userInput, allSaves.length-1);
-
-                    FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
-                    ObjectInputStream in = new ObjectInputStream(file);
-                    Object obj = in.readObject();
-
-                    if(obj.getClass() == Warrior.class){
-                        hero = (Warrior) obj;
-                    } else if (obj.getClass() == Thief.class){
-                        hero = (Thief) obj;
+                    if(allSaves.length <= 0){
+                        chosen = false;
                     } else {
-                        hero = (Priestess) obj;
+                        chosen = true;
+                        int userPick = UserInputValidate.getLoadNumber(userInput, allSaves.length - 1);
+
+                        FileInputStream file = new FileInputStream(allSaves[userPick] + "/hero.bat");
+                        ObjectInputStream in = new ObjectInputStream(file);
+                        Object obj = in.readObject();
+
+                        if (obj.getClass() == Warrior.class) {
+                            hero = (Warrior) obj;
+                        } else if (obj.getClass() == Thief.class) {
+                            hero = (Thief) obj;
+                        } else {
+                            hero = (Priestess) obj;
+                        }
+
+
+                        file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
+                        in = new ObjectInputStream(file);
+                        myDungeon = (Dungeon) in.readObject();
+
+                        ConsoleOutput.printString("\n\n Game has succesfully been loaded.\n\n");
                     }
+                }
 
-
-                    file = new FileInputStream(allSaves[userPick] + "/dungeon.bat");
-                    in = new ObjectInputStream(file);
-                    myDungeon = (Dungeon) in.readObject();
-
-                    ConsoleOutput.printString("\n\n Game has succesfully been loaded.\n\n");
-
-                } else {
-
+                if(!chosen) {
                     hero = heroSelector();
                     int myDungeonSize = 5;
                     myDungeon = new Dungeon(myDungeonSize);
@@ -79,11 +86,12 @@ public class DungeonAdventure implements Serializable {
 
                     hero.setCharacterLocation(myDungeon.getEntrancePoint());
 
-                    if (hero.getCharacter_Name().equals("Varun")  || hero.getCharacter_Name().equals("Austin")) {
+                    if (hero.getCharacter_Name().equals("Varun") || hero.getCharacter_Name().equals("Austin")) {
                         ConsoleOutput.printString("CHEATS ARE ACTIVE!\n");
                         myDungeon.setMyCheatEnabled();
                     }
                 }
+
 
 
                 while(hero.alive()) {
@@ -150,7 +158,7 @@ public class DungeonAdventure implements Serializable {
             }
 
         } else {
-            ConsoleOutput.printString("There are no saves yet!");
+            ConsoleOutput.printString("There are no saves yet!\n");
         }
 
         return files;
