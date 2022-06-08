@@ -101,7 +101,7 @@ public class DungeonAdventure implements Serializable {
                     playAgain = true;
                     ConsoleOutput.printString("Thank you for playing!");
 
-                } 
+                }
             }
         } else {
             ConsoleOutput.printString("A wise choice, now MOVE ALONG!\n");
