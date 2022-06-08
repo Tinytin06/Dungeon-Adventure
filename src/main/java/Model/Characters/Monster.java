@@ -1,9 +1,4 @@
-package Model.Characters;/*
- * Varun Parbhakar
- *
- * TCSS-143
- * Heroes VS Monster (Dungeon DLC)
- */
+package Model.Characters;
 
 import java.io.Serial;
 
@@ -23,10 +18,18 @@ public abstract class Monster extends DungeonCharacter {
         return myChance2Heal;
     }
 
+    /**
+     * Returns the minimum health points
+     * @return the value of chance to heal
+     */
     public int getMyHeal_MinPoints() {
         return myHeal_MinPoints;
     }
 
+    /**
+     * Returns the maximum health points
+     * @return the value of chance to heal
+     */
     public int getMyHeal_MaxPoints() {
         return myHeal_MaxPoints;
     }
@@ -69,8 +72,6 @@ public abstract class Monster extends DungeonCharacter {
             heal_MinPoints_Validator(theC_Heal_MinPoints);
             heal_MaxPoints_Validator(theC_Heal_MaxPoints);
         }
-
-
     }
 
     /**
@@ -104,12 +105,14 @@ public abstract class Monster extends DungeonCharacter {
         return outputHelper.toString();
     }
 
-// add console output. also move these to control and view
+
     /**
      * This method calculates the chances of the monster
      * succeeding at healing himself.
+     * @return String (How much the monster has healed himself)
      */
     protected String heal() {
+
         StringBuilder outputHelper = new StringBuilder();
 
         if (alive()) {
@@ -160,7 +163,7 @@ public abstract class Monster extends DungeonCharacter {
         return myReturn.toString();
     }
 
-    // Validators
+
 
     /**
      * This method validates the chance to heals.
@@ -210,5 +213,4 @@ public abstract class Monster extends DungeonCharacter {
         return true;
     }
 }
-//END
 

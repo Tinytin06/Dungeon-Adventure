@@ -7,11 +7,12 @@ package Model.Characters;/*
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Random;
-import java.util.Scanner;
+
 /**
  * This abstract class is the parent class to Hero and Monster,
  * this class contains the very basic attributes of a Dungeon Character.
- * @author Varun Parbhakar
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour.
+ * @version 06/07/2022
  */
 public abstract class DungeonCharacter implements Serializable {
     // Scanner and Random number generator for all the subclasses.
@@ -51,7 +52,6 @@ public abstract class DungeonCharacter implements Serializable {
     }
 
     private double myCharacter_AttackDamageProbability;
-    private boolean myWinner;
 
 
 //SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
@@ -90,10 +90,6 @@ public abstract class DungeonCharacter implements Serializable {
 
     }
 
-
-
-
-    //Validators
 
     /**
      * This instance method validates the name of the character.
@@ -171,8 +167,6 @@ public abstract class DungeonCharacter implements Serializable {
         myCharacter_AttackSpeed = theC_AttackSpeed;
     }
 
-
-
     /**
      * This instance method validates the chance to attack.
      * @param theC_Chance2Attack (Chance to attack for the character)
@@ -183,10 +177,6 @@ public abstract class DungeonCharacter implements Serializable {
         }
         myCharacter_AttackDamageProbability = theC_Chance2Attack;
     }
-    //END OF VALIDATION
-
-
-    // GETTERS
 
     /**
      * This gets and returns character name.
@@ -194,23 +184,22 @@ public abstract class DungeonCharacter implements Serializable {
      */
     public final String getCharacter_Name() {
         return myCharacter_Name;
-
     }
+
     /**
      * This gets and returns the character's health points.
      * @return
      */
     public final int getCharacter_HealthPoints() {
         return myCharacter_HealthPoints;
-
     }
+
     /**
      * This gets and returns the character's attack speed.
      * @return
      */
     public final int getCharacter_AttackSpeed() {
         return myCharacter_AttackSpeed;
-
     }
     /**
      * This gets and returns if the character has been declared a winner.
@@ -234,6 +223,7 @@ public abstract class DungeonCharacter implements Serializable {
                                                final int theC_MaxDamage) {
         return theC_MinDamage + randomGen.nextInt(theC_MaxDamage - theC_MinDamage + 1);
     }
+
     /**
      * This instance method addition to damageRangeCalculator(),
      * this method simply calls damageRangeCalculator with passing any values.
@@ -250,7 +240,6 @@ public abstract class DungeonCharacter implements Serializable {
     public final boolean alive() {
         return (myCharacter_HealthPoints > 0);
     }
-    //END OF GETTERS
 
     /**
      * This instance method adds to the character's HP.
@@ -288,10 +277,12 @@ public abstract class DungeonCharacter implements Serializable {
     // Character Actions
     /**
      * This instance method is used for attacking the enemy player.
-     * @param enemy (The enemy player)
+     * @param theEnemy (The enemy player)
      */
-    protected String attacks(final DungeonCharacter enemy) {
-
+    protected String attacks(final DungeonCharacter theEnemy) {
+        if(theEnemy == null) {
+            throw new IllegalArgumentException("The passed in enemy is null");
+        }
 
         StringBuilder outputHelper = new StringBuilder();
         if (alive()) {
@@ -301,14 +292,14 @@ public abstract class DungeonCharacter implements Serializable {
                 outputHelper.append("\n");
                 outputHelper.append(getCharacter_Name());
                 outputHelper.append(" attacks ");
-                outputHelper.append(enemy.getCharacter_Name());
+                outputHelper.append(theEnemy.getCharacter_Name());
 
-                outputHelper.append(enemy.damageTaken(damageDone));
+                outputHelper.append(theEnemy.damageTaken(damageDone));
             } else {
                 outputHelper.append("\n");
                 outputHelper.append(getCharacter_Name());
                 outputHelper.append("'s attacked on ");
-                outputHelper.append(enemy.getCharacter_Name());
+                outputHelper.append(theEnemy.getCharacter_Name());
                 outputHelper.append(" but missed.\n");
             }
         }
@@ -367,4 +358,3 @@ public abstract class DungeonCharacter implements Serializable {
     }
 
 }
-//END

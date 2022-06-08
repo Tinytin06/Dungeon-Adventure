@@ -49,10 +49,10 @@ public class Warrior extends Hero implements Serializable {
 //NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
     /**
      * This is a overridden special attack method for this class.
-     * @param enemy
+     * @param theEnemy
      */
     @Override
-    public String specialAttack(final DungeonCharacter enemy) {
+    public String specialAttack(final DungeonCharacter theEnemy) {
         StringBuilder outputHelper = new StringBuilder();
         outputHelper.append("\n");
         outputHelper.append(getCharacter_Name());
@@ -60,12 +60,12 @@ public class Warrior extends Hero implements Serializable {
         if (canUseSpecialAttack()) {
             int specialDamage = specialDamageGenerator();
             outputHelper.append("and has zapped ");
-            outputHelper.append(enemy.getCharacter_Name());
+            outputHelper.append(theEnemy.getCharacter_Name());
             outputHelper.append(" with ");
             outputHelper.append(specialDamage);
             outputHelper.append(" electrons.\n");
 
-            outputHelper.append(enemy.damageTaken(specialDamage));
+            outputHelper.append(theEnemy.damageTaken(specialDamage));
         } else {
             outputHelper.append("but Zeus said NO!, special attack has failed.\n");
         }
@@ -73,4 +73,3 @@ public class Warrior extends Hero implements Serializable {
         return outputHelper.toString();
     }
 }
-//END

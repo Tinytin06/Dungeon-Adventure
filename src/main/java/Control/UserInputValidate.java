@@ -2,15 +2,17 @@ package Control;
 
 import Model.Characters.Hero;
 import View.ConsoleOutput;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is responsible for input validation.
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour
+ * @version 06/07/2022
+ */
 public class UserInputValidate {
-
-
     /**
      * This method is responsible for making sure the user inputs a name for the hero,
      * this method is also performs input validation.
@@ -82,7 +84,7 @@ public class UserInputValidate {
         String direction = null;
         boolean correctAnswer = false;
 
-        // Input Validation
+
         while (!correctAnswer) {
 
             ConsoleOutput.printString(choices + "\n");
@@ -93,9 +95,7 @@ public class UserInputValidate {
 
                 if (direction.equals(Directions.NORTH.direction) || direction.equals("saveGame") || direction.equals(Directions.SOUTH.direction)|| direction.equals(Directions.EAST.direction) ||direction.equals(Directions.WEST.direction)|| direction.equals("k")) {
                     if (direction.equals("k")){
-                        //When K is return to the main function, it prints the legend of the map
-                        return direction; // This needs to be checked
-
+                        return direction;
                     }
                     if(direction.equals("saveGame")){
                         return direction;
@@ -123,7 +123,7 @@ public class UserInputValidate {
      * @param input
      * @return
      */
-    public static int attackChoice(Hero theHero, Scanner input){
+    public static int attackChoice(final Hero theHero, Scanner input){
         int selection = 0;
         int selectTooSmall = 0;
         int selectTooBig = 3;
@@ -139,7 +139,6 @@ public class UserInputValidate {
                     correctAnswer = true;
                 }
 
-
             } else {
                 ConsoleOutput.invalidInput();
                 input.next();
@@ -149,11 +148,12 @@ public class UserInputValidate {
         return selection;
     }
 
-    public static boolean saveGame(final Scanner userInput){
-        ConsoleOutput.printString("Would you like to save your game? (y for yes or any other key for no.)");
-        return userInput.next().equals("y");
-    }
 
+    /**
+     * This method is responsible for validating the file name.
+     * @param userInput
+     * @return (Validated File name)
+     */
     public static String getFileName(final Scanner userInput){
         boolean correctAnswer = false;
         String inputtedFileName = "";
@@ -178,16 +178,21 @@ public class UserInputValidate {
         return inputtedFileName;
     }
 
-    public static int getLoadNumber(final Scanner userInput, int high){
+    /**
+     * This method validates the loadNumber that the user tries to access.
+     * @param userInput
+     * @param theMaxSaveNumber (Maximum number of saves available )
+     * @return (Validated load number)
+     */
+    public static int getLoadNumber(final Scanner userInput, int theMaxSaveNumber){
         boolean correctAnswer = false;
         int loadNumber = 0;
 
-
         while (!correctAnswer) {
-            ConsoleOutput.printString("\nPlease enter the save number between 0 and " + high + "\n");
+            ConsoleOutput.printString("\nPlease enter the save number between 0 and " + theMaxSaveNumber + "\n");
             loadNumber = userInput.nextInt();
 
-            if (loadNumber >= 0 && loadNumber <= high) {
+            if (loadNumber >= 0 && loadNumber <= theMaxSaveNumber) {
                 correctAnswer = true;
             } else {
                 ConsoleOutput.printString("\n\nPlease try again, inputted file name has wrong keys.\n");
@@ -197,16 +202,22 @@ public class UserInputValidate {
         return loadNumber;
     }
 
-    public static int heroSelector(String name, Scanner input){
-        // 1: Thief, 2: Warrior, 3:Priestess
+    /**
+     * This method validates the hero selection made by the user.
+     * @param theHeroName (The Name of the hero)
+     * @param theUserInput
+     * @return
+     */
+    public static int heroSelector(String theHeroName, Scanner theUserInput){
+
         int selection = 0;
         int selectTooSmall = 0;
         int selectTooBig = 3;
         boolean correctAnswer = false;
         while (!correctAnswer) {
-            ConsoleOutput.heroSelection(name);
-            if (input.hasNextInt()) {
-                selection = input.nextInt();
+            ConsoleOutput.heroSelection(theHeroName);
+            if (theUserInput.hasNextInt()) {
+                selection = theUserInput.nextInt();
                 if (selection <= selectTooSmall || selection > selectTooBig) {
                     ConsoleOutput.invalidInput();
                 } else {
@@ -214,23 +225,10 @@ public class UserInputValidate {
                 }
             } else {
                 ConsoleOutput.invalidInput();
-                input.next();
+                theUserInput.next();
             }
 
         }
         return selection;
     }
-
-
-//    public static boolean loadGame(final Scanner userInput){
-//        ConsoleOutput.printString("Would you like to load your saved games? (y for yes or any other key for no.)");
-//        if(userInput.next().equals("y")){
-//
-//
-//        } else{
-//
-//        }
-//
-//    }
 }
-//END

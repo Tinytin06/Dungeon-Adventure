@@ -272,11 +272,9 @@ public class Dungeon implements Serializable {
         }if (west) {
             dummyPoint.translate(-1,0);
             currentLocation.add(dummyPoint);
-            dummyPoint = (Point)(theLocation.clone());
+
         }
 
-        //An improvement this might be instead of storing all the room in an array list, we simply
-        //reveal the contents of the room as we translate to it, In 4 lines above this.
         for (Point local: currentLocation){
             dummyRoom = myDungeon.get(local.y).get(local.x);
             dummyRoom.exploreTheRoom();

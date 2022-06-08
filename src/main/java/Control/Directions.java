@@ -1,5 +1,11 @@
 package Control;
 
+/**
+ * This is a Direction enum class made for the use in the dungeon adventure
+ * and other control classes.
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour.
+ * @version 06/07/2022
+ */
 public enum Directions {
     NORTH("n"),SOUTH("s"),EAST("e"),WEST("w");
 
@@ -9,7 +15,4 @@ public enum Directions {
         direction = theDirection;
     }
 
-    public String getDirection() {
-        return direction;
-    }
 }

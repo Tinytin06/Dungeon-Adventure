@@ -46,16 +46,18 @@ public class Priestess extends Hero  {
      * @param enemy
      */
     @Override
-    protected String specialAttack(final DungeonCharacter enemy) {
+    protected String specialAttack(final DungeonCharacter theEnemy) {
+
         StringBuilder outputHelper = new StringBuilder();
 
         outputHelper.append(getCharacter_Name());
         outputHelper.append(" initiated heal. \n");
+
         if (canUseSpecialAttack()) {
             int healingPoints = specialDamageGenerator();
             super.setMyCharacter_HealthPoints(healingPoints);
             outputHelper.append(" The gods have blessed her with their healing magic.\n");
-            outputHelper.append("healing " +healingPoints+ " Health.");
+            outputHelper.append("healing " + healingPoints + " Health.");
 
         } else {
             outputHelper.append("\nbut she forgot the spell.\n");
@@ -64,4 +66,3 @@ public class Priestess extends Hero  {
         return outputHelper.toString();
     }
 }
-//END

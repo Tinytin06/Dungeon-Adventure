@@ -1,9 +1,4 @@
-package Model.Characters;/*
- * Varun Parbhakar
- *
- * TCSS-143
- * Heroes VS Monster (Dungeon DLC)
- */
+package Model.Characters;
 
 
 import Model.RoomType;
@@ -14,12 +9,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * This abstract class contains all of the necessary instance methods
- * for all of the character that inherit from this hero class.
- * @author Varun Parbhakar
+ * This abstract class contains all the necessary instance methods
+ * for all the character that inherit from this hero class.
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour.
+ * @version 06/07/2022
  */
 public abstract class Hero extends DungeonCharacter implements Serializable {
-
 
     @Serial
     private static final long serialVersionUID = -3591781281869975096L;
@@ -33,11 +28,8 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
     private int myCharacterLocationX;
     private int myCharacterLocationY;
     private ArrayList<Character> mySatchel;
-
-    private ArrayList<Character> myPotions;
     private int myHealingPotions;
     private int myVisionPotions;
-
     private int myPillarPieces;
 
     private final int SPECIAL_ATTACK = 1;
@@ -91,7 +83,6 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         myCharacterLocationX = theCharacterX;
         myCharacterLocationY = theCharacterY;
         mySatchel = new ArrayList<>();
-        myPotions = new ArrayList<>();
 
 
         myHealingPotions = 0;
@@ -391,25 +382,21 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
 
         mySatchel.add(theItem.type);
-
     }
 
-    public boolean satchelContains(RoomType theItem) {
-        return mySatchel.contains(theItem.type);
-    }
-
-
-
+    /**
+     * returns if the character has a certain item in the inventory
+     * @param theItem (the item that is being looked for)
+     * @return if the item was in the inventory True else False
+     */
+    public boolean satchelContains(final RoomType theItem) { return mySatchel.contains(theItem.type);}
 
     /**
      * This method removes the passed item from the hero's inventory.
      * @param theItem
      */
-    public void removeSatchelItem(final RoomType theItem) {
-        mySatchel.remove(Character.valueOf(theItem.type));
+    public void removeSatchelItem(final RoomType theItem) { mySatchel.remove(Character.valueOf(theItem.type));}
 
-
-    }
 
     /**
      * This method return the hero's inventory.
@@ -420,10 +407,6 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
     }
 
 
-
-
-
-
     /**
      * This method return a boolean to indicate if the hero has collected all the pillars.
      * @return
@@ -432,14 +415,11 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         return myPillarPieces == 4;
     }
 
-
-
-
-
-
-    public int getMyHealingPotions() {
-        return myHealingPotions;
-    }
+    /**
+     * returns the total # of healing potions we have found
+     * @return total # of healing potions
+     */
+    public int getMyHealingPotions() { return myHealingPotions;}
 
     public int getMyVisionPotions() {
         return myVisionPotions;
@@ -470,4 +450,3 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         myPillarPieces++;
     }
 }
-//END

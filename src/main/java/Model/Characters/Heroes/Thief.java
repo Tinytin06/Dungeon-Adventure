@@ -42,33 +42,32 @@ public class Thief extends Hero {
 //NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
     /**
      * This is a overridden special attack method for this class.
-     * @param enemy
+     * @param theEnemy
      */
-    protected String specialAttack(final DungeonCharacter enemy) {
+    protected String specialAttack(final DungeonCharacter theEnemy) {
         StringBuilder outputHelper = new StringBuilder();
         outputHelper.append("\n");
         outputHelper.append(getCharacter_Name());
         outputHelper.append(" prepared a sneak attack. \n");
+
         if (canUseSpecialAttack()) {
+
             int specialDamage = specialDamageGenerator();
             outputHelper.append("And has stunned ");
-            outputHelper.append(enemy.getCharacter_Name()+".\n");
+            outputHelper.append(theEnemy.getCharacter_Name()+".\n");
             outputHelper.append("Dealing ");
             outputHelper.append(specialDamage);
             outputHelper.append(" damage.\n");
-            outputHelper.append(enemy.damageTaken(specialDamage));
-            if(enemy.alive()) {
+            outputHelper.append(theEnemy.damageTaken(specialDamage));
+            if(theEnemy.alive()) {
                 outputHelper.append("attacking another time ");
-                outputHelper.append(attacks(enemy));
+                outputHelper.append(attacks(theEnemy));
             }
-
 
         } else {
             outputHelper.append("But was caught and lost his attack.\n");
-
         }
 
         return outputHelper.toString();
     }
 }
-//END
