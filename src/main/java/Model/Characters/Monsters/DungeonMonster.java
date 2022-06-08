@@ -2,6 +2,14 @@ package Model.Characters.Monsters;
 
 import Model.Characters.Monster;
 
+/**
+ *
+ * DungeonMonster is a template that the monster factory can use
+ * to create monsters from the sqlite database
+ *
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour
+ * @version 06/07/2022
+ */
 public class DungeonMonster extends Monster {
     public DungeonMonster(String theC_Name,
                    int theC_Health,

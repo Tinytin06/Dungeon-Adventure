@@ -1,28 +1,28 @@
-package Model.Characters.Heroes;/*
- * Varun Parbhakar
- *
- * TCSS-143
- * Heroes VS Monster (Dungeon DLC)
- */
+package Model.Characters.Heroes;
 
 import Model.Characters.DungeonCharacter;
 import Model.Characters.Hero;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
- * This is a subclass of Hero
- * @author Varun Parbhakar
- */
-public class Thief extends Hero {
+ * This is a subclass of Hero Thief that Multiattacks and has differing
+ * base stats than other Heroes
+ *
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour
+ * @version 06/07/2022
+ * */
+public class Thief extends Hero implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 5280095350427436561L;
 
     /**
-     * This constructor initializes all of the values
-     * for the Warrior character
+     * This constructor initializes all the values
+     * for the Thief character
      * @param theC_Name (The character name)
      */
-    //ASK TOM ABOUT THIS CLASS BEING PUBLIC,
-
-    //Ask him why does compile fail when this class is set to protected level
-    //despite it being imported into the dungeon class.
     public Thief(final String theC_Name) {
 
         super(  theC_Name,
@@ -39,7 +39,7 @@ public class Thief extends Hero {
                 0);
 
     }
-//NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
+
     /**
      * This is a overridden special attack method for this class.
      * @param theEnemy

@@ -26,7 +26,8 @@ import java.util.regex.Matcher;
 /**
  * This is the main client class for the dungeon adventure game it contains
  * the game player that initiates and continues with the game until the player decides to quit.
- * @author Varun Parbhakar
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour
+ * @version 06/07/2022
  */
 public class DungeonAdventure implements Serializable {
     @Serial
@@ -415,7 +416,7 @@ public class DungeonAdventure implements Serializable {
 
     /**
      * This method insures that the user's direction choice does not go out of bounds.
-     * @param theLocation
+     * @param theLocation (The location of the hero inside the dungeon)
      * @param theSize (The size of the dungeon)
      * @return (The list contains the valid directions that a user can take)
      */

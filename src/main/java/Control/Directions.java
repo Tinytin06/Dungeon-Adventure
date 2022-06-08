@@ -11,6 +11,10 @@ public enum Directions {
 
     public final String direction;
 
+    /**
+     * Constructor for the Direction enum class.
+     * @param theDirection (name of Direction heading)
+     */
     Directions(String theDirection) {
         direction = theDirection;
     }

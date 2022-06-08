@@ -19,8 +19,8 @@ import java.util.Scanner;
 /**
  * This class manages the dungeon, it is responsible for creating and populating the dungeon
  * along other operation that are exclusive to the dungeon.
- * @author Varun Parbhakar
- * @editor Austin Luu
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour.
+ * @version 06/07/2022
  */
 public class Dungeon implements Serializable {
     @Serial
@@ -37,21 +37,22 @@ public class Dungeon implements Serializable {
 
     /**
      * Constructor is for reading from the text file.
-     * @param theFile
+     * @param theFile (the File being read)
+     * @param theDungeonSize (the Length of this dungeon)
      * @throws FileNotFoundException
      */
-    public Dungeon(final File theFile, final int theDungeonLength) throws FileNotFoundException {
+    public Dungeon(final File theFile, final int theDungeonSize) throws FileNotFoundException {
 
-        if(theDungeonLength < 2) {
+        if(theDungeonSize < 2) {
             throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");
         }
-        myDungeonSize = theDungeonLength;
+        myDungeonSize = theDungeonSize;
         readFromFile(theFile);
     }
 
     /**
      * Returns the entrance of the dungeon.
-     * @return
+     * @return the entrance of the dungeon
      */
     public Point getEntrancePoint() {
         if(myDungeon.size() <= 0) {
@@ -63,14 +64,14 @@ public class Dungeon implements Serializable {
     /**
      * This constructor creates the dungeon with the use of the specified dungeon size from
      * the user.
-     * @param theDungeonLength
+     * @param theDungeonSize (the length of the dungeon)
      *
      */
-    public Dungeon(final int theDungeonLength) {
-        if(theDungeonLength < 2) {
+    public Dungeon(final int theDungeonSize) {
+        if(theDungeonSize < 2) {
             throw new IllegalArgumentException("Dungeon size must be greater than or equal to 2");
         }
-        myDungeonSize = theDungeonLength;
+        myDungeonSize = theDungeonSize;
         myDungeon = new ArrayList<>();
         dungeonBuilder();
         entranceCreator(myDungeon);
@@ -120,7 +121,10 @@ public class Dungeon implements Serializable {
         return dungeonPrint.toString() ;
     }
 
-
+    /**
+     * creates an entrance for the dungeon at random
+     * @param theDungeon (the newly created dungeon)
+     */
     private void entranceCreator(final ArrayList<ArrayList<Room>> theDungeon) {
         Random rand = new Random();
         boolean haveEntrance = false;
@@ -140,6 +144,10 @@ public class Dungeon implements Serializable {
 
     }
 
+    /**
+     * creates an exit for the dungeon at random
+     * @param theDungeon (the newly created dungeon)
+     */
     private void exitCreator(final ArrayList<ArrayList<Room>> theDungeon) {
         Random rand = new Random();
         boolean haveExit = false;
@@ -159,10 +167,10 @@ public class Dungeon implements Serializable {
     }
 
     /**
-     * This method creates sets the crown in a random room except for the rooms that contain
+     * This method creates sets the pillars in a random room except for the rooms that contain
      * the entrance or the exit.
      *
-     * There is a chance that a two of the crown can be placed into the same room.
+     * There is a chance that of the pillars can be placed into the same room.
      *
      * @param theDungeonMap
      */
@@ -175,7 +183,7 @@ public class Dungeon implements Serializable {
 
         while (!hasInheritance || !hasPolymorphism || !hasEncapsulation || !hasAbstraction) {
 
-            //Locating a room for a Inheritance
+
             if(!hasInheritance) {
                 hasInheritance = pillarSetterHelper(theDungeonMap, RoomType.INHERITANCE);
             }
@@ -194,17 +202,22 @@ public class Dungeon implements Serializable {
         }
     }
 
-    public boolean pillarSetterHelper(final ArrayList<ArrayList<Room>> theDungeon, final RoomType theRoomType) {
+    /**
+     * checks to see if the room is populated by an exit or entrance if so returns false
+     * @param theDungeon (the dungeon)
+     * @param thePillar (a pillar that wants to be put in)
+     * @return
+     */
+    public boolean pillarSetterHelper(final ArrayList<ArrayList<Room>> theDungeon, final RoomType thePillar) {
         Random rand = new Random();
         Room roomSetter;
-        //Locating a room for Polymorphism
 
         roomSetter = theDungeon.get(rand.nextInt(myDungeonSize)).get(rand.nextInt(myDungeonSize));
-        //Ensuring the current room is not an entrance or an exit and doesn't contain crown 2.
-            if (!roomSetter.hasRoomType(RoomType.ENTRANCE) && //Does it already have the Entrance?
-                !roomSetter.hasRoomType(RoomType.EXIT)  ) { //Does it already have an exit?
 
-                roomSetter.addTo_MyRoomInventory(theRoomType);
+            if (!roomSetter.hasRoomType(RoomType.ENTRANCE) &&
+                !roomSetter.hasRoomType(RoomType.EXIT)  ) {
+
+                roomSetter.addTo_MyRoomInventory(thePillar);
                 return true;
             }
         return false;
@@ -248,14 +261,10 @@ public class Dungeon implements Serializable {
         ArrayList<Point> currentLocation = new ArrayList<>();
         Point dummyPoint = (Point)(theLocation.clone());
 
-        //Checking where the vision potion will illuminate the room.
         boolean north = (dummyPoint.y - 1 >= 0);
         boolean south = (dummyPoint.y + 1 <= myDungeonSize-1);
         boolean west = (dummyPoint.x - 1 >= 0);
         boolean east = (dummyPoint.x + 1 <= myDungeonSize-1);
-        //Ask Tom if this structure can be improved
-
-
 
         if (north) {
             dummyPoint.translate(0,-1);
@@ -290,12 +299,17 @@ public class Dungeon implements Serializable {
 
     /**
      * This method returns the status of the myCheatEnabled field.
-     * @return
+     * @return if user has enabled cheats
      */
     public boolean isCheatEnabled(){
         return myCheatEnabled;
     }
 
+    /**
+     * creates the dungeon from a file
+     * @param theFile (the file)
+     * @throws FileNotFoundException
+     */
     protected void readFromFile(final File theFile) throws FileNotFoundException {
         Scanner s = new Scanner(theFile);
         myDungeon = new ArrayList<>();
@@ -327,6 +341,10 @@ public class Dungeon implements Serializable {
 
     }
 
+    /**
+     * returns the dungeon size
+     * @return the dungeon size
+     */
     public int getMyDungeonSize(){
         return myDungeonSize;
     }

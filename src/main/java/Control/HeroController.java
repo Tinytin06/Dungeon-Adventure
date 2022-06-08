@@ -7,8 +7,11 @@ import View.ConsoleOutput;
 import java.util.ArrayList;
 
 
-
-//maybe rename this to hero controller
+/**
+ * This Hero Controller class manages the hero controls.
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour
+ * @version 06/07/2022
+ */
 public class HeroController {
 
     /**
@@ -19,9 +22,9 @@ public class HeroController {
     public static void moveCharacter(final Hero theHero, final String theHeroHeading) {
 
         String direction = theHeroHeading;
+        final String LEGEND = "k";
 
-        if (direction.equals("k")){
-            // Print the legend for dungeon
+        if (direction.equals(LEGEND)){
             ConsoleOutput.printString(RoomType.legend() + "\n");
 
         } else if (direction.equals(Directions.NORTH.direction)){

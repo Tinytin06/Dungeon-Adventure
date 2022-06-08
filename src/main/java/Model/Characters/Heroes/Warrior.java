@@ -1,9 +1,4 @@
-package Model.Characters.Heroes;/*
- * Varun Parbhakar
- *
- * TCSS-143
- * Heroes VS Monster (Dungeon DLC)
- */
+package Model.Characters.Heroes;
 
 import Model.Characters.DungeonCharacter;
 import Model.Characters.Hero;
@@ -12,9 +7,12 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * This is a subclass of Hero
- * @author Varun Parbhakar
- */
+ * This is a subclass of Hero Warrior that does massive damage and has differing
+ * base stats than other Heroes
+ *
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour
+ * @version 06/07/2022
+ * */
 public class Warrior extends Hero implements Serializable {
 
 
@@ -22,14 +20,11 @@ public class Warrior extends Hero implements Serializable {
     private static final long serialVersionUID = -7581078960929808165L;
 
     /**
-     * This constructor initializes all of the values
+     * This constructor initializes all the values
      * for the Warrior character
      * @param theC_Name (The character name)
      */
-    //ASK TOM ABOUT THIS CLASS BEING PUBLIC,
 
-    //Ask him why does compile fail when this class is set to protected level
-    //despite it being imported into the dungeon class.
     public Warrior(final String theC_Name) {
 
         super(  theC_Name,
@@ -46,7 +41,7 @@ public class Warrior extends Hero implements Serializable {
                 0);
 
     }
-//NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
+
     /**
      * This is a overridden special attack method for this class.
      * @param theEnemy

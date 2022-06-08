@@ -49,21 +49,18 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      * @param theC_SpecialSkill_MinDamage (Minimum Damage for Special Attack)
      * @param theC_SpecialSkill_MaxDamage (Maximum Damage for Special Attack)
      */
-
-
-    //Make them final
-    protected Hero(String theC_Name,
-                   int theC_Health,
-                   int theC_AttackSpeed,
-                   int theC_MinDamage,
-                   int theC_MaxDamage,
-                   double theC_Chance2Attack,
-                   double theC_Chance2Block,
-                   double theC_SpecialSkill_Chance,
-                   int theC_SpecialSkill_MinDamage,
-                   int theC_SpecialSkill_MaxDamage,
-                   int theCharacterX,
-                   int theCharacterY) {
+    protected Hero(final String theC_Name,
+                   final int theC_Health,
+                   final int theC_AttackSpeed,
+                   final int theC_MinDamage,
+                   final int theC_MaxDamage,
+                   final double theC_Chance2Attack,
+                   final double theC_Chance2Block,
+                   final double theC_SpecialSkill_Chance,
+                   final int theC_SpecialSkill_MinDamage,
+                   final int theC_SpecialSkill_MaxDamage,
+                   final int theCharacterX,
+                   final int theCharacterY) {
 
         super(theC_Name,
                 theC_Health,
@@ -114,7 +111,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method generates a random value and reduces that value from the
-     * character's healthpoints.
+     * character's health points.
      */
     public void heroTakesDamage() {
         super.setMyCharacter_HealthPoints(-randomGen.nextInt(20)+1);
@@ -127,8 +124,6 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      */
     @Override
     public String damageTaken(final int theC_Damage) {
-        //Ask if this logic is okay to be in this class
-        //TRUE(getCharacter_Name() + " blocked the attack!\n")
         if (randomGen.nextDouble() <= myChance2Block) {
             return ("\n"+ getCharacter_Name() + " blocked the attack!\n");
         } else {
@@ -174,6 +169,10 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         return (myNumberOfAttacks > 0 && alive() && theEnemy.alive() && !myRunAway);
     }
 
+    /**
+     * before a fight if the attackspeed is greater than the 2ce enemy's then update # of attacks
+     * @param theEnemy (the enemy that the hero is fighting)
+     */
     public void resetAttackSpeed(final DungeonCharacter theEnemy){
         int tooLowOfAttackSpeedRatio = 0;
         int fixesLowRatio = 1;
@@ -205,7 +204,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method return the chance to block.
-     * @return
+     * @return the chance to block
      */
     public double getMyChance2Block() {
         return myChance2Block;
@@ -213,7 +212,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method return the chance to use a special skill.
-     * @return
+     * @return the chance to use a Special skill
      */
     public double getMySpecialSkillChance() {
         return mySpecialSkillChance;
@@ -221,7 +220,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method return the min damage.
-     * @return
+     * @return the min amount of damage that a special skill deals/heals for
      */
     public int getMySpecialSkill_MinDamage() {
         return mySpecialSkill_MinDamage;
@@ -229,7 +228,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method return the max damage.
-     * @return
+     * @return the max amount of damage that a special skill deals/heals for
      */
     public int getMySpecialSkill_MaxDamage() {
         return mySpecialSkill_MaxDamage;
@@ -329,7 +328,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method return the Y coordinate of the character.
-     * @return
+     * @return the Y coordinate of the character
      */
     public int getCharacterLocationY() {
         return myCharacterLocationY;
@@ -337,7 +336,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method return the X coordinate of the character.
-     * @return
+     * @return the X coordinate of the character
      */
     public int getCharacterLocationX() {
         return myCharacterLocationX;
@@ -346,18 +345,19 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method sets the location of the character.
-
      */
     public void setCharacterLocation(final Point theCharacterLocation ) {
         myCharacterLocationY = theCharacterLocation.y;
         myCharacterLocationX = theCharacterLocation.x;
     }
 
-
-    public void incrementHealingPotion() {
-        myHealingPotions++;
-    }
-
+    /**
+     * the method increments the healing potion values
+     */
+    public void incrementHealingPotion() { myHealingPotions++;}
+    /**
+     * the method increments the vision potion values
+     */
     public void incrementVisionPotion() {
         myVisionPotions++;
     }
@@ -367,19 +367,16 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      * @param theItem
      */
     public void addItem2Satchel(final RoomType theItem) {
-        //Checking for the Pillars
-        for (RoomType type : RoomType.getMYPillars()) {
+        for (RoomType type : RoomType.getMyPillars()) {
             if(type.type == theItem.type) {
-                myPillarPieces++;
+                incrementPillars();
             }
         }
         if(theItem.type == RoomType.HEALING.type) {
-            myHealingPotions++;
+            incrementHealingPotion();
         } else if(theItem.type == RoomType.VISION.type) {
-            myVisionPotions++;
+            incrementVisionPotion();
         }
-
-
 
         mySatchel.add(theItem.type);
     }
@@ -393,14 +390,14 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method removes the passed item from the hero's inventory.
-     * @param theItem
+     * @param theItem (the item that we are trying to remove)
      */
     public void removeSatchelItem(final RoomType theItem) { mySatchel.remove(Character.valueOf(theItem.type));}
 
 
     /**
      * This method return the hero's inventory.
-     * @return
+     * @return whatever is the hero's inventory
      */
     public ArrayList<Character> getHeroSatchel(){
         return mySatchel;
@@ -409,7 +406,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     /**
      * This method return a boolean to indicate if the hero has collected all the pillars.
-     * @return
+     * @return if the hero has collected all 4 Pillars of OO
      */
     public boolean hasCollectedEveryPillar() {
         return myPillarPieces == 4;
@@ -421,13 +418,18 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      */
     public int getMyHealingPotions() { return myHealingPotions;}
 
+    /**
+     * returns the total # of vision potions we have found
+     * @return total # of vision potions
+     */
     public int getMyVisionPotions() {
         return myVisionPotions;
     }
 
-
-
-
+    /**
+     * returns the total # of attacks we have made
+     * @return total # of attacks
+     */
     public int getNumberOfAttacks(){
         return myNumberOfAttacks;
     }
@@ -446,6 +448,9 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         return stats;
     }
 
+    /**
+     * the method increments the pillars found
+     */
     public void incrementPillars() {
         myPillarPieces++;
     }

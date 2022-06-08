@@ -9,8 +9,8 @@ import java.util.HashSet;
 import static Model.RoomType.*;
 /**
  * This is the Room class which populates the rooms and insures that each room is labeled correctly.
- * @author Varun Parbhakar
- * @editor Austin Luu
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour.
+ * @version 06/07/2022
  */
 public class Room implements Serializable {
     private static final long serialversionUID = 2291551312L;

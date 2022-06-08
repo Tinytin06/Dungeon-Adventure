@@ -1,9 +1,5 @@
-package Model.Characters;/*
- * Varun Parbhakar
- *
- * TCSS-143
- * Heroes VS Monster (Dungeon DLC)
- */
+package Model.Characters;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Random;
@@ -15,15 +11,13 @@ import java.util.Random;
  * @version 06/07/2022
  */
 public abstract class DungeonCharacter implements Serializable {
-    // Scanner and Random number generator for all the subclasses.
-    public final static Scanner userInput = new Scanner(System.in);
-    protected final static Random randomGen = new Random();
+
     @Serial
     private static final long serialVersionUID = 8276876816569082427L;
 
-    // Fields
-    private String myCharacter_Name;
+    protected final static Random randomGen = new Random();
 
+    private String myCharacter_Name;
 
     private int myCharacter_HealthPoints;
     private int myCharacter_MaxHealthPoints;
@@ -47,14 +41,10 @@ public abstract class DungeonCharacter implements Serializable {
         return myCharacter_AttackDamageProbability;
     }
 
-    public boolean isMyWinner() {
-        return myWinner;
-    }
-
     private double myCharacter_AttackDamageProbability;
 
 
-//SHOULD PROBABLY NOT HAVE EXCEPTIONS HERE IT IS A SMALL CODE SMELL
+
     /**
      * This constructor initializes the major fields that are required for a dungeon
      * character.
@@ -201,17 +191,6 @@ public abstract class DungeonCharacter implements Serializable {
     public final int getCharacter_AttackSpeed() {
         return myCharacter_AttackSpeed;
     }
-    /**
-     * This gets and returns if the character has been declared a winner.
-     * This method is ran towards the end of the game.
-     * @param enemy (Enemy character)
-     * @return (Return True if character has defeated the enemy)
-     */
-    protected final boolean isWinner(DungeonCharacter enemy) {
-        determineWinner(enemy);
-        return myWinner;
-    }
-
 
     /**
      * This instance method returns a value between the given minimum and maximum damage.
@@ -260,21 +239,8 @@ public abstract class DungeonCharacter implements Serializable {
         myCharacter_HealthPoints = 0;
     }
 
-//NEEDS TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
-    /**
-     * This instance method runs to check if a cheat is active.
-     */
-    protected final void isCheatActive(){
-        if(getCharacter_Name().equals("Jesus")){
-            myCharacter_HealthPoints = 1000101;
-            System.out.println("\t-----CHEAT ACTIVATED-----"); //
-            System.out.println("\t\tPraise the LORD!!!!");
 
-        }
-    }
 
-//NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
-    // Character Actions
     /**
      * This instance method is used for attacking the enemy player.
      * @param theEnemy (The enemy player)
@@ -307,7 +273,7 @@ public abstract class DungeonCharacter implements Serializable {
         return outputHelper.toString();
     }
 
-//NEED TO MAKE CONTROL AND VIEW METHODS FOR THIS METHOD
+
     /**
      * This instance method makes sure that damage is dealt to the character.
      * @param theC_Damage (The amount of damage that a character takes)
@@ -340,21 +306,7 @@ public abstract class DungeonCharacter implements Serializable {
             outputHelper.append(">>\n");
         }
 
-        //"\n" + getCharacter_Name() + " Has taken <<" + theC_Damage + ">> damage \n+ System.out.println(getCharacter_Name() + " has fainted\n");"
-
-//        return true;
-        //DOUBLE HCECK THIS RETURN STAMENT!!!
         return outputHelper.toString();
-    }
-
-    /**
-     * This instance method determine if the character is a winner or not.
-     * @param enemy (The enemy character)
-     */
-    private void determineWinner(final DungeonCharacter enemy) {
-        if (!enemy.alive()) {
-            myWinner = true;
-        }
     }
 
 }

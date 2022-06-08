@@ -3,9 +3,9 @@ package Model.Characters;
 import java.io.Serial;
 
 /**
- * This abstract class contains all of the necessary instance methods
- * for all of the character that inherit from this Monster class.
- * @author Varun Parbhakar
+ * This abstract class contains all the necessary instance methods
+ * for all the characters that inherit from this Monster class.
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour.
  */
 public abstract class Monster extends DungeonCharacter {
 
@@ -13,7 +13,13 @@ public abstract class Monster extends DungeonCharacter {
     private static final long serialVersionUID = 6586368167250317279L;
 
     private double myChance2Heal;
+    private int myHeal_MinPoints;
+    private int myHeal_MaxPoints;
 
+    /**
+     * returns the value of chance to heal when called
+     * @return the value of chance to heal
+     */
     public double getMyChance2Heal() {
         return myChance2Heal;
     }
@@ -34,8 +40,7 @@ public abstract class Monster extends DungeonCharacter {
         return myHeal_MaxPoints;
     }
 
-    private int myHeal_MinPoints;
-    private int myHeal_MaxPoints;
+
 
     /**
      * This abstract method initializes the values for all for
@@ -50,15 +55,15 @@ public abstract class Monster extends DungeonCharacter {
      * @param theC_Heal_MinPoints (Minimum Damage for Special Attack)
      * @param theC_Heal_MaxPoints (Maximum Damage for Special Attack)
      */
-    protected Monster(String theC_Name,
-                      int theC_Health,
-                      int theC_AttackSpeed,
-                      int theC_MinDamage,
-                      int theC_MaxDamage,
-                      double theC_Chance2Attack,
-                      double theC_Chance2Heal,
-                      int theC_Heal_MinPoints,
-                      int theC_Heal_MaxPoints) {
+    protected Monster(final String theC_Name,
+                      final int theC_Health,
+                      final int theC_AttackSpeed,
+                      final int theC_MinDamage,
+                      final int theC_MaxDamage,
+                      final double theC_Chance2Attack,
+                      final double theC_Chance2Heal,
+                      final int theC_Heal_MinPoints,
+                      final int theC_Heal_MaxPoints) {
 
         super(theC_Name,
                 theC_Health,

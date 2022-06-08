@@ -3,7 +3,11 @@ package Model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+/**
+ * an enumeration class that has all the types of rooms possible
+ * @authors Varun Parbhakar, Austin Luu, Yacine Bennour.
+ * @version 06/07/2022
+ */
 public enum RoomType {
     FIGHT('F'),
     PIT('X'),
